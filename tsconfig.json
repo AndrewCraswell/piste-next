@@ -22,7 +22,8 @@
       "$queries/*": ["queries/*"],
       "$lib": ["lib"],
       "$lib/*": ["lib/*"]
-    }
+    },
+    // "types": ["react/next", "react-dom/next"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
