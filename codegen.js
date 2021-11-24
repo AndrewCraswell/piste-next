@@ -6,7 +6,7 @@ module.exports = {
       },
     },
   ],
-  documents: ["./queries/**/*/.graphql"],
+  documents: ["./queries/**/*.graphql"],
   overwrite: true,
   generates: {
     "./queries/index.ts": {

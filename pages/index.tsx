@@ -1,9 +1,5 @@
-import { useApolloClient, useLazyQuery } from "@apollo/client";
-import type { NextPage } from "next";
-
-import { initializeApollo } from "../lib/apollo";
-import GET_MEMBERS_SEARCH from "../lib/queries/getMembersSearch";
-import GET_MEMBER_BY_ID from "../lib/queries/getMemberById";
+import { useApolloClient } from "@apollo/client"
+import type { NextPage } from "next"
 import {
   PrimaryButton,
   Stack,
@@ -11,15 +7,26 @@ import {
   PersonaSize,
   CompoundButton,
   Dialog,
-} from "@fluentui/react";
-import React, { useRef } from "react";
-import { Card } from "../components/Card";
+  IPersonaProps,
+  IBasePicker,
+} from "@fluentui/react"
+import React, { useRef } from "react"
+
+import { initializeApollo } from "$lib/apollo"
+import { Card } from "$components"
+import {
+  SearchMembersDocument,
+  SearchMembersQuery,
+  SearchMembersQueryVariables,
+} from "$queries"
+
+type MemberPersona = IPersonaProps & {
+  memberId: string
+}
 
 const Home: NextPage = () => {
-  const client = useApolloClient();
-  const [] = useLazyQuery(GET_MEMBER_BY_ID, {});
-
-  const picker = useRef();
+  const client = useApolloClient()
+  const picker = useRef<IBasePicker<IPersonaProps>>(null)
 
   return (
     <>
@@ -28,28 +35,33 @@ const Home: NextPage = () => {
           <Stack horizontal tokens={{ childrenGap: 4 }}>
             <NormalPeoplePicker
               onResolveSuggestions={async (filter) => {
-                const { data } = await client.query({
-                  query: GET_MEMBERS_SEARCH,
-                  variables: { input: `${filter}%` },
-                });
+                const { data } = await client.query<
+                  SearchMembersQuery,
+                  SearchMembersQueryVariables
+                >({
+                  query: SearchMembersDocument,
+                  variables: { filter: `${filter}%` },
+                })
 
-                const suggestions =
-                  data.members.map((m) => ({
-                    text: m.FullName,
-                    size: PersonaSize.size24,
-                    memberId: m.Member.MemberId,
-                    secondaryText:
-                      m.Member.Club1Name ||
-                      m.Member.Club2Name ||
-                      m.Member.Division,
-                  })) || [];
+                const suggestions: MemberPersona[] = data.members.map((m) => ({
+                  text: m.FullName,
+                  size: PersonaSize.size24,
+                  memberId: m.MemberId,
+                  secondaryText: m.Member?.Club1Name || undefined,
+                }))
 
-                return suggestions;
+                return suggestions
               }}
-              resolveDelay={1}
-              onItemSelected={(item) => {
-                console.log([...picker.current.items, item]);
-                return item;
+              resolveDelay={350}
+              onItemSelected={(selectedItem?: IPersonaProps | undefined) => {
+                const items = picker.current?.items || []
+                if (selectedItem) {
+                  console.log([...items, selectedItem])
+                  return selectedItem
+                } else {
+                  console.log([...items])
+                  return null
+                }
               }}
               componentRef={picker}
             />
@@ -90,17 +102,12 @@ const Home: NextPage = () => {
         </Stack>
       </Dialog>
     </>
-  );
-};
+  )
+}
 
 export const getStaticProps = async () => {
-  const apolloClient = initializeApollo();
-  await apolloClient.query({
-    query: GET_MEMBERS_SEARCH,
-    variables: { input: "%" },
-  });
+  const apolloClient = initializeApollo()
+  return { props: { initialApolloState: apolloClient.cache.extract() } }
+}
 
-  return { props: { initialApolloState: apolloClient.cache.extract() } };
-};
-
-export default Home;
+export default Home

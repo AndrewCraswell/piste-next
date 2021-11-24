@@ -1,0 +1,13 @@
+query SearchMembers($filter: String!) {
+  members: MembersLookup(
+    limit: 25
+    where: { FullName: { _like: $filter } }
+    order_by: { FullName: asc }
+  ) {
+    FullName
+    MemberId
+    Member {
+      Club1Name
+    }
+  }
+}

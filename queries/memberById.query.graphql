@@ -1,0 +1,10 @@
+query MemberById($id: String!) {
+  member: Members(where: { MemberId: { _eq: $id } }) {
+    FirstName
+    LastName
+    MemberId
+    Club1Name
+    Division
+    Birthdate
+  }
+}
