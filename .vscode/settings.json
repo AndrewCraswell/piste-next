@@ -11,12 +11,15 @@
   "files.exclude": {
     "**/build": true,
     "**/coverage": true,
+    "**/.next": true,
     "**/node_modules": true,
-    "**/.svelte-kit": true,
-    "**/.vercel_build_output": true
   },
   "typescript.tsdk": ".\\node_modules\\typescript\\lib",
   "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
@@ -24,9 +27,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": true
   },
-  "[svelte]": {
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "svelte.svelte-vscode"
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
   },
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
@@ -34,6 +37,7 @@
   "eslint.validate": [
     "javascript",
     "typescript",
-    "svelte"
+    "javascriptreact",
+    "typescriptreact"
   ]
 }

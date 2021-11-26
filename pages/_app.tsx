@@ -1,9 +1,11 @@
 import type { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client"
 import { initializeIcons } from "@fluentui/react"
+import { MsalProvider } from "@azure/msal-react"
 
 import { useApollo } from "$lib/apollo"
-import { ThemeProvider } from "$components"
+import { AuthenticatedApp, OnboardingGate, ThemeProvider } from "$components"
+import { msal } from "$lib/authConfig"
 
 import "../styles/globals.css"
 import "modern-normalize"
@@ -15,9 +17,15 @@ function App({ Component, pageProps }: AppProps) {
 
   return (
     <ApolloProvider client={apolloClient}>
-      <ThemeProvider>
-        <Component {...pageProps} />
-      </ThemeProvider>
+      <MsalProvider instance={msal}>
+        <ThemeProvider>
+          <AuthenticatedApp>
+            <OnboardingGate>
+              <Component {...pageProps} />
+            </OnboardingGate>
+          </AuthenticatedApp>
+        </ThemeProvider>
+      </MsalProvider>
     </ApolloProvider>
   )
 }

@@ -8,6 +8,7 @@ query SearchMembers($filter: String!) {
     MemberId
     Member {
       Club1Name
+      Club2Name
     }
   }
 }

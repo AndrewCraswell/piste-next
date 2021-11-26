@@ -174,6 +174,25 @@ export type String_Mssql_Comparison_Exp = {
   _nlike?: InputMaybe<Scalars['String']>;
 };
 
+/** columns and relationships of "Users" */
+export type Users = {
+  __typename?: 'Users';
+  Oid: Scalars['String'];
+};
+
+/** Boolean expression to filter rows from the table "Users". All fields are combined with a logical 'AND'. */
+export type Users_Bool_Exp = {
+  Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
+  _and?: InputMaybe<Array<Users_Bool_Exp>>;
+  _not?: InputMaybe<Users_Bool_Exp>;
+  _or?: InputMaybe<Array<Users_Bool_Exp>>;
+};
+
+/** Ordering options when selecting data from "Users". */
+export type Users_Order_By = {
+  Oid?: InputMaybe<Order_By>;
+};
+
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Mssql_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['date']>;
@@ -222,6 +241,8 @@ export type Query_Root = {
   Members: Array<Members>;
   /** fetch data from the table: "MembersLookup" */
   MembersLookup: Array<MembersLookup>;
+  /** fetch data from the table: "Users" */
+  Users: Array<Users>;
 };
 
 
@@ -240,12 +261,22 @@ export type Query_RootMembersLookupArgs = {
   where?: InputMaybe<MembersLookup_Bool_Exp>;
 };
 
+
+export type Query_RootUsersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "Members" */
   Members: Array<Members>;
   /** fetch data from the table: "MembersLookup" */
   MembersLookup: Array<MembersLookup>;
+  /** fetch data from the table: "Users" */
+  Users: Array<Users>;
 };
 
 
@@ -264,6 +295,14 @@ export type Subscription_RootMembersLookupArgs = {
   where?: InputMaybe<MembersLookup_Bool_Exp>;
 };
 
+
+export type Subscription_RootUsersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Users_Order_By>>;
+  where?: InputMaybe<Users_Bool_Exp>;
+};
+
 export type MemberByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
@@ -271,12 +310,26 @@ export type MemberByIdQueryVariables = Exact<{
 
 export type MemberByIdQuery = { __typename?: 'query_root', member: Array<{ __typename?: 'Members', FirstName: string, LastName: string, MemberId: string, Club1Name?: string | null | undefined, Division?: string | null | undefined, Birthdate: number }> };
 
+export type MembersByIdsQueryVariables = Exact<{
+  ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type MembersByIdsQuery = { __typename?: 'query_root', Members: Array<{ __typename?: 'Members', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null | undefined, Club2Name?: string | null | undefined, Division?: string | null | undefined, Region?: number | null | undefined, Expiration: any, Gender?: string | null | undefined, MemberType: string, MemberId: string, Nickname?: string | null | undefined, Epee: string, Foil: string, Saber: string, Competitive: string, Club1Id?: string | null | undefined, Club2Id?: string | null | undefined }> };
+
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', members: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', Club1Name?: string | null | undefined } | null | undefined }> };
+export type SearchMembersQuery = { __typename?: 'query_root', members: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', Club1Name?: string | null | undefined, Club2Name?: string | null | undefined } | null | undefined }> };
+
+export type UserByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type UserByIdQuery = { __typename?: 'query_root', Users: Array<{ __typename?: 'Users', Oid: string }> };
 
 
 export const MemberByIdDocument = gql`
@@ -319,6 +372,58 @@ export function useMemberByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type MemberByIdQueryHookResult = ReturnType<typeof useMemberByIdQuery>;
 export type MemberByIdLazyQueryHookResult = ReturnType<typeof useMemberByIdLazyQuery>;
 export type MemberByIdQueryResult = Apollo.QueryResult<MemberByIdQuery, MemberByIdQueryVariables>;
+export const MembersByIdsDocument = gql`
+    query MembersByIds($ids: [String!]) {
+  Members(where: {MemberId: {_in: $ids}}) {
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    Region
+    Expiration
+    Gender
+    MemberType
+    MemberId
+    Nickname
+    Epee
+    Foil
+    Saber
+    Competitive
+    Club1Id
+    Club2Id
+  }
+}
+    `;
+
+/**
+ * __useMembersByIdsQuery__
+ *
+ * To run a query within a React component, call `useMembersByIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMembersByIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMembersByIdsQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useMembersByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
+      }
+export function useMembersByIdsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
+        }
+export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery>;
+export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
+export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!) {
   members: MembersLookup(
@@ -330,6 +435,7 @@ export const SearchMembersDocument = gql`
     MemberId
     Member {
       Club1Name
+      Club2Name
     }
   }
 }
@@ -362,3 +468,38 @@ export function useSearchMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
 export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQuery>;
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
+export const UserByIdDocument = gql`
+    query UserById($id: String!) {
+  Users(where: {Oid: {_eq: $id}}) {
+    Oid
+  }
+}
+    `;
+
+/**
+ * __useUserByIdQuery__
+ *
+ * To run a query within a React component, call `useUserByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useUserByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useUserByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useUserByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
+      }
+export function useUserByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<UserByIdQuery, UserByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<UserByIdQuery, UserByIdQueryVariables>(UserByIdDocument, options);
+        }
+export type UserByIdQueryHookResult = ReturnType<typeof useUserByIdQuery>;
+export type UserByIdLazyQueryHookResult = ReturnType<typeof useUserByIdLazyQuery>;
+export type UserByIdQueryResult = Apollo.QueryResult<UserByIdQuery, UserByIdQueryVariables>;

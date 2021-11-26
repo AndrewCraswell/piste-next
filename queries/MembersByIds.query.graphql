@@ -1,0 +1,22 @@
+query MembersByIds($ids: [String!]) {
+  Members(where: { MemberId: { _in: $ids } }) {
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    Region
+    Expiration
+    Gender
+    MemberType
+    MemberId
+    Nickname
+    Epee
+    Foil
+    Saber
+    Competitive
+    Club1Id
+    Club2Id
+  }
+}
