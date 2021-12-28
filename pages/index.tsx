@@ -4,7 +4,11 @@ import { Text } from "@fluentui/react"
 import { initializeApollo } from "$lib/apollo"
 
 const Home: NextPage = () => {
-  return <Text>Dashboard</Text>
+  return (
+    <>
+      <Text as="h1">Dashboard</Text>
+    </>
+  )
 }
 
 export const getStaticProps = async () => {

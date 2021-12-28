@@ -33,7 +33,7 @@ export const msalConfig: Configuration = {
   system: {
     loggerOptions: {
       loggerCallback: (logLevel, message) => {
-        console.log("[MSAL]", message)
+        //console.log("[MSAL]", message)
       },
       logLevel: LogLevel.Verbose,
       piiLoggingEnabled: false,
