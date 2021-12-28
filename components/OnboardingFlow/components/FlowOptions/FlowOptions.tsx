@@ -47,7 +47,6 @@ export const FlowOptions: React.FunctionComponent = () => {
 
         <CompoundButton
           secondaryText="I schedule lessons for my family"
-          disabled
           onClick={() => {
             goTo("parent")
           }}

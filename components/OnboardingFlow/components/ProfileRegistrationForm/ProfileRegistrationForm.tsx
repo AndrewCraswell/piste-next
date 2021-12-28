@@ -24,15 +24,23 @@ const formTokens: Partial<IStackProps> = {
   tokens: { childrenGap: 15 },
 }
 
-export const ProfileRegistrationForm: React.FunctionComponent = () => {
+export const ProfileRegistrationForm: React.FunctionComponent = ({
+  children,
+}) => {
   const { handleSubmit, control, setValue } =
     useForm<ProfileRegistrationFields>()
-  const { back } = useDecisionTree()
+  const { back, next } = useDecisionTree()
 
   const onSubmit: SubmitHandler<ProfileRegistrationFields> = useCallback(
     (values, event) => {
       event?.preventDefault()
+
+      const invalidChars = ["_", "(", ")", " ", "", "-"]
+      values.phoneNumber = sanitizeInput(values.phoneNumber, invalidChars)
+      values.postalCode = sanitizeInput(values.postalCode, invalidChars)
+
       console.log(values)
+      next()
     },
     []
   )
@@ -172,8 +180,12 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
 
       <DialogFooter>
         <DefaultButton onClick={back}>Back</DefaultButton>
-        <PrimaryButton type="submit">Register</PrimaryButton>
+        <PrimaryButton type="submit">Next</PrimaryButton>
       </DialogFooter>
     </form>
   )
+}
+
+function sanitizeInput(value: string, remove: string[]) {
+  return remove.reduce((val, char) => val.replaceAll(char, ""), value)
 }
