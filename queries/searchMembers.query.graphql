@@ -1,5 +1,5 @@
 query SearchMembers($filter: String!) {
-  members: MembersLookup(
+  MembersLookup(
     limit: 25
     where: { FullName: { _like: $filter } }
     order_by: { FullName: asc }

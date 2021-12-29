@@ -322,7 +322,7 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', members: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', Club1Name?: string | null | undefined, Club2Name?: string | null | undefined } | null | undefined }> };
+export type SearchMembersQuery = { __typename?: 'query_root', MembersLookup: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', Club1Name?: string | null | undefined, Club2Name?: string | null | undefined } | null | undefined }> };
 
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -426,7 +426,7 @@ export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsL
 export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!) {
-  members: MembersLookup(
+  MembersLookup(
     limit: 25
     where: {FullName: {_like: $filter}}
     order_by: {FullName: asc}

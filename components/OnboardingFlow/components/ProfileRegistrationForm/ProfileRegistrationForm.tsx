@@ -6,6 +6,7 @@ import {
   FormAddressAutocomplete,
 } from "$components"
 import { useDecisionTree } from "$components/DecisionTree"
+import { useAuthenticatedUser } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import {
   Stack,
@@ -15,7 +16,7 @@ import {
   PrimaryButton,
   DefaultButton,
 } from "@fluentui/react"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileRegistrationFields } from "./ProfileRegistrationForm.types"
 
@@ -24,12 +25,11 @@ const formTokens: Partial<IStackProps> = {
   tokens: { childrenGap: 15 },
 }
 
-export const ProfileRegistrationForm: React.FunctionComponent = ({
-  children,
-}) => {
+export const ProfileRegistrationForm: React.FunctionComponent = () => {
   const { handleSubmit, control, setValue } =
     useForm<ProfileRegistrationFields>()
   const { back, next } = useDecisionTree()
+  const user = useAuthenticatedUser()
 
   const onSubmit: SubmitHandler<ProfileRegistrationFields> = useCallback(
     (values, event) => {
@@ -121,6 +121,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = ({
             type="email"
             maxLength={64}
             autoComplete="email"
+            defaultValue={user?.username}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
@@ -180,12 +181,16 @@ export const ProfileRegistrationForm: React.FunctionComponent = ({
 
       <DialogFooter>
         <DefaultButton onClick={back}>Back</DefaultButton>
-        <PrimaryButton type="submit">Next</PrimaryButton>
+        {/* <PrimaryButton type="submit">Next</PrimaryButton> */}
+        <PrimaryButton onClick={next}>Next</PrimaryButton>
       </DialogFooter>
     </form>
   )
 }
 
 function sanitizeInput(value: string, remove: string[]) {
-  return remove.reduce((val, char) => val.replaceAll(char, ""), value)
+  return remove.reduce(
+    (val, char) => (val ? val.replaceAll(char, "") : ""),
+    value
+  )
 }

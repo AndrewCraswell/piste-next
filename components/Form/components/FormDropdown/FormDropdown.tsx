@@ -12,6 +12,7 @@ export const FormDropdown: React.FunctionComponent<FormDropdownProps> = (
 
   return (
     <Controller
+      defaultValue={inputProps.defaultValue}
       {...controllerProps}
       render={({ field, fieldState: { invalid, error } }) => (
         <Dropdown

@@ -1,4 +1,4 @@
-import { Card } from "$components"
+import { Card, MemberLookupField } from "$components"
 import {
   DecisionTree,
   DecisionTemplate,
@@ -10,13 +10,16 @@ import {
   MotionAnimations,
   MotionDurations,
   MotionTimings,
-  IStackProps,
   DefaultButton,
   DialogFooter,
   PrimaryButton,
 } from "@fluentui/react"
 
-import { FlowOptions, ProfileRegistrationForm } from "./components"
+import {
+  FlowOptions,
+  ProfileRegistrationForm,
+  StudentAccountLinkingForm,
+} from "./components"
 
 const AnimatedStack = styled(Stack)`
   animation: ${MotionAnimations.slideUpIn};
@@ -57,15 +60,7 @@ export const OnboardingFlow: React.FunctionComponent = () => {
           </Card>
         </DecisionTemplate>
         <DecisionTemplate id="student-usfa" nextId="success">
-          {({ back, next }: IDecisionTreeContext) => (
-            <Card>
-              Sync with USFA Membership
-              <DialogFooter>
-                <DefaultButton onClick={back}>Back</DefaultButton>
-                <PrimaryButton onClick={next}>Next</PrimaryButton>
-              </DialogFooter>
-            </Card>
-          )}
+          <StudentAccountLinkingForm />
         </DecisionTemplate>
 
         {/* Parent flow */}

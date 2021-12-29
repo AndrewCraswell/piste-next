@@ -13,6 +13,7 @@ export const FormDatePicker: React.FunctionComponent<FormDatePickerProps> = (
 
   return (
     <Controller
+      defaultValue={inputProps.defaultValue}
       {...controllerProps}
       render={({ field }) => (
         <DatePicker

@@ -15,7 +15,7 @@ export const MemberLookupField: React.FunctionComponent = () => {
   return (
     <NormalPeoplePicker
       inputProps={{
-        placeholder: "Name",
+        placeholder: "Full name",
       }}
       onResolveSuggestions={async (filter) => {
         const { data } = await client.query<
@@ -26,7 +26,7 @@ export const MemberLookupField: React.FunctionComponent = () => {
           variables: { filter: `${filter}%` },
         })
 
-        const suggestions: IPersonaProps[] = data!.members.map((m) => ({
+        const suggestions: IPersonaProps[] = data!.MembersLookup.map((m) => ({
           text: m.FullName,
           size: PersonaSize.size24,
           optionalText: m.MemberId,

@@ -11,6 +11,7 @@ export const FormMaskedTextField: React.FunctionComponent<FormMaskedTextFieldPro
 
     return (
       <Controller
+        defaultValue={inputProps.defaultValue}
         {...controllerProps}
         render={({ field, fieldState: { invalid, error } }) => (
           <MaskedTextField

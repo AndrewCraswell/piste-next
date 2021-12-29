@@ -12,6 +12,7 @@ export const FormTextField: React.FunctionComponent<FormTextFieldProps> = (
 
   return (
     <Controller
+      defaultValue={inputProps.defaultValue}
       {...controllerProps}
       render={({ field, fieldState: { invalid, error } }) => (
         <TextField

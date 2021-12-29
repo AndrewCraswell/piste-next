@@ -28,6 +28,7 @@
     "react-hook-form": "^7.22.5"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.7.2",
     "@graphql-codegen/cli": "^2.3.0",
     "@graphql-codegen/introspection": "^2.1.0",
     "@graphql-codegen/typescript": "^2.4.1",
