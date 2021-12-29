@@ -310,6 +310,14 @@ export type MemberByIdQueryVariables = Exact<{
 
 export type MemberByIdQuery = { __typename?: 'query_root', member: Array<{ __typename?: 'Members', FirstName: string, LastName: string, MemberId: string, Club1Name?: string | null | undefined, Division?: string | null | undefined, Birthdate: number }> };
 
+export type MemberDetailsByNameQueryVariables = Exact<{
+  firstName: Scalars['String'];
+  lastName: Scalars['String'];
+}>;
+
+
+export type MemberDetailsByNameQuery = { __typename?: 'query_root', Members: Array<{ __typename?: 'Members', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null | undefined, Club2Name?: string | null | undefined, Division?: string | null | undefined, MemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
+
 export type MembersByIdsQueryVariables = Exact<{
   ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
 }>;
@@ -372,6 +380,56 @@ export function useMemberByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryH
 export type MemberByIdQueryHookResult = ReturnType<typeof useMemberByIdQuery>;
 export type MemberByIdLazyQueryHookResult = ReturnType<typeof useMemberByIdLazyQuery>;
 export type MemberByIdQueryResult = Apollo.QueryResult<MemberByIdQuery, MemberByIdQueryVariables>;
+export const MemberDetailsByNameDocument = gql`
+    query MemberDetailsByName($firstName: String!, $lastName: String!) {
+  Members(
+    limit: 10
+    where: {FirstName: {_eq: $firstName}, LastName: {_eq: $lastName}}
+  ) {
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    MemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
+  }
+}
+    `;
+
+/**
+ * __useMemberDetailsByNameQuery__
+ *
+ * To run a query within a React component, call `useMemberDetailsByNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMemberDetailsByNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMemberDetailsByNameQuery({
+ *   variables: {
+ *      firstName: // value for 'firstName'
+ *      lastName: // value for 'lastName'
+ *   },
+ * });
+ */
+export function useMemberDetailsByNameQuery(baseOptions: ApolloReactHooks.QueryHookOptions<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>(MemberDetailsByNameDocument, options);
+      }
+export function useMemberDetailsByNameLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>(MemberDetailsByNameDocument, options);
+        }
+export type MemberDetailsByNameQueryHookResult = ReturnType<typeof useMemberDetailsByNameQuery>;
+export type MemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useMemberDetailsByNameLazyQuery>;
+export type MemberDetailsByNameQueryResult = Apollo.QueryResult<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>;
 export const MembersByIdsDocument = gql`
     query MembersByIds($ids: [String!]) {
   Members(where: {MemberId: {_in: $ids}}) {

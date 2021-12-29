@@ -1,0 +1,19 @@
+query MemberDetailsByName($firstName: String!, $lastName: String!) {
+  Members(
+    limit: 10
+    where: { FirstName: { _eq: $firstName }, LastName: { _eq: $lastName } }
+  ) {
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    MemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
+  }
+}

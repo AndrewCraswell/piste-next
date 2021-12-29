@@ -1,9 +1,5 @@
-import {
-  Card,
-  MemberDetailsCard,
-  MemberLookupField,
-  useDecisionTree,
-} from "$components"
+import { Card, MemberDetailsCard, useDecisionTree } from "$components"
+import { useMemberDetailsByNameQuery } from "$queries"
 import {
   DialogFooter,
   DefaultButton,
@@ -13,17 +9,22 @@ import {
 
 export const StudentAccountLinkingForm: React.FunctionComponent = () => {
   const { back, next } = useDecisionTree()
+  const { data: members } = useMemberDetailsByNameQuery({
+    variables: {
+      firstName: "Andrew",
+      lastName: "Chen",
+    },
+  })
 
   return (
     <>
       <Card>
         <div style={{ marginBottom: 20 }}>
-          <Text variant="xLarge">USA Fencing membership</Text>
+          <Text variant="xLarge">Is this you?</Text>
           <Text variant="mediumPlus">
-            <div>Link your membership to sync your ratings</div>
+            <div>There is a USA Fencing member that matches your profile</div>
           </Text>
         </div>
-        <MemberLookupField />
 
         <DialogFooter>
           <DefaultButton onClick={back}>Back</DefaultButton>
@@ -32,7 +33,24 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
         </DialogFooter>
       </Card>
 
-      <MemberDetailsCard />
+      <div style={{ width: 400 }}>
+        {members?.Members.map((member) => (
+          <MemberDetailsCard
+            key={member.MemberId}
+            details={{
+              fullName: `${member.FirstName} ${member.LastName}`,
+              secondaryText:
+                member.Club1Name || member.Club2Name || member.Division || "",
+              memberId: member.MemberId,
+              membershipExpiration: member.Expiration,
+              birthdate: member.Birthdate,
+              foilRating: member.Foil,
+              epeeRating: member.Epee,
+              sabreRating: member.Saber,
+            }}
+          />
+        ))}
+      </div>
     </>
   )
 }

@@ -2,8 +2,8 @@ import { HorizontalCard } from "../HorizontalCard"
 import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import { Text, Persona, FontWeights } from "@fluentui/react"
-
-// TODO: Pass in Member data
+import { useDisclosure } from "$hooks"
+import dayjs from "dayjs"
 
 const MemberDetailsList = styled.ul`
   display: grid;
@@ -32,49 +32,77 @@ const MemberDetailItem: React.FunctionComponent<IMemberDetailItemProps> = ({
     >
       {title}
     </Text>
-    <Text variant="small">{value}</Text>
+    <Text variant="small">{value ?? "N/A"}</Text>
   </li>
 )
 
 const ThinCard = styled(HorizontalCard)`
   padding: ${({ theme }) => theme.spacing.s1};
   width: 100%;
-  max-width: 280px;
 `
 
 export interface IMemberDetailItemProps {
   title: string
-  value: string
+  value?: string
 }
 
-export const MemberDetailsCard: React.FunctionComponent<IStyleableProps> = ({
-  className,
-}) => {
-  return (
-    <ThinCard
-      className={className}
-      actions={[
-        {
-          iconProps: { iconName: "Add" },
-        },
-        {
-          iconProps: { iconName: "Calendar" },
-        },
-      ]}
-    >
-      <Persona
-        text="Andrew Craswell"
-        secondaryText="Kaizen Academy"
-        showSecondaryText
-      />
-      <MemberDetailsList>
-        <MemberDetailItem title="Member Id" value="100067485" />
-        <MemberDetailItem title="Expiration" value="6/15/2022" />
-        <MemberDetailItem title="Birthdate" value="4/09/1992" />
-        <MemberDetailItem title="Foil" value="U" />
-        <MemberDetailItem title="Epee" value="B26" />
-        <MemberDetailItem title="Sabre" value="U" />
-      </MemberDetailsList>
-    </ThinCard>
-  )
+export type MemberDetails = {
+  fullName?: string
+  secondaryText?: string
+  memberId?: string
+  membershipExpiration?: string
+  birthdate: number
+  foilRating?: string
+  epeeRating?: string
+  sabreRating?: string
 }
+
+export interface IMemberDetailsCardProps extends IStyleableProps {
+  details: MemberDetails
+}
+export const MemberDetailsCard: React.FunctionComponent<IMemberDetailsCardProps> =
+  ({ className, details }) => {
+    const { isOpen: isAdded, onToggle: flipAdded } = useDisclosure(false)
+
+    const {
+      fullName,
+      secondaryText,
+      memberId,
+      membershipExpiration,
+      birthdate,
+      foilRating,
+      epeeRating,
+      sabreRating,
+    } = details
+
+    return (
+      <ThinCard
+        className={className}
+        actions={[
+          {
+            iconProps: { iconName: isAdded ? "SkypeCircleCheck" : "Add" },
+            onClick: () => {
+              flipAdded()
+            },
+          },
+        ]}
+      >
+        <Persona
+          text={fullName}
+          secondaryText={secondaryText}
+          showSecondaryText
+        />
+        <MemberDetailsList>
+          <MemberDetailItem title="Member Id" value={memberId} />
+          <MemberDetailItem
+            title="Expiration"
+            value={dayjs(membershipExpiration).format("M/DD/YYYY")}
+          />
+          <MemberDetailItem title="Birthdate" value={birthdate.toString()} />
+          <MemberDetailItem title="Foil" value={foilRating} />
+          <MemberDetailItem title="Epee" value={epeeRating} />
+          <MemberDetailItem title="Sabre" value={sabreRating} />
+        </MemberDetailsList>
+      </ThinCard>
+    )
+  }

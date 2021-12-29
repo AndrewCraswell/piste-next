@@ -1,4 +1,4 @@
-import { Card, MemberLookupField } from "$components"
+import { Card } from "$components"
 import {
   DecisionTree,
   DecisionTemplate,
