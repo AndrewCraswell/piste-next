@@ -10,6 +10,7 @@ function createApolloClient() {
       },
     }),
     cache: new InMemoryCache(),
+    connectToDevTools: true,
   })
 }
 

@@ -8,15 +8,15 @@ export interface IHeaderButtonProps
     HTMLButtonElement
   > {
   variant?: "normal" | "large"
-  icon: string
+  icon?: string
 }
 
 const Button: React.FunctionComponent<IHeaderButtonProps> = (props) => {
-  const { icon, variant, ...buttonProps } = props
+  const { icon, variant, children, ...buttonProps } = props
 
   return (
     <button {...buttonProps}>
-      <Icon iconName={icon} />
+      {icon ? <Icon iconName={icon} /> : children}
     </button>
   )
 }

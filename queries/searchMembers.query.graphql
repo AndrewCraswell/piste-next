@@ -1,5 +1,6 @@
-query SearchMembers($filter: String!, $count: Int = 12) {
+query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
   MembersLookup(
+    offset: $offset
     limit: $count
     where: { FullName: { _like: $filter } }
     order_by: { FullName: asc }

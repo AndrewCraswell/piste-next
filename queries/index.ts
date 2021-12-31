@@ -327,6 +327,7 @@ export type MembersByIdsQuery = { __typename?: 'query_root', Members: Array<{ __
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
+  offset?: InputMaybe<Scalars['Int']>;
   count?: InputMaybe<Scalars['Int']>;
 }>;
 
@@ -484,8 +485,9 @@ export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery
 export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
 export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const SearchMembersDocument = gql`
-    query SearchMembers($filter: String!, $count: Int = 12) {
+    query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
   MembersLookup(
+    offset: $offset
     limit: $count
     where: {FullName: {_like: $filter}}
     order_by: {FullName: asc}
@@ -523,6 +525,7 @@ export const SearchMembersDocument = gql`
  * const { data, loading, error } = useSearchMembersQuery({
  *   variables: {
  *      filter: // value for 'filter'
+ *      offset: // value for 'offset'
  *      count: // value for 'count'
  *   },
  * });

@@ -1,8 +1,15 @@
-import { useAuthenticatedUser } from "$hooks"
 import styled from "@emotion/styled"
-import { Nav } from "@fluentui/react"
+import {
+  Callout,
+  DirectionalHint,
+  Nav,
+  Persona,
+  PersonaSize,
+  Text,
+} from "@fluentui/react"
 import { HeaderButton } from "./components"
 import { useRouter } from "next/router"
+import { useDisclosure } from "$hooks"
 
 const AppRoot = styled.div`
   display: flex;
@@ -46,24 +53,10 @@ const CenterRegion = styled.div`
   display: inherit;
 `
 
-export const HeaderAvatar = styled.button`
-  background-color: inherit;
-  color: inherit;
-  line-height: inherit;
-  border: none;
-  min-width: 48px;
-  padding: 0;
-
-  &:hover {
-    background-color: ${({ theme }) => theme.palette.themeDarker};
-    transition: background-color 0.467s cubic-bezier(0.1, 0.9, 0.2, 1) 34ms;
-    cursor: pointer;
-  }
-
-  &:focus {
-    outline: #fff 1px solid;
-    outline-offset: -1px;
-  }
+export const HeaderAvatar = styled(HeaderButton)`
+  align-items: center;
+  display: flex;
+  justify-content: center;
 `
 
 const PageContainer = styled.div`
@@ -93,11 +86,19 @@ const AppNavContainer = styled.div`
 
 const AppNav = styled(Nav)`
   width: 200px;
+
+  li[role="listitem"] a {
+    padding: 0 20px 0;
+  }
 `
 
 export const AppShell: React.FunctionComponent = ({ children }) => {
-  const user = useAuthenticatedUser()
   const router = useRouter()
+  const {
+    isOpen: isUserMenuOpen,
+    onToggle: toggleUserMenu,
+    onClose: onUserMenuDismissed,
+  } = useDisclosure(false)
 
   return (
     <AppRoot>
@@ -113,7 +114,32 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
           <HeaderButton icon="Message" />
           <HeaderButton icon="Settings" />
 
-          <HeaderAvatar>O</HeaderAvatar>
+          <HeaderAvatar id="headerAvatar" onClick={() => toggleUserMenu()}>
+            <Persona
+              imageUrl="https://scontent-sea1-1.xx.fbcdn.net/v/t1.6435-1/cp0/p40x40/42202440_10155749668661451_975321746469027840_n.jpg?_nc_cat=107&ccb=1-5&_nc_sid=dbb9e7&_nc_ohc=9DvLQgIW6YsAX8na_oU&_nc_ht=scontent-sea1-1.xx&oh=00_AT9sfpou2rF6gl1-xX83z9oUVej3RLOlzyirS3FgVe8lbw&oe=61F5D411"
+              size={PersonaSize.size32}
+              hidePersonaDetails={true}
+              imageAlt="Andrew Craswell"
+            />
+          </HeaderAvatar>
+
+          <Callout
+            target="#headerAvatar"
+            isBeakVisible={false}
+            directionalHint={DirectionalHint.bottomRightEdge}
+            style={{ width: 320, padding: "20px 24px" }}
+            hidden={!isUserMenuOpen}
+            onDismiss={onUserMenuDismissed}
+            minPagePadding={0}
+          >
+            <Text block variant="xLarge">
+              Callout title here
+            </Text>
+            <Text block variant="small">
+              Message body is optional. If help documentation is available,
+              consider adding a link to learn more at the bottom.
+            </Text>
+          </Callout>
         </HeaderInner>
       </AppHeader>
 

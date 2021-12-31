@@ -8,8 +8,8 @@ import {
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
-import { SearchBox } from "@fluentui/react"
-import { useEffect } from "react"
+import { PrimaryButton, SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
+import { useEffect, useState } from "react"
 
 const GridContainer = styled.div`
   display: grid;
@@ -22,13 +22,19 @@ export const Dashboard: NextPage = () => {
   const pageTitle = "Dashboard"
   useTitle(pageTitle)
 
-  const [fetch, { data: members }] = useSearchMembersLazyQuery()
+  const pageSize = 12
+  const [fetch, { data: members, fetchMore, loading }] =
+    useSearchMembersLazyQuery({
+      notifyOnNetworkStatusChange: true,
+    })
+  const [pageNum, setPageNum] = useState(0)
+  const [searchTerm, setSearchTerm] = useState("")
 
   useEffect(() => {
     fetch({
       variables: {
         filter: "%",
-        count: 12,
+        count: pageSize,
       },
     })
   }, [])
@@ -38,15 +44,31 @@ export const Dashboard: NextPage = () => {
       <PageTitle>{pageTitle}</PageTitle>
       <SearchBox
         placeholder="Search"
-        onSearch={(newValue) =>
-          fetch({
-            variables: {
-              filter: `%${newValue}%`,
-              count: 30,
-            },
-          })
-        }
+        onSearch={(value) => {
+          if (searchTerm === value) {
+            return
+          }
+
+          setSearchTerm(value)
+          setPageNum(0)
+          if (value) {
+            fetch({
+              variables: {
+                filter: `%${value}%`,
+                count: pageSize,
+              },
+            })
+          } else {
+            fetch({
+              variables: {
+                filter: "%",
+                count: pageSize,
+              },
+            })
+          }
+        }}
       />
+
       <GridContainer>
         {members?.MembersLookup.map(({ FullName, Member, MemberId }) => (
           <MemberDetailsCard
@@ -68,6 +90,32 @@ export const Dashboard: NextPage = () => {
           />
         ))}
       </GridContainer>
+
+      {loading ? (
+        <Spinner size={SpinnerSize.large} style={{ marginTop: "2em" }} />
+      ) : (
+        <PrimaryButton
+          style={{ margin: "2em auto 0", display: "block" }}
+          onClick={() => {
+            setPageNum((val) => val + 1)
+            fetchMore({
+              variables: {
+                filter: `%${searchTerm}%`,
+                offset: pageSize * (pageNum + 1),
+                count: pageSize,
+              },
+              updateQuery: (existing, incoming) => ({
+                MembersLookup: [
+                  ...existing.MembersLookup,
+                  ...incoming.fetchMoreResult?.MembersLookup!,
+                ],
+              }),
+            })
+          }}
+        >
+          Load more
+        </PrimaryButton>
+      )}
     </>
   )
 }
