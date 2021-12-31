@@ -75,6 +75,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             placeholder="First name"
             maxLength={64}
             autoComplete="given-name"
+            defaultValue={user?.idTokenClaims.given_name}
           />
           <FormTextField
             control={control}
@@ -85,6 +86,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             placeholder="Last name"
             maxLength={64}
             autoComplete="family-name"
+            defaultValue={user?.idTokenClaims.family_name}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>

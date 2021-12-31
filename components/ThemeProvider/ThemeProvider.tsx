@@ -5,7 +5,7 @@ import React from "react"
 
 const BodyGrow = styled.div`
   height: 100vh;
-  background-color: ${({ theme }) => theme.palette.neutralLighterAlt};
+  //background-color: ${({ theme }) => theme.palette.neutralLighterAlt};
 `
 
 const ThemeInner: React.FunctionComponent = ({ children }) => {

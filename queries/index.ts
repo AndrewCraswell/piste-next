@@ -327,10 +327,11 @@ export type MembersByIdsQuery = { __typename?: 'query_root', Members: Array<{ __
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
+  count?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', MembersLookup: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', Club1Name?: string | null | undefined, Club2Name?: string | null | undefined } | null | undefined }> };
+export type SearchMembersQuery = { __typename?: 'query_root', MembersLookup: Array<{ __typename?: 'MembersLookup', FullName: string, MemberId: string, Member?: { __typename?: 'Members', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null | undefined, Club2Name?: string | null | undefined, Division?: string | null | undefined, MemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null | undefined }> };
 
 export type UserByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -384,7 +385,7 @@ export const MemberDetailsByNameDocument = gql`
     query MemberDetailsByName($firstName: String!, $lastName: String!) {
   Members(
     limit: 10
-    where: {FirstName: {_eq: $firstName}, LastName: {_eq: $lastName}}
+    where: {FirstName: {_like: $firstName}, LastName: {_like: $lastName}}
   ) {
     FirstName
     LastName
@@ -483,17 +484,27 @@ export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery
 export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
 export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const SearchMembersDocument = gql`
-    query SearchMembers($filter: String!) {
+    query SearchMembers($filter: String!, $count: Int = 12) {
   MembersLookup(
-    limit: 25
+    limit: $count
     where: {FullName: {_like: $filter}}
     order_by: {FullName: asc}
   ) {
     FullName
     MemberId
     Member {
+      FirstName
+      LastName
+      Birthdate
       Club1Name
       Club2Name
+      Division
+      MemberId
+      MemberType
+      Expiration
+      Foil
+      Epee
+      Saber
     }
   }
 }
@@ -512,6 +523,7 @@ export const SearchMembersDocument = gql`
  * const { data, loading, error } = useSearchMembersQuery({
  *   variables: {
  *      filter: // value for 'filter'
+ *      count: // value for 'count'
  *   },
  * });
  */

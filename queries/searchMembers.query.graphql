@@ -1,14 +1,24 @@
-query SearchMembers($filter: String!) {
+query SearchMembers($filter: String!, $count: Int = 12) {
   MembersLookup(
-    limit: 25
+    limit: $count
     where: { FullName: { _like: $filter } }
     order_by: { FullName: asc }
   ) {
     FullName
     MemberId
     Member {
+      FirstName
+      LastName
+      Birthdate
       Club1Name
       Club2Name
+      Division
+      MemberId
+      MemberType
+      Expiration
+      Foil
+      Epee
+      Saber
     }
   }
 }

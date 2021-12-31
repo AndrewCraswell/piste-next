@@ -41,6 +41,10 @@ const ThinCard = styled(HorizontalCard)`
   width: 100%;
 `
 
+const MemberPersona = styled(Persona)`
+  max-width: 245px;
+`
+
 export interface IMemberDetailItemProps {
   title: string
   value?: string
@@ -51,7 +55,7 @@ export type MemberDetails = {
   secondaryText?: string
   memberId?: string
   membershipExpiration?: string
-  birthdate: number
+  birthdate?: number
   foilRating?: string
   epeeRating?: string
   sabreRating?: string
@@ -87,7 +91,7 @@ export const MemberDetailsCard: React.FunctionComponent<IMemberDetailsCardProps>
           },
         ]}
       >
-        <Persona
+        <MemberPersona
           text={fullName}
           secondaryText={secondaryText}
           showSecondaryText
@@ -98,7 +102,7 @@ export const MemberDetailsCard: React.FunctionComponent<IMemberDetailsCardProps>
             title="Expiration"
             value={dayjs(membershipExpiration).format("M/DD/YYYY")}
           />
-          <MemberDetailItem title="Birthdate" value={birthdate.toString()} />
+          <MemberDetailItem title="Birthdate" value={birthdate?.toString()} />
           <MemberDetailItem title="Foil" value={foilRating} />
           <MemberDetailItem title="Epee" value={epeeRating} />
           <MemberDetailItem title="Sabre" value={sabreRating} />

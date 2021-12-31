@@ -1,7 +1,7 @@
 query MemberDetailsByName($firstName: String!, $lastName: String!) {
   Members(
     limit: 10
-    where: { FirstName: { _eq: $firstName }, LastName: { _eq: $lastName } }
+    where: { FirstName: { _like: $firstName }, LastName: { _like: $lastName } }
   ) {
     FirstName
     LastName
