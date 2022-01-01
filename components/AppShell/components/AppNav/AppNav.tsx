@@ -1,4 +1,5 @@
 import { useDisclosure } from "$hooks"
+import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import {
   Nav,
@@ -14,8 +15,6 @@ import { Hamburger } from "./components"
 
 const NavContainer = styled.div`
   background-color: ${({ theme }) => theme.palette.neutralLighter};
-  display: flex;
-  flex-direction: column;
 
   .ms-FocusZone {
     display: flex;
@@ -65,11 +64,14 @@ const StyledNav = styled(Nav)<IStyledNavProps>`
   }
 `
 
-export interface IAppNavProps {
+export interface IAppNavProps extends IStyleableProps {
   links: INavLinkGroup[]
 }
 
-export const AppNav: React.FunctionComponent<IAppNavProps> = ({ links }) => {
+export const AppNav: React.FunctionComponent<IAppNavProps> = ({
+  links,
+  className,
+}) => {
   const router = useRouter()
   const { isOpen, onToggle } = useDisclosure(true)
 
@@ -81,7 +83,7 @@ export const AppNav: React.FunctionComponent<IAppNavProps> = ({ links }) => {
   )
 
   return (
-    <NavContainer>
+    <NavContainer className={className}>
       <Hamburger
         iconProps={{ iconName: "GlobalNavButton" }}
         onClick={onToggle}

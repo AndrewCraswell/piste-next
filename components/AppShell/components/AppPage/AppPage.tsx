@@ -1,3 +1,4 @@
+import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import { DetailedHTMLProps, HTMLAttributes } from "react"
 
@@ -12,14 +13,16 @@ const PageContent = styled.main`
 `
 
 export interface IAppPageProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {}
+  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+    IStyleableProps {}
 
 export const AppPage: React.FunctionComponent<IAppPageProps> = ({
   children,
+  className,
   ...props
 }) => {
   return (
-    <PageContainer {...props}>
+    <PageContainer className={className} {...props}>
       <PageContent>{children}</PageContent>
     </PageContainer>
   )

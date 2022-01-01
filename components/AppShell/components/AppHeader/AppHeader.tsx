@@ -1,4 +1,5 @@
 import { useAuthenticatedUser, useDisclosure } from "$hooks"
+import { IStyleableProps } from "$types"
 import { useMsal } from "@azure/msal-react"
 import styled from "@emotion/styled"
 import { Panel } from "@fluentui/react"
@@ -47,9 +48,11 @@ const NotificationsPanel = styled(Panel)`
   }
 `
 
-export interface IAppHeaderProps {}
+export interface IAppHeaderProps extends IStyleableProps {}
 
-export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
+export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
+  className,
+}) => {
   const { instance } = useMsal()
   const user = useAuthenticatedUser()
   const { isOpen, onClose, onToggle } = useDisclosure()
@@ -60,7 +63,7 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
 
   return (
     <>
-      <Header>
+      <Header className={className}>
         <HeaderInner>
           {/* TODO: Parameterize this */}
           <HeaderButton icon="Waffle" variant="large" />

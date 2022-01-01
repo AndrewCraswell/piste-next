@@ -2,25 +2,44 @@ import styled from "@emotion/styled"
 import { AppHeader, AppNav, AppPage } from "./components"
 
 const AppRoot = styled.div`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: min-content auto;
+  grid-template-areas:
+    "header"
+    "main";
   height: 100%;
   overflow-y: hidden;
 `
 
+const Header = styled(AppHeader)`
+  grid-area: header;
+`
+
 const AppMain = styled.div`
-  display: flex;
-  flex-grow: 1;
+  grid-area: main;
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-template-areas:
+    "nav body"
+    "nav body";
   background-color: ${({ theme }) => theme.palette.neutralLighterAlt};
   overflow-y: auto;
+`
+
+const Nav = styled(AppNav)`
+  grid-area: nav;
+`
+
+const Page = styled(AppPage)`
+  grid-area: body;
 `
 
 export const AppShell: React.FunctionComponent = ({ children }) => {
   return (
     <AppRoot>
-      <AppHeader />
+      <Header />
       <AppMain>
-        <AppNav
+        <Nav
           links={[
             {
               links: [
@@ -53,7 +72,7 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
             },
           ]}
         />
-        <AppPage>{children}</AppPage>
+        <Page>{children}</Page>
         {/* TODO: Add a footer inside the AppPage */}
       </AppMain>
     </AppRoot>
