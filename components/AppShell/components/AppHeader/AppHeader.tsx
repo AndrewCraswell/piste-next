@@ -1,6 +1,7 @@
-import { useAuthenticatedUser } from "$hooks"
+import { useAuthenticatedUser, useDisclosure } from "$hooks"
 import { useMsal } from "@azure/msal-react"
 import styled from "@emotion/styled"
+import { Panel } from "@fluentui/react"
 import { useCallback } from "react"
 import { HeaderButton, UserMenu } from "./components"
 
@@ -40,43 +41,64 @@ const CenterRegion = styled.div`
   display: inherit;
 `
 
-// TODO: Convert CSS to emotion components
-
 export interface IAppHeaderProps {}
 
 export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
   const { instance } = useMsal()
   const user = useAuthenticatedUser()
-  console.log(user)
+  const { isOpen, onClose, onToggle } = useDisclosure()
+
   const logout = useCallback(() => {
     instance.logoutRedirect()
   }, [instance])
 
   return (
-    <Header>
-      <HeaderInner>
-        {/* TODO: Parameterize this */}
-        <HeaderButton icon="Waffle" variant="large" />
-        <BrandingAnchor href="/">
-          {/* TODO: Parameterize the siteName */}
-          {process.env.NEXT_PUBLIC_SITE_NAME}
-        </BrandingAnchor>
+    <>
+      <Header>
+        <HeaderInner>
+          {/* TODO: Parameterize this */}
+          <HeaderButton icon="Waffle" variant="large" />
+          <BrandingAnchor href="/">
+            {/* TODO: Parameterize the siteName */}
+            {process.env.NEXT_PUBLIC_SITE_NAME}
+          </BrandingAnchor>
 
-        <CenterRegion></CenterRegion>
+          <CenterRegion></CenterRegion>
 
-        {/* TODO: Allow actions to be passed in */}
-        {/* TODO: Collapse down to ellipse on small screens */}
-        <HeaderButton icon="Ringer" />
-        <HeaderButton icon="Settings" />
+          {/* TODO: Allow actions to be passed in */}
+          {/* TODO: Collapse down to ellipse on small screens */}
+          <HeaderButton icon="Ringer" onClick={onToggle} />
+          <HeaderButton icon="Settings" />
 
-        {/* TODO: Pass all user menu props up to the AppShell level */}
-        <UserMenu
-          // Get fullName from profile
-          fullName={"Andrew Craswell"}
-          email={user?.username}
-          logout={logout}
-        />
-      </HeaderInner>
-    </Header>
+          {/* TODO: Pass all user menu props up to the AppShell level */}
+          <UserMenu
+            // Get fullName from profile
+            fullName={"Andrew Craswell"}
+            email={user?.username}
+            logout={logout}
+          />
+        </HeaderInner>
+      </Header>
+      <Panel
+        headerText="Sample panel"
+        isOpen={isOpen}
+        onDismiss={onClose}
+        closeButtonAriaLabel="Close"
+        isLightDismiss={true}
+        layerProps={{
+          styles: {
+            root: { top: 48 },
+          },
+        }}
+        overlayProps={{
+          styles: {
+            root: { backgroundColor: "none" },
+          },
+        }}
+        isBlocking={true}
+      >
+        <p>Content goes here.</p>
+      </Panel>
+    </>
   )
 }

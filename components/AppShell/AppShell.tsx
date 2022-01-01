@@ -5,13 +5,14 @@ const AppRoot = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  overflow-y: hidden;
 `
 
 const AppMain = styled.div`
   display: flex;
   flex-grow: 1;
   background-color: ${({ theme }) => theme.palette.neutralLighterAlt};
-  overflow-y: hidden;
+  overflow-y: auto;
 `
 
 export const AppShell: React.FunctionComponent = ({ children }) => {
