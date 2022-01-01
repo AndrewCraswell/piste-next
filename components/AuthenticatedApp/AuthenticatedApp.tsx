@@ -10,7 +10,7 @@ import {
 import { InteractionStatus, InteractionType } from "@azure/msal-browser"
 
 export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
-  const { login } = useMsalAuthentication(InteractionType.Popup, {})
+  const { login } = useMsalAuthentication(InteractionType.Redirect, {})
   const { inProgress } = useMsal()
 
   return (
