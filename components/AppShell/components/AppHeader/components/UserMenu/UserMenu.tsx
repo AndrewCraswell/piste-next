@@ -9,6 +9,7 @@ import {
   PersonaSize,
 } from "@fluentui/react"
 import { useId } from "@fluentui/react-hooks"
+import { useRouter } from "next/router"
 import { HeaderButton } from "../HeaderButton"
 
 export const HeaderAvatar = styled(HeaderButton)`
@@ -37,6 +38,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   logout,
 }) => {
   const avatarId = useId("headerAvatar")
+  const router = useRouter()
   const {
     isOpen: isUserMenuOpen,
     onToggle: toggleUserMenu,
@@ -84,6 +86,12 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
             <div>
               <ActionButton
                 href="/profile"
+                onClick={(event) => {
+                  event.preventDefault()
+                  if (event.currentTarget instanceof HTMLAnchorElement) {
+                    router.push(event.currentTarget.href)
+                  }
+                }}
                 iconProps={{
                   iconName: "ContactCard",
                 }}

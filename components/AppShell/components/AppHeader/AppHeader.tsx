@@ -86,15 +86,13 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
         </HeaderInner>
       </Header>
       <NotificationsPanel
-        headerText="Sample panel"
+        headerText="Notifications"
         isOpen={isOpen}
         onDismiss={onClose}
         closeButtonAriaLabel="Close"
         isLightDismiss={true}
         isBlocking={true}
-      >
-        <p>Content goes here.</p>
-      </NotificationsPanel>
+      ></NotificationsPanel>
     </>
   )
 }
