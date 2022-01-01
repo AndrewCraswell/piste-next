@@ -41,6 +41,12 @@ const CenterRegion = styled.div`
   display: inherit;
 `
 
+const NotificationsPanel = styled(Panel)`
+  .ms-Panel-main {
+    top: 48px;
+  }
+`
+
 export interface IAppHeaderProps {}
 
 export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
@@ -79,26 +85,16 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = (props) => {
           />
         </HeaderInner>
       </Header>
-      <Panel
+      <NotificationsPanel
         headerText="Sample panel"
         isOpen={isOpen}
         onDismiss={onClose}
         closeButtonAriaLabel="Close"
         isLightDismiss={true}
-        layerProps={{
-          styles: {
-            root: { top: 48 },
-          },
-        }}
-        overlayProps={{
-          styles: {
-            root: { backgroundColor: "none" },
-          },
-        }}
         isBlocking={true}
       >
         <p>Content goes here.</p>
-      </Panel>
+      </NotificationsPanel>
     </>
   )
 }
