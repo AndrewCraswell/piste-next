@@ -11,6 +11,7 @@ const AppMain = styled.div`
   display: flex;
   flex-grow: 1;
   background-color: ${({ theme }) => theme.palette.neutralLighterAlt};
+  overflow-y: hidden;
 `
 
 export const AppShell: React.FunctionComponent = ({ children }) => {
