@@ -7,11 +7,16 @@ const HamburgerButton = styled(IconButton)`
   height: 44px;
 `
 
+const HamburgerContainer = styled.div`
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutralLight};
+`
+
 export const Hamburger: React.FunctionComponent<IButtonProps> = ({
   children,
+  className,
   ...props
 }) => (
-  <div>
+  <HamburgerContainer className={className}>
     <HamburgerButton {...props} />
-  </div>
+  </HamburgerContainer>
 )
