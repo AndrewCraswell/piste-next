@@ -15,6 +15,7 @@ import { Hamburger } from "./components"
 
 const NavContainer = styled.div`
   background-color: ${({ theme }) => theme.palette.neutralLighter};
+  border-right: 1px solid ${({ theme }) => theme.palette.neutralLight};
 
   .ms-FocusZone {
     display: flex;
@@ -28,18 +29,12 @@ export interface IStyledNavProps {
 const StyledNav = styled(Nav)<IStyledNavProps>`
   width: ${(props) => (props.isExpanded ? 200 : 48)}px;
   transition: width 200ms ${MotionTimings.decelerate};
-  background-color: ${({ theme }) => theme.palette.neutralLighter};
   overflow-y: visible;
+  //overflow-x: hidden;
 
   li[role="listitem"] a,
   li[role="listitem"] button {
     padding: 0 12px 0 !important;
-  }
-
-  li[role="listitem"] button {
-    padding: 0;
-    width: auto;
-    height: auto;
   }
 
   .ms-Nav-group {
