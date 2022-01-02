@@ -30,7 +30,6 @@ const StyledNav = styled(Nav)<IStyledNavProps>`
   width: ${(props) => (props.isExpanded ? 200 : 48)}px;
   transition: width 200ms ${MotionTimings.decelerate};
   overflow-y: visible;
-  //overflow-x: hidden;
 
   li[role="listitem"] a,
   li[role="listitem"] button {
