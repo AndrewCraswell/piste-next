@@ -7,7 +7,8 @@
     "start": "next start",
     "lint": "next lint --fix",
     "gql": "graphql-codegen --config codegen.js -r dotenv/config",
-    "gql:watch": "yarn gql --watch"
+    "gql:watch": "yarn gql --watch",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@apollo/client": "^3.5.4",
