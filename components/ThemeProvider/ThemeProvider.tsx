@@ -2,6 +2,7 @@ import { ThemeProvider as FluentProvider, useTheme } from "@fluentui/react"
 import { ThemeProvider as EmotionProvider } from "@emotion/react"
 import styled from "@emotion/styled"
 import React from "react"
+import { DefaultTheme } from "@fluentui/theme-samples"
 
 const BodyGrow = styled.div`
   height: 100vh;
@@ -19,7 +20,7 @@ const ThemeInner: React.FunctionComponent = ({ children }) => {
 
 export const ThemeProvider: React.FunctionComponent = ({ children }) => {
   return (
-    <FluentProvider>
+    <FluentProvider theme={DefaultTheme}>
       <ThemeInner>{children}</ThemeInner>
     </FluentProvider>
   )
