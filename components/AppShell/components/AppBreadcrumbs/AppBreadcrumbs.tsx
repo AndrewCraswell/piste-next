@@ -30,15 +30,12 @@ export interface IAppBreadcrumbsProps {
 export const AppBreadcrumbs: React.FunctionComponent<IAppBreadcrumbsProps> = ({
   crumbs,
 }) => {
-  const onLinkClick = useCallback(
-    (event) => {
-      if (event.target instanceof HTMLAnchorElement) {
-        event.preventDefault()
-        router.push(event.target.href)
-      }
-    },
-    [router]
-  )
+  const onLinkClick = useCallback((event) => {
+    if (event.target instanceof HTMLAnchorElement) {
+      event.preventDefault()
+      router.push(event.target.href)
+    }
+  }, [])
 
   return (
     <BreadcrumbBar

@@ -16,7 +16,7 @@ import {
   PrimaryButton,
   DefaultButton,
 } from "@fluentui/react"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileRegistrationFields } from "./ProfileRegistrationForm.types"
 
@@ -42,7 +42,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
       console.log(values)
       next()
     },
-    []
+    [next]
   )
 
   const setAddressOnAutocomplete = useCallback(
@@ -53,16 +53,16 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
       setValue("state", "WA")
       setValue("postalCode", address.postalCode)
     },
-    []
+    [setValue]
   )
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
       <legend style={{ marginBottom: 20 }}>
-        <Text variant="xLarge">Create profile</Text>
+        {/* <Text variant="xLarge">Create profile</Text>
         <Text variant="mediumPlus">
           <div>Setup your student profile so you can enroll in classes</div>
-        </Text>
+        </Text> */}
       </legend>
       <Stack {...formTokens}>
         <Stack horizontal tokens={columnTokens}>

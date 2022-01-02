@@ -1,10 +1,7 @@
 import type { NextPage } from "next"
 
 import { initializeApollo } from "$lib/apollo"
-import {
-  useMemberDetailsByNameLazyQuery,
-  useSearchMembersLazyQuery,
-} from "$queries"
+import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
@@ -37,7 +34,7 @@ export const Dashboard: NextPage = () => {
         count: pageSize,
       },
     })
-  }, [])
+  }, [fetch])
 
   return (
     <>
