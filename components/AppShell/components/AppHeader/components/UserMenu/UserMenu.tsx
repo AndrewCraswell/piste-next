@@ -10,9 +10,10 @@ import {
 } from "@fluentui/react"
 import { useId } from "@fluentui/react-hooks"
 import { useRouter } from "next/router"
+import { useCallback } from "react"
 import { HeaderButton } from "../HeaderButton"
 
-export const HeaderAvatar = styled(HeaderButton)`
+const HeaderAvatar = styled(HeaderButton)`
   align-items: center;
   display: flex;
   justify-content: center;
@@ -21,6 +22,47 @@ export const HeaderAvatar = styled(HeaderButton)`
 const TransparentPersona = styled(Persona)`
   .ms-Persona-initials {
     background-color: transparent;
+  }
+`
+
+const MenuCallout = styled(Callout)`
+  & > div {
+    width: 320px;
+    padding: 20px;
+  }
+`
+
+const MenuContent = styled.div`
+  display: flex;
+`
+
+const LogoutButton = styled(ActionButton)`
+  padding: 0;
+  height: 20px;
+  margin-top: 6px;
+  display: block;
+
+  i {
+    margin-left: 0;
+  }
+`
+
+const MenuInner = styled.div`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+`
+
+const ProfileButton = styled(ActionButton)`
+  padding: 0;
+  height: 20px;
+  margin-top: 6px;
+  display: block;
+
+  i {
+    margin-left: 0;
   }
 `
 
@@ -45,6 +87,16 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
     onClose: onUserMenuDismissed,
   } = useDisclosure(false)
 
+  const onLinkClicked = useCallback(
+    (event) => {
+      event.preventDefault()
+      if (event.currentTarget instanceof HTMLAnchorElement) {
+        router.push(event.currentTarget.href)
+      }
+    },
+    [router]
+  )
+
   return (
     <>
       <HeaderAvatar id={avatarId} onClick={toggleUserMenu}>
@@ -55,78 +107,43 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
           imageAlt={fullName}
         />
       </HeaderAvatar>
-      <Callout
+      <MenuCallout
         target={`#${avatarId}`}
         isBeakVisible={false}
         directionalHint={DirectionalHint.bottomRightEdge}
-        style={{ width: 320, padding: "20px" }}
         hidden={!isUserMenuOpen}
         onDismiss={onUserMenuDismissed}
         minPagePadding={0}
       >
-        <div style={{ display: "flex" }}>
-          <Persona
-            coinSize={88}
-            hidePersonaDetails={true}
-            imageAlt=""
-            style={{ marginRight: 20 }}
-          />
-          <div
-            style={{
-              flexGrow: 1,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              marginLeft: 20,
-            }}
-          >
+        <MenuContent>
+          <Persona coinSize={88} hidePersonaDetails={true} imageAlt="" />
+          <MenuInner>
             {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
             {email ? <Text>{email}</Text> : null}
 
-            <div>
-              <ActionButton
-                href="/profile"
-                onClick={(event) => {
-                  event.preventDefault()
-                  if (event.currentTarget instanceof HTMLAnchorElement) {
-                    router.push(event.currentTarget.href)
-                  }
-                }}
-                iconProps={{
-                  iconName: "ContactCard",
-                }}
-                style={{
-                  padding: 0,
-                  height: 20,
-                  marginTop: 6,
-                  display: "block",
-                }}
-                styles={{ icon: { marginLeft: 0 } }}
-              >
-                My profile
-              </ActionButton>
+            <ProfileButton
+              href="/profile"
+              onClick={onLinkClicked}
+              iconProps={{
+                iconName: "ContactCard",
+              }}
+            >
+              My profile
+            </ProfileButton>
 
-              {logout ? (
-                <ActionButton
-                  onClick={logout}
-                  iconProps={{
-                    iconName: "SignOut",
-                  }}
-                  style={{
-                    padding: 0,
-                    height: 20,
-                    marginTop: 6,
-                    display: "block",
-                  }}
-                  styles={{ icon: { marginLeft: 0 } }}
-                >
-                  Sign out
-                </ActionButton>
-              ) : null}
-            </div>
-          </div>
-        </div>
-      </Callout>
+            {logout ? (
+              <LogoutButton
+                onClick={logout}
+                iconProps={{
+                  iconName: "SignOut",
+                }}
+              >
+                Sign out
+              </LogoutButton>
+            ) : null}
+          </MenuInner>
+        </MenuContent>
+      </MenuCallout>
     </>
   )
 }
