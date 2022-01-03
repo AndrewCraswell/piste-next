@@ -1,9 +1,5 @@
 import styled from "@emotion/styled"
-import {
-  MotionAnimations,
-  MotionDurations,
-  MotionTimings,
-} from "@fluentui/react"
+import { AnimationStyles } from "@fluentui/react"
 
 export const Card = styled.div`
   background: ${({ theme }) => theme.palette.white};
@@ -12,8 +8,6 @@ export const Card = styled.div`
   background-clip: padding-box;
   position: relative;
   box-shadow: ${({ theme }) => theme.effects.elevation4};
-  animation: ${MotionAnimations.slideUpIn};
-  animation-duration: ${MotionDurations.duration4};
-  animation-timing-function: ${MotionTimings.decelerate};
+  ${AnimationStyles.slideUpIn20 as unknown as string}
   display: inline-block;
 `

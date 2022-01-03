@@ -7,12 +7,10 @@ import {
 import styled from "@emotion/styled"
 import {
   Stack,
-  MotionAnimations,
-  MotionDurations,
-  MotionTimings,
   DefaultButton,
   DialogFooter,
   PrimaryButton,
+  AnimationStyles,
 } from "@fluentui/react"
 
 import {
@@ -22,9 +20,7 @@ import {
 } from "./components"
 
 const AnimatedStack = styled(Stack)`
-  animation: ${MotionAnimations.slideUpIn};
-  animation-duration: ${MotionDurations.duration4};
-  animation-timing-function: ${MotionTimings.decelerate};
+  ${AnimationStyles.slideUpIn20 as unknown as string}
   height: 85vh;
   width: 100%;
   max-width: 100vw;

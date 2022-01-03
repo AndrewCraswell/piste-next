@@ -2,19 +2,10 @@ import { OnboardingFlow } from "$components"
 import { useAuthenticatedUser } from "$hooks"
 import { useUserByIdQuery } from "$queries"
 import styled from "@emotion/styled"
-import {
-  MotionAnimations,
-  MotionDurations,
-  MotionTimings,
-  Spinner,
-  SpinnerSize,
-  Stack,
-} from "@fluentui/react"
+import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
 
 const AnimatedStack = styled(Stack)`
-  animation: ${MotionAnimations.slideUpIn};
-  animation-duration: ${MotionDurations.duration4};
-  animation-timing-function: ${MotionTimings.decelerate};
+  ${AnimationStyles.slideUpIn20 as unknown as string}
   height: 85vh;
   width: 100vw;
 `

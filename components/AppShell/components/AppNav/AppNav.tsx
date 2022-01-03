@@ -3,7 +3,7 @@ import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import {
   Nav,
-  MotionTimings,
+  AnimationVariables,
   INavLinkGroup,
   IRenderGroupHeaderProps,
   Text,
@@ -28,7 +28,7 @@ export interface IStyledNavProps {
 
 const StyledNav = styled(Nav)<IStyledNavProps>`
   width: ${(props) => (props.isExpanded ? 200 : 48)}px;
-  transition: width 200ms ${MotionTimings.decelerate};
+  transition: width 200ms ${AnimationVariables.easeFunction1};
   overflow-y: visible;
 
   li[role="listitem"] a,

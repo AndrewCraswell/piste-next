@@ -4,12 +4,7 @@ import { initializeIcons } from "@fluentui/react"
 import { MsalProvider } from "@azure/msal-react"
 
 import { useApollo } from "$lib/apollo"
-import {
-  AppShell,
-  AuthenticatedApp,
-  OnboardingGate,
-  ThemeProvider,
-} from "$components"
+import { AppShell, AuthenticatedApp, ThemeProvider } from "$components"
 import { msal } from "$lib/authConfig"
 
 import "../styles/globals.css"
