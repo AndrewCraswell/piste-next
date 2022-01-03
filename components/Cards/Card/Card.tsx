@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import { AnimationStyles } from "@fluentui/react"
 
 export const Card = styled.div`
-  background: ${({ theme }) => theme.palette.white};
+  background-color: ${({ theme }) => theme.palette.white};
   padding: ${({ theme }) => theme.spacing.m};
   border-radius: ${({ theme }) => theme.effects.roundedCorner4};
   background-clip: padding-box;

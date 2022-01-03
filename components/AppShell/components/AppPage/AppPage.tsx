@@ -4,7 +4,7 @@ import { DetailedHTMLProps, HTMLAttributes } from "react"
 
 const PageContainer = styled.div`
   width: 100%;
-  padding: 10px 32px 32px 32px;
+  padding: 32px;
 `
 
 const PageContent = styled.main`

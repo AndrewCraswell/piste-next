@@ -7,7 +7,7 @@ import { useCallback } from "react"
 import { HeaderButton, UserMenu } from "./components"
 
 const Header = styled.header`
-  background-color: ${({ theme }) => theme.palette.accent};
+  background-color: ${({ theme }) => theme.palette.themePrimary};
   color: #fff;
   height: 48px;
 `
