@@ -6,6 +6,7 @@ export function useBreadcrumbs(): IBreadcrumbItem[] {
   const router = useRouter()
   const sitemap = useSitemap({
     tagName: "breadcrumb",
+    injectLinkShims: true,
   })
 
   return getBreadcrumbs(router.pathname, sitemap, [])
@@ -30,5 +31,7 @@ function getBreadcrumbs(
     text: item.name,
     key: item.url,
     href: item.url,
-  }))
+    onMouseOver: item.onMouseOver,
+    onClick: item.onClick,
+  })) as IBreadcrumbItem[]
 }

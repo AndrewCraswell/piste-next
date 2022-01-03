@@ -44,6 +44,7 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
   const sitemap = useSitemapGroups({
     flatten: true,
     tagName: "nav",
+    injectLinkShims: true,
   })
 
   return (

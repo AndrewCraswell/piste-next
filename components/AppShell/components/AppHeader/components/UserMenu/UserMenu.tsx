@@ -1,4 +1,4 @@
-import { useDisclosure } from "$hooks"
+import { useDisclosure, useLinkShims } from "$hooks"
 import styled from "@emotion/styled"
 import {
   ActionButton,
@@ -81,6 +81,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 }) => {
   const avatarId = useId("headerAvatar")
   const router = useRouter()
+  const linkShims = useLinkShims()
   const {
     isOpen: isUserMenuOpen,
     onToggle: toggleUserMenu,
@@ -89,12 +90,10 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 
   const onLinkClicked = useCallback(
     (event) => {
-      event.preventDefault()
-      if (event.currentTarget instanceof HTMLAnchorElement) {
-        router.push(event.currentTarget.href)
-      }
+      linkShims.onClick(event)
+      onUserMenuDismissed()
     },
-    [router]
+    [linkShims, onUserMenuDismissed]
   )
 
   return (
@@ -124,6 +123,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
             <ProfileButton
               href="/profile"
               onClick={onLinkClicked}
+              onMouseOver={linkShims.onMouseOver}
               iconProps={{
                 iconName: "ContactCard",
               }}

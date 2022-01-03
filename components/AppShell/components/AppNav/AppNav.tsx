@@ -9,7 +9,6 @@ import {
   Text,
   FontWeights,
 } from "@fluentui/react"
-import { useRouter } from "next/router"
 import { useCallback } from "react"
 import { Hamburger } from "./components"
 
@@ -30,9 +29,15 @@ const StyledNav = styled(Nav)<IStyledNavProps>`
   transition: width 200ms ${AnimationVariables.easeFunction1};
   overflow-y: visible;
 
-  li[role="listitem"] a,
-  li[role="listitem"] button {
-    padding: 0 12px 0 !important;
+  li[role="listitem"] {
+    a,
+    button {
+      padding: 0 12px 0 !important;
+
+      &:not(.is-disabled, :hover) {
+        color: #000;
+      }
+    }
   }
 
   .ms-Nav-group {
@@ -64,7 +69,6 @@ export const AppNav: React.FunctionComponent<IAppNavProps> = ({
   links,
   className,
 }) => {
-  const router = useRouter()
   const { isOpen, onToggle } = useDisclosure(true)
 
   const onRenderGroupHeader = useCallback(
@@ -84,12 +88,6 @@ export const AppNav: React.FunctionComponent<IAppNavProps> = ({
       <StyledNav
         onRenderGroupHeader={onRenderGroupHeader}
         isExpanded={isOpen}
-        onLinkClick={(event, item) => {
-          if (item) {
-            event?.preventDefault()
-            router.push(item.url)
-          }
-        }}
         groups={links}
       />
     </NavContainer>

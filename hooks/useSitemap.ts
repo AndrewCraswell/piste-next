@@ -1,10 +1,12 @@
 import { IPageItem, sitemap } from "$lib"
 import { INavLink, INavLinkGroup } from "@fluentui/react"
+import { useLinkShims } from "./useLinkShims"
 
 export interface IUseSitemapOptions {
   tagName?: string
   flatten?: boolean
   basePath?: string
+  injectLinkShims?: boolean
 }
 
 function flattenNavLinks(links: Array<INavLink[]>) {
@@ -70,11 +72,20 @@ function groupLinks(links: INavLink[]): INavLinkGroup[] {
 }
 
 export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
+  const shims = useLinkShims()
+
   const links = sitemap
     .map((item) => traverseSitemap(item, options))
     .filter(Boolean) as Array<INavLink[]>
 
-  return flattenNavLinks(links)
+  return flattenNavLinks(links).map((item) => {
+    if (options.injectLinkShims && !item.disabled) {
+      item.onMouseOver = shims.onMouseOver
+      item.onClick = shims.onClick
+    }
+
+    return item
+  })
 }
 
 export function useSitemapGroups(
