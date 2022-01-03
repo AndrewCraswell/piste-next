@@ -14,7 +14,6 @@ import { useCallback } from "react"
 import { Hamburger } from "./components"
 
 const NavContainer = styled.div`
-  background-color: ${({ theme }) => theme.palette.neutralLighter};
   border-right: 1px solid ${({ theme }) => theme.palette.neutralLight};
 
   .ms-FocusZone {
@@ -42,8 +41,7 @@ const StyledNav = styled(Nav)<IStyledNavProps>`
     }
 
     & > span {
-      color: ${({ isExpanded, theme }) =>
-        isExpanded ? "inherit" : theme.palette.neutralLighter};
+      color: ${({ isExpanded }) => (isExpanded ? "inherit" : "transparent")};
       transition: color 125ms ease-in-out;
 
       font-weight: ${FontWeights.light};
