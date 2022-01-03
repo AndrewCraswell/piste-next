@@ -35,7 +35,7 @@ const StyledNav = styled(Nav)<IStyledNavProps>`
       padding: 0 12px 0 !important;
 
       &:not(.is-disabled, :hover) {
-        color: #000;
+        color: inherit;
       }
     }
   }
