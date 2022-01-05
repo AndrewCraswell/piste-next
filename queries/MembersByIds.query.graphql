@@ -1,5 +1,5 @@
 query MembersByIds($ids: [String!]) {
-  Members(where: { MemberId: { _in: $ids } }) {
+  AssociationMembers(where: { AssociationMemberId: { _in: $ids } }) {
     FirstName
     LastName
     Birthdate
@@ -10,7 +10,7 @@ query MembersByIds($ids: [String!]) {
     Expiration
     Gender
     MemberType
-    MemberId
+    AssociationMemberId
     Nickname
     Epee
     Foil

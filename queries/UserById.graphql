@@ -1,5 +1,0 @@
-query UserById($id: String!) {
-  Users(where: { Oid: { _eq: $id } }) {
-    Oid
-  }
-}

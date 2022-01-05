@@ -1,25 +1,23 @@
 query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
-  MembersLookup(
+  AssociationMembersLookup(
     offset: $offset
     limit: $count
     where: { FullName: { _like: $filter } }
     order_by: { FullName: asc }
   ) {
     FullName
-    MemberId
-    Member {
-      FirstName
-      LastName
-      Birthdate
-      Club1Name
-      Club2Name
-      Division
-      MemberId
-      MemberType
-      Expiration
-      Foil
-      Epee
-      Saber
-    }
+
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    AssociationMemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
   }
 }

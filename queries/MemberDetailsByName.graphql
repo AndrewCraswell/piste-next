@@ -1,5 +1,5 @@
 query MemberDetailsByName($firstName: String!, $lastName: String!) {
-  Members(
+  AssociationMembers(
     limit: 10
     where: { FirstName: { _like: $firstName }, LastName: { _like: $lastName } }
   ) {
@@ -9,7 +9,7 @@ query MemberDetailsByName($firstName: String!, $lastName: String!) {
     Club1Name
     Club2Name
     Division
-    MemberId
+    AssociationMemberId
     MemberType
     Expiration
     Foil

@@ -1,0 +1,20 @@
+query AccountProfile($oid: String!) {
+  Accounts(where: { Oid: { _eq: $oid } }) {
+    Oid
+    AccountStudent {
+      FirstName
+      LastName
+      Email
+      Phone
+      Birthdate
+      AssociationMemberId
+    }
+    Address {
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+  }
+}
