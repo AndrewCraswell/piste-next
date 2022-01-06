@@ -24,8 +24,8 @@ export const msalConfig: Configuration = {
     clientId: "a2263523-40bc-4fce-b7c6-173df761752a",
     authority: b2cPolicies.authorities.signUpSignIn.authority,
     knownAuthorities: [b2cPolicies.authorityDomain],
-    redirectUri: "/",
-    postLogoutRedirectUri: "/",
+    redirectUri: window.location.origin,
+    postLogoutRedirectUri: window.location.origin,
   },
   cache: {
     cacheLocation: "localStorage",
@@ -33,7 +33,9 @@ export const msalConfig: Configuration = {
   system: {
     loggerOptions: {
       loggerCallback: (logLevel, message) => {
-        //console.log("[MSAL]", message)
+        if (process.env.NEXT_PUBLIC_ENABLE_MSAL_LOGGER === "true") {
+          console.log("[MSAL]", message)
+        }
       },
       logLevel: LogLevel.Verbose,
       piiLoggingEnabled: false,
