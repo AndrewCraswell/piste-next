@@ -5,94 +5,123 @@ import {
   FormDatePicker,
   FormAddressAutocomplete,
 } from "$components"
-import { useDecisionTree } from "$components/DecisionTree"
 import { useAuthenticatedUser } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import {
   Stack,
   IStackProps,
-  Text,
   DialogFooter,
   PrimaryButton,
-  DefaultButton,
+  Text,
 } from "@fluentui/react"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { ProfileRegistrationFields } from "./ProfileRegistrationForm.types"
+import { ProfileFormFields } from "./ProfileForm.types"
+import { useAccountProfileQuery } from "$queries"
 
 const columnTokens = { childrenGap: 50 }
 const formTokens: Partial<IStackProps> = {
   tokens: { childrenGap: 15 },
 }
 
-export const ProfileRegistrationForm: React.FunctionComponent = () => {
-  const { handleSubmit, control, setValue } =
-    useForm<ProfileRegistrationFields>()
-  const { back, next } = useDecisionTree()
-  const user = useAuthenticatedUser()
+export const ProfileForm: React.FunctionComponent = () => {
+  const { handleSubmit, control, setValue, formState } =
+    useForm<ProfileFormFields>()
+  const account = useAuthenticatedUser()
 
-  const onSubmit: SubmitHandler<ProfileRegistrationFields> = useCallback(
+  const { data, loading } = useAccountProfileQuery({
+    variables: {
+      oid: account?.oid!,
+    },
+  })
+
+  const onSubmit: SubmitHandler<ProfileFormFields> = useCallback(
     (values, event) => {
       event?.preventDefault()
 
       const invalidChars = ["_", "(", ")", " ", "", "-"]
-      values.phoneNumber = sanitizeInput(values.phoneNumber, invalidChars)
-      values.postalCode = sanitizeInput(values.postalCode, invalidChars)
+      values.Phone = sanitizeInput({
+        value: values.Phone,
+        remove: invalidChars,
+      })
+      values.Postal = sanitizeInput({
+        value: values.Postal,
+        remove: invalidChars,
+      })
 
       console.log(values)
-      next()
     },
-    [next]
+    []
   )
 
-  const setAddressOnAutocomplete = useCallback(
-    (address: GoogleAddressResult) => {
-      setValue("address", address.address1)
-      setValue("address2", address.address2)
-      setValue("city", address.city)
-      setValue("state", "WA")
-      setValue("postalCode", address.postalCode)
+  const setFormFields = useCallback(
+    (fields: Partial<ProfileFormFields>) => {
+      Object.keys(fields).forEach((name) => {
+        const fieldName = name as keyof ProfileFormFields
+        const value = fields[fieldName] || ""
+        setValue(fieldName, value)
+      })
     },
     [setValue]
   )
 
+  const setAddressOnAutocomplete = useCallback(
+    (address: GoogleAddressResult) => {
+      const fields: Partial<ProfileFormFields> = {
+        Address: address.address1,
+        Address2: address.address2,
+        City: address.city,
+        Postal: address.postalCode,
+      }
+
+      console.log(fields)
+      setFormFields(fields)
+    },
+    [setFormFields]
+  )
+
+  useEffect(() => {
+    if (!loading) {
+      const fields: Partial<ProfileFormFields> = {
+        ...data?.Accounts[0].AccountStudent,
+        ...data?.Accounts[0].Address,
+      }
+
+      console.log(fields)
+      setFormFields(fields)
+    }
+  }, [data?.Accounts, loading, setFormFields])
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
-      <legend style={{ marginBottom: 20 }}>
-        <Text variant="xLarge">Create profile</Text>
-        <Text variant="mediumPlus">
-          <div>Setup your student profile so you can enroll in classes</div>
-        </Text>
-      </legend>
+      <legend style={{ marginBottom: 20 }}></legend>
       <Stack {...formTokens}>
         <Stack horizontal tokens={columnTokens}>
           <FormTextField
             control={control}
-            name="firstName"
+            name="FirstName"
             id="firstName"
             label="First name"
             required
             placeholder="First name"
             maxLength={64}
             autoComplete="given-name"
-            defaultValue={user?.idTokenClaims?.given_name}
           />
           <FormTextField
             control={control}
             id="lastName"
-            name="lastName"
+            name="LastName"
             label="Last name"
             required
             placeholder="Last name"
             maxLength={64}
             autoComplete="family-name"
-            defaultValue={user?.idTokenClaims?.family_name}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
           <FormDatePicker
             control={control}
-            name="birthDate"
+            name="Birthdate"
             label="Birthdate"
             placeholder="Birthdate"
             ariaLabel="Birthdate"
@@ -104,7 +133,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
         <Stack horizontal tokens={columnTokens}>
           <FormMaskedTextField
             control={control}
-            name="phoneNumber"
+            name="Phone"
             label="Phone number"
             mask="(999) 999-9999"
             title="A 10 digit phone number"
@@ -116,14 +145,13 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
         <Stack horizontal tokens={columnTokens}>
           <FormTextField
             control={control}
-            name="email"
+            name="Email"
             label="Email"
             required
             placeholder="Email"
             type="email"
             maxLength={64}
             autoComplete="email"
-            defaultValue={user?.username}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
@@ -131,7 +159,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             control={control}
             onPlaceSelected={setAddressOnAutocomplete}
             id="address"
-            name="address"
+            name="Address"
             label="Address"
             required
             placeholder="Address"
@@ -144,7 +172,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
         <Stack horizontal tokens={columnTokens}>
           <FormTextField
             control={control}
-            name="address2"
+            name="Address2"
             label="Unit"
             placeholder="Unit"
             maxLength={32}
@@ -152,7 +180,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
           />
           <FormTextField
             control={control}
-            name="city"
+            name="City"
             label="City"
             placeholder="City"
             required
@@ -164,14 +192,14 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
         <Stack horizontal tokens={columnTokens}>
           <StatesDropdown
             control={control}
-            name="state"
+            name="State"
             required
             style={{ minWidth: 177 }}
           />
           <FormMaskedTextField
             control={control}
             id="postalCode"
-            name="postalCode"
+            name="Postal"
             label="Postal code"
             mask="99999-9999"
             title="A 5 digit postal code"
@@ -182,17 +210,24 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
       </Stack>
 
       <DialogFooter>
-        <DefaultButton onClick={back}>Back</DefaultButton>
-        {/* <PrimaryButton type="submit">Next</PrimaryButton> */}
-        <PrimaryButton onClick={next}>Next</PrimaryButton>
+        <PrimaryButton
+          type="submit"
+          disabled={!formState.isDirty || formState.isSubmitting}
+        >
+          Save
+        </PrimaryButton>
       </DialogFooter>
     </form>
   )
 }
 
-function sanitizeInput(value: string, remove: string[]) {
-  return remove.reduce(
-    (val, char) => (val ? val.replaceAll(char, "") : ""),
-    value
+function sanitizeInput(options: { value?: string | null; remove: string[] }) {
+  const { remove, value } = options
+
+  return (
+    remove.reduce(
+      (val, char) => (val ? val.replaceAll(char, "") : ""),
+      value
+    ) ?? ""
   )
 }

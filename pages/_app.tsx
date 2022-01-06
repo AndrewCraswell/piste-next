@@ -4,7 +4,12 @@ import { initializeIcons } from "@fluentui/react"
 import { MsalProvider } from "@azure/msal-react"
 
 import { useApollo } from "$lib/apollo"
-import { AppShell, AuthenticatedApp, ThemeProvider } from "$components"
+import {
+  AppShell,
+  AuthenticatedApp,
+  OnboardingGate,
+  ThemeProvider,
+} from "$components"
 import { msal } from "$lib/authConfig"
 
 import "../styles/globals.css"
@@ -20,11 +25,11 @@ function App({ Component, pageProps }: AppProps) {
       <MsalProvider instance={msal}>
         <ThemeProvider>
           <AuthenticatedApp>
-            {/* <OnboardingGate> */}
-            <AppShell>
-              <Component {...pageProps} />
-            </AppShell>
-            {/* </OnboardingGate> */}
+            <OnboardingGate>
+              <AppShell>
+                <Component {...pageProps} />
+              </AppShell>
+            </OnboardingGate>
           </AuthenticatedApp>
         </ThemeProvider>
       </MsalProvider>

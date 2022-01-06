@@ -15,8 +15,8 @@ const GridContainer = styled.div`
   margin-top: 2em;
 `
 
-export const Dashboard: NextPage = () => {
-  const pageTitle = "Dashboard"
+export const Overview: NextPage = () => {
+  const pageTitle = "Overview"
   useTitle(pageTitle)
 
   const pageSize = 12
@@ -122,4 +122,4 @@ export const getStaticProps = async () => {
   return { props: { initialApolloState: apolloClient.cache.extract() } }
 }
 
-export default Dashboard
+export default Overview

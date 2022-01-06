@@ -2,7 +2,7 @@ import styled from "@emotion/styled"
 import { Text } from "@fluentui/react"
 
 const Title = styled(Text)`
-  margin: 0 0 2em 0;
+  margin: 0 0 1em 0;
 `
 
 export const PageTitle: React.FunctionComponent = ({ children }) => (

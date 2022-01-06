@@ -15,7 +15,7 @@ export interface IPageItem {
 
 export const sitemap: IPageItem[] = [
   {
-    name: "Dashboard",
+    name: "Overview",
     url: "/",
     tags: {
       nav: {

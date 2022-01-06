@@ -1,7 +1,16 @@
 import type { NextPage } from "next"
-import { PageTitle } from "$components"
+import { PageTitle, ProfileForm } from "$components"
 import { useTitle } from "$hooks"
-import { ProfileRegistrationForm } from "$components/OnboardingFlow/components"
+import { Pivot, PivotItem, Text } from "@fluentui/react"
+import styled from "@emotion/styled"
+
+const ProfilePivot = styled(Pivot)`
+  margin-top: 1em;
+
+  div[role="tabpanel"] {
+    margin-top: 1em;
+  }
+`
 
 export const Profile: NextPage = () => {
   const pageTitle = "Profile"
@@ -10,8 +19,18 @@ export const Profile: NextPage = () => {
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
+      {/*
+      <Text variant="mediumPlus">Manage your profile and settings.</Text> */}
 
-      <ProfileRegistrationForm />
+      <ProfilePivot>
+        <PivotItem headerText="Contact">
+          <ProfileForm />
+        </PivotItem>
+        <PivotItem headerText="Account"></PivotItem>
+        <PivotItem headerText="Notifications"></PivotItem>
+        <PivotItem headerText="Payment"></PivotItem>
+        <PivotItem headerText="Fencers"></PivotItem>
+      </ProfilePivot>
     </>
   )
 }
