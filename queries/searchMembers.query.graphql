@@ -6,7 +6,6 @@ query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
     order_by: { FullName: asc }
   ) {
     FullName
-
     FirstName
     LastName
     Birthdate

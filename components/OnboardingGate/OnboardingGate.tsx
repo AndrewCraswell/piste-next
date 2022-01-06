@@ -1,6 +1,6 @@
 import { OnboardingFlow } from "$components"
 import { useAuthenticatedUser } from "$hooks"
-import { useUserByIdQuery } from "$queries"
+import { useAccountProfileQuery } from "$queries"
 import styled from "@emotion/styled"
 import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
 
@@ -11,9 +11,9 @@ const AnimatedStack = styled(Stack)`
 `
 
 export const OnboardingGate: React.FunctionComponent = ({ children }) => {
-  const user = useAuthenticatedUser()
-  const { data, loading } = useUserByIdQuery({
-    variables: { id: user?.idTokenClaims.oid! },
+  const account = useAuthenticatedUser()
+  const { data, loading } = useAccountProfileQuery({
+    variables: { oid: account?.oid! },
   })
 
   if (loading) {
@@ -24,7 +24,7 @@ export const OnboardingGate: React.FunctionComponent = ({ children }) => {
     )
   } else {
     // If profile already exists
-    if (data?.Users[0]?.Oid) {
+    if (data?.Accounts[0].Oid) {
       return <>{children}</>
     } else {
       // If profile does not exist, guide user to create it

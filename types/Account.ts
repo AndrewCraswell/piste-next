@@ -1,6 +1,7 @@
-export type User = {
+export type Account = {
+  oid: string
   username: string
-  idTokenClaims: IdTokenClaims
+  idTokenClaims?: IdTokenClaims
 }
 
 export type IdTokenClaims = {

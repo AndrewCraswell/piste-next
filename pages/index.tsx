@@ -67,22 +67,22 @@ export const Dashboard: NextPage = () => {
       />
 
       <GridContainer>
-        {members?.MembersLookup.map(({ FullName, Member, MemberId }) => (
+        {members?.AssociationMembersLookup.map((member) => (
           <MemberDetailsCard
-            key={MemberId}
+            key={member.AssociationMemberId}
             details={{
-              fullName: FullName,
+              fullName: member.FullName,
               secondaryText:
-                Member?.Club1Name ||
-                Member?.Club2Name ||
-                Member?.Division ||
+                member?.Club1Name ||
+                member?.Club2Name ||
+                member?.Division ||
                 "",
-              memberId: Member?.MemberId,
-              membershipExpiration: Member?.Expiration,
-              birthdate: Member?.Birthdate,
-              foilRating: Member?.Foil,
-              epeeRating: Member?.Epee,
-              sabreRating: Member?.Saber,
+              memberId: member?.AssociationMemberId,
+              membershipExpiration: member?.Expiration,
+              birthdate: member?.Birthdate,
+              foilRating: member?.Foil,
+              epeeRating: member?.Epee,
+              sabreRating: member?.Saber,
             }}
           />
         ))}
@@ -102,9 +102,9 @@ export const Dashboard: NextPage = () => {
                 count: pageSize,
               },
               updateQuery: (existing, incoming) => ({
-                MembersLookup: [
-                  ...existing.MembersLookup,
-                  ...incoming.fetchMoreResult?.MembersLookup!,
+                AssociationMembersLookup: [
+                  ...existing.AssociationMembersLookup,
+                  ...incoming.fetchMoreResult?.AssociationMembersLookup!,
                 ],
               }),
             })

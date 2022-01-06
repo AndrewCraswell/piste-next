@@ -2,7 +2,7 @@ import { AccountInfo, IPublicClientApplication } from "@azure/msal-browser"
 import { IdTokenClaims } from "@azure/msal-common"
 import { useMsal } from "@azure/msal-react"
 import { useEffect, useState } from "react"
-import { User } from "types"
+import { Account } from "types"
 
 type MsalAccount = Partial<
   Pick<AccountInfo, "homeAccountId" | "localAccountId" | "username">
@@ -11,12 +11,14 @@ type MsalAccount = Partial<
 function getUserMetadata(
   msal: IPublicClientApplication,
   accounts: MsalAccount[]
-): User | null {
+): Account | null {
   if (msal && accounts?.length) {
-    let account = msal.getAllAccounts()[0]
-    const claims = account?.idTokenClaims || ({} as IdTokenClaims)
+    const account = msal.getAllAccounts()[0]
+
+    const claims: IdTokenClaims = account?.idTokenClaims ?? {}
 
     return {
+      oid: claims?.oid || "",
       username: account?.username || "",
       idTokenClaims: claims,
     }
@@ -25,9 +27,9 @@ function getUserMetadata(
   return null
 }
 
-export const useAuthenticatedUser = (): User | null => {
+export const useAuthenticatedUser = (): Account | null => {
   const { instance, accounts } = useMsal()
-  const [user, setUser] = useState<User | null>(
+  const [user, setUser] = useState<Account | null>(
     getUserMetadata(instance, accounts)
   )
 

@@ -26,13 +26,14 @@ export const MemberLookupField: React.FunctionComponent = () => {
           variables: { filter: `${filter}%` },
         })
 
-        const suggestions: IPersonaProps[] = data!.MembersLookup.map((m) => ({
-          text: m.FullName,
-          size: PersonaSize.size24,
-          optionalText: m.MemberId,
-          secondaryText:
-            m.Member?.Club1Name || m.Member?.Club2Name || undefined,
-        }))
+        const suggestions: IPersonaProps[] = data!.AssociationMembersLookup.map(
+          (m) => ({
+            text: m.FullName,
+            size: PersonaSize.size24,
+            optionalText: m.AssociationMemberId,
+            secondaryText: m.Club1Name || m.Club2Name || undefined,
+          })
+        )
 
         return suggestions
       }}
