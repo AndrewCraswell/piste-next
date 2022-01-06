@@ -1,24 +1,19 @@
 import type { NextPage } from "next"
 
 import { initializeApollo } from "$lib/apollo"
-import {
-  useSearchMembersLazyQuery,
-  useSearchMembersQuery,
-  SearchMembersQuery,
-  SearchMembersDocument,
-} from "$queries"
+import { useSearchMembersLazyQuery, SearchMembersDocument } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
 import { PrimaryButton, SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 const pageSize = 12
 
 const GridContainer = styled.div`
   display: grid;
   grid-gap: 1em;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 332px));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 330px));
   margin-top: 2em;
 `
 
@@ -32,6 +27,23 @@ export const Overview: NextPage = () => {
     })
   const [pageNum, setPageNum] = useState(0)
   const [searchTerm, setSearchTerm] = useState("")
+
+  const fetchMembers = useCallback(() => {
+    setPageNum((val) => val + 1)
+    fetchMore({
+      variables: {
+        filter: `%${searchTerm}%`,
+        offset: pageSize * (pageNum + 1),
+        count: pageSize,
+      },
+      updateQuery: (existing, incoming) => ({
+        AssociationMembersLookup: [
+          ...existing.AssociationMembersLookup,
+          ...incoming.fetchMoreResult?.AssociationMembersLookup!,
+        ],
+      }),
+    })
+  }, [fetchMore, pageNum, searchTerm])
 
   useEffect(() => {
     fetch({
@@ -99,22 +111,7 @@ export const Overview: NextPage = () => {
       ) : (
         <PrimaryButton
           style={{ margin: "2em auto 0", display: "block" }}
-          onClick={() => {
-            setPageNum((val) => val + 1)
-            fetchMore({
-              variables: {
-                filter: `%${searchTerm}%`,
-                offset: pageSize * (pageNum + 1),
-                count: pageSize,
-              },
-              updateQuery: (existing, incoming) => ({
-                AssociationMembersLookup: [
-                  ...existing.AssociationMembersLookup,
-                  ...incoming.fetchMoreResult?.AssociationMembersLookup!,
-                ],
-              }),
-            })
-          }}
+          onClick={fetchMembers}
         >
           Load more
         </PrimaryButton>
