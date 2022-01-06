@@ -34,14 +34,14 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
       </Card>
 
       <div style={{ width: 400 }}>
-        {members?.Members.map((member) => (
+        {members?.AssociationMembers.map((member) => (
           <MemberDetailsCard
-            key={member.MemberId}
+            key={member.AssociationMemberId}
             details={{
               fullName: `${member.FirstName} ${member.LastName}`,
               secondaryText:
                 member.Club1Name || member.Club2Name || member.Division || "",
-              memberId: member.MemberId,
+              memberId: member.AssociationMemberId,
               membershipExpiration: member.Expiration,
               birthdate: member.Birthdate,
               foilRating: member.Foil,
