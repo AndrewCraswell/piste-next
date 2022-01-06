@@ -1,12 +1,19 @@
 import type { NextPage } from "next"
 
 import { initializeApollo } from "$lib/apollo"
-import { useSearchMembersLazyQuery } from "$queries"
+import {
+  useSearchMembersLazyQuery,
+  useSearchMembersQuery,
+  SearchMembersQuery,
+  SearchMembersDocument,
+} from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
 import { PrimaryButton, SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import { useEffect, useState } from "react"
+
+const pageSize = 12
 
 const GridContainer = styled.div`
   display: grid;
@@ -19,7 +26,6 @@ export const Overview: NextPage = () => {
   const pageTitle = "Overview"
   useTitle(pageTitle)
 
-  const pageSize = 12
   const [fetch, { data: members, fetchMore, loading }] =
     useSearchMembersLazyQuery({
       notifyOnNetworkStatusChange: true,
@@ -119,6 +125,15 @@ export const Overview: NextPage = () => {
 
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
+
+  await apolloClient.query({
+    query: SearchMembersDocument,
+    variables: {
+      filter: "%",
+      count: pageSize,
+    },
+  })
+
   return { props: { initialApolloState: apolloClient.cache.extract() } }
 }
 
