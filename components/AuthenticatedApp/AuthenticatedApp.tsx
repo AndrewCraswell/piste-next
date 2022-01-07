@@ -1,41 +1,34 @@
+import { useAuth0 } from "@auth0/auth0-react"
 import { PrimaryButton } from "@fluentui/react"
 import React from "react"
 
-import {
-  useMsal,
-  AuthenticatedTemplate,
-  UnauthenticatedTemplate,
-  useMsalAuthentication,
-} from "@azure/msal-react"
-import { InteractionStatus, InteractionType } from "@azure/msal-browser"
-
 export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
-  const { login } = useMsalAuthentication(InteractionType.Redirect, {
-    prompt: "select_account",
-  })
-  const { inProgress } = useMsal()
+  const { loginWithRedirect, isLoading, user, error } = useAuth0()
 
-  return (
-    <>
-      <AuthenticatedTemplate>{children}</AuthenticatedTemplate>
-      <UnauthenticatedTemplate>
-        {[InteractionStatus.Startup, InteractionStatus.HandleRedirect].includes(
-          inProgress
-        ) && <span>Loading...</span>}
-        {[InteractionStatus.None, InteractionStatus.Login].includes(
-          inProgress
-        ) && (
-          <PrimaryButton
-            onClick={() => {
-              login()
-            }}
-          >
-            Sign in
-          </PrimaryButton>
-        )}
-      </UnauthenticatedTemplate>
-    </>
-  )
+  if (error) {
+    return (
+      <span>
+        An error was encountered while logging in. Please try again later.
+      </span>
+    )
+  }
+
+  console.log(user)
+
+  if (isLoading) {
+    return <span>Loading...</span>
+  }
+
+  if (user) {
+    return <>{children}</>
+  } else {
+    loginWithRedirect({
+      prompt: "select_account",
+      scope: "profile email openid",
+    })
+
+    return null
+  }
 }
 
 export default React.memo(AuthenticatedApp)

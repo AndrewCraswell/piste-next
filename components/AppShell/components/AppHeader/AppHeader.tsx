@@ -1,9 +1,8 @@
-import { useAuthenticatedUser, useDisclosure } from "$hooks"
+import { useAccountProfile, useDisclosure } from "$hooks"
 import { IStyleableProps } from "$types"
-import { useMsal } from "@azure/msal-react"
+import { useAuth0 } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { Panel } from "@fluentui/react"
-import { useCallback } from "react"
 import { HeaderButton, UserMenu } from "./components"
 
 const Header = styled.header`
@@ -53,13 +52,9 @@ export interface IAppHeaderProps extends IStyleableProps {}
 export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
   className,
 }) => {
-  const { instance } = useMsal()
-  const user = useAuthenticatedUser()
   const { isOpen, onClose, onToggle } = useDisclosure()
-
-  const logout = useCallback(() => {
-    instance.logoutRedirect()
-  }, [instance])
+  const { account } = useAccountProfile()
+  const { logout } = useAuth0()
 
   return (
     <>
@@ -82,8 +77,9 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
           {/* TODO: Pass all user menu props up to the AppShell level */}
           <UserMenu
             // Get fullName from profile
-            fullName={"Andrew Craswell"}
-            email={user?.username}
+            avatarUrl={account.Picture}
+            fullName={account.FullName}
+            email={account.Email}
             logout={logout}
           />
         </HeaderInner>

@@ -1,8 +1,6 @@
 import type { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client"
 import { initializeIcons } from "@fluentui/react"
-import { MsalProvider } from "@azure/msal-react"
-
 import { useApollo } from "$lib/apollo"
 import {
   AppShell,
@@ -10,7 +8,7 @@ import {
   OnboardingGate,
   ThemeProvider,
 } from "$components"
-import { msal } from "$lib/authConfig"
+import { Auth0Provider } from "@auth0/auth0-react"
 
 import "../styles/globals.css"
 import "modern-normalize"
@@ -21,8 +19,12 @@ function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   return (
-    <ApolloProvider client={apolloClient}>
-      <MsalProvider instance={msal}>
+    <Auth0Provider
+      domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string}
+      clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
+      redirectUri={process.env.NEXT_PUBLIC_BASE_URL}
+    >
+      <ApolloProvider client={apolloClient}>
         <ThemeProvider>
           <AuthenticatedApp>
             <OnboardingGate>
@@ -32,8 +34,8 @@ function App({ Component, pageProps }: AppProps) {
             </OnboardingGate>
           </AuthenticatedApp>
         </ThemeProvider>
-      </MsalProvider>
-    </ApolloProvider>
+      </ApolloProvider>
+    </Auth0Provider>
   )
 }
 
