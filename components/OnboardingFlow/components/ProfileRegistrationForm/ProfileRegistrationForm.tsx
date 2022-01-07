@@ -6,7 +6,7 @@ import {
   FormAddressAutocomplete,
 } from "$components"
 import { useDecisionTree } from "$components/DecisionTree"
-import { useAuthenticatedUser } from "$hooks"
+import { useAccountProfile } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import {
   Stack,
@@ -29,7 +29,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
   const { handleSubmit, control, setValue } =
     useForm<ProfileRegistrationFields>()
   const { back, next } = useDecisionTree()
-  const user = useAuthenticatedUser()
+  const { account } = useAccountProfile()
 
   const onSubmit: SubmitHandler<ProfileRegistrationFields> = useCallback(
     (values, event) => {
@@ -75,7 +75,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             placeholder="First name"
             maxLength={64}
             autoComplete="given-name"
-            defaultValue={user?.idTokenClaims?.given_name}
+            defaultValue={account.FirstName}
           />
           <FormTextField
             control={control}
@@ -86,7 +86,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             placeholder="Last name"
             maxLength={64}
             autoComplete="family-name"
-            defaultValue={user?.idTokenClaims?.family_name}
+            defaultValue={account.LastName}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
@@ -123,7 +123,7 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
             type="email"
             maxLength={64}
             autoComplete="email"
-            defaultValue={user?.username}
+            defaultValue={account.Email}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
