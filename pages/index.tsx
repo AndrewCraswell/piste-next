@@ -119,18 +119,18 @@ export const Overview: NextPage = () => {
   )
 }
 
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const apolloClient = initializeApollo()
+export const getServerSideProps: GetServerSideProps = async () => {
+  const apolloClient = initializeApollo()
 
-//   await apolloClient.query({
-//     query: SearchMembersDocument,
-//     variables: {
-//       filter: "%",
-//       count: pageSize,
-//     },
-//   })
+  await apolloClient.query({
+    query: SearchMembersDocument,
+    variables: {
+      filter: "%",
+      count: pageSize,
+    },
+  })
 
-//   return { props: { initialApolloState: apolloClient.cache.extract() } }
-// }
+  return { props: { initialApolloState: apolloClient.cache.extract() } }
+}
 
 export default Overview
