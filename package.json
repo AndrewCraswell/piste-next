@@ -19,7 +19,7 @@
     "@fluentui/react": "^8.48.1",
     "@fluentui/react-hooks": "^8.3.8",
     "@fluentui/react-icons": "^1.1.145",
-    "@fluentui/theme-samples": "^8.2.58",
+    "@fluentui/theme-samples": "^8.2.60",
     "@fluentui/web-components": "^2.1.0",
     "dayjs": "^1.10.7",
     "modern-normalize": "^1.1.0",
