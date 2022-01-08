@@ -1,7 +1,7 @@
 import type { AppProps } from "next/app"
 import { ApolloProvider } from "@apollo/client"
 import { initializeIcons } from "@fluentui/react"
-import { useApollo } from "$lib/apollo"
+import { useApollo } from "$lib"
 import {
   AppShell,
   AuthenticatedApp,
@@ -17,7 +17,7 @@ import { getBaseUrl } from "$lib"
 initializeIcons()
 
 function App({ Component, pageProps }: AppProps) {
-  const apolloClient = useApollo(pageProps.initialApolloState)
+  const apolloClient = useApollo(pageProps)
 
   return (
     <Auth0Provider

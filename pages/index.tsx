@@ -1,5 +1,5 @@
 import type { NextPage, GetServerSideProps } from "next"
-import { initializeApollo } from "$lib/apollo"
+import { initializeApollo, addApolloState } from "$lib"
 import { useSearchMembersLazyQuery, SearchMembersDocument } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
@@ -130,7 +130,9 @@ export const getServerSideProps: GetServerSideProps = async () => {
     },
   })
 
-  return { props: { initialApolloState: apolloClient.cache.extract() } }
+  return addApolloState(apolloClient, {
+    props: {},
+  })
 }
 
 export default Overview
