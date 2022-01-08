@@ -1,7 +1,7 @@
 import type { NextPage } from "next"
 import { PageTitle, ProfileForm } from "$components"
 import { useTitle } from "$hooks"
-import { Pivot, PivotItem, Text } from "@fluentui/react"
+import { Pivot, PivotItem } from "@fluentui/react"
 import styled from "@emotion/styled"
 
 const ProfilePivot = styled(Pivot)`
