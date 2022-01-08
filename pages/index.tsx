@@ -119,7 +119,7 @@ export const Overview: NextPage = () => {
   )
 }
 
-export const getStaticProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
