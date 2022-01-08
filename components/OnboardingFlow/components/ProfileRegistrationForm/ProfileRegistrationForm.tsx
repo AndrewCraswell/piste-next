@@ -39,7 +39,6 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
       values.phoneNumber = sanitizeInput(values.phoneNumber, invalidChars)
       values.postalCode = sanitizeInput(values.postalCode, invalidChars)
 
-      console.log(values)
       next()
     },
     [next]

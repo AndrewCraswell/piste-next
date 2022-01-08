@@ -41,8 +41,6 @@ export const ProfileForm: React.FunctionComponent = () => {
         value: values.Postal,
         remove: invalidChars,
       })
-
-      console.log(values)
     },
     []
   )
@@ -66,8 +64,6 @@ export const ProfileForm: React.FunctionComponent = () => {
         City: address.city,
         Postal: address.postalCode,
       }
-
-      console.log(fields)
       setFormFields(fields)
     },
     [setFormFields]
@@ -78,8 +74,6 @@ export const ProfileForm: React.FunctionComponent = () => {
       const fields: Partial<ProfileFormFields> = {
         ...account,
       }
-
-      console.log(fields)
       setFormFields(fields)
     }
   }, [loading, setFormFields, account])

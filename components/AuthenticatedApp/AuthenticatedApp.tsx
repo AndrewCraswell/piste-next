@@ -13,8 +13,6 @@ export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
     )
   }
 
-  console.log(user)
-
   if (isLoading) {
     return <span>Loading...</span>
   }
