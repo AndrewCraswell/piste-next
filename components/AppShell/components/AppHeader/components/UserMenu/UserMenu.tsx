@@ -9,7 +9,6 @@ import {
   PersonaSize,
 } from "@fluentui/react"
 import { useId } from "@fluentui/react-hooks"
-import { useRouter } from "next/router"
 import { useCallback } from "react"
 import { HeaderButton } from "../HeaderButton"
 
@@ -27,7 +26,6 @@ const TransparentPersona = styled(Persona)`
 
 const MenuCallout = styled(Callout)`
   & > div {
-    width: 320px;
     padding: 20px;
   }
 `
@@ -36,10 +34,18 @@ const MenuContent = styled.div`
   display: flex;
 `
 
+const ActionsContainer = styled.div`
+  margin-top: 6px;
+
+  a,
+  button {
+    margin-top: 6px;
+  }
+`
+
 const LogoutButton = styled(ActionButton)`
   padding: 0;
   height: 20px;
-  margin-top: 6px;
   display: block;
 
   i {
@@ -58,7 +64,6 @@ const MenuInner = styled.div`
 const ProfileButton = styled(ActionButton)`
   padding: 0;
   height: 20px;
-  margin-top: 6px;
   display: block;
 
   i {
@@ -80,7 +85,6 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   logout,
 }) => {
   const avatarId = useId("headerAvatar")
-  const router = useRouter()
   const linkShims = useLinkShims()
   const {
     isOpen: isUserMenuOpen,
@@ -115,32 +119,39 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
         minPagePadding={0}
       >
         <MenuContent>
-          <Persona coinSize={88} hidePersonaDetails={true} imageAlt="" />
+          <Persona
+            imageUrl={avatarUrl}
+            coinSize={88}
+            hidePersonaDetails={true}
+            imageAlt=""
+          />
           <MenuInner>
             {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
             {email ? <Text>{email}</Text> : null}
 
-            <ProfileButton
-              href="/profile"
-              onClick={onLinkClicked}
-              onMouseOver={linkShims.onMouseOver}
-              iconProps={{
-                iconName: "ContactCard",
-              }}
-            >
-              My profile
-            </ProfileButton>
-
-            {logout ? (
-              <LogoutButton
-                onClick={logout}
+            <ActionsContainer>
+              <ProfileButton
+                href="/profile"
+                onClick={onLinkClicked}
+                onMouseOver={linkShims.onMouseOver}
                 iconProps={{
-                  iconName: "SignOut",
+                  iconName: "ContactCard",
                 }}
               >
-                Sign out
-              </LogoutButton>
-            ) : null}
+                My profile
+              </ProfileButton>
+
+              {logout ? (
+                <LogoutButton
+                  onClick={logout}
+                  iconProps={{
+                    iconName: "SignOut",
+                  }}
+                >
+                  Sign out
+                </LogoutButton>
+              ) : null}
+            </ActionsContainer>
           </MenuInner>
         </MenuContent>
       </MenuCallout>

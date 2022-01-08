@@ -5,7 +5,6 @@ import {
   FormDatePicker,
   FormAddressAutocomplete,
 } from "$components"
-import { useAuthenticatedUser } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import {
   Stack,
@@ -17,7 +16,7 @@ import {
 import { useCallback, useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileFormFields } from "./ProfileForm.types"
-import { useAccountProfileQuery } from "$queries"
+import { useAccountProfile } from "$hooks"
 
 const columnTokens = { childrenGap: 50 }
 const formTokens: Partial<IStackProps> = {
@@ -27,13 +26,7 @@ const formTokens: Partial<IStackProps> = {
 export const ProfileForm: React.FunctionComponent = () => {
   const { handleSubmit, control, setValue, formState } =
     useForm<ProfileFormFields>()
-  const account = useAuthenticatedUser()
-
-  const { data, loading } = useAccountProfileQuery({
-    variables: {
-      oid: account?.oid!,
-    },
-  })
+  const { account, loading } = useAccountProfile()
 
   const onSubmit: SubmitHandler<ProfileFormFields> = useCallback(
     (values, event) => {
@@ -48,8 +41,6 @@ export const ProfileForm: React.FunctionComponent = () => {
         value: values.Postal,
         remove: invalidChars,
       })
-
-      console.log(values)
     },
     []
   )
@@ -73,8 +64,6 @@ export const ProfileForm: React.FunctionComponent = () => {
         City: address.city,
         Postal: address.postalCode,
       }
-
-      console.log(fields)
       setFormFields(fields)
     },
     [setFormFields]
@@ -83,14 +72,11 @@ export const ProfileForm: React.FunctionComponent = () => {
   useEffect(() => {
     if (!loading) {
       const fields: Partial<ProfileFormFields> = {
-        ...data?.Accounts[0].AccountStudent,
-        ...data?.Accounts[0].Address,
+        ...account,
       }
-
-      console.log(fields)
       setFormFields(fields)
     }
-  }, [data?.Accounts, loading, setFormFields])
+  }, [loading, setFormFields, account])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">

@@ -1,5 +1,4 @@
 import type { NextPage } from "next"
-
 import { initializeApollo } from "$lib/apollo"
 import { useSearchMembersLazyQuery, SearchMembersDocument } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
@@ -120,7 +119,7 @@ export const Overview: NextPage = () => {
   )
 }
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const apolloClient = initializeApollo()
 
   await apolloClient.query({
