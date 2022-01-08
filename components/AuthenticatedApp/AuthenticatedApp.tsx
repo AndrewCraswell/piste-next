@@ -14,7 +14,7 @@ export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
   }
 
   if (isLoading) {
-    return <span>Loading...</span>
+    return null
   }
 
   if (user) {
