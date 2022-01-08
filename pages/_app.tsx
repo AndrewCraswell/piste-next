@@ -18,11 +18,15 @@ initializeIcons()
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
+  const baseUrl = process.env.VERCEL_URL || process.env.NEXT_PUBLIC_BASE_URL
+  console.log(`VERCEL_URL = ${process.env.VERCEL_URL}`)
+  console.log(`BASE_URL = ${baseUrl}`)
+
   return (
     <Auth0Provider
       domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string}
       clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
-      redirectUri={process.env.NEXT_PUBLIC_BASE_URL}
+      redirectUri={baseUrl}
     >
       <ApolloProvider client={apolloClient}>
         <ThemeProvider>
