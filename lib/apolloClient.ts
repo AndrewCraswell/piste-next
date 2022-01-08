@@ -2,10 +2,10 @@ import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 
 function createApolloClient() {
   console.log("apolloClient")
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : process.env.NEXT_PUBLIC_BASE_URL
-  console.log(`VERCEL_URL = ${process.env.VERCEL_URL}`)
+  console.log(`VERCEL_URL = ${process.env.NEXT_PUBLIC_VERCEL_URL}`)
   console.log(`BASE_URL = ${baseUrl}`)
 
   return new ApolloClient({

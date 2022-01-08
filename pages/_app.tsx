@@ -19,10 +19,10 @@ function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
   console.log("_app.tsx")
-  const baseUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
+  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : process.env.NEXT_PUBLIC_BASE_URL
-  console.log(`VERCEL_URL = ${process.env.VERCEL_URL}`)
+  console.log(`VERCEL_URL = ${process.env.NEXT_PUBLIC_VERCEL_URL}`)
   console.log(`BASE_URL = ${baseUrl}`)
 
   return (
