@@ -6,7 +6,7 @@ module.exports = {
     return [
       {
         source: "/api/graphql",
-        destination: process.env.GRAPHQL_API_URL,
+        destination: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
       },
     ]
   },
