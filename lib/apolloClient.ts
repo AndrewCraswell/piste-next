@@ -1,7 +1,6 @@
 import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client"
 import { getBaseUrl } from "./getBaseUrl"
 import { useMemo } from "react"
-import { IAppPageProps } from "$components/AppShell/components"
 
 const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__"
 
@@ -9,7 +8,7 @@ export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: `${getBaseUrl()}/api/graphql`,
+      uri: `${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}`,
       headers: {
         lang: "en",
       },
