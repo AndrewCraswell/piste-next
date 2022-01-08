@@ -18,10 +18,16 @@ initializeIcons()
 function App({ Component, pageProps }: AppProps) {
   const apolloClient = useApollo(pageProps.initialApolloState)
 
-  console.log("_app.tsx")
-  const baseUrl = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : process.env.NEXT_PUBLIC_BASE_URL
+  let baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+  if (
+    ["preview", "development"].includes(
+      process.env.NEXT_PUBLIC_VERCEL_ENV ?? ""
+    )
+  ) {
+    baseUrl = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
+  }
+
+  console.log(`VERCEL_ENV = ${process.env.NEXT_PUBLIC_VERCEL_ENV}`)
   console.log(`VERCEL_URL = ${process.env.NEXT_PUBLIC_VERCEL_URL}`)
   console.log(`BASE_URL = ${baseUrl}`)
 
