@@ -119,22 +119,4 @@ export const Overview: NextPage = () => {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  ctx.resolvedUrl
-
-  const apolloClient = initializeApollo()
-
-  await apolloClient.query({
-    query: SearchMembersDocument,
-    variables: {
-      filter: "%",
-      count: pageSize,
-    },
-  })
-
-  return addApolloState(apolloClient, {
-    props: {},
-  })
-}
-
 export default Overview
