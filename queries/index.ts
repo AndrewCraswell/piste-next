@@ -571,6 +571,7 @@ export type ClubLocations = {
   CreatedBy?: Maybe<Scalars['String']>;
   Email: Scalars['String'];
   LocationId: Scalars['String'];
+  Name: Scalars['String'];
   Phone: Scalars['String'];
   UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
@@ -592,6 +593,7 @@ export type ClubLocations_Bool_Exp = {
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
   Email?: InputMaybe<String_Mssql_Comparison_Exp>;
   LocationId?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Name?: InputMaybe<String_Mssql_Comparison_Exp>;
   Phone?: InputMaybe<String_Mssql_Comparison_Exp>;
   UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   _and?: InputMaybe<Array<ClubLocations_Bool_Exp>>;
@@ -605,6 +607,7 @@ export type ClubLocations_Max_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   LocationId?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };
@@ -615,6 +618,7 @@ export type ClubLocations_Min_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   LocationId?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };
@@ -629,6 +633,7 @@ export type ClubLocations_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   LocationId?: InputMaybe<Order_By>;
+  Name?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };

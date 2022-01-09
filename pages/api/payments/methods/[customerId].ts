@@ -1,6 +1,9 @@
 import type { NextApiHandler } from "next"
 import Stripe from "stripe"
 
+// Sample: https://github.com/stripe-samples/developer-office-hours/blob/master/2020-12-15-clone-payment-method/client/index.html
+// Video: https://www.youtube.com/watch?v=ri07uPos1gs
+
 // customerId = cus_Kvm41gHVgqbeeS
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
