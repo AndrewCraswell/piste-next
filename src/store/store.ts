@@ -1,17 +1,28 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
+import { rootReducer } from "./reducers"
 import { paymentMethodsApi } from "./services"
 
-export const store = configureStore({
-  reducer: {
-    // Add the generated reducer as a specific top-level slice
-    [paymentMethodsApi.reducerPath]: paymentMethodsApi.reducer,
-  },
-  // Adding the api middleware enables caching, invalidation, polling,
-  // and other useful features of `rtk-query`.
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(paymentMethodsApi.middleware),
-})
+function configureAppStore(preloadedState: any = {}) {
+  const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) => [
+      paymentMethodsApi.middleware,
+      ...getDefaultMiddleware(),
+    ],
+    preloadedState,
+  })
+
+  //@ts-ignore
+  if (process.env.NODE_ENV !== "production" && module.hot) {
+    //@ts-ignore
+    module.hot.accept("./reducers", () => store.replaceReducer(reducer))
+  }
+
+  return store
+}
+
+export const store = configureAppStore()
 
 // optional, but required for refetchOnFocus/refetchOnReconnect behaviors
 // see `setupListeners` docs - takes an optional callback as the 2nd arg for customization
