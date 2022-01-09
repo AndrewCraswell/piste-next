@@ -1,5 +1,10 @@
 import type { NextPage } from "next"
-import { PageTitle, ProfileForm } from "$components"
+import {
+  ElementsProvider,
+  PageTitle,
+  PaymentMethodForm,
+  ProfileForm,
+} from "$components"
 import { useTitle } from "$hooks"
 import { Pivot, PivotItem } from "@fluentui/react"
 import styled from "@emotion/styled"
@@ -28,7 +33,11 @@ export const Profile: NextPage = () => {
         </PivotItem>
         <PivotItem headerText="Account"></PivotItem>
         <PivotItem headerText="Notifications"></PivotItem>
-        <PivotItem headerText="Payment"></PivotItem>
+        <PivotItem headerText="Payment">
+          <ElementsProvider>
+            <PaymentMethodForm />
+          </ElementsProvider>
+        </PivotItem>
         <PivotItem headerText="Fencers"></PivotItem>
       </ProfilePivot>
     </>
