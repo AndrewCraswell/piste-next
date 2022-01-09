@@ -64,49 +64,50 @@ export type MemberDetails = {
 export interface IMemberDetailsCardProps extends IStyleableProps {
   details: MemberDetails
 }
-export const MemberDetailsCard: React.FunctionComponent<IMemberDetailsCardProps> =
-  ({ className, details }) => {
-    const { isOpen: isAdded, onToggle: flipAdded } = useDisclosure(false)
+export const MemberDetailsCard: React.FunctionComponent<
+  IMemberDetailsCardProps
+> = ({ className, details }) => {
+  const { isOpen: isAdded, onToggle: flipAdded } = useDisclosure(false)
 
-    const {
-      fullName,
-      secondaryText,
-      memberId,
-      membershipExpiration,
-      birthdate,
-      foilRating,
-      epeeRating,
-      sabreRating,
-    } = details
+  const {
+    fullName,
+    secondaryText,
+    memberId,
+    membershipExpiration,
+    birthdate,
+    foilRating,
+    epeeRating,
+    sabreRating,
+  } = details
 
-    return (
-      <ThinCard
-        className={className}
-        actions={[
-          {
-            iconProps: { iconName: isAdded ? "SkypeCircleCheck" : "Add" },
-            onClick: () => {
-              flipAdded()
-            },
+  return (
+    <ThinCard
+      className={className}
+      actions={[
+        {
+          iconProps: { iconName: isAdded ? "SkypeCircleCheck" : "Add" },
+          onClick: () => {
+            flipAdded()
           },
-        ]}
-      >
-        <MemberPersona
-          text={fullName}
-          secondaryText={secondaryText}
-          showSecondaryText
+        },
+      ]}
+    >
+      <MemberPersona
+        text={fullName}
+        secondaryText={secondaryText}
+        showSecondaryText
+      />
+      <MemberDetailsList>
+        <MemberDetailItem title="Member Id" value={memberId} />
+        <MemberDetailItem
+          title="Expiration"
+          value={dayjs(membershipExpiration).format("M/DD/YYYY")}
         />
-        <MemberDetailsList>
-          <MemberDetailItem title="Member Id" value={memberId} />
-          <MemberDetailItem
-            title="Expiration"
-            value={dayjs(membershipExpiration).format("M/DD/YYYY")}
-          />
-          <MemberDetailItem title="Birthdate" value={birthdate?.toString()} />
-          <MemberDetailItem title="Foil" value={foilRating} />
-          <MemberDetailItem title="Epee" value={epeeRating} />
-          <MemberDetailItem title="Sabre" value={sabreRating} />
-        </MemberDetailsList>
-      </ThinCard>
-    )
-  }
+        <MemberDetailItem title="Birthdate" value={birthdate?.toString()} />
+        <MemberDetailItem title="Foil" value={foilRating} />
+        <MemberDetailItem title="Epee" value={epeeRating} />
+        <MemberDetailItem title="Sabre" value={sabreRating} />
+      </MemberDetailsList>
+    </ThinCard>
+  )
+}

@@ -1,6 +1,5 @@
-import type { NextPage, GetServerSideProps } from "next"
-import { initializeApollo, addApolloState } from "$lib"
-import { useSearchMembersLazyQuery, SearchMembersDocument } from "$queries"
+import type { NextPage } from "next"
+import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"

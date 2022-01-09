@@ -5,7 +5,7 @@ import {
   FormDatePicker,
   FormAddressAutocomplete,
 } from "$components"
-import { useDecisionTree } from "$components/DecisionTree"
+import { useDecisionTree } from "$components"
 import { useAccountProfile } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import {

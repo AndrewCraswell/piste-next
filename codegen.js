@@ -6,10 +6,10 @@ module.exports = {
       },
     },
   ],
-  documents: ["./queries/**/*.graphql"],
+  documents: ["./src/queries/**/*.graphql"],
   overwrite: true,
   generates: {
-    "./queries/index.ts": {
+    "./src/queries/index.ts": {
       plugins: [
         "typescript",
         "typescript-operations",
