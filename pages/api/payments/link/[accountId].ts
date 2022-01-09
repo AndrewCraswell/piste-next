@@ -1,8 +1,8 @@
 import type { NextApiHandler } from "next"
 import Stripe from "stripe"
 
-// Sample: https://github.com/stripe-samples/saving-card-without-payment/blob/14749ed3cf830ba307924092b9ca3e0d4ae726ef/client/script.js#L55
-// customerId = cus_Kvm41gHVgqbeeS
+// Sample: https://github.com/stripe-samples/connect-onboarding-for-standard/blob/master/server/node/server.js
+// accountId = TODO
 
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2020-08-27",
@@ -17,24 +17,24 @@ const setupIntent: NextApiHandler<Stripe.SetupIntent | Error> = async (
   req,
   res
 ) => {
-  const { customerId } = req.query
+  const { accountId } = req.query
 
-  if (!customerId) {
+  if (!accountId) {
     res.status(400).json(new Error("No customerId was provided."))
   }
 
-  if (typeof customerId === "string") {
+  if (typeof accountId === "string") {
     try {
-      const setupIntent = await stripe.setupIntents.create({
-        customer: customerId,
-      })
+      // const setupIntent = await stripe.setupIntents.create({
+      //   customer: customerId,
+      // })
 
-      res.status(200).json(setupIntent)
+      res.status(200).json({} as any)
     } catch (error: any) {
       res.status(error.statusCode).json(error)
     }
   } else {
-    res.status(400).json(new Error("customerId must be a string."))
+    res.status(400).json(new Error("accountId must be a string."))
   }
 }
 

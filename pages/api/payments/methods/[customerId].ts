@@ -6,6 +6,9 @@ import Stripe from "stripe"
 
 // customerId = cus_Kvm41gHVgqbeeS
 
+// TODO: Delete payment method
+//    Reference: https://stripe.com/docs/api/cards/delete
+
 export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
   apiVersion: "2020-08-27",
   appInfo: {
