@@ -1,1 +1,2 @@
-export * from "./paymentMethods"
+export * from "./store"
+export * from "./services"

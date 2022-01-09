@@ -8,6 +8,7 @@ import {
 import { useTitle } from "$hooks"
 import { Pivot, PivotItem } from "@fluentui/react"
 import styled from "@emotion/styled"
+import { useGetPaymentMethodsQuery } from "$store"
 
 const ProfilePivot = styled(Pivot)`
   margin-top: 1em;
@@ -21,6 +22,8 @@ export const Profile: NextPage = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
 
+  const { data: paymentMethods } =
+    useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
@@ -34,6 +37,14 @@ export const Profile: NextPage = () => {
         <PivotItem headerText="Account"></PivotItem>
         <PivotItem headerText="Notifications"></PivotItem>
         <PivotItem headerText="Payment">
+          <div>
+            {paymentMethods?.map(({ card, id }) => (
+              <div key={id} style={{ margin: "16px 0" }}>
+                <span>{card?.brand}</span> <span>{card?.last4}</span>{" "}
+                <span>{`${card?.exp_month}/${card?.exp_year}`}</span>
+              </div>
+            ))}
+          </div>
           <ElementsProvider>
             <PaymentMethodForm />
           </ElementsProvider>

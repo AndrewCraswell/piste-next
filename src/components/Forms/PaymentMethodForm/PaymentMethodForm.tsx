@@ -55,12 +55,17 @@ export const PaymentMethodForm: React.FunctionComponent<
       console.log("[PaymentMethod]", paymentMethod)
 
       // Create the SetupIntent
-      const setupIntentResponse = await fetch("/api/setup-intent", {
-        method: "post",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      // TODO: Create redux query stores for this
+      const customerId = "cus_Kvm41gHVgqbeeS" // TODO: Get this from the Account profile
+      const setupIntentResponse = await fetch(
+        `/api/payments/setup-intent/${customerId}`,
+        {
+          method: "post",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
 
       const setupIntent = await setupIntentResponse.json()
       console.log("[SetupIntent]", setupIntent)

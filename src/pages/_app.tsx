@@ -9,10 +9,12 @@ import {
   ThemeProvider,
 } from "$components"
 import { Auth0Provider } from "@auth0/auth0-react"
+import { getBaseUrl } from "$lib"
+import { Provider } from "react-redux"
+import { store } from "$store"
 
 import "../styles/globals.css"
 import "modern-normalize"
-import { getBaseUrl } from "$lib"
 
 initializeIcons()
 
@@ -27,13 +29,15 @@ function App({ Component, pageProps }: AppProps) {
     >
       <ApolloProvider client={apolloClient}>
         <ThemeProvider>
-          <AuthenticatedApp>
-            <OnboardingGate>
-              <AppShell>
-                <Component {...pageProps} />
-              </AppShell>
-            </OnboardingGate>
-          </AuthenticatedApp>
+          <Provider store={store}>
+            <AuthenticatedApp>
+              <OnboardingGate>
+                <AppShell>
+                  <Component {...pageProps} />
+                </AppShell>
+              </OnboardingGate>
+            </AuthenticatedApp>
+          </Provider>
         </ThemeProvider>
       </ApolloProvider>
     </Auth0Provider>
