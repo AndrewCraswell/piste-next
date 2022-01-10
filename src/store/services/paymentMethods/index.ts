@@ -5,9 +5,11 @@ import { PaymentMethod } from "@stripe/stripe-js"
 export const paymentMethodsApi = createApi({
   reducerPath: "paymentMethods",
   baseQuery: fetchBaseQuery({ baseUrl: "/api/payments/" }),
+  tagTypes: ["PaymentMethod"],
   endpoints: (builder) => ({
     getPaymentMethods: builder.query<PaymentMethod[], string>({
       query: (customerId) => `methods/${customerId}`,
+      providesTags: ["PaymentMethod"],
     }),
   }),
 })

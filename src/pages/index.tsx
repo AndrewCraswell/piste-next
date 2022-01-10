@@ -43,6 +43,33 @@ export const Overview: NextPage = () => {
     })
   }, [fetchMore, pageNum, searchTerm])
 
+  const onSearch = useCallback(
+    (value) => {
+      if (searchTerm === value) {
+        return
+      }
+
+      setSearchTerm(value)
+      setPageNum(0)
+      if (value) {
+        fetch({
+          variables: {
+            filter: `%${value}%`,
+            count: pageSize,
+          },
+        })
+      } else {
+        fetch({
+          variables: {
+            filter: "%",
+            count: pageSize,
+          },
+        })
+      }
+    },
+    [fetch, searchTerm]
+  )
+
   useEffect(() => {
     fetch({
       variables: {
@@ -55,32 +82,7 @@ export const Overview: NextPage = () => {
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
-      <SearchBox
-        placeholder="Search"
-        onSearch={(value) => {
-          if (searchTerm === value) {
-            return
-          }
-
-          setSearchTerm(value)
-          setPageNum(0)
-          if (value) {
-            fetch({
-              variables: {
-                filter: `%${value}%`,
-                count: pageSize,
-              },
-            })
-          } else {
-            fetch({
-              variables: {
-                filter: "%",
-                count: pageSize,
-              },
-            })
-          }
-        }}
-      />
+      <SearchBox placeholder="Search" onSearch={onSearch} />
 
       <GridContainer>
         {members?.AssociationMembersLookup.map((member) => (
