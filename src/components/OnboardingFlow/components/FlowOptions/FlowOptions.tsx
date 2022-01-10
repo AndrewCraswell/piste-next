@@ -1,7 +1,8 @@
 import { useDecisionTree } from "$components/DecisionTree"
 import styled from "@emotion/styled"
-import { Stack, Text } from "@fluentui/react"
+import { Stack } from "@fluentui/react"
 import { CompoundButton, Divider } from "@fluentui/react-components"
+import { Text } from "@fluentui/react-components"
 
 const HeroStack = styled(Stack)`
   margin-bottom: 3em;
@@ -21,8 +22,8 @@ export const FlowOptions: React.FunctionComponent = () => {
         horizontalAlign="center"
         tokens={{ childrenGap: 32 }}
       >
-        <Text variant="xxLargePlus">Welcome to the Piste!</Text>
-        <Text variant="large">
+        <Text size={800}>Welcome to the Piste!</Text>
+        <Text size={500}>
           Let's find the best onboarding experience for you
         </Text>
       </HeroStack>

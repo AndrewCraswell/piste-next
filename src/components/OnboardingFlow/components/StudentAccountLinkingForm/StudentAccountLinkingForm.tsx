@@ -1,7 +1,7 @@
 import { Card, MemberDetailsCard, useDecisionTree } from "$components"
 import { useMemberDetailsByNameQuery } from "$queries"
-import { DialogFooter, Text } from "@fluentui/react"
-import { Button } from "@fluentui/react-components"
+import { DialogFooter } from "@fluentui/react"
+import { Button, Text } from "@fluentui/react-components"
 
 export const StudentAccountLinkingForm: React.FunctionComponent = () => {
   const { back, next } = useDecisionTree()
@@ -16,8 +16,8 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
     <>
       <Card>
         <div style={{ marginBottom: 20 }}>
-          <Text variant="xLarge">Is this you?</Text>
-          <Text variant="mediumPlus">
+          <Text size={500}>Is this you?</Text>
+          <Text size={400}>
             <div>There is a USA Fencing member that matches your profile</div>
           </Text>
         </div>

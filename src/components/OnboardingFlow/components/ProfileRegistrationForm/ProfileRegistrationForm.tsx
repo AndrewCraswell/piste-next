@@ -8,8 +8,8 @@ import {
 import { useDecisionTree } from "$components"
 import { useAccountProfile } from "$hooks"
 import { GoogleAddressResult } from "$types"
-import { Stack, IStackProps, Text, DialogFooter } from "@fluentui/react"
-import { Button } from "@fluentui/react-components"
+import { Stack, IStackProps, DialogFooter } from "@fluentui/react"
+import { Button, Text } from "@fluentui/react-components"
 import { useCallback } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileRegistrationFields } from "./ProfileRegistrationForm.types"
@@ -52,8 +52,8 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
       <legend style={{ marginBottom: 20 }}>
-        <Text variant="xLarge">Create profile</Text>
-        <Text variant="mediumPlus">
+        <Text size={500}>Create profile</Text>
+        <Text size={400}>
           <div>Setup your student profile so you can enroll in classes</div>
         </Text>
       </legend>

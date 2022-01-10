@@ -1,11 +1,12 @@
 import { useDisclosure, useLinkShims } from "$hooks"
 import styled from "@emotion/styled"
-import { ActionButton, Text, Persona } from "@fluentui/react"
+import { ActionButton, Persona } from "@fluentui/react"
 import {
   Avatar,
   Popover,
   PopoverSurface,
   PopoverTrigger,
+  Text,
 } from "@fluentui/react-components"
 import { useCallback, useRef } from "react"
 import { HeaderButton } from "../HeaderButton"
@@ -28,7 +29,8 @@ const TransparentAvatar = styled(Avatar)`
 
 const MenuContent = styled.div`
   display: flex;
-  line-height: normal !important;
+  line-height: normal;
+  color: ${({ theme }) => theme.fluentV9.colorNeutralForeground1};
 `
 
 const ActionsContainer = styled.div`
@@ -119,7 +121,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
             />
 
             <MenuInner>
-              {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
+              {fullName ? <Text size={500}>{fullName}</Text> : null}
               {email ? <Text>{email}</Text> : null}
 
               <ActionsContainer>

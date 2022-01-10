@@ -1,7 +1,8 @@
 import { HorizontalCard } from "../HorizontalCard"
 import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
-import { Text, Persona, FontWeights } from "@fluentui/react"
+import { Persona } from "@fluentui/react"
+import { Text } from "@fluentui/react-components"
 import { useDisclosure } from "$hooks"
 import dayjs from "dayjs"
 
@@ -26,13 +27,10 @@ const MemberDetailItem: React.FunctionComponent<IMemberDetailItemProps> = ({
   value,
 }) => (
   <li>
-    <Text
-      variant="xSmall"
-      styles={{ root: { fontWeight: FontWeights.semibold } }}
-    >
+    <Text size={100} weight="semibold">
       {title}
     </Text>
-    <Text variant="small">{value ?? "N/A"}</Text>
+    <Text size={200}>{value ?? "N/A"}</Text>
   </li>
 )
 

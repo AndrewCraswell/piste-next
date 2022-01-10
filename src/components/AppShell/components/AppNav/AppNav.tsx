@@ -6,9 +6,9 @@ import {
   AnimationVariables,
   INavLinkGroup,
   IRenderGroupHeaderProps,
-  Text,
   FontWeights,
 } from "@fluentui/react"
+import { Text } from "@fluentui/react-components"
 import { useCallback } from "react"
 import { Hamburger } from "./components"
 
@@ -72,9 +72,7 @@ export const AppNav: React.FunctionComponent<IAppNavProps> = ({
   const { isOpen, onToggle } = useDisclosure(true)
 
   const onRenderGroupHeader = useCallback(
-    (group?: IRenderGroupHeaderProps) => (
-      <Text variant="mediumPlus">{group?.name}</Text>
-    ),
+    (group?: IRenderGroupHeaderProps) => <Text size={400}>{group?.name}</Text>,
     []
   )
 

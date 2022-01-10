@@ -28,7 +28,7 @@ export const Profile: NextPage = () => {
     <>
       <PageTitle>{pageTitle}</PageTitle>
       {/*
-      <Text variant="mediumPlus">Manage your profile and settings.</Text> */}
+      <Text size={400}>Manage your profile and settings.</Text> */}
 
       <ProfilePivot>
         <PivotItem headerText="Contact">
