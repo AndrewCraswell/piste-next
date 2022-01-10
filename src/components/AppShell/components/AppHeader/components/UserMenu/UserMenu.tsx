@@ -1,6 +1,6 @@
 import { useDisclosure, useLinkShims } from "$hooks"
 import styled from "@emotion/styled"
-import { ActionButton, Persona } from "@fluentui/react"
+import { ActionButton } from "@fluentui/react"
 import {
   Avatar,
   Popover,
