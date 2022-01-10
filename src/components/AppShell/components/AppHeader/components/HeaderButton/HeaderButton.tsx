@@ -28,6 +28,7 @@ export const HeaderButton = styled(Button)`
   border: none;
   min-width: 48px;
   padding: 0;
+  height: 100%;
 
   i {
     line-height: inherit;

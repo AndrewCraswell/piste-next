@@ -1,16 +1,19 @@
 import { useDisclosure, useLinkShims } from "$hooks"
 import styled from "@emotion/styled"
+import { ActionButton, Text, Persona } from "@fluentui/react"
 import {
-  ActionButton,
-  Callout,
-  Text,
-  DirectionalHint,
-  Persona,
-} from "@fluentui/react"
-import { Avatar } from "@fluentui/react-components"
-import { useId } from "@fluentui/react-hooks"
-import { useCallback } from "react"
+  Avatar,
+  Popover,
+  PopoverSurface,
+  PopoverTrigger,
+} from "@fluentui/react-components"
+import { useCallback, useRef } from "react"
 import { HeaderButton } from "../HeaderButton"
+
+const AvatarContainer = styled.div`
+  height: 100%;
+  z-index: 1000;
+`
 
 const HeaderAvatar = styled(HeaderButton)`
   align-items: center;
@@ -23,14 +26,9 @@ const TransparentAvatar = styled(Avatar)`
   color: ${({ theme }) => theme.palette.white};
 `
 
-const MenuCallout = styled(Callout)`
-  & > div {
-    padding: 20px;
-  }
-`
-
 const MenuContent = styled.div`
   display: flex;
+  line-height: normal !important;
 `
 
 const ActionsContainer = styled.div`
@@ -83,79 +81,74 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   email,
   logout,
 }) => {
-  const avatarId = useId("headerAvatar")
+  const avatarRef = useRef(null)
   const linkShims = useLinkShims()
-  const {
-    isOpen: isUserMenuOpen,
-    onToggle: toggleUserMenu,
-    onClose: onUserMenuDismissed,
-  } = useDisclosure(false)
+  const { isOpen, onToggle, onClose } = useDisclosure(false)
 
   const onLinkClicked = useCallback(
     (event) => {
       linkShims.onClick(event)
-      onUserMenuDismissed()
+      onClose()
     },
-    [linkShims, onUserMenuDismissed]
+    [linkShims, onClose]
   )
 
   return (
     <>
-      <HeaderAvatar id={avatarId} onClick={toggleUserMenu}>
-        <TransparentAvatar
-          image={{
-            src: avatarUrl,
-            alt: `User menu for ${fullName}`,
-          }}
-        />
-      </HeaderAvatar>
-      <MenuCallout
-        target={`#${avatarId}`}
-        isBeakVisible={false}
-        directionalHint={DirectionalHint.bottomRightEdge}
-        hidden={!isUserMenuOpen}
-        onDismiss={onUserMenuDismissed}
-        minPagePadding={0}
-      >
-        <MenuContent>
-          <Persona
-            imageUrl={avatarUrl}
-            coinSize={88}
-            hidePersonaDetails={true}
-            imageAlt=""
-            imageShouldStartVisible={true}
-          />
-
-          <MenuInner>
-            {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
-            {email ? <Text>{email}</Text> : null}
-
-            <ActionsContainer>
-              <ProfileButton
-                href="/profile"
-                onClick={onLinkClicked}
-                onMouseOver={linkShims.onMouseOver}
-                iconProps={{
-                  iconName: "ContactCard",
+      <Popover noArrow mountNode={avatarRef.current || undefined} open={isOpen}>
+        <PopoverTrigger>
+          <AvatarContainer ref={avatarRef} onClick={onToggle}>
+            <HeaderAvatar>
+              <TransparentAvatar
+                image={{
+                  src: avatarUrl,
+                  alt: `User menu for ${fullName}`,
                 }}
-              >
-                My profile
-              </ProfileButton>
+              />
+            </HeaderAvatar>
+          </AvatarContainer>
+        </PopoverTrigger>
+        <PopoverSurface>
+          <MenuContent>
+            <Persona
+              imageUrl={avatarUrl}
+              coinSize={88}
+              hidePersonaDetails={true}
+              imageAlt=""
+              imageShouldStartVisible={true}
+            />
 
-              {logout ? (
-                <LogoutButton
-                  onClick={logout}
+            <MenuInner>
+              {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
+              {email ? <Text>{email}</Text> : null}
+
+              <ActionsContainer>
+                <ProfileButton
+                  href="/profile"
+                  onClick={onLinkClicked}
+                  onMouseOver={linkShims.onMouseOver}
                   iconProps={{
-                    iconName: "SignOut",
+                    iconName: "ContactCard",
                   }}
                 >
-                  Sign out
-                </LogoutButton>
-              ) : null}
-            </ActionsContainer>
-          </MenuInner>
-        </MenuContent>
-      </MenuCallout>
+                  My profile
+                </ProfileButton>
+
+                {logout ? (
+                  <LogoutButton
+                    onClick={logout}
+                    iconProps={{
+                      iconName: "SignOut",
+                    }}
+                  >
+                    Sign out
+                  </LogoutButton>
+                ) : null}
+              </ActionsContainer>
+            </MenuInner>
+          </MenuContent>
+        </PopoverSurface>
+      </Popover>
     </>
   )
 }
