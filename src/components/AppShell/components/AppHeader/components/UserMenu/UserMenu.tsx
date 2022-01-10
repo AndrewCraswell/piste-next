@@ -6,8 +6,8 @@ import {
   Text,
   DirectionalHint,
   Persona,
-  PersonaSize,
 } from "@fluentui/react"
+import { Avatar } from "@fluentui/react-components"
 import { useId } from "@fluentui/react-hooks"
 import { useCallback } from "react"
 import { HeaderButton } from "../HeaderButton"
@@ -18,10 +18,9 @@ const HeaderAvatar = styled(HeaderButton)`
   justify-content: center;
 `
 
-const TransparentPersona = styled(Persona)`
-  .ms-Persona-initials {
-    background-color: transparent;
-  }
+const TransparentAvatar = styled(Avatar)`
+  background-color: transparent;
+  color: ${({ theme }) => theme.palette.white};
 `
 
 const MenuCallout = styled(Callout)`
@@ -103,11 +102,11 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   return (
     <>
       <HeaderAvatar id={avatarId} onClick={toggleUserMenu}>
-        <TransparentPersona
-          imageUrl={avatarUrl}
-          size={PersonaSize.size32}
-          hidePersonaDetails={true}
-          imageAlt={fullName}
+        <TransparentAvatar
+          image={{
+            src: avatarUrl,
+            alt: `User menu for ${fullName}`,
+          }}
         />
       </HeaderAvatar>
       <MenuCallout
@@ -124,7 +123,9 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
             coinSize={88}
             hidePersonaDetails={true}
             imageAlt=""
+            imageShouldStartVisible={true}
           />
+
           <MenuInner>
             {fullName ? <Text variant="xLarge">{fullName}</Text> : null}
             {email ? <Text>{email}</Text> : null}

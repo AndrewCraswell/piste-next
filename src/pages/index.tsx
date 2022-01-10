@@ -3,8 +3,9 @@ import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
-import { PrimaryButton, SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
+import { SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import { useCallback, useEffect, useState } from "react"
+import { Button } from "@fluentui/react-components"
 
 const pageSize = 12
 
@@ -109,12 +110,13 @@ export const Overview: NextPage = () => {
       {loading ? (
         <Spinner size={SpinnerSize.large} style={{ marginTop: "2em" }} />
       ) : (
-        <PrimaryButton
+        <Button
+          appearance="primary"
           style={{ margin: "2em auto 0", display: "block" }}
           onClick={fetchMembers}
         >
           Load more
-        </PrimaryButton>
+        </Button>
       )}
     </>
   )

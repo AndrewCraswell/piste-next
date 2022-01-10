@@ -1,27 +1,49 @@
-import { ThemeProvider as FluentProvider, useTheme } from "@fluentui/react"
+import { ThemeProvider as FluentProvider } from "@fluentui/react"
 import { ThemeProvider as EmotionProvider } from "@emotion/react"
 import styled from "@emotion/styled"
-import React from "react"
-import { DefaultTheme } from "@fluentui/theme-samples"
+import React, { useMemo } from "react"
+import { DefaultTheme, DarkTheme } from "@fluentui/theme-samples"
+import {
+  webLightTheme,
+  webDarkTheme,
+  FluentProvider as FluentNextProvider,
+} from "@fluentui/react-components"
+import { IEmotionalSupportProps, IAppTheme } from "./ThemeProvider.types"
 
 const BodyGrow = styled.div`
   height: 100vh;
 `
 
-const ThemeInner: React.FunctionComponent = ({ children }) => {
-  const theme = useTheme()
-
-  return (
-    <EmotionProvider theme={theme}>
-      <BodyGrow>{children}</BodyGrow>
-    </EmotionProvider>
-  )
-}
+const EmotionalSupport: React.FunctionComponent<IEmotionalSupportProps> = ({
+  children,
+  theme,
+}) => (
+  <EmotionProvider theme={theme}>
+    <BodyGrow>{children}</BodyGrow>
+  </EmotionProvider>
+)
 
 export const ThemeProvider: React.FunctionComponent = ({ children }) => {
+  const themeName = "light"
+
+  let theme: IAppTheme = useMemo((): IAppTheme => {
+    switch (themeName) {
+      //@ts-ignore
+      case "dark":
+        return { ...DarkTheme, fluentV9: webDarkTheme }
+
+      //@ts-ignore
+      case "light":
+      default:
+        return { ...DefaultTheme, fluentV9: webLightTheme }
+    }
+  }, [])
+
   return (
-    <FluentProvider theme={DefaultTheme}>
-      <ThemeInner>{children}</ThemeInner>
+    <FluentProvider theme={theme}>
+      <FluentNextProvider theme={theme.fluentV9}>
+        <EmotionalSupport theme={theme}>{children}</EmotionalSupport>
+      </FluentNextProvider>
     </FluentProvider>
   )
 }

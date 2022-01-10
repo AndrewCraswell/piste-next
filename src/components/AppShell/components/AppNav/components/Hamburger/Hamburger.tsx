@@ -14,6 +14,7 @@ const HamburgerContainer = styled.div`
 export const Hamburger: React.FunctionComponent<IButtonProps> = ({
   children,
   className,
+  theme,
   ...props
 }) => (
   <HamburgerContainer className={className}>
