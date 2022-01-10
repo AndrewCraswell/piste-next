@@ -6,7 +6,7 @@ import {
   useStripe,
 } from "@stripe/react-stripe-js"
 import { FormEvent } from "react"
-import { PrimaryButton } from "@fluentui/react"
+import { Button } from "@fluentui/react-components"
 
 // Sample code:
 // https://github.com/stripe-samples/saving-card-without-payment/blob/14749ed3cf830ba307924092b9ca3e0d4ae726ef/client/script.js
@@ -93,9 +93,14 @@ export const PaymentMethodForm: React.FunctionComponent<
   return (
     <form onSubmit={handleSubmit} style={{ width: 300 }}>
       <CardElement />
-      <PrimaryButton type="submit" disabled={!stripe} style={{ marginTop: 16 }}>
+      <Button
+        appearance="primary"
+        type="submit"
+        disabled={!stripe}
+        style={{ marginTop: 16 }}
+      >
         Add payment method
-      </PrimaryButton>
+      </Button>
     </form>
   )
 }

@@ -8,14 +8,8 @@ import {
 import { useDecisionTree } from "$components"
 import { useAccountProfile } from "$hooks"
 import { GoogleAddressResult } from "$types"
-import {
-  Stack,
-  IStackProps,
-  Text,
-  DialogFooter,
-  PrimaryButton,
-  DefaultButton,
-} from "@fluentui/react"
+import { Stack, IStackProps, Text, DialogFooter } from "@fluentui/react"
+import { Button } from "@fluentui/react-components"
 import { useCallback } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileRegistrationFields } from "./ProfileRegistrationForm.types"
@@ -181,9 +175,11 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
       </Stack>
 
       <DialogFooter>
-        <DefaultButton onClick={back}>Back</DefaultButton>
-        {/* <PrimaryButton type="submit">Next</PrimaryButton> */}
-        <PrimaryButton onClick={next}>Next</PrimaryButton>
+        <Button onClick={back}>Back</Button>
+        {/* <Button appearance="primary" type="submit">Next</Button> */}
+        <Button appearance="primary" onClick={next}>
+          Next
+        </Button>
       </DialogFooter>
     </form>
   )

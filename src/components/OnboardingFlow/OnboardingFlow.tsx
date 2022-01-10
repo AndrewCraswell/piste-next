@@ -5,13 +5,8 @@ import {
   IDecisionTreeContext,
 } from "$components/DecisionTree"
 import styled from "@emotion/styled"
-import {
-  Stack,
-  DefaultButton,
-  DialogFooter,
-  PrimaryButton,
-  AnimationStyles,
-} from "@fluentui/react"
+import { Stack, DialogFooter, AnimationStyles } from "@fluentui/react"
+import { Button } from "@fluentui/react-components"
 
 import {
   FlowOptions,
@@ -42,8 +37,8 @@ export const OnboardingFlow: React.FunctionComponent = () => {
             <Card>
               Congratulations, you're done!
               <DialogFooter>
-                <DefaultButton onClick={back}>Back</DefaultButton>
-                <PrimaryButton>Get started!</PrimaryButton>
+                <Button onClick={back}>Back</Button>
+                <Button appearance="primary">Get started!</Button>
               </DialogFooter>
             </Card>
           )}
@@ -70,8 +65,10 @@ export const OnboardingFlow: React.FunctionComponent = () => {
             <Card>
               Add your children to your account
               <DialogFooter>
-                <DefaultButton onClick={back}>Back</DefaultButton>
-                <PrimaryButton onClick={next}>Next</PrimaryButton>
+                <Button onClick={back}>Back</Button>
+                <Button appearance="primary" onClick={next}>
+                  Next
+                </Button>
               </DialogFooter>
             </Card>
           )}
@@ -81,8 +78,10 @@ export const OnboardingFlow: React.FunctionComponent = () => {
             <Card>
               Sync your children with their USFA Memberships
               <DialogFooter>
-                <DefaultButton onClick={back}>Back</DefaultButton>
-                <PrimaryButton onClick={next}>Next</PrimaryButton>
+                <Button onClick={back}>Back</Button>
+                <Button appearance="primary" onClick={next}>
+                  Next
+                </Button>
               </DialogFooter>
             </Card>
           )}

@@ -1,11 +1,7 @@
 import { Card, MemberDetailsCard, useDecisionTree } from "$components"
 import { useMemberDetailsByNameQuery } from "$queries"
-import {
-  DialogFooter,
-  DefaultButton,
-  PrimaryButton,
-  Text,
-} from "@fluentui/react"
+import { DialogFooter, Text } from "@fluentui/react"
+import { Button } from "@fluentui/react-components"
 
 export const StudentAccountLinkingForm: React.FunctionComponent = () => {
   const { back, next } = useDecisionTree()
@@ -27,9 +23,11 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
         </div>
 
         <DialogFooter>
-          <DefaultButton onClick={back}>Back</DefaultButton>
-          <DefaultButton onClick={next}>Skip</DefaultButton>
-          <PrimaryButton onClick={next}>Next</PrimaryButton>
+          <Button onClick={back}>Back</Button>
+          <Button onClick={next}>Skip</Button>
+          <Button appearance="primary" onClick={next}>
+            Next
+          </Button>
         </DialogFooter>
       </Card>
 

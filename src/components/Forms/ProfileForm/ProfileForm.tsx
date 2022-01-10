@@ -6,17 +6,12 @@ import {
   FormAddressAutocomplete,
 } from "$components"
 import { GoogleAddressResult } from "$types"
-import {
-  Stack,
-  IStackProps,
-  DialogFooter,
-  PrimaryButton,
-  Text,
-} from "@fluentui/react"
+import { Stack, IStackProps, DialogFooter } from "@fluentui/react"
 import { useCallback, useEffect } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileFormFields } from "./ProfileForm.types"
 import { useAccountProfile } from "$hooks"
+import { Button } from "@fluentui/react-components"
 
 const columnTokens = { childrenGap: 50 }
 const formTokens: Partial<IStackProps> = {
@@ -196,12 +191,13 @@ export const ProfileForm: React.FunctionComponent = () => {
       </Stack>
 
       <DialogFooter>
-        <PrimaryButton
+        <Button
+          appearance="primary"
           type="submit"
           disabled={!formState.isDirty || formState.isSubmitting}
         >
           Save
-        </PrimaryButton>
+        </Button>
       </DialogFooter>
     </form>
   )

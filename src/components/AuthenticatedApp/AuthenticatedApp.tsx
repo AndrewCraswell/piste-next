@@ -1,5 +1,4 @@
 import { useAuth0 } from "@auth0/auth0-react"
-import { PrimaryButton } from "@fluentui/react"
 import React from "react"
 
 export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
