@@ -85,7 +85,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 }) => {
   const avatarRef = useRef(null)
   const linkShims = useLinkShims()
-  const { isOpen, onToggle, onClose } = useDisclosure(false)
+  const { isOpen, onToggle, onClose, setIsOpen } = useDisclosure(false)
 
   const onLinkClicked = useCallback(
     (event) => {
@@ -97,7 +97,12 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 
   return (
     <>
-      <Popover noArrow mountNode={avatarRef.current || undefined} open={isOpen}>
+      <Popover
+        noArrow
+        mountNode={avatarRef.current || undefined}
+        open={isOpen}
+        onOpenChange={(e, { open }) => setIsOpen(open)}
+      >
         <PopoverTrigger>
           <AvatarContainer ref={avatarRef} onClick={onToggle}>
             <HeaderAvatar>
@@ -112,12 +117,12 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
         </PopoverTrigger>
         <PopoverSurface>
           <MenuContent>
-            <Persona
-              imageUrl={avatarUrl}
-              coinSize={88}
-              hidePersonaDetails={true}
-              imageAlt=""
-              imageShouldStartVisible={true}
+            <Avatar
+              image={{
+                src: avatarUrl,
+                alt: "",
+              }}
+              size={96}
             />
 
             <MenuInner>
