@@ -1,6 +1,7 @@
 import { useDecisionTree } from "$components/DecisionTree"
 import styled from "@emotion/styled"
-import { Stack, CompoundButton, Separator, Text } from "@fluentui/react"
+import { Stack, Separator, Text } from "@fluentui/react"
+import { CompoundButton } from "@fluentui/react-components"
 
 const HeroStack = styled(Stack)`
   margin-bottom: 3em;
@@ -34,8 +35,8 @@ export const FlowOptions: React.FunctionComponent = () => {
 
       <Stack tokens={{ childrenGap: 12 }}>
         <CompoundButton
-          primary
-          secondaryText="I'm ready to try classes"
+          appearance="primary"
+          secondaryContent="I'm ready to try classes"
           onClick={() => {
             goTo("student")
           }}
@@ -46,7 +47,7 @@ export const FlowOptions: React.FunctionComponent = () => {
         <ThemedSeparator alignContent="center">Or</ThemedSeparator>
 
         <CompoundButton
-          secondaryText="I schedule lessons for my family"
+          secondaryContent="I schedule lessons for my family"
           onClick={() => {
             goTo("parent")
           }}
@@ -55,7 +56,7 @@ export const FlowOptions: React.FunctionComponent = () => {
         </CompoundButton>
 
         <CompoundButton
-          secondaryText="I own or teach at an existing club"
+          secondaryContent="I own or teach at an existing club"
           disabled
           onClick={() => {
             goTo("coach")
