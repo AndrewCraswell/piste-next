@@ -1,20 +1,14 @@
 import { useDecisionTree } from "$components/DecisionTree"
 import styled from "@emotion/styled"
-import { Stack, Separator, Text } from "@fluentui/react"
-import { CompoundButton } from "@fluentui/react-components"
+import { Stack, Text } from "@fluentui/react"
+import { CompoundButton, Divider } from "@fluentui/react-components"
 
 const HeroStack = styled(Stack)`
   margin-bottom: 3em;
 `
 
-const ThemedSeparator = styled(Separator)`
-  &:before {
-    background-color: ${({ theme }) => theme.palette.neutralTertiaryAlt};
-  }
-
-  & > div {
-    background: ${({ theme }) => theme.palette.neutralLighterAlt};
-  }
+const AlignedCompoundButton = styled(CompoundButton)`
+  justify-content: flex-start;
 `
 
 export const FlowOptions: React.FunctionComponent = () => {
@@ -34,28 +28,31 @@ export const FlowOptions: React.FunctionComponent = () => {
       </HeroStack>
 
       <Stack tokens={{ childrenGap: 12 }}>
-        <CompoundButton
+        <AlignedCompoundButton
+          size="large"
           appearance="primary"
-          secondaryContent="I'm ready to try classes"
+          secondaryContent="I'm ready to try some classes"
           onClick={() => {
             goTo("student")
           }}
         >
           Student
-        </CompoundButton>
+        </AlignedCompoundButton>
 
-        <ThemedSeparator alignContent="center">Or</ThemedSeparator>
+        <Divider>Or</Divider>
 
-        <CompoundButton
+        <AlignedCompoundButton
+          size="large"
           secondaryContent="I schedule lessons for my family"
           onClick={() => {
             goTo("parent")
           }}
         >
           Parent
-        </CompoundButton>
+        </AlignedCompoundButton>
 
-        <CompoundButton
+        <AlignedCompoundButton
+          size="large"
           secondaryContent="I own or teach at an existing club"
           disabled
           onClick={() => {
@@ -63,7 +60,7 @@ export const FlowOptions: React.FunctionComponent = () => {
           }}
         >
           Coach
-        </CompoundButton>
+        </AlignedCompoundButton>
       </Stack>
     </>
   )

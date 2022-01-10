@@ -20,7 +20,7 @@ export const OnboardingGate: React.FunctionComponent = ({ children }) => {
     )
   } else {
     // If profile already exists
-    if (account.UserId) {
+    if (!account.UserId) {
       return <>{children}</>
     } else {
       // If profile does not exist, guide user to create it
