@@ -3,9 +3,13 @@ import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import { Stack, IconButton, IButtonProps } from "@fluentui/react"
 
+const CardThinnedBottom = styled(Card)`
+  padding-bottom: 0;
+`
+
 const CardControls = styled(Stack)`
   border-top: 1px solid ${({ theme }) => theme.palette.neutralLight};
-  padding-top: 6px;
+  padding: 6px 0;
 `
 
 const verticalTokens = { childrenGap: "0.5rem" }
@@ -19,19 +23,19 @@ export const VerticalCard: React.FunctionComponent<IVerticalCardProps> = ({
   className,
   actions,
 }) => (
-  <Card className={className}>
+  <CardThinnedBottom className={className}>
     <Stack tokens={verticalTokens}>
       <Stack tokens={verticalTokens} verticalFill grow>
         {children}
       </Stack>
 
       {actions.length ? (
-        <CardControls>
+        <CardControls horizontal horizontalAlign="end">
           {actions.map((props, index) => (
             <IconButton key={index} {...props} />
           ))}
         </CardControls>
       ) : undefined}
     </Stack>
-  </Card>
+  </CardThinnedBottom>
 )
