@@ -1189,7 +1189,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, AccountStudent: { __typename?: 'Students', FirstName: string, LastName: string, Email?: string | null | undefined, Phone?: string | null | undefined, Birthdate: any, AssociationMemberId?: string | null | undefined }, Address?: { __typename?: 'Addresses', Address: string, Address2?: string | null | undefined, City: string, Postal: string, State: string } | null | undefined, Dependents: Array<{ __typename?: 'Students', AssociationMemberId?: string | null | undefined, AvatarUrl?: string | null | undefined, Birthdate: any, Email?: string | null | undefined, FirstName: string, LastName: string, Phone?: string | null | undefined, StudentId: any }> }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', FirstName: string, LastName: string, Email?: string | null | undefined, Phone?: string | null | undefined, Birthdate: any, AssociationMemberId?: string | null | undefined }, Address?: { __typename?: 'Addresses', Address: string, Address2?: string | null | undefined, City: string, Postal: string, State: string } | null | undefined, Dependents: Array<{ __typename?: 'Students', AssociationMemberId?: string | null | undefined, AvatarUrl?: string | null | undefined, Birthdate: any, Email?: string | null | undefined, FirstName: string, LastName: string, Phone?: string | null | undefined, StudentId: any }> }> };
 
 export type MemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -1227,6 +1227,7 @@ export const AccountProfileDocument = gql`
     query AccountProfile($oid: String!) {
   Accounts(where: {Oid: {_eq: $oid}}) {
     Oid
+    PrimaryStudentId
     AccountStudent {
       FirstName
       LastName

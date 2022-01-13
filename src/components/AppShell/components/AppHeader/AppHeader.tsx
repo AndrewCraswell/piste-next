@@ -1,14 +1,16 @@
+import { PistePanel } from "$components"
 import { useAccountProfile, useDisclosure } from "$hooks"
 import { IStyleableProps } from "$types"
 import { useAuth0 } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
-import { Panel } from "@fluentui/react"
 import { HeaderButton, UserMenu } from "./components"
+
+export const headerHeight = 48
 
 const Header = styled.header`
   background-color: ${({ theme }) => theme.palette.themePrimary};
   color: #fff;
-  height: 48px;
+  height: ${headerHeight}px;
 `
 Header.defaultProps = {
   role: "banner",
@@ -39,12 +41,6 @@ const CenterRegion = styled.div`
   flex: 1 0 auto;
   justify-content: center;
   display: inherit;
-`
-
-const NotificationsPanel = styled(Panel)`
-  .ms-Panel-main {
-    top: 48px;
-  }
 `
 
 export interface IAppHeaderProps extends IStyleableProps {}
@@ -84,14 +80,14 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
           />
         </HeaderInner>
       </Header>
-      <NotificationsPanel
+      <PistePanel
         headerText="Notifications"
         isOpen={isOpen}
         onDismiss={onClose}
         closeButtonAriaLabel="Close"
         isLightDismiss={true}
         isBlocking={true}
-      ></NotificationsPanel>
+      ></PistePanel>
     </>
   )
 }

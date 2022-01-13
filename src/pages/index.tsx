@@ -11,7 +11,7 @@ const pageSize = 12
 
 const GridContainer = styled.div`
   display: grid;
-  grid-gap: 1em;
+  grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(300px, 330px));
   margin-top: 2em;
 `
