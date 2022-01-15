@@ -2,7 +2,9 @@ query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
   AssociationMembersLookup(
     offset: $offset
     limit: $count
-    where: { FullName: { _like: $filter } }
+    where: {
+      _or: [{ FullName: { _like: $filter } }, { Club1Name: { _like: $filter } }]
+    }
     order_by: { FullName: asc }
   ) {
     FullName

@@ -1431,7 +1431,7 @@ export const SearchMembersDocument = gql`
   AssociationMembersLookup(
     offset: $offset
     limit: $count
-    where: {FullName: {_like: $filter}}
+    where: {_or: [{FullName: {_like: $filter}}, {Club1Name: {_like: $filter}}]}
     order_by: {FullName: asc}
   ) {
     FullName
