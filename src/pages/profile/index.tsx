@@ -1,5 +1,6 @@
 import type { NextPage } from "next"
 import {
+  AddFencerCard,
   ElementsProvider,
   FencerCard,
   PageTitle,
@@ -82,6 +83,7 @@ export const Profile: NextPage = () => {
                 primaryFencerId={account.PrimaryStudentId}
               />
             ))}
+            <AddFencerCard />
           </FencersGrid>
         </PivotItem>
       </ProfilePivot>
