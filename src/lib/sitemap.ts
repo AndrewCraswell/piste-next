@@ -28,7 +28,7 @@ export const sitemap: IPageItem[] = [
     children: [
       {
         name: "Calendar",
-        url: "calendar",
+        url: "calendar/",
         tags: {
           nav: { link: { icon: "Calendar" } },
           breadcrumb: {},
@@ -36,7 +36,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Clubs",
-        url: "clubs",
+        url: "clubs/",
         tags: {
           nav: { link: { icon: "Teamwork" } },
           breadcrumb: {},
@@ -44,7 +44,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Billing",
-        url: "billing",
+        url: "billing/",
         tags: {
           nav: { link: { icon: "PaymentCard" } },
           breadcrumb: {},
@@ -52,7 +52,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Classes",
-        url: "classes",
+        url: "classes/",
         tags: {
           nav: { group: "Club", link: { icon: "Education", disabled: true } },
           breadcrumb: {},
@@ -60,7 +60,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Coaching",
-        url: "coaching",
+        url: "coaching/",
         tags: {
           nav: { group: "Club", link: { icon: "UserEvent", disabled: true } },
           breadcrumb: {},
@@ -68,7 +68,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Challenge",
-        url: "challenge",
+        url: "challenge/",
         tags: {
           nav: { group: "Club", link: { icon: "Diamond", disabled: true } },
           breadcrumb: {},
@@ -76,7 +76,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Armory",
-        url: "armory",
+        url: "armory/",
         tags: {
           nav: {
             group: "Club",
@@ -87,7 +87,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Store",
-        url: "store",
+        url: "store/",
         tags: {
           nav: {
             group: "Club",
@@ -98,7 +98,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Clinics",
-        url: "clinics",
+        url: "clinics/",
         tags: {
           nav: {
             group: "Events",
@@ -109,7 +109,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Tournaments",
-        url: "tournaments",
+        url: "tournaments/",
         tags: {
           nav: { group: "Events", link: { icon: "Trophy2", disabled: true } },
           breadcrumb: {},
@@ -117,7 +117,7 @@ export const sitemap: IPageItem[] = [
       },
       {
         name: "Profile",
-        url: "profile",
+        url: "profile/",
         tags: {
           breadcrumb: {},
         },
