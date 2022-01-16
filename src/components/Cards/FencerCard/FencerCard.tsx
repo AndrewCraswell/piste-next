@@ -62,7 +62,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   const age = new Date().getFullYear() - dayjs(Birthdate).year()
   const formattedEmail = Email || "N/A"
   const formattedPhone = Phone ? formatPhoneNumber(Phone) : "N/A"
-  const formattedAvatarUrl = AvatarUrl ?? undefined
+  const formattedAvatar = AvatarUrl ? { src: AvatarUrl } : undefined
   const isLinked = !!AssociationMemberId
   const isPrimaryFencer = StudentId === primaryFencerId
   const memberId = `#${AssociationMemberId}`
@@ -83,11 +83,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         </BadgeContainer>
 
         <Stack horizontal horizontalAlign="center">
-          <Avatar
-            name={fullName}
-            size={96}
-            image={{ src: formattedAvatarUrl }}
-          />
+          <Avatar name={fullName} size={96} image={formattedAvatar} />
         </Stack>
       </CardHeader>
 
