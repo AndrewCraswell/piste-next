@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+
+<g>
+	<defs>
+		<path id="5772181563_SVGID_1__grid" d="M3,15h48l10,17v17H3V15z"/>
+	</defs>
+	<use xlink:href="#5772181563_SVGID_1__grid" class="stshockcolor" style="fill:#80B34F;;overflow:visible;"/>
+	<clipPath id="5772181563_SVGID_2__grid">
+		<use xlink:href="#5772181563_SVGID_1__grid" style="overflow:visible;"/>
+	</clipPath>
+	<g class="st3" style="clip-path:url(#5772181563_SVGID_2__grid);;">
+		<polygon class="st1" points="61,49 3,49 3,15 22.179,15 61,37.541   " style="fill:#FFFFFF;fill-opacity:0.15;;"/>
+		<path class="st4" d="M6,18h52v28H6V18z M42,32c0,6.628-4.479,12-10,12c-5.522,0-10-5.372-10-12s4.477-12,10-12    C37.521,20,42,25.372,42,32z M11,20c0,1.657-1.343,3-3,3v18c1.657,0,3,1.343,3,3h42c0-1.656,1.344-3,3-3V23c-1.657,0-3-1.343-3-3    H11z" style="fill:#231F20;fill-opacity:0.5;;"/>
+	</g>
+</g>
+<g>
+	<polygon class="stshockcolor" points="46.142,23.74 61,32 51,15  " style="fill:#80B34F;;"/>
+	<polygon class="st0" points="46.142,23.74 61,32 51,15  " style="opacity:0.6;fill:#FFFFFF;;"/>
+</g>
+</svg>

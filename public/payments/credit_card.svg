@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+
+<g>
+	<defs>
+		<path id="5772181573_SVGID_1__grid" d="M60,47c0,1.657-1.343,3-3,3H7c-1.657,0-3-1.343-3-3V17c0-1.657,1.343-3,3-3h50c1.657,0,3,1.343,3,3V47z"/>
+	</defs>
+	<use xlink:href="#5772181573_SVGID_1__grid" class="stshockcolor" style="fill:#75A2D9;;overflow:visible;"/>
+	<clipPath id="5772181573_SVGID_2__grid">
+		<use xlink:href="#5772181573_SVGID_1__grid" style="overflow:visible;"/>
+	</clipPath>
+	<g class="st1" style="clip-path:url(#5772181573_SVGID_2__grid);;">
+		<polygon class="st3" points="4,50 57.688,50 4,19   " style="opacity:0.2;;"/>
+		<g>
+			<defs>
+				<rect id="5772181573_SVGID_3__grid" x="4" y="19" width="56" height="10"/>
+			</defs>
+			<use xlink:href="#5772181573_SVGID_3__grid" style="overflow:visible;opacity:0.8;"/>
+			<clipPath id="5772181573_SVGID_4__grid">
+				<use xlink:href="#5772181573_SVGID_3__grid" style="overflow:visible;opacity:0.8;"/>
+			</clipPath>
+			<g class="st2" style="clip-path:url(#5772181573_SVGID_4__grid);;">
+				<polygon class="st4" points="54.227,29 21.319,29 27.092,19 60,19     " style="opacity:0.1;fill:#FFFFFF;;"/>
+			</g>
+		</g>
+	</g>
+</g>
+<rect x="14" y="33" class="st0" width="36" height="4" style="opacity:0.6;fill:#FFFFFF;;"/>
+<rect x="19" y="40" class="st0" width="26" height="4" style="opacity:0.6;fill:#FFFFFF;;"/>
+</svg>

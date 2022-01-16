@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 15.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Layer_1" x="0px" y="0px" width="64px" height="64px" viewBox="0 0 64 64" style="enable-background:new 0 0 64 64;" xml:space="preserve">
+
+<g>
+	<defs>
+		<path id="5772181598_SVGID_1__grid" d="M26.696,54.43c-2.829,0-5.258-2.136-5.562-5.011c-0.984-9.3-6.201-17.381-14.313-22.174    c-2.664-1.573-3.546-5.007-1.974-7.669c1.575-2.663,5.007-3.544,7.67-1.974c11.03,6.516,18.416,17.969,19.755,30.64    c0.326,3.073-1.903,5.833-4.979,6.158C27.093,54.419,26.893,54.43,26.696,54.43z"/>
+	</defs>
+	<use xlink:href="#5772181598_SVGID_1__grid" style="overflow:visible;fill:#75A2D8;"/>
+	<clipPath id="5772181598_SVGID_2__grid">
+		<use xlink:href="#5772181598_SVGID_1__grid" style="overflow:visible;"/>
+	</clipPath>
+	<polygon class="st2" points="14.333,48.477 27.078,48.477 27.078,29.504 25.287,29.504  " style="clip-path:url(#5772181598_SVGID_2__grid);fill:#47475E;fill-opacity:0.3;;"/>
+</g>
+<g>
+	<defs>
+		<path id="5772181598_SVGID_3__grid" d="M46.682,59.999c-0.06,0-0.123,0-0.186-0.003c-3.09-0.102-5.516-2.687-5.413-5.78    c0.45-13.783-6.143-26.675-17.631-34.489c-2.558-1.74-3.221-5.222-1.481-7.779c1.735-2.558,5.221-3.225,7.779-1.482    c14.682,9.983,23.104,26.475,22.525,44.118C52.178,57.612,49.689,59.999,46.682,59.999z"/>
+	</defs>
+	<use xlink:href="#5772181598_SVGID_3__grid" style="overflow:visible;fill:#F7C90B;"/>
+	<clipPath id="5772181598_SVGID_4__grid">
+		<use xlink:href="#5772181598_SVGID_3__grid" style="overflow:visible;"/>
+	</clipPath>
+	<polygon class="st3" points="31.039,53.813 48.326,53.813 48.326,28.08 45.896,28.08  " style="clip-path:url(#5772181598_SVGID_4__grid);fill:#7D1CC7;fill-opacity:0.15;;"/>
+</g>
+<path class="st1" d="M26.595,54.44c-0.92,0-1.854-0.228-2.715-0.705c-2.703-1.502-3.677-4.91-2.174-7.615  c4.919-8.852,4.918-19.431-0.001-28.305c-1.5-2.704-0.523-6.112,2.182-7.612C26.593,8.707,30,9.681,31.5,12.385  c6.807,12.278,6.807,26.921-0.005,39.176C30.473,53.401,28.563,54.44,26.595,54.44z" style="fill:#C7441C;;"/>
+<path class="stshockcolor" d="M46.677,59.999c-0.794,0-1.6-0.167-2.365-0.523c-2.804-1.311-4.015-4.643-2.708-7.444  c5.942-12.725,5.942-27.328-0.002-40.063c-1.308-2.802-0.097-6.134,2.708-7.442c2.799-1.308,6.132-0.098,7.441,2.707  c7.348,15.746,7.348,33.801,0.003,49.535C50.802,58.804,48.783,59.999,46.677,59.999z" style="fill:#599C48;;"/>
+</svg>
