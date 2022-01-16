@@ -14,7 +14,7 @@ const VerticallyCentered = styled(Stack)`
 `
 
 export interface IAddFencerCard {
-  onClick: () => void
+  onClick?: () => void
 }
 
 export const AddFencerCard: React.FunctionComponent<IAddFencerCard> = ({

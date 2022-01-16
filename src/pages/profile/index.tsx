@@ -6,6 +6,7 @@ import {
   PageTitle,
   PaymentMethodForm,
   ProfileForm,
+  PaymentMethod,
 } from "$components"
 import { useAccountProfile, useTitle } from "$hooks"
 import { Pivot, PivotItem } from "@fluentui/react"
@@ -24,6 +25,12 @@ const FencersGrid = styled.div`
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
+`
+
+const PaymentMethodsGrid = styled.div`
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(246px, 246px));
 `
 
 // const items = [
@@ -64,12 +71,23 @@ export const Profile: NextPage = () => {
         <PivotItem headerText="Account"></PivotItem>
         <PivotItem headerText="Notifications"></PivotItem>
         <PivotItem headerText="Payment">
-          {paymentMethods?.map(({ card, id }) => (
-            <div key={id} style={{ margin: "16px 0" }}>
-              <span>{card?.brand}</span> <span>{card?.last4}</span>{" "}
-              <span>{`${card?.exp_month}/${card?.exp_year}`}</span>
-            </div>
-          ))}
+          <PaymentMethodsGrid>
+            {paymentMethods?.map(({ card, id, billing_details }, index) => {
+              if (card) {
+                return (
+                  <PaymentMethod
+                    key={id}
+                    card={card}
+                    themeIndex={index}
+                    name={billing_details.name}
+                  />
+                )
+              } else {
+                return null
+              }
+            })}
+          </PaymentMethodsGrid>
+
           <ElementsProvider>
             <PaymentMethodForm />
           </ElementsProvider>
