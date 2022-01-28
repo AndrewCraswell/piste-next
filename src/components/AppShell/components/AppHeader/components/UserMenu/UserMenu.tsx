@@ -115,7 +115,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
             </HeaderAvatar>
           </AvatarContainer>
         </PopoverTrigger>
-        <PopoverSurface>
+        <PopoverSurface style={{ borderRight: 0 }}>
           <MenuContent>
             <Avatar
               image={{
