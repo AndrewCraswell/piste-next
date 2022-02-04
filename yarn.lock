@@ -744,18 +744,18 @@
     stylis "^4.0.6"
     tslib "^2.1.0"
 
-"@fluentui/merge-styles@^8.2.2":
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/@fluentui/merge-styles/-/merge-styles-8.2.2.tgz#8a11671aafe5d62e2ca9aea716d62b1e0b22fd3a"
-  integrity sha512-sZNwhGyceLBnV/lZyXVJEyEITU97pmNdVvziEcWl6uiWQ6AfNT3NoEw/JQCOIjofP5EL6FFv6lCOo8mktvR1hg==
-  dependencies:
-    "@fluentui/set-version" "^8.1.5"
-    tslib "^2.1.0"
-
 "@fluentui/merge-styles@^8.2.3":
   version "8.2.3"
   resolved "https://registry.yarnpkg.com/@fluentui/merge-styles/-/merge-styles-8.2.3.tgz#3cd596fc0d83d3f23edcd57d69a50b6e18e4ffa3"
   integrity sha512-kwjY56C0ACMkYUikOX6krIwfuEworq6+A7V4zE1w8jRc7RSYHQfyfavu6ptNVgPPR/Bmho3AgriyhnnoFq+6fQ==
+  dependencies:
+    "@fluentui/set-version" "^8.1.5"
+    tslib "^2.1.0"
+
+"@fluentui/merge-styles@^8.3.0":
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/merge-styles/-/merge-styles-8.3.0.tgz#e27581dd43cbe1b5d54d7325e619924883dd0fd5"
+  integrity sha512-qI61vWnmSuZYopMfWbEkTuDmnedmOYmsphTwflG6zif1EPV6h5u3dDUfHnmHMahywNOLOv5MOa+zVU0SCEHSAg==
   dependencies:
     "@fluentui/set-version" "^8.1.5"
     tslib "^2.1.0"
@@ -882,24 +882,14 @@
     "@fluentui/utilities" "^8.3.9"
     tslib "^2.1.0"
 
-"@fluentui/react-hooks@^8.3.8":
-  version "8.3.8"
-  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.3.8.tgz#f98aad7c8d1058199d17add7c9942e41a70cc34d"
-  integrity sha512-N5GOIP/PgDEBiYVdH8RCIOH/9wYbo9P6Bj7D4E8aEEL4Z3WoKUVYmL/c5dgxn4T6xN6/mAyuvFFnZVeSyH4WQQ==
+"@fluentui/react-hooks@^8.3.10", "@fluentui/react-hooks@^8.3.9":
+  version "8.3.10"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.3.10.tgz#c7c9736b837b30fd9c5208c428df71632a17e3f2"
+  integrity sha512-4FskWO5/kur/BKcDgeOPpuG5v75ssZHNw17J94FpoYaBEvpPc+Ja7vviAAiauZygjbJPSM270AHoXS5K+k371A==
   dependencies:
     "@fluentui/react-window-provider" "^2.1.6"
     "@fluentui/set-version" "^8.1.5"
-    "@fluentui/utilities" "^8.3.8"
-    tslib "^2.1.0"
-
-"@fluentui/react-hooks@^8.3.9":
-  version "8.3.9"
-  resolved "https://registry.yarnpkg.com/@fluentui/react-hooks/-/react-hooks-8.3.9.tgz#a9a92acce10b07f5f8dd7e35a6d8ce5f3dfff67b"
-  integrity sha512-slgQubShYrzVaelzBkvPVJy0EY+WJeJUqLAu9f9AX22sOi/odid1PuEi3ZuX7d+lLiGUQR0HaEbvo+jEf6HNeQ==
-  dependencies:
-    "@fluentui/react-window-provider" "^2.1.6"
-    "@fluentui/set-version" "^8.1.5"
-    "@fluentui/utilities" "^8.3.9"
+    "@fluentui/utilities" "^8.3.10"
     tslib "^2.1.0"
 
 "@fluentui/react-icons@^1.1.140", "@fluentui/react-icons@^1.1.145":
@@ -1143,23 +1133,13 @@
     "@fluentui/utilities" "^8.3.9"
     tslib "^2.1.0"
 
-"@fluentui/utilities@^8.3.8":
-  version "8.3.8"
-  resolved "https://registry.yarnpkg.com/@fluentui/utilities/-/utilities-8.3.8.tgz#11a5f0c049dccf7820ea684865b19475604f48fb"
-  integrity sha512-CMyoXze7Xb8oN+pXKC06m4/JuNLNzaDtZA52/aQ7ccy+viovHye5HK5KHvvIowSxZbA2amysk6DjE9CKkfaiKA==
+"@fluentui/utilities@^8.3.10", "@fluentui/utilities@^8.3.9":
+  version "8.3.10"
+  resolved "https://registry.yarnpkg.com/@fluentui/utilities/-/utilities-8.3.10.tgz#0242cfd594772574bc245c0acbfac486f130cc46"
+  integrity sha512-GZaeS1kHMFfMRDN4MM/+Y0HYIQPaYAOwEzQF/T6NvfqHT5A98VEeIZsSzJGQPSVZKmhFa+H/bQYQRS8rgywSzQ==
   dependencies:
     "@fluentui/dom-utilities" "^2.1.5"
-    "@fluentui/merge-styles" "^8.2.2"
-    "@fluentui/set-version" "^8.1.5"
-    tslib "^2.1.0"
-
-"@fluentui/utilities@^8.3.9":
-  version "8.3.9"
-  resolved "https://registry.yarnpkg.com/@fluentui/utilities/-/utilities-8.3.9.tgz#d5dad90b03b26a947c066800a2db18ba7d3f9c65"
-  integrity sha512-UNz/5RjEmCtllzpCXEUkK/ScxjYkEG5tHIdUqxe+vg70UL92qlcSLo7E2NKuCuD7HM3z/tVbbE18ZEKJM6AOFg==
-  dependencies:
-    "@fluentui/dom-utilities" "^2.1.5"
-    "@fluentui/merge-styles" "^8.2.3"
+    "@fluentui/merge-styles" "^8.3.0"
     "@fluentui/set-version" "^8.1.5"
     tslib "^2.1.0"
 
