@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.4",
+    "@apollo/client": "^3.5.10",
     "@auth0/auth0-react": "^1.8.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
