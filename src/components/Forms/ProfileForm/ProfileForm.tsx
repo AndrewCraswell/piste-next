@@ -12,6 +12,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { ProfileFormFields } from "./ProfileForm.types"
 import { useAccountProfile } from "$hooks"
 import { Button } from "@fluentui/react-components"
+import dayjs from "dayjs"
 
 const columnTokens = { childrenGap: 50 }
 const formTokens: Partial<IStackProps> = {
@@ -69,6 +70,9 @@ export const ProfileForm: React.FunctionComponent = () => {
       const fields: Partial<ProfileFormFields> = {
         ...account,
       }
+
+      fields.Birthdate = dayjs(fields.Birthdate).format("M/DD/YYYY")
+
       setFormFields(fields)
     }
   }, [loading, setFormFields, account])
