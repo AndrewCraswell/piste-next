@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.6.0",
     "@fluentui/react": "^8.48.1",
     "@fluentui/react-components": "^9.0.0-alpha.124",
-    "@fluentui/react-hooks": "^8.3.8",
+    "@fluentui/react-hooks": "^8.5.3",
     "@fluentui/react-icons": "^1.1.145",
     "@fluentui/theme-samples": "^8.2.60",
     "@reduxjs/toolkit": "^1.7.1",
