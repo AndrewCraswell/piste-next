@@ -34,6 +34,7 @@ function App({ Component, pageProps, renderer }: AppProps) {
           domain={process.env.NEXT_PUBLIC_AUTH0_DOMAIN as string}
           clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
           redirectUri={getBaseUrl()}
+          cacheLocation="localstorage"
         >
           <ApolloProvider client={apolloClient}>
             <ThemeProvider>
