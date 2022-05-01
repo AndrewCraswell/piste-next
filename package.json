@@ -20,7 +20,7 @@
     "@fluentui/react-components": "^9.0.0-rc.8",
     "@fluentui/react-hooks": "^8.5.4",
     "@fluentui/react-icons": "^1.1.145",
-    "@fluentui/theme-samples": "^8.2.60",
+    "@fluentui/theme-samples": "^8.4.28",
     "@reduxjs/toolkit": "^1.8.1",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.22.0",
