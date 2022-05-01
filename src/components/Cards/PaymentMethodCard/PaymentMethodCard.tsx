@@ -49,7 +49,7 @@ export const PaymentMethodCard: React.FunctionComponent<
         },
       },
     ],
-    []
+    [card, onDeleteClick, onEditClick]
   )
 
   return (
