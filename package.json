@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.1",
-    "@auth0/auth0-react": "^1.8.0",
+    "@auth0/auth0-react": "^1.10.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fluentui/react": "^8.48.1",
