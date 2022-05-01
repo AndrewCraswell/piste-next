@@ -12,12 +12,12 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.5.4",
+    "@apollo/client": "^3.6.1",
     "@auth0/auth0-react": "^1.8.0",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
     "@fluentui/react": "^8.48.1",
-    "@fluentui/react-components": "^9.0.0-alpha.124",
+    "@fluentui/react-components": "^9.0.0-rc.8",
     "@fluentui/react-hooks": "^8.3.8",
     "@fluentui/react-icons": "^1.1.145",
     "@fluentui/theme-samples": "^8.2.60",
@@ -32,7 +32,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-autocomplete": "^2.6.1",
-    "react-hook-form": "^7.22.5",
+    "react-hook-form": "^7.30.0",
     "react-redux": "^7.2.6",
     "stripe": "^8.195.0"
   },
@@ -54,7 +54,7 @@
     "gql": "^1.1.2",
     "graphql": "^16.0.1",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.5",
+    "lint-staged": "^12.4.1",
     "typescript": "4.5.4"
   },
   "sideEffects": false
