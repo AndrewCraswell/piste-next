@@ -21,7 +21,7 @@
     "@fluentui/react-hooks": "^8.5.4",
     "@fluentui/react-icons": "^1.1.145",
     "@fluentui/theme-samples": "^8.2.60",
-    "@reduxjs/toolkit": "^1.7.1",
+    "@reduxjs/toolkit": "^1.8.1",
     "@stripe/react-stripe-js": "^1.7.0",
     "@stripe/stripe-js": "^1.22.0",
     "axios": "^0.24.0",
