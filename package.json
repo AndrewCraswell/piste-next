@@ -14,7 +14,7 @@
   "dependencies": {
     "@apollo/client": "^3.6.1",
     "@auth0/auth0-react": "^1.10.1",
-    "@emotion/react": "^11.7.1",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.6.0",
     "@fluentui/react": "^8.67.2",
     "@fluentui/react-components": "^9.0.0-rc.8",
