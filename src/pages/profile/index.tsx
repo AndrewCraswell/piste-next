@@ -6,7 +6,7 @@ import {
   PageTitle,
   PaymentMethodForm,
   ProfileForm,
-  PaymentMethod,
+  PaymentMethodCard,
 } from "$components"
 import { useAccountProfile, useTitle } from "$hooks"
 import { Pivot, PivotItem } from "@fluentui/react"
@@ -29,8 +29,8 @@ const FencersGrid = styled.div`
 
 const PaymentMethodsGrid = styled.div`
   display: grid;
-  grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(246px, 246px));
+  grid-gap: 1.25rem;
+  grid-template-columns: repeat(auto-fill, 292px);
 `
 
 // const items = [
@@ -75,11 +75,12 @@ export const Profile: NextPage = () => {
             {paymentMethods?.map(({ card, id, billing_details }, index) => {
               if (card) {
                 return (
-                  <PaymentMethod
+                  <PaymentMethodCard
                     key={id}
                     card={card}
                     themeIndex={index}
                     name={billing_details.name}
+                    onEditClick={(event, card) => console.log("EDIT", card)}
                   />
                 )
               } else {
