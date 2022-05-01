@@ -8,7 +8,7 @@ export function createApolloClient() {
   return new ApolloClient({
     ssrMode: typeof window === "undefined",
     link: new HttpLink({
-      uri: `${getBaseUrl()}/api/graphql`,
+      uri: `${getBaseUrl()}/api/graphql/`,
       headers: {
         lang: "en",
       },

@@ -10,7 +10,7 @@ module.exports = withBundleAnalyzer(
     async rewrites() {
       return [
         {
-          source: "/api/graphql",
+          source: "/api/graphql/",
           destination: process.env.NEXT_PUBLIC_GRAPHQL_API_URL,
         },
       ]
