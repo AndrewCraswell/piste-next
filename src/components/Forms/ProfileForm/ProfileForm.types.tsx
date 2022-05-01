@@ -1,7 +1,7 @@
 export type ProfileFormFields = {
   FirstName: string
   LastName: string
-  Birthdate: string
+  Birthdate: Date
   Phone: string | null
   Email: string | null
   Address: string

@@ -69,9 +69,8 @@ export const ProfileForm: React.FunctionComponent = () => {
     if (!loading) {
       const fields: Partial<ProfileFormFields> = {
         ...account,
+        Birthdate: dayjs(account.Birthdate).toDate(),
       }
-
-      fields.Birthdate = dayjs(fields.Birthdate).format("M/DD/YYYY")
 
       setFormFields(fields)
     }
@@ -113,6 +112,11 @@ export const ProfileForm: React.FunctionComponent = () => {
             allowTextInput
             isRequired
             style={{ maxWidth: 177 }}
+            defaultValue={
+              dayjs(account.Birthdate).toDate() as unknown as string
+            }
+            maxDate={new Date()}
+            formatDate={(date) => dayjs(date).format("M/DD/YYYY")}
           />
         </Stack>
         <Stack horizontal tokens={columnTokens}>
