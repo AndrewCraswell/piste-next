@@ -22,7 +22,7 @@
     "@fluentui/react-icons": "^1.1.145",
     "@fluentui/theme-samples": "^8.4.28",
     "@reduxjs/toolkit": "^1.8.1",
-    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/react-stripe-js": "^1.7.2",
     "@stripe/stripe-js": "^1.29.0",
     "dayjs": "^1.11.1",
     "modern-normalize": "^1.1.0",
