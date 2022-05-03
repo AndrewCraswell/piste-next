@@ -9,8 +9,15 @@ import {
   PaymentMethodCard,
   FencerForm,
   IProfileFormFields,
+  IAddressFormFields,
+  IFencerFormFields,
 } from "$components"
-import { useAccountProfile, useDisclosure, useTitle } from "$hooks"
+import {
+  useAccountProfile,
+  useDisclosure,
+  useFormHelpers,
+  useTitle,
+} from "$hooks"
 import {
   DefaultButton,
   Dialog,
@@ -21,7 +28,8 @@ import {
 } from "@fluentui/react"
 import styled from "@emotion/styled"
 import { useGetPaymentMethodsQuery } from "$store"
-import { useForm } from "react-hook-form"
+import { SubmitHandler, useForm } from "react-hook-form"
+import { useCallback } from "react"
 
 const ProfilePivot = styled(Pivot)`
   margin-top: 1rem;
@@ -124,8 +132,9 @@ export const Profile: NextPage = () => {
             <AddFencerDialog
               isOpen={isAddFencerDialogOpen}
               onClose={onCloseAddFencerDialog}
-              onSaved={() => {
+              onSaved={(fencer: IFencerFormFields) => {
                 console.log("SAVED")
+                console.log(fencer)
                 onCloseAddFencerDialog()
               }}
             />
@@ -140,13 +149,31 @@ export default Profile
 
 export interface IAddFencerDialogProps {
   isOpen?: boolean
-  onSaved?: (fencer: any) => void
-  onClose?: () => void
+  onSaved: (fencer: IFencerFormFields) => void
+  onClose: () => void
 }
 export const AddFencerDialog: React.FunctionComponent<
   IAddFencerDialogProps
 > = ({ isOpen, onClose, onSaved }) => {
   const form = useForm<IProfileFormFields>()
+  const { sanitizePhone } = useFormHelpers(form)
+
+  const { handleSubmit, formState, reset } = form
+
+  const onFencerAdded: SubmitHandler<IFencerFormFields> = useCallback(
+    (fencer) => {
+      fencer.Phone = sanitizePhone(fencer.Phone)
+
+      onSaved(fencer)
+      reset()
+    },
+    [onSaved, reset, sanitizePhone]
+  )
+
+  const onDialogClose = useCallback(() => {
+    reset()
+    onClose()
+  }, [onClose, reset])
 
   return (
     <Dialog
@@ -160,11 +187,16 @@ export const AddFencerDialog: React.FunctionComponent<
       }}
       maxWidth={500}
     >
-      <FencerForm form={form} />
-      <DialogFooter>
-        <PrimaryButton onClick={onSaved}>Save</PrimaryButton>
-        <DefaultButton onClick={onClose}>Cancel</DefaultButton>
-      </DialogFooter>
+      <form onSubmit={handleSubmit(onFencerAdded)}>
+        <FencerForm form={form} />
+
+        <DialogFooter>
+          <PrimaryButton type="submit" disabled={!formState.isDirty}>
+            Save
+          </PrimaryButton>
+          <DefaultButton onClick={onDialogClose}>Cancel</DefaultButton>
+        </DialogFooter>
+      </form>
     </Dialog>
   )
 }

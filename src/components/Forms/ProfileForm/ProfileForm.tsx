@@ -12,7 +12,7 @@ import { FormSection } from "$components"
 
 export const ProfileForm: React.FunctionComponent = () => {
   const form = useForm<IProfileFormFields>()
-  const { setFormFields, sanitizeInput } = useFormHelpers(form)
+  const { setFormFields, sanitizePhone, sanitizePostal } = useFormHelpers(form)
   const { account, loading } = useAccountProfile()
 
   const { control, handleSubmit, formState } = form
@@ -21,19 +21,12 @@ export const ProfileForm: React.FunctionComponent = () => {
     (values, event) => {
       event?.preventDefault()
 
-      const invalidChars = ["_", "(", ")", " ", "", "-"]
-      values.Phone = sanitizeInput({
-        value: values.Phone,
-        remove: invalidChars,
-      })
-      values.Postal = sanitizeInput({
-        value: values.Postal,
-        remove: invalidChars,
-      })
+      values.Phone = sanitizePhone(values.Phone)
+      values.Postal = sanitizePostal(values.Postal)
 
       console.log(JSON.stringify(values))
     },
-    [sanitizeInput]
+    [sanitizePhone, sanitizePostal]
   )
 
   useEffect(() => {
