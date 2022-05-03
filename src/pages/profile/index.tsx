@@ -7,11 +7,21 @@ import {
   PaymentMethodForm,
   ProfileForm,
   PaymentMethodCard,
+  FencerForm,
+  IProfileFormFields,
 } from "$components"
-import { useAccountProfile, useTitle } from "$hooks"
-import { Pivot, PivotItem } from "@fluentui/react"
+import { useAccountProfile, useDisclosure, useTitle } from "$hooks"
+import {
+  DefaultButton,
+  Dialog,
+  DialogFooter,
+  Pivot,
+  PivotItem,
+  PrimaryButton,
+} from "@fluentui/react"
 import styled from "@emotion/styled"
 import { useGetPaymentMethodsQuery } from "$store"
+import { useForm } from "react-hook-form"
 
 const ProfilePivot = styled(Pivot)`
   margin-top: 1rem;
@@ -55,6 +65,12 @@ export const Profile: NextPage = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
 
+  const {
+    isOpen: isAddFencerDialogOpen,
+    onClose: onCloseAddFencerDialog,
+    onOpen: onOpenAddFencerDialog,
+  } = useDisclosure(false)
+
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
 
@@ -94,16 +110,26 @@ export const Profile: NextPage = () => {
           </ElementsProvider>
         </PivotItem>
         <PivotItem headerText="Fencers">
-          <FencersGrid>
-            {account.Dependents?.map((fencer) => (
-              <FencerCard
-                key={fencer.StudentId}
-                fencer={fencer}
-                primaryFencerId={account.PrimaryStudentId}
-              />
-            ))}
-            <AddFencerCard />
-          </FencersGrid>
+          <div>
+            <FencersGrid>
+              {account.Dependents?.map((fencer) => (
+                <FencerCard
+                  key={fencer.StudentId}
+                  fencer={fencer}
+                  primaryFencerId={account.PrimaryStudentId}
+                />
+              ))}
+              <AddFencerCard onClick={onOpenAddFencerDialog} />
+            </FencersGrid>
+            <AddFencerDialog
+              isOpen={isAddFencerDialogOpen}
+              onClose={onCloseAddFencerDialog}
+              onSaved={() => {
+                console.log("SAVED")
+                onCloseAddFencerDialog()
+              }}
+            />
+          </div>
         </PivotItem>
       </ProfilePivot>
     </>
@@ -111,3 +137,34 @@ export const Profile: NextPage = () => {
 }
 
 export default Profile
+
+export interface IAddFencerDialogProps {
+  isOpen?: boolean
+  onSaved?: (fencer: any) => void
+  onClose?: () => void
+}
+export const AddFencerDialog: React.FunctionComponent<
+  IAddFencerDialogProps
+> = ({ isOpen, onClose, onSaved }) => {
+  const form = useForm<IProfileFormFields>()
+
+  return (
+    <Dialog
+      hidden={!isOpen}
+      dialogContentProps={{
+        title: "Add new fencer",
+        subText:
+          "Add a new fencer to your profile. This student can be enrolled in lessons or classes, and be linked to an official association membership.",
+        showCloseButton: true,
+        onDismiss: onClose,
+      }}
+      maxWidth={500}
+    >
+      <FencerForm form={form} />
+      <DialogFooter>
+        <PrimaryButton onClick={onSaved}>Save</PrimaryButton>
+        <DefaultButton onClick={onClose}>Cancel</DefaultButton>
+      </DialogFooter>
+    </Dialog>
+  )
+}

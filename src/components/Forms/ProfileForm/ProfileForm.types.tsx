@@ -1,12 +1,6 @@
-export type ProfileFormFields = {
-  FirstName: string
-  LastName: string
-  Birthdate: Date
-  Phone: string | null
-  Email: string | null
-  Address: string
-  Address2: string | null
-  City: string
-  State: string
-  Postal: string
-}
+import { IAddressFormFields } from "../AddressForm"
+import { IFencerFormFields } from "../FencerForm"
+
+export interface IProfileFormFields
+  extends IFencerFormFields,
+    IAddressFormFields {}
