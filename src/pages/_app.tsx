@@ -5,6 +5,7 @@ import { useApollo } from "$lib"
 import {
   AppShell,
   AuthenticatedApp,
+  AuthorizedApolloProvider,
   OnboardingGate,
   ThemeProvider,
 } from "$components"
@@ -35,8 +36,9 @@ function App({ Component, pageProps, renderer }: AppProps) {
           clientId={process.env.NEXT_PUBLIC_AUTH0_CLIENT_ID as string}
           redirectUri={getBaseUrl()}
           cacheLocation="localstorage"
+          audience={process.env.NEXT_PUBLIC_AUTH0_HASURA_AUDIENCE}
         >
-          <ApolloProvider client={apolloClient}>
+          <AuthorizedApolloProvider>
             <ThemeProvider>
               <Provider store={store}>
                 <AuthenticatedApp>
@@ -48,7 +50,7 @@ function App({ Component, pageProps, renderer }: AppProps) {
                 </AuthenticatedApp>
               </Provider>
             </ThemeProvider>
-          </ApolloProvider>
+          </AuthorizedApolloProvider>
         </Auth0Provider>
       </SSRProvider>
     </RendererProvider>
