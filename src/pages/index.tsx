@@ -1,12 +1,11 @@
-import type { GetStaticProps, NextPage } from "next"
-import { SearchMembersDocument, useSearchMembersLazyQuery } from "$queries"
+import type { NextPage } from "next"
+import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
 import { useTitle } from "$hooks"
 import { SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import { useCallback, useEffect, useState } from "react"
 import { Button } from "@fluentui/react-components"
-import { addApolloState, initializeApollo } from "$lib"
 
 const pageSize = 12
 
@@ -124,18 +123,3 @@ export const Overview: NextPage = () => {
 }
 
 export default Overview
-
-export const getServerSideProps: GetStaticProps = async (context) => {
-  const apolloClient = initializeApollo()
-
-  await apolloClient.query({
-    query: SearchMembersDocument,
-    variables: {
-      filter: `%`,
-      count: pageSize,
-      offset: 0,
-    },
-  })
-
-  return addApolloState(apolloClient)
-}
