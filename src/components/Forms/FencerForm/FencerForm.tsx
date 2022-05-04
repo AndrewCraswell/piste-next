@@ -18,7 +18,6 @@ interface IFencerFormProps {
 export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
   form,
 }) => {
-  const { account } = useAccountProfile()
   const { control } = form
 
   return (
@@ -55,7 +54,7 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
           allowTextInput
           isRequired
           style={{ maxWidth: 177 }}
-          defaultValue={dayjs(account.Birthdate).toDate() as unknown as string}
+          defaultValue={new Date() as unknown as string}
           maxDate={new Date()}
           formatDate={(date) => dayjs(date).format("M/DD/YYYY")}
         />
