@@ -92,12 +92,6 @@ export const Profile: NextPage = () => {
           },
         },
       ],
-      // updateQuery: (existing, incoming) => ({
-      //   AssociationMembersLookup: [
-      //     ...existing.AssociationMembersLookup,
-      //     ...incoming.fetchMoreResult?.AssociationMembersLookup!,
-      //   ],
-      // }),
     })
 
   return (
