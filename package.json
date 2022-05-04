@@ -48,7 +48,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "eslint": "8",
-    "eslint-config-next": "12.1.5",
+    "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
     "gql": "^1.1.2",
     "graphql": "^16.4.0",
