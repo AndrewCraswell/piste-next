@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.1",
+    "@apollo/client": "^3.6.2",
     "@auth0/auth0-react": "^1.10.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -26,14 +26,14 @@
     "@stripe/stripe-js": "^1.29.0",
     "dayjs": "^1.11.1",
     "modern-normalize": "^1.1.0",
-    "next": "^12.1.5",
+    "next": "^12.1.6",
     "polished": "^4.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-google-autocomplete": "^2.6.1",
     "react-hook-form": "^7.30.0",
     "react-redux": "^8.0.1",
-    "stripe": "^8.219.0"
+    "stripe": "^8.220.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
@@ -41,7 +41,7 @@
     "@graphql-codegen/typescript": "^2.4.8",
     "@graphql-codegen/typescript-operations": "^2.3.5",
     "@graphql-codegen/typescript-react-apollo": "^3.2.11",
-    "@next/bundle-analyzer": "^12.1.5",
+    "@next/bundle-analyzer": "^12.1.6",
     "@types/node": "17.0.31",
     "@types/react": "^17.0.44",
     "@types/react-dom": "^17.0.16",
