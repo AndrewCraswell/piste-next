@@ -6,7 +6,7 @@ import {
   FormAddressAutocomplete,
 } from "$components"
 import { useDecisionTree } from "$components"
-import { useAccountProfile } from "$hooks"
+import { useAccountProfile, useFormHelpers } from "$hooks"
 import { GoogleAddressResult } from "$types"
 import { Stack, IStackProps, DialogFooter } from "@fluentui/react"
 import { Button, Text } from "@fluentui/react-components"
@@ -20,22 +20,23 @@ const formTokens: Partial<IStackProps> = {
 }
 
 export const ProfileRegistrationForm: React.FunctionComponent = () => {
-  const { handleSubmit, control, setValue } =
-    useForm<ProfileRegistrationFields>()
+  const form = useForm<ProfileRegistrationFields>()
+  const { sanitizePhone, sanitizePostal } = useFormHelpers(form)
   const { back, next } = useDecisionTree()
   const { account } = useAccountProfile()
+
+  const { handleSubmit, control, setValue } = form
 
   const onSubmit: SubmitHandler<ProfileRegistrationFields> = useCallback(
     (values, event) => {
       event?.preventDefault()
 
-      const invalidChars = ["_", "(", ")", " ", "", "-"]
-      values.phoneNumber = sanitizeInput(values.phoneNumber, invalidChars)
-      values.postalCode = sanitizeInput(values.postalCode, invalidChars)
+      values.phoneNumber = sanitizePhone(values.phoneNumber)
+      values.postalCode = sanitizePostal(values.postalCode)
 
       next()
     },
-    [next]
+    [next, sanitizePhone, sanitizePostal]
   )
 
   const setAddressOnAutocomplete = useCallback(
@@ -182,12 +183,5 @@ export const ProfileRegistrationForm: React.FunctionComponent = () => {
         </Button>
       </DialogFooter>
     </form>
-  )
-}
-
-function sanitizeInput(value: string, remove: string[]) {
-  return remove.reduce(
-    (val, char) => (val ? val.replaceAll(char, "") : ""),
-    value
   )
 }

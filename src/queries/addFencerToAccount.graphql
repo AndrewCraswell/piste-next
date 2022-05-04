@@ -1,0 +1,11 @@
+mutation AddFencerToAccount($fencer: Students_insert_input!) {
+  insert_Students_one(object: $fencer) {
+    Oid
+    StudentId
+    FirstName
+    LastName
+    Birthdate
+    Phone
+    Email
+  }
+}

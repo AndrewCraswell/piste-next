@@ -58,7 +58,7 @@ export const PaymentMethodForm: React.FunctionComponent<
       // TODO: Create redux query stores for this
       const customerId = "cus_Kvm41gHVgqbeeS" // TODO: Get this from the Account profile
       const setupIntentResponse = await fetch(
-        `/api/payments/setup-intent/${customerId}`,
+        `/api/payments/setup-intent/${customerId}/`,
         {
           method: "post",
           headers: {

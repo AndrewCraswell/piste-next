@@ -1,5 +1,5 @@
 import type { NextPage } from "next"
-import { initializeApollo } from "$lib/apollo"
+import { addApolloState, initializeApollo } from "$lib"
 import { PageTitle } from "$components"
 import { useTitle } from "$hooks"
 
@@ -16,7 +16,18 @@ export const <FTName | capitalize>: NextPage = () => {
 
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
-  return { props: { initialApolloState: apolloClient.cache.extract() } }
+
+  // TODO: Perform query here
+  // await apolloClient.query({
+  //   query: SearchMembersDocument,
+  //   variables: {
+  //     filter: `%`,
+  //     count: pageSize,
+  //     offset: 0,
+  //   },
+  // })
+
+  return addApolloState(apolloClient)
 }
 
 export default <FTName | capitalize>
