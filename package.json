@@ -7,7 +7,7 @@
     "start": "next start",
     "lint": "next lint --fix",
     "lint:ts": "tsc --project tsconfig.json --pretty --noEmit",
-    "gql": "graphql-codegen --config codegen.js -r dotenv/config",
+    "gql": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen --config codegen.js -r dotenv/config",
     "gql:watch": "yarn gql --watch",
     "prepare": "husky install"
   },
