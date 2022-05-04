@@ -1,7 +1,5 @@
 import type { AppProps } from "next/app"
-import { ApolloProvider } from "@apollo/client"
 import { initializeIcons } from "@fluentui/react"
-import { useApollo } from "$lib"
 import {
   AppShell,
   AuthenticatedApp,
@@ -26,8 +24,6 @@ initializeIcons()
 
 //@ts-ignore
 function App({ Component, pageProps, renderer }: AppProps) {
-  const apolloClient = useApollo(pageProps)
-
   return (
     <RendererProvider renderer={renderer || createDOMRenderer()}>
       <SSRProvider>
@@ -38,7 +34,7 @@ function App({ Component, pageProps, renderer }: AppProps) {
           cacheLocation="localstorage"
           audience={process.env.NEXT_PUBLIC_AUTH0_HASURA_AUDIENCE}
         >
-          <AuthorizedApolloProvider>
+          <AuthorizedApolloProvider pageProps={pageProps}>
             <ThemeProvider>
               <Provider store={store}>
                 <AuthenticatedApp>
