@@ -30,6 +30,7 @@ import styled from "@emotion/styled"
 import { useGetPaymentMethodsQuery } from "$store"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useCallback } from "react"
+import { AccountProfileDocument, useAddFencerToAccountMutation } from "$queries"
 
 const ProfilePivot = styled(Pivot)`
   margin-top: 1rem;
@@ -72,7 +73,7 @@ const PaymentMethodsGrid = styled.div`
 export const Profile: NextPage = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
-
+  const { account } = useAccountProfile()
   const {
     isOpen: isAddFencerDialogOpen,
     onClose: onCloseAddFencerDialog,
@@ -81,8 +82,23 @@ export const Profile: NextPage = () => {
 
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
-
-  const { account } = useAccountProfile()
+  const [addFencerToAccount, { data, loading, error }] =
+    useAddFencerToAccountMutation({
+      refetchQueries: (result) => [
+        {
+          query: AccountProfileDocument,
+          variables: {
+            oid: result.data?.insert_Students_one?.Oid,
+          },
+        },
+      ],
+      // updateQuery: (existing, incoming) => ({
+      //   AssociationMembersLookup: [
+      //     ...existing.AssociationMembersLookup,
+      //     ...incoming.fetchMoreResult?.AssociationMembersLookup!,
+      //   ],
+      // }),
+    })
 
   return (
     <>
@@ -133,8 +149,11 @@ export const Profile: NextPage = () => {
               isOpen={isAddFencerDialogOpen}
               onClose={onCloseAddFencerDialog}
               onSaved={(fencer: IFencerFormFields) => {
-                console.log("SAVED")
-                console.log(fencer)
+                addFencerToAccount({
+                  variables: {
+                    fencer,
+                  },
+                })
                 onCloseAddFencerDialog()
               }}
             />
@@ -156,18 +175,19 @@ export const AddFencerDialog: React.FunctionComponent<
   IAddFencerDialogProps
 > = ({ isOpen, onClose, onSaved }) => {
   const form = useForm<IProfileFormFields>()
-  const { sanitizePhone } = useFormHelpers(form)
+  const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
 
   const { handleSubmit, formState, reset } = form
 
   const onFencerAdded: SubmitHandler<IFencerFormFields> = useCallback(
     (fencer) => {
       fencer.Phone = sanitizePhone(fencer.Phone)
+      fencer.Birthdate = sanitizeDate(fencer.Birthdate)
 
       onSaved(fencer)
       reset()
     },
-    [onSaved, reset, sanitizePhone]
+    [onSaved, reset, sanitizeDate, sanitizePhone]
   )
 
   const onDialogClose = useCallback(() => {

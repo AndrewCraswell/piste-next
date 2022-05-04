@@ -6,8 +6,8 @@ import dayjs from "dayjs"
 
 import { IProfileFormFields } from "./ProfileForm.types"
 import { useAccountProfile, useFormHelpers } from "$hooks"
-import { AddressForm, IAddressFormFields } from "../AddressForm"
-import { FencerForm, IFencerFormFields } from "../FencerForm"
+import { AddressForm } from "../AddressForm"
+import { FencerForm } from "../FencerForm"
 import { FormSection } from "$components"
 
 export const ProfileForm: React.FunctionComponent = () => {

@@ -1,3 +1,4 @@
+import dayjs from "dayjs"
 import { useMemo } from "react"
 import { UseFormReturn } from "react-hook-form"
 
@@ -19,6 +20,7 @@ export function useFormHelpers<T>(form: UseFormReturn<T, object>) {
       sanitizeInput,
       sanitizePhone,
       sanitizePostal,
+      sanitizeDate,
     }),
     [setValue]
   )
@@ -40,13 +42,19 @@ function sanitizeInput(options: { value?: string | null; remove: string[] }) {
 function sanitizePhone(phoneNumber: string | null | undefined) {
   return sanitizeInput({
     value: phoneNumber,
-    remove: ["_", "(", ")", " ", "", "-"],
-  })
+    remove: ["+", "_", "(", ")", " ", "", "-"],
+  }).slice(0, 10)
 }
 
 function sanitizePostal(postalNumber: string | null | undefined) {
   return sanitizeInput({
     value: postalNumber,
     remove: ["_", "(", ")", " ", "", "-"],
-  })
+  }).slice(0, 9)
+}
+
+function sanitizeDate(
+  date: string | number | Date | dayjs.Dayjs | null | undefined
+) {
+  return dayjs(date).format("YYYY-MM-DD")
 }

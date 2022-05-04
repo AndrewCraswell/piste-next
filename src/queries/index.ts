@@ -4315,7 +4315,7 @@ export type AddFencerToAccountMutationVariables = Exact<{
 }>;
 
 
-export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
+export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
 
 export type MemberByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4500,6 +4500,7 @@ export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, Memb
 export const AddFencerToAccountDocument = gql`
     mutation AddFencerToAccount($fencer: Students_insert_input!) {
   insert_Students_one(object: $fencer) {
+    Oid
     StudentId
     FirstName
     LastName
