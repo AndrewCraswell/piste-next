@@ -12,7 +12,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "@apollo/client": "^3.6.1",
+    "@apollo/client": "^3.6.2",
     "@auth0/auth0-react": "^1.10.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -22,7 +22,7 @@
     "@fluentui/react-icons": "^1.1.145",
     "@fluentui/theme-samples": "^8.4.28",
     "@reduxjs/toolkit": "^1.8.1",
-    "@stripe/react-stripe-js": "^1.7.0",
+    "@stripe/react-stripe-js": "^1.7.2",
     "@stripe/stripe-js": "^1.29.0",
     "dayjs": "^1.11.1",
     "modern-normalize": "^1.1.0",
@@ -48,7 +48,7 @@
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.0",
     "eslint": "8",
-    "eslint-config-next": "12.1.5",
+    "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "^8.5.0",
     "gql": "^1.1.2",
     "graphql": "^16.4.0",
