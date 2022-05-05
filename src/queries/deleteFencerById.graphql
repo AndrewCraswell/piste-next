@@ -1,0 +1,5 @@
+mutation DeleteFencerById($fencerId: uniqueidentifier!) {
+  delete_Students_by_pk(StudentId: $fencerId) {
+    StudentId
+  }
+}
