@@ -8,7 +8,7 @@ import {
   GetAccountFencersDocument,
   useGetAccountFencersLazyQuery,
 } from "$queries"
-import { useEffect } from "react"
+import { useCallback, useEffect } from "react"
 
 const FencersGrid = styled.div`
   display: grid;
@@ -41,6 +41,18 @@ export const FencersManager: React.FunctionComponent = () => {
     { data: accountFencers, loading: isLoadingFencers },
   ] = useGetAccountFencersLazyQuery()
 
+  const onFencerSaved = useCallback(
+    (fencer: IFencerFormFields) => {
+      addFencerToAccount({
+        variables: {
+          fencer,
+        },
+      })
+      onCloseEditFencerDialog()
+    },
+    [addFencerToAccount, onCloseEditFencerDialog]
+  )
+
   useEffect(() => {
     if (account.UserId) {
       getAccountFencers({
@@ -66,14 +78,7 @@ export const FencersManager: React.FunctionComponent = () => {
       <EditFencerDialog
         isOpen={isEditFencerDialogOpen}
         onClose={onCloseEditFencerDialog}
-        onSaved={(fencer: IFencerFormFields) => {
-          addFencerToAccount({
-            variables: {
-              fencer,
-            },
-          })
-          onCloseEditFencerDialog()
-        }}
+        onSaved={onFencerSaved}
       />
     </>
   )
