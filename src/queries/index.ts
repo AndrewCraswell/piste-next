@@ -4322,7 +4322,7 @@ export type GetAccountFencersQueryVariables = Exact<{
 }>;
 
 
-export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Birthdate: any, Email?: string | null, Phone?: string | null }> };
+export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
 
 export type MemberByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4535,13 +4535,15 @@ export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerTo
 export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
 export const GetAccountFencersDocument = gql`
     query GetAccountFencers($oid: String!) {
-  Students(where: {Oid: {_eq: $oid}}) {
+  Students(where: {Oid: {_eq: $oid}}, order_by: {FirstName: asc}) {
     StudentId
     FirstName
     LastName
     Birthdate
+    AssociationMemberId
     Email
     Phone
+    AvatarUrl
   }
 }
     `;
