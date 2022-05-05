@@ -11,7 +11,7 @@ export const useAccountProfile = () => {
   })
 
   const account = useMemo(() => {
-    let { AccountStudent, Oid, Address, Dependents, PrimaryStudentId } =
+    let { AccountStudent, Oid, Address, PrimaryStudentId } =
       data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
@@ -34,7 +34,6 @@ export const useAccountProfile = () => {
       ...Address,
       Picture: user?.picture,
       Email: email,
-      Dependents,
     }
   }, [user, data])
 

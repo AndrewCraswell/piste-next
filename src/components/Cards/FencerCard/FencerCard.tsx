@@ -3,7 +3,7 @@ import { Icon, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
 import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
-import { AccountProfileQuery } from "$queries"
+import { AccountProfileQuery, GetAccountFencersQuery } from "$queries"
 import { DetailsItem } from "./components"
 
 const CardHeader = styled.div`
@@ -35,7 +35,7 @@ const fencerActions = [
   },
 ]
 
-export type AccountFencer = AccountProfileQuery["Accounts"][0]["Dependents"][0]
+export type AccountFencer = GetAccountFencersQuery["Students"][0]
 
 export interface IFencerCardProps {
   fencer: AccountFencer
