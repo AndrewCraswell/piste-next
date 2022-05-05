@@ -1,0 +1,10 @@
+query GetAccountFencers($oid: String!) {
+  Students(where: { Oid: { _eq: $oid } }) {
+    StudentId
+    FirstName
+    LastName
+    Birthdate
+    Email
+    Phone
+  }
+}

@@ -4293,7 +4293,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, Dependents: Array<{ __typename?: 'Students', AssociationMemberId?: string | null, AvatarUrl?: string | null, Birthdate: any, Email?: string | null, FirstName: string, LastName: string, Phone?: string | null, StudentId: any }> }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
 
 export type MemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -4316,6 +4316,13 @@ export type AddFencerToAccountMutationVariables = Exact<{
 
 
 export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
+
+export type GetAccountFencersQueryVariables = Exact<{
+  oid: Scalars['String'];
+}>;
+
+
+export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Birthdate: any, Email?: string | null, Phone?: string | null }> };
 
 export type MemberByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4353,16 +4360,6 @@ export const AccountProfileDocument = gql`
       City
       Postal
       State
-    }
-    Dependents {
-      AssociationMemberId
-      AvatarUrl
-      Birthdate
-      Email
-      FirstName
-      LastName
-      Phone
-      StudentId
     }
   }
 }
@@ -4536,6 +4533,46 @@ export function useAddFencerToAccountMutation(baseOptions?: ApolloReactHooks.Mut
 export type AddFencerToAccountMutationHookResult = ReturnType<typeof useAddFencerToAccountMutation>;
 export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerToAccountMutation>;
 export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
+export const GetAccountFencersDocument = gql`
+    query GetAccountFencers($oid: String!) {
+  Students(where: {Oid: {_eq: $oid}}) {
+    StudentId
+    FirstName
+    LastName
+    Birthdate
+    Email
+    Phone
+  }
+}
+    `;
+
+/**
+ * __useGetAccountFencersQuery__
+ *
+ * To run a query within a React component, call `useGetAccountFencersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountFencersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountFencersQuery({
+ *   variables: {
+ *      oid: // value for 'oid'
+ *   },
+ * });
+ */
+export function useGetAccountFencersQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetAccountFencersQuery, GetAccountFencersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetAccountFencersQuery, GetAccountFencersQueryVariables>(GetAccountFencersDocument, options);
+      }
+export function useGetAccountFencersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetAccountFencersQuery, GetAccountFencersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetAccountFencersQuery, GetAccountFencersQueryVariables>(GetAccountFencersDocument, options);
+        }
+export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFencersQuery>;
+export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
+export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
 export const MemberByIdDocument = gql`
     query MemberById($id: String!) {
   member: AssociationMembers(where: {AssociationMemberId: {_eq: $id}}) {

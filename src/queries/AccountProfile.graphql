@@ -17,15 +17,5 @@ query AccountProfile($oid: String!) {
       Postal
       State
     }
-    Dependents {
-      AssociationMemberId
-      AvatarUrl
-      Birthdate
-      Email
-      FirstName
-      LastName
-      Phone
-      StudentId
-    }
   }
 }
