@@ -1,5 +1,6 @@
 query GetAccountFencers($oid: String!) {
   Students(where: { Oid: { _eq: $oid } }, order_by: { FirstName: asc }) {
+    Oid
     StudentId
     FirstName
     LastName

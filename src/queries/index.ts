@@ -4317,12 +4317,19 @@ export type AddFencerToAccountMutationVariables = Exact<{
 
 export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
 
+export type DeleteFencerByIdMutationVariables = Exact<{
+  fencerId: Scalars['uniqueidentifier'];
+}>;
+
+
+export type DeleteFencerByIdMutation = { __typename?: 'mutation_root', delete_Students_by_pk?: { __typename?: 'Students', StudentId: any } | null };
+
 export type GetAccountFencersQueryVariables = Exact<{
   oid: Scalars['String'];
 }>;
 
 
-export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
+export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
 
 export type MemberByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4533,9 +4540,43 @@ export function useAddFencerToAccountMutation(baseOptions?: ApolloReactHooks.Mut
 export type AddFencerToAccountMutationHookResult = ReturnType<typeof useAddFencerToAccountMutation>;
 export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerToAccountMutation>;
 export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
+export const DeleteFencerByIdDocument = gql`
+    mutation DeleteFencerById($fencerId: uniqueidentifier!) {
+  delete_Students_by_pk(StudentId: $fencerId) {
+    StudentId
+  }
+}
+    `;
+export type DeleteFencerByIdMutationFn = Apollo.MutationFunction<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
+
+/**
+ * __useDeleteFencerByIdMutation__
+ *
+ * To run a mutation, you first call `useDeleteFencerByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteFencerByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteFencerByIdMutation, { data, loading, error }] = useDeleteFencerByIdMutation({
+ *   variables: {
+ *      fencerId: // value for 'fencerId'
+ *   },
+ * });
+ */
+export function useDeleteFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>(DeleteFencerByIdDocument, options);
+      }
+export type DeleteFencerByIdMutationHookResult = ReturnType<typeof useDeleteFencerByIdMutation>;
+export type DeleteFencerByIdMutationResult = Apollo.MutationResult<DeleteFencerByIdMutation>;
+export type DeleteFencerByIdMutationOptions = Apollo.BaseMutationOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
 export const GetAccountFencersDocument = gql`
     query GetAccountFencers($oid: String!) {
   Students(where: {Oid: {_eq: $oid}}, order_by: {FirstName: asc}) {
+    Oid
     StudentId
     FirstName
     LastName

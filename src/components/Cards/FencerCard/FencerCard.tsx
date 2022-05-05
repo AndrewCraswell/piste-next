@@ -1,10 +1,15 @@
 import { VerticalCard } from "$components/Cards/VerticalCard"
-import { Icon, Stack } from "@fluentui/react"
+import { IButtonProps, Icon, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
 import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
-import { AccountProfileQuery, GetAccountFencersQuery } from "$queries"
+import {
+  GetAccountFencersDocument,
+  GetAccountFencersQuery,
+  useDeleteFencerByIdMutation,
+} from "$queries"
 import { DetailsItem } from "./components"
+import { useCallback, useMemo } from "react"
 
 const CardHeader = styled.div`
   position: relative;
@@ -22,18 +27,6 @@ const BadgeContainer = styled.div`
 const DetailsStack = styled(Stack)`
   margin: 1.5rem 0 1rem 0;
 `
-
-const fencerActions = [
-  {
-    iconProps: { iconName: "Edit" },
-  },
-  {
-    iconProps: { iconName: "ContactLink" },
-  },
-  {
-    iconProps: { iconName: "Delete" },
-  },
-]
 
 export type AccountFencer = GetAccountFencersQuery["Students"][0]
 
@@ -55,7 +48,20 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
     Phone,
     AvatarUrl,
     StudentId,
+    Oid,
   } = fencer
+
+  const [deleteFencer, { loading: isDeletingFencer }] =
+    useDeleteFencerByIdMutation({
+      refetchQueries: [
+        {
+          query: GetAccountFencersDocument,
+          variables: {
+            oid: Oid,
+          },
+        },
+      ],
+    })
 
   const fullName = `${FirstName} ${LastName}`
   const formattedBirthDate = dayjs(Birthdate).format("MMM D, YYYY")
@@ -66,6 +72,30 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   const isLinked = !!AssociationMemberId
   const isPrimaryFencer = StudentId === primaryFencerId
   const memberId = `#${AssociationMemberId}`
+
+  const onEditFencerClicked = useCallback(() => {}, [])
+  const onDeleteFencerClicked = useCallback(() => {
+    deleteFencer({
+      variables: { fencerId: StudentId },
+    })
+  }, [deleteFencer, StudentId])
+  const onEditAssociationClicked = useCallback(() => {}, [])
+
+  const fencerActions: IButtonProps[] = useMemo(
+    () => [
+      {
+        iconProps: { iconName: "Edit" },
+      },
+      {
+        iconProps: { iconName: "ContactLink" },
+      },
+      {
+        iconProps: { iconName: "Delete" },
+        onClick: onDeleteFencerClicked,
+      },
+    ],
+    [onDeleteFencerClicked]
+  )
 
   return (
     <VerticalCard actions={fencerActions}>
