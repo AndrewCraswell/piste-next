@@ -1,18 +1,9 @@
 import styled from "@emotion/styled"
 
-import {
-  AddFencerCard,
-  FencerCard,
-  IFencerFormFields,
-  EditFencerDialog,
-} from "$components"
+import { AddFencerCard, FencerCard, EditFencerDialog } from "$components"
 import { useAccountProfile, useDisclosure } from "$hooks"
-import {
-  useAddFencerToAccountMutation,
-  GetAccountFencersDocument,
-  useGetAccountFencersLazyQuery,
-} from "$queries"
-import { useCallback, useEffect } from "react"
+import { useGetAccountFencersLazyQuery } from "$queries"
+import { useEffect } from "react"
 
 const FencersGrid = styled.div`
   display: grid;
