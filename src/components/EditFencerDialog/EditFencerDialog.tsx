@@ -5,13 +5,20 @@ import {
   PrimaryButton,
 } from "@fluentui/react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useCallback } from "react"
+import { useCallback, useMemo } from "react"
 
 import { FencerForm, IProfileFormFields, IFencerFormFields } from "$components"
-import { useFormHelpers } from "$hooks"
+import { useAccountProfile, useFormHelpers } from "$hooks"
+import {
+  GetAccountFencersDocument,
+  useAddFencerToAccountMutation,
+  useUpdateFencerByIdMutation,
+} from "$queries"
+import { AccountFencer } from "$types"
+import dayjs from "dayjs"
 
 export interface IEditFencerDialogProps {
-  fencer?: IFencerFormFields
+  fencer?: AccountFencer
   isOpen?: boolean
   onSaved: (fencer: IFencerFormFields) => void
   onClose: () => void
@@ -20,25 +27,91 @@ export interface IEditFencerDialogProps {
 export const EditFencerDialog: React.FunctionComponent<
   IEditFencerDialogProps
 > = ({ isOpen, onClose, onSaved, fencer }) => {
-  const form = useForm<IProfileFormFields>({ defaultValues: fencer })
-  const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
-
-  const { handleSubmit, formState, reset } = form
-
-  const onFencerSaved: SubmitHandler<IFencerFormFields> = useCallback(
-    (fencer) => {
-      fencer.Phone = sanitizePhone(fencer.Phone)
-      fencer.Birthdate = sanitizeDate(fencer.Birthdate)
-
-      onSaved(fencer)
-    },
-    [onSaved, sanitizeDate, sanitizePhone]
+  const defaultFormValues = useMemo(
+    () => ({
+      ...fencer,
+      Birthdate: dayjs(fencer?.Birthdate).toDate(),
+      Email: fencer?.Email ?? undefined,
+      Phone: fencer?.Phone ?? undefined,
+    }),
+    [fencer]
   )
 
-  const onDialogClose = useCallback(() => {
+  const form = useForm<IProfileFormFields>({ defaultValues: defaultFormValues })
+  const { handleSubmit, formState, reset, getValues } = form
+  const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
+  const {
+    account: { UserId },
+  } = useAccountProfile()
+
+  const [addFencerToAccount, { loading: isAddingFencer }] =
+    useAddFencerToAccountMutation({
+      refetchQueries: (result) => [
+        {
+          query: GetAccountFencersDocument,
+          variables: {
+            oid: result.data?.insert_Students_one?.Oid,
+          },
+        },
+      ],
+    })
+
+  const [editFencer, { loading: isSavingFencer }] = useUpdateFencerByIdMutation(
+    {
+      refetchQueries: [
+        {
+          query: GetAccountFencersDocument,
+          variables: {
+            oid: UserId,
+          },
+        },
+      ],
+      onCompleted: () => {
+        onClose()
+        reset(getValues())
+      },
+    }
+  )
+
+  const onCancelClicked = useCallback(() => {
     onClose()
-    reset(fencer)
-  }, [fencer, onClose, reset])
+    reset(defaultFormValues)
+  }, [defaultFormValues, onClose, reset])
+
+  const onFencerSaved: SubmitHandler<IFencerFormFields> = useCallback(
+    ({ FirstName, LastName, Birthdate, Phone, Email }) => {
+      const newFencer = {
+        FirstName,
+        LastName,
+        Birthdate: sanitizeDate(Birthdate),
+        Phone: sanitizePhone(Phone),
+        Email,
+      }
+
+      if (fencer?.StudentId) {
+        editFencer({
+          variables: {
+            fencerId: fencer?.StudentId,
+            changes: newFencer,
+          },
+        })
+      } else {
+        addFencerToAccount({
+          variables: { fencer: newFencer },
+        })
+      }
+
+      onSaved(newFencer)
+    },
+    [
+      addFencerToAccount,
+      editFencer,
+      fencer?.StudentId,
+      onSaved,
+      sanitizeDate,
+      sanitizePhone,
+    ]
+  )
 
   return (
     <Dialog
@@ -48,7 +121,7 @@ export const EditFencerDialog: React.FunctionComponent<
         subText:
           "Add a new fencer to your profile. This student can be enrolled in lessons or classes, and be linked to an official association membership.",
         showCloseButton: true,
-        onDismiss: onDialogClose,
+        onDismiss: onCancelClicked,
         closeButtonAriaLabel: "Close",
       }}
       maxWidth={500}
@@ -60,7 +133,7 @@ export const EditFencerDialog: React.FunctionComponent<
           <PrimaryButton type="submit" disabled={!formState.isDirty}>
             Save
           </PrimaryButton>
-          <DefaultButton onClick={onDialogClose}>Cancel</DefaultButton>
+          <DefaultButton onClick={onCancelClicked}>Cancel</DefaultButton>
         </DialogFooter>
       </form>
     </Dialog>

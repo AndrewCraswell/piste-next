@@ -10,15 +10,14 @@ import {
 } from "@fluentui/react"
 import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
+import { useCallback, useMemo } from "react"
 
 import { EditFencerDialog, VerticalCard } from "$components"
 import {
   GetAccountFencersDocument,
   useDeleteFencerByIdMutation,
-  useUpdateFencerByIdMutation,
 } from "$queries"
 import { DetailsItem } from "./components"
-import { useCallback, useMemo } from "react"
 import { useDisclosure } from "$hooks"
 import {
   CardHeader,
@@ -28,7 +27,7 @@ import {
   SemiboldText,
   DialogSpinner,
 } from "./FencerCard.styles"
-import { AccountFencer } from "./FencerCard.types"
+import { AccountFencer } from "$types"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
@@ -76,20 +75,6 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       onCompleted: onDeleteDialogClose,
     })
 
-  const [editFencer, { loading: isSavingFencer }] = useUpdateFencerByIdMutation(
-    {
-      refetchQueries: [
-        {
-          query: GetAccountFencersDocument,
-          variables: {
-            oid: Oid,
-          },
-        },
-      ],
-      onCompleted: onCloseEditFencerDialog,
-    }
-  )
-
   const fullName = `${FirstName} ${LastName}`
   const formattedBirthDate = dayjs(Birthdate).format("MMM D, YYYY")
   const age = new Date().getFullYear() - dayjs(Birthdate).year()
@@ -100,17 +85,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   const isPrimaryFencer = StudentId === primaryFencerId
   const memberId = `#${AssociationMemberId}`
 
-  const onEditFencerClicked = useCallback(
-    (fencer) => {
-      editFencer({
-        variables: {
-          fencerId: StudentId,
-          changes: fencer,
-        },
-      })
-    },
-    [StudentId, editFencer]
-  )
+  const onEditFencerClicked = useCallback((fencer) => {}, [])
 
   const onDeleteFencerConfirmed = useCallback(() => {
     deleteFencer({
@@ -253,13 +228,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
           </DialogFooter>
         </Dialog>
         <EditFencerDialog
-          fencer={{
-            FirstName,
-            LastName,
-            Birthdate: dayjs(Birthdate).toDate(),
-            Email: Email ?? undefined,
-            Phone: Phone ?? undefined,
-          }}
+          fencer={fencer}
           isOpen={isEditFencerDialogOpen}
           onClose={onCloseEditFencerDialog}
           onSaved={onEditFencerClicked}

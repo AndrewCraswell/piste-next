@@ -28,34 +28,10 @@ export const FencersManager: React.FunctionComponent = () => {
     onOpen: onOpenEditFencerDialog,
   } = useDisclosure(false)
 
-  const [addFencerToAccount, { loading: isAddingFencer }] =
-    useAddFencerToAccountMutation({
-      refetchQueries: (result) => [
-        {
-          query: GetAccountFencersDocument,
-          variables: {
-            oid: result.data?.insert_Students_one?.Oid,
-          },
-        },
-      ],
-    })
-
   const [
     getAccountFencers,
     { data: accountFencers, loading: isLoadingFencers },
   ] = useGetAccountFencersLazyQuery()
-
-  const onFencerSaved = useCallback(
-    (fencer: IFencerFormFields) => {
-      addFencerToAccount({
-        variables: {
-          fencer,
-        },
-      })
-      onCloseEditFencerDialog()
-    },
-    [addFencerToAccount, onCloseEditFencerDialog]
-  )
 
   useEffect(() => {
     if (account.UserId) {
@@ -80,8 +56,10 @@ export const FencersManager: React.FunctionComponent = () => {
       <EditFencerDialog
         isOpen={isEditFencerDialogOpen}
         onClose={onCloseEditFencerDialog}
-        onSaved={onFencerSaved}
+        onSaved={onCloseEditFencerDialog}
       />
     </>
   )
 }
+
+// TODO: Move EditFencerDialog into the AddFencerCard component
