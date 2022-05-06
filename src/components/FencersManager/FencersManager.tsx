@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
-import { AddFencerCard, FencerCard, EditFencerDialog } from "$components"
-import { useAccountProfile, useDisclosure } from "$hooks"
+import { AddFencerCard, FencerCard } from "$components"
+import { useAccountProfile } from "$hooks"
 import { useGetAccountFencersLazyQuery } from "$queries"
 import { useEffect } from "react"
 
@@ -13,11 +13,6 @@ const FencersGrid = styled.div`
 
 export const FencersManager: React.FunctionComponent = () => {
   const { account } = useAccountProfile()
-  const {
-    isOpen: isEditFencerDialogOpen,
-    onClose: onCloseEditFencerDialog,
-    onOpen: onOpenEditFencerDialog,
-  } = useDisclosure(false)
 
   const [
     getAccountFencers,
@@ -42,15 +37,8 @@ export const FencersManager: React.FunctionComponent = () => {
         ).map((fencer) => (
           <FencerCard key={fencer.StudentId} fencer={fencer} />
         ))}
-        <AddFencerCard onClick={onOpenEditFencerDialog} />
+        <AddFencerCard />
       </FencersGrid>
-      <EditFencerDialog
-        isOpen={isEditFencerDialogOpen}
-        onClose={onCloseEditFencerDialog}
-        onSaved={onCloseEditFencerDialog}
-      />
     </>
   )
 }
-
-// TODO: Move EditFencerDialog into the AddFencerCard component

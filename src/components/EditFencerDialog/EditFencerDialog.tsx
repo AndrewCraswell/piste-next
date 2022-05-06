@@ -99,6 +99,7 @@ export const EditFencerDialog: React.FunctionComponent<
         addFencerToAccount({
           variables: { fencer: newFencer },
         })
+        reset({})
       }
 
       onSaved(newFencer)
@@ -108,6 +109,7 @@ export const EditFencerDialog: React.FunctionComponent<
       editFencer,
       fencer?.StudentId,
       onSaved,
+      reset,
       sanitizeDate,
       sanitizePhone,
     ]
