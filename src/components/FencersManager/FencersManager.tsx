@@ -70,12 +70,10 @@ export const FencersManager: React.FunctionComponent = () => {
   return (
     <>
       <FencersGrid>
-        {accountFencers?.Students?.map((fencer) => (
-          <FencerCard
-            key={fencer.StudentId}
-            fencer={fencer}
-            primaryFencerId={account.PrimaryStudentId}
-          />
+        {accountFencers?.Students?.filter(
+          (f) => f.StudentId !== account.PrimaryStudentId
+        ).map((fencer) => (
+          <FencerCard key={fencer.StudentId} fencer={fencer} />
         ))}
         <AddFencerCard onClick={onOpenEditFencerDialog} />
       </FencersGrid>

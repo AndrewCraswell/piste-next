@@ -32,7 +32,7 @@ import { AccountFencer } from "./FencerCard.types"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
-  primaryFencerId: string
+  primaryFencerId?: string
 }
 
 export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
