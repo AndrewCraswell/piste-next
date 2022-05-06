@@ -1,8 +1,12 @@
 import styled from "@emotion/styled"
 
-import { AddFencerCard, FencerCard, IFencerFormFields } from "$components"
+import {
+  AddFencerCard,
+  FencerCard,
+  IFencerFormFields,
+  EditFencerDialog,
+} from "$components"
 import { useAccountProfile, useDisclosure } from "$hooks"
-import { EditFencerDialog } from "./components"
 import {
   useAddFencerToAccountMutation,
   GetAccountFencersDocument,

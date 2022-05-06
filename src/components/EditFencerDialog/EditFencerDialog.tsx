@@ -11,6 +11,7 @@ import { FencerForm, IProfileFormFields, IFencerFormFields } from "$components"
 import { useFormHelpers } from "$hooks"
 
 export interface IEditFencerDialogProps {
+  fencer?: IFencerFormFields
   isOpen?: boolean
   onSaved: (fencer: IFencerFormFields) => void
   onClose: () => void
@@ -18,27 +19,26 @@ export interface IEditFencerDialogProps {
 
 export const EditFencerDialog: React.FunctionComponent<
   IEditFencerDialogProps
-> = ({ isOpen, onClose, onSaved }) => {
-  const form = useForm<IProfileFormFields>()
+> = ({ isOpen, onClose, onSaved, fencer }) => {
+  const form = useForm<IProfileFormFields>({ defaultValues: fencer })
   const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
 
   const { handleSubmit, formState, reset } = form
 
-  const onFencerAdded: SubmitHandler<IFencerFormFields> = useCallback(
+  const onFencerSaved: SubmitHandler<IFencerFormFields> = useCallback(
     (fencer) => {
       fencer.Phone = sanitizePhone(fencer.Phone)
       fencer.Birthdate = sanitizeDate(fencer.Birthdate)
 
       onSaved(fencer)
-      reset()
     },
-    [onSaved, reset, sanitizeDate, sanitizePhone]
+    [onSaved, sanitizeDate, sanitizePhone]
   )
 
   const onDialogClose = useCallback(() => {
-    reset()
     onClose()
-  }, [onClose, reset])
+    reset(fencer)
+  }, [fencer, onClose, reset])
 
   return (
     <Dialog
@@ -48,11 +48,12 @@ export const EditFencerDialog: React.FunctionComponent<
         subText:
           "Add a new fencer to your profile. This student can be enrolled in lessons or classes, and be linked to an official association membership.",
         showCloseButton: true,
-        onDismiss: onClose,
+        onDismiss: onDialogClose,
+        closeButtonAriaLabel: "Close",
       }}
       maxWidth={500}
     >
-      <form onSubmit={handleSubmit(onFencerAdded)}>
+      <form onSubmit={handleSubmit(onFencerSaved)}>
         <FencerForm form={form} />
 
         <DialogFooter>

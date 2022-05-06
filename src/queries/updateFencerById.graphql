@@ -1,0 +1,16 @@
+mutation UpdateFencerById(
+  $fencerId: uniqueidentifier!
+  $changes: Students_set_input!
+) {
+  update_Students_by_pk(pk_columns: { StudentId: $fencerId }, _set: $changes) {
+    FirstName
+    LastName
+    Birthdate
+    Phone
+    Email
+    AvatarUrl
+    AssociationMemberId
+    StudentId
+    Oid
+  }
+}

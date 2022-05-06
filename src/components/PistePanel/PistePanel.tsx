@@ -6,3 +6,6 @@ export const PistePanel = styled(Panel)`
     top: 48px;
   }
 `
+PistePanel.defaultProps = {
+  closeButtonAriaLabel: "Close",
+}

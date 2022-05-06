@@ -11,10 +11,11 @@ import {
 import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
 
-import { VerticalCard } from "$components"
+import { EditFencerDialog, VerticalCard } from "$components"
 import {
   GetAccountFencersDocument,
   useDeleteFencerByIdMutation,
+  useUpdateFencerByIdMutation,
 } from "$queries"
 import { DetailsItem } from "./components"
 import { useCallback, useMemo } from "react"
@@ -56,6 +57,12 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
     onClose: onDeleteDialogClose,
   } = useDisclosure(false)
 
+  const {
+    isOpen: isEditFencerDialogOpen,
+    onClose: onCloseEditFencerDialog,
+    onOpen: onOpenEditFencerDialog,
+  } = useDisclosure(false)
+
   const [deleteFencer, { loading: isDeletingFencer }] =
     useDeleteFencerByIdMutation({
       refetchQueries: [
@@ -69,6 +76,20 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       onCompleted: onDeleteDialogClose,
     })
 
+  const [editFencer, { loading: isSavingFencer }] = useUpdateFencerByIdMutation(
+    {
+      refetchQueries: [
+        {
+          query: GetAccountFencersDocument,
+          variables: {
+            oid: Oid,
+          },
+        },
+      ],
+      onCompleted: onCloseEditFencerDialog,
+    }
+  )
+
   const fullName = `${FirstName} ${LastName}`
   const formattedBirthDate = dayjs(Birthdate).format("MMM D, YYYY")
   const age = new Date().getFullYear() - dayjs(Birthdate).year()
@@ -79,12 +100,24 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   const isPrimaryFencer = StudentId === primaryFencerId
   const memberId = `#${AssociationMemberId}`
 
-  const onEditFencerClicked = useCallback(() => {}, [])
+  const onEditFencerClicked = useCallback(
+    (fencer) => {
+      editFencer({
+        variables: {
+          fencerId: StudentId,
+          changes: fencer,
+        },
+      })
+    },
+    [StudentId, editFencer]
+  )
+
   const onDeleteFencerConfirmed = useCallback(() => {
     deleteFencer({
       variables: { fencerId: StudentId },
     })
   }, [deleteFencer, StudentId])
+
   const onEditAssociationClicked = useCallback(() => {}, [])
 
   const fencerActions = useMemo(
@@ -94,7 +127,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         !isPrimaryFencer
           ? {
               iconProps: { iconName: "Edit" },
-              onClick: onEditAssociationClicked,
+              onClick: onOpenEditFencerDialog,
             }
           : undefined,
         {
@@ -109,7 +142,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
             }
           : undefined,
       ].filter(Boolean) as IButtonProps[],
-    [isPrimaryFencer, onEditAssociationClicked, onDeleteDialogOpen]
+    [isPrimaryFencer, onOpenEditFencerDialog, onDeleteDialogOpen]
   )
 
   return (
@@ -188,6 +221,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       </VerticalCard>
 
       <EmbedDialog>
+        {/* TODO: Migrate this into ConfirmFencerDeleteDialog component */}
         <Dialog
           hidden={!isDeleteDialogOpen}
           dialogContentProps={{
@@ -199,6 +233,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
                 <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
               </span>
             ) as unknown as string,
+            closeButtonAriaLabel: "Close",
           }}
         >
           <DialogFooter>
@@ -217,6 +252,18 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
             </DefaultButton>
           </DialogFooter>
         </Dialog>
+        <EditFencerDialog
+          fencer={{
+            FirstName,
+            LastName,
+            Birthdate: dayjs(Birthdate).toDate(),
+            Email: Email ?? undefined,
+            Phone: Phone ?? undefined,
+          }}
+          isOpen={isEditFencerDialogOpen}
+          onClose={onCloseEditFencerDialog}
+          onSaved={onEditFencerClicked}
+        />
       </EmbedDialog>
     </>
   )
