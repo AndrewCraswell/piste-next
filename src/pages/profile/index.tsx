@@ -1,5 +1,12 @@
 import type { NextPage } from "next"
 import { Pivot, PivotItem } from "@fluentui/react"
+import {
+  TabList,
+  Tab,
+  TabValue,
+  SelectTabData,
+  SelectTabEvent,
+} from "@fluentui/react-components/unstable"
 import styled from "@emotion/styled"
 
 import {
@@ -12,13 +19,12 @@ import {
 } from "$components"
 import { useTitle } from "$hooks"
 import { useGetPaymentMethodsQuery } from "$store"
+import { useState } from "react"
 
-const ProfilePivot = styled(Pivot)`
-  margin-top: 1rem;
+// TODO: Move payments logic into a separate component
 
-  div[role="tabpanel"] {
-    margin-top: 1rem;
-  }
+const ProfileTabs = styled(TabList)`
+  margin-bottom: 1rem;
 `
 
 const PaymentMethodsGrid = styled.div`
@@ -34,17 +40,28 @@ export const Profile: NextPage = () => {
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
 
+  const [selectedTab, setSelectedTab] = useState<TabValue>("contact")
+  const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
+    setSelectedTab(data.value)
+  }
+
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
 
-      <ProfilePivot>
-        <PivotItem headerText="Contact">
-          <ProfileForm />
-        </PivotItem>
-        <PivotItem headerText="Account"></PivotItem>
-        <PivotItem headerText="Notifications"></PivotItem>
-        <PivotItem headerText="Payment">
+      <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
+        <Tab value="contact">Contact</Tab>
+        {/* <Tab value="account">Account</Tab>
+        <Tab value="notifications">Notifications</Tab> */}
+        <Tab value="payment">Payment</Tab>
+        <Tab value="fencers">Fencers</Tab>
+      </ProfileTabs>
+
+      {selectedTab === "contact" && <ProfileForm />}
+      {selectedTab === "account" && <></>}
+      {selectedTab === "notifications" && <></>}
+      {selectedTab === "payment" && (
+        <>
           <PaymentMethodsGrid>
             {paymentMethods?.map(({ card, id, billing_details }, index) => {
               if (card) {
@@ -62,15 +79,12 @@ export const Profile: NextPage = () => {
               }
             })}
           </PaymentMethodsGrid>
-
           <ElementsProvider>
             <PaymentMethodForm />
           </ElementsProvider>
-        </PivotItem>
-        <PivotItem headerText="Fencers">
-          <FencersManager />
-        </PivotItem>
-      </ProfilePivot>
+        </>
+      )}
+      {selectedTab === "fencers" && <FencersManager />}
     </>
   )
 }
