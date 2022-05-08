@@ -16,11 +16,12 @@ import {
 } from "$queries"
 import { AccountFencer } from "$types"
 import dayjs from "dayjs"
+import { Button, FluentProvider } from "@fluentui/react-components"
 
 export interface IEditFencerDialogProps {
   fencer?: AccountFencer
   isOpen?: boolean
-  onSaved: (fencer: IFencerFormFields) => void
+  onSaved?: (fencer: IFencerFormFields) => void
   onClose: () => void
 }
 
@@ -102,7 +103,9 @@ export const EditFencerDialog: React.FunctionComponent<
         reset({})
       }
 
-      onSaved(newFencer)
+      if (onSaved) {
+        onSaved(newFencer)
+      }
     },
     [
       addFencerToAccount,
@@ -128,16 +131,22 @@ export const EditFencerDialog: React.FunctionComponent<
       }}
       maxWidth={500}
     >
-      <form onSubmit={handleSubmit(onFencerSaved)}>
-        <FencerForm form={form} />
+      <FluentProvider>
+        <form onSubmit={handleSubmit(onFencerSaved)}>
+          <FencerForm form={form} />
 
-        <DialogFooter>
-          <PrimaryButton type="submit" disabled={!formState.isDirty}>
-            Save
-          </PrimaryButton>
-          <DefaultButton onClick={onCancelClicked}>Cancel</DefaultButton>
-        </DialogFooter>
-      </form>
+          <DialogFooter>
+            <Button
+              appearance="primary"
+              type="submit"
+              disabled={!formState.isDirty}
+            >
+              Save
+            </Button>
+            <Button onClick={onCancelClicked}>Cancel</Button>
+          </DialogFooter>
+        </form>
+      </FluentProvider>
     </Dialog>
   )
 }

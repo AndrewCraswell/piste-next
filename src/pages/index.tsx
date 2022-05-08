@@ -92,16 +92,16 @@ export const Overview: NextPage = () => {
             details={{
               fullName: member.FullName,
               secondaryText:
-                member?.Club1Name ||
-                member?.Club2Name ||
-                member?.Division ||
-                "",
-              memberId: member?.AssociationMemberId,
-              membershipExpiration: member?.Expiration,
-              birthdate: member?.Birthdate,
-              foilRating: member?.Foil,
-              epeeRating: member?.Epee,
-              sabreRating: member?.Saber,
+                member.Club1Name ||
+                member.Club2Name ||
+                member.Division ||
+                member.Birthdate.toString(),
+              memberId: member.AssociationMemberId,
+              membershipExpiration: member.Expiration,
+              birthdate: member.Birthdate,
+              foilRating: member.Foil,
+              epeeRating: member.Epee,
+              sabreRating: member.Saber,
             }}
           />
         ))}
