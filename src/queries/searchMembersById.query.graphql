@@ -1,0 +1,23 @@
+query SearchMembersById($id: String!) {
+  AssociationMembersLookup(
+    where: { _or: [{ AssociationMemberId: { _eq: $id } }] }
+  ) {
+    FullName
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    AssociationMemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
+    Students {
+      Oid
+      StudentId
+    }
+  }
+}

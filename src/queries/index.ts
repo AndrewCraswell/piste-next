@@ -4347,6 +4347,13 @@ export type SearchMembersQueryVariables = Exact<{
 
 export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string }> }> };
 
+export type SearchMembersByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type SearchMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
+
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
   changes: Students_Set_Input;
@@ -4723,6 +4730,57 @@ export function useSearchMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
 export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQuery>;
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
+export const SearchMembersByIdDocument = gql`
+    query SearchMembersById($id: String!) {
+  AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
+    FullName
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    AssociationMemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
+    Students {
+      Oid
+      StudentId
+    }
+  }
+}
+    `;
+
+/**
+ * __useSearchMembersByIdQuery__
+ *
+ * To run a query within a React component, call `useSearchMembersByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchMembersByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchMembersByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useSearchMembersByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>(SearchMembersByIdDocument, options);
+      }
+export function useSearchMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>(SearchMembersByIdDocument, options);
+        }
+export type SearchMembersByIdQueryHookResult = ReturnType<typeof useSearchMembersByIdQuery>;
+export type SearchMembersByIdLazyQueryHookResult = ReturnType<typeof useSearchMembersByIdLazyQuery>;
+export type SearchMembersByIdQueryResult = Apollo.QueryResult<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>;
 export const UpdateFencerByIdDocument = gql`
     mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
   update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {

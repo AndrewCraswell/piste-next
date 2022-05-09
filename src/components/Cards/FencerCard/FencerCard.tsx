@@ -250,6 +250,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
             console.log(member)
           }}
           fencerId={StudentId}
+          associationId={AssociationMemberId || undefined}
         />
       </EmbedDialog>
     </>

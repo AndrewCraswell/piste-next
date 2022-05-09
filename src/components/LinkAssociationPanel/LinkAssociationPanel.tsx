@@ -3,13 +3,17 @@ import {
   MemberDetailsCard,
   PistePanel,
   MemberLookupField,
+  associationMemberToPersona,
 } from "$components"
-import { useUpdateFencerByIdMutation } from "$queries"
+import {
+  useSearchMembersByIdQuery,
+  useUpdateFencerByIdMutation,
+} from "$queries"
 import { AssociationMember } from "$types"
 import styled from "@emotion/styled"
 import { DialogFooter } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
-import { useState, useCallback } from "react"
+import { useState, useCallback, useEffect } from "react"
 
 // TODO: Move this PanelFooter into another component file
 export const PanelFooter = styled(DialogFooter)`
@@ -24,6 +28,7 @@ export const PanelFooter = styled(DialogFooter)`
 
 export interface ILinkAssociationPanelProps {
   fencerId: string
+  associationId?: string
   isOpen?: boolean
   onSaved: (membershipId?: string) => void
   onClose: () => void
@@ -33,10 +38,22 @@ export interface ILinkAssociationPanelProps {
 
 export const LinkAssociationPanel: React.FunctionComponent<
   ILinkAssociationPanelProps
-> = ({ fencerId, onClose, onSaved, isOpen }) => {
+> = ({ associationId, fencerId, onClose, onSaved, isOpen }) => {
   const [member, setMember] = useState<AssociationMember | undefined>()
 
   const [linkAccount] = useUpdateFencerByIdMutation()
+  const { data } = useSearchMembersByIdQuery({
+    variables: {
+      id: associationId!,
+    },
+    skip: !associationId,
+    onCompleted: (data) => {
+      const member = data.AssociationMembersLookup[0]
+      if (member) {
+        setMember(member)
+      }
+    },
+  })
 
   const onLinkClicked = useCallback(() => {
     linkAccount({
@@ -76,6 +93,13 @@ export const LinkAssociationPanel: React.FunctionComponent<
     [onClose, onLinkClicked]
   )
 
+  useEffect(() => {
+    if (associationId) {
+    }
+  }, [associationId])
+
+  const preselectedPersonas = member ? [associationMemberToPersona(member)] : []
+
   return (
     <PistePanel
       headerText="Link association account"
@@ -92,7 +116,11 @@ export const LinkAssociationPanel: React.FunctionComponent<
             features.
           </Text>
 
-          <MemberLookupField itemLimit={1} onChange={onMemberLookupChange} />
+          <MemberLookupField
+            defaultSelectedItems={preselectedPersonas}
+            itemLimit={1}
+            onChange={onMemberLookupChange}
+          />
 
           {member && (
             <MemberDetailsCard

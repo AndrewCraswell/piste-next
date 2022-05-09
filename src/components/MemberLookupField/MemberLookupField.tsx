@@ -12,6 +12,7 @@ import {
   SearchMembersQueryVariables,
 } from "$queries"
 import { AssociationMember } from "$types"
+import { associationMemberToPersona } from "./MemberLookupField.utils"
 
 interface IMemberLookupFieldProps
   extends Partial<Omit<IPeoplePickerProps, "onChange">> {
@@ -38,17 +39,7 @@ export const MemberLookupField: React.FunctionComponent<
         })
 
         const suggestions: IPersonaProps[] = data!.AssociationMembersLookup.map(
-          (m) => ({
-            text: m.FullName,
-            size: PersonaSize.size24,
-            optionalText: m.AssociationMemberId,
-            secondaryText:
-              m.Club1Name ||
-              m.Club2Name ||
-              m.Division ||
-              m.Birthdate.toString(),
-            member: m,
-          })
+          associationMemberToPersona
         )
 
         return suggestions
