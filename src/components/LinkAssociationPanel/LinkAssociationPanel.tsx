@@ -36,14 +36,14 @@ export const LinkAssociationPanel: React.FunctionComponent<
 > = ({ fencerId, onClose, onSaved, isOpen }) => {
   const [member, setMember] = useState<AssociationMember | undefined>()
 
-  const [linkAccount, { data }] = useUpdateFencerByIdMutation()
+  const [linkAccount] = useUpdateFencerByIdMutation()
 
   const onLinkClicked = useCallback(() => {
     linkAccount({
       variables: {
         fencerId,
         changes: {
-          AssociationMemberId: member?.AssociationMemberId,
+          AssociationMemberId: member?.AssociationMemberId || null,
         },
       },
       onCompleted: () => {
