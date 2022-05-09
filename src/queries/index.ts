@@ -4345,7 +4345,7 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
+export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string }> }> };
 
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -4687,6 +4687,9 @@ export const SearchMembersDocument = gql`
     Foil
     Epee
     Saber
+    Students {
+      Oid
+    }
   }
 }
     `;

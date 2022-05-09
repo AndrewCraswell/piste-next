@@ -4,6 +4,7 @@ import {
   PistePanel,
   MemberLookupField,
 } from "$components"
+import { useUpdateFencerByIdMutation } from "$queries"
 import { AssociationMember } from "$types"
 import styled from "@emotion/styled"
 import { DialogFooter } from "@fluentui/react"
@@ -28,23 +29,51 @@ export interface ILinkAssociationPanelProps {
   onClose: () => void
 }
 
+// TODO: Determine if account is already linked and prevent saving
+
 export const LinkAssociationPanel: React.FunctionComponent<
   ILinkAssociationPanelProps
 > = ({ fencerId, onClose, onSaved, isOpen }) => {
-  const [members, setMembers] = useState<AssociationMember[]>([])
+  const [member, setMember] = useState<AssociationMember | undefined>()
+
+  const [linkAccount, { data }] = useUpdateFencerByIdMutation()
+
+  const onLinkClicked = useCallback(() => {
+    linkAccount({
+      variables: {
+        fencerId,
+        changes: {
+          AssociationMemberId: member?.AssociationMemberId,
+        },
+      },
+      onCompleted: () => {
+        onSaved(member?.AssociationMemberId)
+        setMember(undefined)
+        onClose()
+      },
+    })
+  }, [fencerId, linkAccount, member?.AssociationMemberId, onClose, onSaved])
+
+  const onMemberLookupChange = useCallback((members) => {
+    if (members.length) {
+      setMember(members[0])
+    } else {
+      setMember(undefined)
+    }
+  }, [])
 
   const onRenderFooterContent = useCallback(
     () => (
       <FluentProvider>
         <PanelFooter>
-          <Button appearance="primary" onClick={onClose}>
+          <Button appearance="primary" onClick={onLinkClicked}>
             Save
           </Button>
           <Button onClick={onClose}>Cancel</Button>
         </PanelFooter>
       </FluentProvider>
     ),
-    [onClose]
+    [onClose, onLinkClicked]
   )
 
   return (
@@ -63,16 +92,10 @@ export const LinkAssociationPanel: React.FunctionComponent<
             features.
           </Text>
 
-          <MemberLookupField
-            itemLimit={1}
-            onChange={(members) => {
-              setMembers(members)
-            }}
-          />
+          <MemberLookupField itemLimit={1} onChange={onMemberLookupChange} />
 
-          {members.map((member) => (
+          {member && (
             <MemberDetailsCard
-              key={member.AssociationMemberId}
               details={{
                 fullName: member.FullName,
                 secondaryText:
@@ -88,7 +111,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
                 sabreRating: member.Saber,
               }}
             />
-          ))}
+          )}
         </FormSection>
       </FluentProvider>
     </PistePanel>

@@ -20,5 +20,8 @@ query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
     Foil
     Epee
     Saber
+    Students {
+      Oid
+    }
   }
 }
