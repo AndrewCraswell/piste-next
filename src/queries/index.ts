@@ -4293,7 +4293,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -4362,6 +4362,7 @@ export const AccountProfileDocument = gql`
     Oid
     PrimaryStudentId
     AccountStudent {
+      StudentId
       FirstName
       LastName
       Email
@@ -4370,6 +4371,7 @@ export const AccountProfileDocument = gql`
       AssociationMemberId
     }
     Address {
+      AddressId
       Address
       Address2
       City

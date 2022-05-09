@@ -40,7 +40,7 @@ export const Profile: NextPage = () => {
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
 
-  const [selectedTab, setSelectedTab] = useState<TabValue>("contact")
+  const [selectedTab, setSelectedTab] = useState<TabValue>("profile")
   const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
     setSelectedTab(data.value)
   }
@@ -50,14 +50,14 @@ export const Profile: NextPage = () => {
       <PageTitle>{pageTitle}</PageTitle>
 
       <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
-        <Tab value="contact">Profile</Tab>
+        <Tab value="profile">Profile</Tab>
         {/* <Tab value="account">Account</Tab>
         <Tab value="notifications">Notifications</Tab> */}
         <Tab value="payment">Payment</Tab>
         <Tab value="fencers">Fencers</Tab>
       </ProfileTabs>
 
-      {selectedTab === "contact" && <ProfileForm />}
+      {selectedTab === "profile" && <ProfileForm />}
       {selectedTab === "account" && <></>}
       {selectedTab === "notifications" && <></>}
       {selectedTab === "payment" && (

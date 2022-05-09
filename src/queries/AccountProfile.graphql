@@ -3,6 +3,7 @@ query AccountProfile($oid: String!) {
     Oid
     PrimaryStudentId
     AccountStudent {
+      StudentId
       FirstName
       LastName
       Email
@@ -11,6 +12,7 @@ query AccountProfile($oid: String!) {
       AssociationMemberId
     }
     Address {
+      AddressId
       Address
       Address2
       City

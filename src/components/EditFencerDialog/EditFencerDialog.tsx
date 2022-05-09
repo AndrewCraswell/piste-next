@@ -1,14 +1,9 @@
-import {
-  DefaultButton,
-  Dialog,
-  DialogFooter,
-  PrimaryButton,
-} from "@fluentui/react"
+import { Dialog, DialogFooter } from "@fluentui/react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useCallback, useMemo } from "react"
 
 import { FencerForm, IProfileFormFields, IFencerFormFields } from "$components"
-import { useAccountProfile, useFormHelpers } from "$hooks"
+import { useFormHelpers } from "$hooks"
 import {
   GetAccountFencersDocument,
   useAddFencerToAccountMutation,
@@ -41,9 +36,6 @@ export const EditFencerDialog: React.FunctionComponent<
   const form = useForm<IProfileFormFields>({ defaultValues: defaultFormValues })
   const { handleSubmit, formState, reset, getValues } = form
   const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
-  const {
-    account: { UserId },
-  } = useAccountProfile()
 
   const [addFencerToAccount, { loading: isAddingFencer }] =
     useAddFencerToAccountMutation({
@@ -59,14 +51,6 @@ export const EditFencerDialog: React.FunctionComponent<
 
   const [editFencer, { loading: isSavingFencer }] = useUpdateFencerByIdMutation(
     {
-      refetchQueries: [
-        {
-          query: GetAccountFencersDocument,
-          variables: {
-            oid: UserId,
-          },
-        },
-      ],
       onCompleted: () => {
         onClose()
         reset(getValues())

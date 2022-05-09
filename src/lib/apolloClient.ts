@@ -1,5 +1,10 @@
 import { useMemo } from "react"
-import { ApolloClient, ApolloLink, InMemoryCache } from "@apollo/client"
+import {
+  ApolloClient,
+  ApolloLink,
+  InMemoryCache,
+  ApolloCache,
+} from "@apollo/client"
 import { RetryLink } from "@apollo/client/link/retry"
 import { BatchHttpLink } from "@apollo/client/link/batch-http"
 import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react"
@@ -26,7 +31,43 @@ export function createApolloClient(
         },
       }),
     ]),
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+      typePolicies: {
+        AccountAppRoles: {
+          keyFields: ["AppRoleId"],
+        },
+        AccountClubRoles: {
+          keyFields: ["ClubRoleId"],
+        },
+        Accounts: {
+          keyFields: ["Oid"],
+        },
+        Addresses: {
+          keyFields: ["AddressId"],
+        },
+        AppRoles: {
+          keyFields: ["RoleId"],
+        },
+        AssociationMembers: {
+          keyFields: ["AssociationMemberId"],
+        },
+        AssociationMembersLookup: {
+          keyFields: ["AssociationMemberId"],
+        },
+        ClubLocations: {
+          keyFields: ["LocationId"],
+        },
+        ClubRoles: {
+          keyFields: ["RoleId"],
+        },
+        Clubs: {
+          keyFields: ["ClubId"],
+        },
+        Students: {
+          keyFields: ["StudentId"],
+        },
+      },
+    }),
     connectToDevTools: true,
   })
 }
@@ -98,4 +139,29 @@ export function useApollo(pageProps: any = {}) {
     [state, getAccessTokenSilently]
   )
   return store
+}
+
+export function cacheEvicter(options: {
+  typeName: string
+  idName?: string
+  id: string
+}) {
+  const { id, idName = "id", typeName } = options
+
+  return (cache: ApolloCache<any>) => {
+    const normalizedId = cache.identify({
+      [idName]: id,
+      __typename: typeName,
+    })
+
+    const result = cache.evict({ id: normalizedId })
+
+    if (result) {
+      cache.gc()
+    } else {
+      console.warn(
+        `Unable to evict item from cache: { __typename: "${typeName}", ${idName}: "${id}" }`
+      )
+    }
+  }
 }
