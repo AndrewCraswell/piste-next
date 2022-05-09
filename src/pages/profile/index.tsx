@@ -50,7 +50,7 @@ export const Profile: NextPage = () => {
       <PageTitle>{pageTitle}</PageTitle>
 
       <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
-        <Tab value="contact">Contact</Tab>
+        <Tab value="contact">Profile</Tab>
         {/* <Tab value="account">Account</Tab>
         <Tab value="notifications">Notifications</Tab> */}
         <Tab value="payment">Payment</Tab>
