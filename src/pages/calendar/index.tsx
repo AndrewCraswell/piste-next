@@ -11,19 +11,19 @@ const event = {
 }
 
 const NylasAvailability: React.FunctionComponent = () => {
+  // @ts-ignore
   useEffect(() => import("@nylas/components-availability"), [])
 
   return (
+    // @ts-ignore
     <nylas-availability
       allow-booking="true"
-      //id="demo-availability"
       view_as="schedule"
       show_header="true"
       date_format="full"
       show_as_week="true"
       show_weekends="true"
       show_ticks="true"
-      //access_token="TQq1NTr6DdG6KNqcKMnoJry0Rd9KLA"
     />
   )
 }
