@@ -1,5 +1,4 @@
 import type { NextPage } from "next"
-import { Pivot, PivotItem } from "@fluentui/react"
 import {
   TabList,
   Tab,
@@ -7,6 +6,7 @@ import {
   SelectTabData,
   SelectTabEvent,
 } from "@fluentui/react-components/unstable"
+import { Text } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 import {
@@ -51,6 +51,7 @@ export const Profile: NextPage = () => {
 
       <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
         <Tab value="profile">Profile</Tab>
+        <Tab value="connections">Connections</Tab>
         {/* <Tab value="account">Account</Tab>
         <Tab value="notifications">Notifications</Tab> */}
         <Tab value="payment">Payment</Tab>
@@ -58,8 +59,9 @@ export const Profile: NextPage = () => {
       </ProfileTabs>
 
       {selectedTab === "profile" && <ProfileForm />}
-      {selectedTab === "account" && <></>}
-      {selectedTab === "notifications" && <></>}
+      {selectedTab === "connections" && <ConnectionsManager />}
+      {/* {selectedTab === "account" && <></>}
+      {selectedTab === "notifications" && <></>} */}
       {selectedTab === "payment" && (
         <>
           <PaymentMethodsGrid>
@@ -90,3 +92,11 @@ export const Profile: NextPage = () => {
 }
 
 export default Profile
+
+const ConnectionsManager: React.FunctionComponent = () => {
+  return (
+    <>
+      <Text>Connect to your callendar</Text>
+    </>
+  )
+}

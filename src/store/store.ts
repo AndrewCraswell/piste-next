@@ -1,13 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit"
 import { setupListeners } from "@reduxjs/toolkit/query"
 import { rootReducer } from "./reducers"
-import { paymentMethodsApi } from "./services"
+import { paymentMethodsApi, nylasApi } from "./services"
 
 function configureAppStore(preloadedState: any = {}) {
   const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) => [
       paymentMethodsApi.middleware,
+      nylasApi.middleware,
       ...getDefaultMiddleware(),
     ],
     preloadedState,
