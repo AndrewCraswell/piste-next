@@ -37,7 +37,7 @@
     "react-google-autocomplete": "^2.6.1",
     "react-hook-form": "^7.30.0",
     "react-redux": "^8.0.1",
-    "stripe": "^8.220.0"
+    "stripe": "^9.0.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.6.2",
