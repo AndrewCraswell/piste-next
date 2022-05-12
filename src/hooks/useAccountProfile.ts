@@ -27,7 +27,6 @@ export const useAccountProfile = () => {
     // Use fallbacks to determine the best email
     const email = AccountStudent?.Email || user?.email
 
-    debugger
     return {
       UserId: Oid,
       PrimaryStudentId,
