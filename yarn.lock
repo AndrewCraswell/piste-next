@@ -1151,10 +1151,10 @@
     "@fluentui/set-version" "^8.2.0"
     tslib "^2.1.0"
 
-"@fluentui/react@^8.67.2":
-  version "8.67.2"
-  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.67.2.tgz#9642da61b29a10591d17e3492ad3cbbe98d6d92b"
-  integrity sha512-QzDa4gXcVacBsUfXKRQV+tL7NwBJZpzgJU/lRlI4zjeC9pqiBxh6ZmxtHu0XXXIKFXa0DyesgnAKBbyqGsENmw==
+"@fluentui/react@^8.67.2", "@fluentui/react@^8.67.4":
+  version "8.67.4"
+  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.67.4.tgz#fe161f5572f877b88eebec3e385c03bf21185fd3"
+  integrity sha512-iBbSyOmsuxRJkn1P4rMrvN5uAyORrtNAXLk9qXzpI7h9ohXZPfGCImHXn7GyrVON0zGtjNEYevkW5VS/M2hDww==
   dependencies:
     "@fluentui/date-time-utilities" "^8.5.0"
     "@fluentui/font-icons-mdl2" "^8.3.2"
@@ -1198,12 +1198,12 @@
     "@microsoft/load-themed-styles" "^1.10.26"
     tslib "^2.1.0"
 
-"@fluentui/theme-samples@^8.4.28":
-  version "8.4.28"
-  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.4.28.tgz#82a99a46fee214224b3559cc72b0eac972eda3ee"
-  integrity sha512-1iXJa9FkRjNYom7qbETVC+MUmeOdNO+l/E5Q3aAycHbV9SekY9j3eIUZl+JaXbNoTjzgVd5zhHK4O2dVE/8RJw==
+"@fluentui/theme-samples@^8.4.30":
+  version "8.4.30"
+  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.4.30.tgz#91ce6b2adad03f95803265e807c8951a9dc7f6f9"
+  integrity sha512-rCvcclDN8oki1epadti9IV0jh+bpcDQP90O0iK+jEd7Oq3OHMMaxgIj5+E6vLKTPnMzZJSlFb4MixVawGgWEEg==
   dependencies:
-    "@fluentui/react" "^8.67.2"
+    "@fluentui/react" "^8.67.4"
     "@fluentui/scheme-utilities" "^8.3.6"
     "@fluentui/set-version" "^8.2.0"
     tslib "^2.1.0"
@@ -2909,10 +2909,10 @@ dotenv@^10.0.0:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-10.0.0.tgz#3d4227b8fb95f81096cdd2b66653fb2c7085ba81"
   integrity sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==
 
-dotenv@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.0.tgz#c619001253be89ebb638d027b609c75c26e47411"
-  integrity sha512-qD9WU0MPM4SWLPJy/r2Be+2WgQj8plChsyrCNQzW/0WjvcJQiKQJ9mH3ZgB3fxbUUxgc/11ZJ0Fi5KiimWGz2Q==
+dotenv@^16.0.1:
+  version "16.0.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.0.1.tgz#8f8f9d94876c35dac989876a5d3a82a267fdce1d"
+  integrity sha512-1K6hR6wtk2FviQ4kEiSjFiH5rpzEVi8WW0x96aztHVMhEspNpc4DVOUTEHtEva5VThQ8IaBX1Pe4gSzpVVUsKQ==
 
 dset@^3.1.0:
   version "3.1.1"
@@ -3633,10 +3633,10 @@ graphql-ws@^5.4.1:
   resolved "https://registry.yarnpkg.com/graphql-ws/-/graphql-ws-5.5.5.tgz#f375486d3f196e2a2527b503644693ae3a8670a9"
   integrity sha512-hvyIS71vs4Tu/yUYHPvGXsTgo0t3arU820+lT5VjZS2go0ewp2LqyCgxEN56CzOG7Iys52eRhHBiD1gGRdiQtw==
 
-graphql@^16.4.0:
-  version "16.4.0"
-  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.4.0.tgz#bb10b1b4683045dedcb67000eb4ad134a36c59e6"
-  integrity sha512-tYDNcRvKCcfHREZYje3v33NSrSD/ZpbWWdPtBtUUuXx9NCo/2QDxYzNqCnMvfsrnbwRpEHMovVrPu/ERoLrIRg==
+graphql@^16.5.0:
+  version "16.5.0"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-16.5.0.tgz#41b5c1182eaac7f3d47164fb247f61e4dfb69c85"
+  integrity sha512-qbHgh8Ix+j/qY+a/ZcJnFQ+j8ezakqPiHwPiZhV/3PgGlgf96QMBB5/f2rkiC9sgLoy/xvT6TSiaf2nTHJh5iA==
 
 gzip-size@^6.0.0:
   version "6.0.0"
