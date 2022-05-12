@@ -4288,6 +4288,13 @@ export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uniqueidentifier']>>;
 };
 
+export type MembersByIdsQueryVariables = Exact<{
+  ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
+}>;
+
+
+export type MembersByIdsQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, Region?: string | null, Expiration: any, Gender?: string | null, MemberType: string, AssociationMemberId: string, Nickname?: string | null, Epee: string, Foil: string, Saber: string, Competitive: string, Club1Id?: string | null, Club2Id?: string | null }> };
+
 export type AccountProfileQueryVariables = Exact<{
   oid: Scalars['String'];
 }>;
@@ -4331,13 +4338,6 @@ export type MemberDetailsByNameQueryVariables = Exact<{
 
 export type MemberDetailsByNameQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
 
-export type MembersByIdsQueryVariables = Exact<{
-  ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-}>;
-
-
-export type MembersByIdsQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, Region?: string | null, Expiration: any, Gender?: string | null, MemberType: string, AssociationMemberId: string, Nickname?: string | null, Epee: string, Foil: string, Saber: string, Competitive: string, Club1Id?: string | null, Club2Id?: string | null }> };
-
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
   offset?: InputMaybe<Scalars['Int']>;
@@ -4345,7 +4345,7 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string }> }> };
+export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
 
 export type SearchMembersByIdQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4363,6 +4363,58 @@ export type UpdateFencerByIdMutationVariables = Exact<{
 export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid: string } | null };
 
 
+export const MembersByIdsDocument = gql`
+    query MembersByIds($ids: [String!]) {
+  AssociationMembers(where: {AssociationMemberId: {_in: $ids}}) {
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    Region
+    Expiration
+    Gender
+    MemberType
+    AssociationMemberId
+    Nickname
+    Epee
+    Foil
+    Saber
+    Competitive
+    Club1Id
+    Club2Id
+  }
+}
+    `;
+
+/**
+ * __useMembersByIdsQuery__
+ *
+ * To run a query within a React component, call `useMembersByIdsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMembersByIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMembersByIdsQuery({
+ *   variables: {
+ *      ids: // value for 'ids'
+ *   },
+ * });
+ */
+export function useMembersByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
+      }
+export function useMembersByIdsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
+        }
+export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery>;
+export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
+export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const AccountProfileDocument = gql`
     query AccountProfile($oid: String!) {
   Accounts(where: {Oid: {_eq: $oid}}) {
@@ -4621,58 +4673,6 @@ export function useMemberDetailsByNameLazyQuery(baseOptions?: ApolloReactHooks.L
 export type MemberDetailsByNameQueryHookResult = ReturnType<typeof useMemberDetailsByNameQuery>;
 export type MemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useMemberDetailsByNameLazyQuery>;
 export type MemberDetailsByNameQueryResult = Apollo.QueryResult<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>;
-export const MembersByIdsDocument = gql`
-    query MembersByIds($ids: [String!]) {
-  AssociationMembers(where: {AssociationMemberId: {_in: $ids}}) {
-    FirstName
-    LastName
-    Birthdate
-    Club1Name
-    Club2Name
-    Division
-    Region
-    Expiration
-    Gender
-    MemberType
-    AssociationMemberId
-    Nickname
-    Epee
-    Foil
-    Saber
-    Competitive
-    Club1Id
-    Club2Id
-  }
-}
-    `;
-
-/**
- * __useMembersByIdsQuery__
- *
- * To run a query within a React component, call `useMembersByIdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMembersByIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMembersByIdsQuery({
- *   variables: {
- *      ids: // value for 'ids'
- *   },
- * });
- */
-export function useMembersByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
-      }
-export function useMembersByIdsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
-        }
-export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery>;
-export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
-export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
   AssociationMembersLookup(
@@ -4695,6 +4695,7 @@ export const SearchMembersDocument = gql`
     Epee
     Saber
     Students {
+      StudentId
       Oid
     }
   }
