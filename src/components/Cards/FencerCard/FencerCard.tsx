@@ -246,10 +246,8 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         <LinkAssociationPanel
           isOpen={isAssociationPanelOpen}
           onClose={onCloseAssociationPanel}
-          onSaved={(member) => {
-            console.log(member)
-          }}
           fencerId={StudentId}
+          defaultFilter={fullName}
           associationId={AssociationMemberId || undefined}
         />
       </EmbedDialog>

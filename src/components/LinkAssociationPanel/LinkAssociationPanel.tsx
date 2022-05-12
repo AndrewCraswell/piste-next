@@ -28,9 +28,10 @@ export const PanelFooter = styled(DialogFooter)`
 
 export interface ILinkAssociationPanelProps {
   fencerId: string
+  defaultFilter?: string
   associationId?: string
   isOpen?: boolean
-  onSaved: (membershipId?: string) => void
+  onSaved?: (membershipId?: string) => void
   onClose: () => void
 }
 
@@ -38,7 +39,7 @@ export interface ILinkAssociationPanelProps {
 
 export const LinkAssociationPanel: React.FunctionComponent<
   ILinkAssociationPanelProps
-> = ({ associationId, fencerId, onClose, onSaved, isOpen }) => {
+> = ({ associationId, fencerId, defaultFilter, onClose, onSaved, isOpen }) => {
   const [member, setMember] = useState<AssociationMember | undefined>()
 
   const [linkAccount] = useUpdateFencerByIdMutation()
@@ -64,7 +65,9 @@ export const LinkAssociationPanel: React.FunctionComponent<
         },
       },
       onCompleted: () => {
-        onSaved(member?.AssociationMemberId)
+        if (onSaved) {
+          onSaved(member?.AssociationMemberId)
+        }
         setMember(undefined)
         onClose()
       },
@@ -117,6 +120,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
           </Text>
 
           <MemberLookupField
+            defaultFilter={defaultFilter}
             defaultSelectedItems={preselectedPersonas}
             itemLimit={1}
             onChange={onMemberLookupChange}
