@@ -15,8 +15,9 @@ export const useAccountProfile = () => {
       data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
-    const accountFullName =
-      `${AccountStudent?.FirstName} ${AccountStudent?.LastName}`.trim()
+    const accountFullName = `${AccountStudent?.FirstName || ""} ${
+      AccountStudent?.LastName || ""
+    }`.trim()
     const userFullName =
       user?.name ||
       `${user?.given_name} ${user?.family_name}`.trim() ||

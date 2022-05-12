@@ -13,7 +13,7 @@ import { AssociationMember } from "$types"
 import styled from "@emotion/styled"
 import { DialogFooter } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 
 // TODO: Move this PanelFooter into another component file
 export const PanelFooter = styled(DialogFooter)`
@@ -28,9 +28,10 @@ export const PanelFooter = styled(DialogFooter)`
 
 export interface ILinkAssociationPanelProps {
   fencerId: string
+  defaultFilter?: string
   associationId?: string
   isOpen?: boolean
-  onSaved: (membershipId?: string) => void
+  onSaved?: (membershipId?: string) => void
   onClose: () => void
 }
 
@@ -38,7 +39,8 @@ export interface ILinkAssociationPanelProps {
 
 export const LinkAssociationPanel: React.FunctionComponent<
   ILinkAssociationPanelProps
-> = ({ associationId, fencerId, onClose, onSaved, isOpen }) => {
+> = ({ associationId, fencerId, defaultFilter, onClose, onSaved, isOpen }) => {
+  const initialMember = useRef<AssociationMember>()
   const [member, setMember] = useState<AssociationMember | undefined>()
 
   const [linkAccount] = useUpdateFencerByIdMutation()
@@ -49,6 +51,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
     skip: !associationId,
     onCompleted: (data) => {
       const member = data.AssociationMembersLookup[0]
+      initialMember.current = member
       if (member) {
         setMember(member)
       }
@@ -64,12 +67,15 @@ export const LinkAssociationPanel: React.FunctionComponent<
         },
       },
       onCompleted: () => {
-        onSaved(member?.AssociationMemberId)
-        setMember(undefined)
+        if (onSaved) {
+          onSaved(member?.AssociationMemberId)
+        }
+        setMember(member)
+        initialMember.current = member
         onClose()
       },
     })
-  }, [fencerId, linkAccount, member?.AssociationMemberId, onClose, onSaved])
+  }, [fencerId, linkAccount, member, onClose, onSaved])
 
   const onMemberLookupChange = useCallback((members) => {
     if (members.length) {
@@ -79,6 +85,11 @@ export const LinkAssociationPanel: React.FunctionComponent<
     }
   }, [])
 
+  const resetOnClose = useCallback(() => {
+    setMember(initialMember.current)
+    onClose()
+  }, [onClose])
+
   const onRenderFooterContent = useCallback(
     () => (
       <FluentProvider>
@@ -86,11 +97,11 @@ export const LinkAssociationPanel: React.FunctionComponent<
           <Button appearance="primary" onClick={onLinkClicked}>
             Save
           </Button>
-          <Button onClick={onClose}>Cancel</Button>
+          <Button onClick={resetOnClose}>Cancel</Button>
         </PanelFooter>
       </FluentProvider>
     ),
-    [onClose, onLinkClicked]
+    [onLinkClicked, resetOnClose]
   )
 
   useEffect(() => {
@@ -107,7 +118,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
       isLightDismiss={true}
       isFooterAtBottom={true}
       onRenderFooterContent={onRenderFooterContent}
-      onDismiss={onClose}
+      onDismiss={resetOnClose}
     >
       <FluentProvider>
         <FormSection>
@@ -117,6 +128,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
           </Text>
 
           <MemberLookupField
+            defaultFilter={defaultFilter}
             defaultSelectedItems={preselectedPersonas}
             itemLimit={1}
             onChange={onMemberLookupChange}
