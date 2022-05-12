@@ -16,7 +16,7 @@ CardControls.defaultProps = {
 const horizontalTokens = { childrenGap: "0.5rem" }
 
 export interface IHorizontalCardProps extends IStyleableProps {
-  actions: IButtonProps[]
+  actions?: IButtonProps[]
 }
 
 export const HorizontalCard: React.FunctionComponent<IHorizontalCardProps> = ({
@@ -30,13 +30,13 @@ export const HorizontalCard: React.FunctionComponent<IHorizontalCardProps> = ({
         {children}
       </Stack>
 
-      {actions.length ? (
+      {actions?.length && (
         <CardControls>
           {actions.map((props, index) => (
             <IconButton key={index} {...props} />
           ))}
         </CardControls>
-      ) : undefined}
+      )}
     </Stack>
   </Card>
 )

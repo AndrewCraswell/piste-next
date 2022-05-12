@@ -1,7 +1,7 @@
 import { HorizontalCard } from "../HorizontalCard"
 import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
-import { Persona } from "@fluentui/react"
+import { IButtonProps, Persona } from "@fluentui/react"
 import { Text } from "@fluentui/react-components"
 import { useDisclosure } from "$hooks"
 import dayjs from "dayjs"
@@ -61,12 +61,11 @@ export type MemberDetails = {
 
 export interface IMemberDetailsCardProps extends IStyleableProps {
   details: MemberDetails
+  actions?: IButtonProps[]
 }
 export const MemberDetailsCard: React.FunctionComponent<
   IMemberDetailsCardProps
-> = ({ className, details }) => {
-  const { isOpen: isAdded, onToggle: flipAdded } = useDisclosure(false)
-
+> = ({ className, details, actions }) => {
   const {
     fullName,
     secondaryText,
@@ -79,17 +78,7 @@ export const MemberDetailsCard: React.FunctionComponent<
   } = details
 
   return (
-    <ThinCard
-      className={className}
-      actions={[
-        {
-          iconProps: { iconName: isAdded ? "SkypeCircleCheck" : "Add" },
-          onClick: () => {
-            flipAdded()
-          },
-        },
-      ]}
-    >
+    <ThinCard className={className} actions={actions}>
       <MemberPersona
         text={fullName}
         secondaryText={secondaryText}

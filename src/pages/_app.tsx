@@ -38,11 +38,9 @@ function App({ Component, pageProps, renderer }: AppProps) {
             <ThemeProvider>
               <Provider store={store}>
                 <AuthenticatedApp>
-                  <OnboardingGate>
-                    <AppShell>
-                      <Component {...pageProps} />
-                    </AppShell>
-                  </OnboardingGate>
+                  <AppShell>
+                    <Component {...pageProps} />
+                  </AppShell>
                 </AuthenticatedApp>
               </Provider>
             </ThemeProvider>

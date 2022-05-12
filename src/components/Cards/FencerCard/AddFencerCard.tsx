@@ -1,7 +1,10 @@
+import { EditFencerDialog } from "$components"
 import { VerticalCard } from "$components/Cards/VerticalCard"
+import { useDisclosure } from "$hooks"
 import styled from "@emotion/styled"
 import { Stack } from "@fluentui/react"
-import { Button, Text } from "@fluentui/react-components"
+import { Button } from "@fluentui/react-components"
+import { EmbedDialog } from "./FencerCard.styles"
 
 const Card = styled(VerticalCard)`
   border: 4px dashed ${({ theme }) => theme.palette.neutralLight};
@@ -13,20 +16,29 @@ const VerticallyCentered = styled(Stack)`
   height: 100%;
 `
 
-export interface IAddFencerCard {
-  onClick?: () => void
-}
+export const AddFencerCard: React.FunctionComponent = () => {
+  const {
+    isOpen: isEditFencerDialogOpen,
+    onClose: onCloseEditFencerDialog,
+    onOpen: onOpenEditFencerDialog,
+  } = useDisclosure(false)
 
-export const AddFencerCard: React.FunctionComponent<IAddFencerCard> = ({
-  onClick,
-}) => {
   return (
-    <Card actions={[]}>
-      <VerticallyCentered horizontalAlign="center" verticalAlign="center">
-        <Button appearance="outline" onClick={onClick}>
-          Add fencer
-        </Button>
-      </VerticallyCentered>
-    </Card>
+    <>
+      <Card actions={[]}>
+        <VerticallyCentered horizontalAlign="center" verticalAlign="center">
+          <Button appearance="outline" onClick={onOpenEditFencerDialog}>
+            Add fencer
+          </Button>
+        </VerticallyCentered>
+      </Card>
+      <EmbedDialog>
+        <EditFencerDialog
+          isOpen={isEditFencerDialogOpen}
+          onClose={onCloseEditFencerDialog}
+          onSaved={onCloseEditFencerDialog}
+        />
+      </EmbedDialog>
+    </>
   )
 }

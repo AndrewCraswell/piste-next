@@ -1,16 +1,28 @@
 import { useApolloClient } from "@apollo/client"
-import { NormalPeoplePicker, PersonaSize, IPersonaProps } from "@fluentui/react"
+import {
+  NormalPeoplePicker,
+  PersonaSize,
+  IPersonaProps,
+  IPeoplePickerProps,
+} from "@fluentui/react"
 
 import {
   SearchMembersDocument,
   SearchMembersQuery,
   SearchMembersQueryVariables,
-  useMembersByIdsLazyQuery,
 } from "$queries"
+import { AssociationMember } from "$types"
+import { associationMemberToPersona } from "./MemberLookupField.utils"
 
-export const MemberLookupField: React.FunctionComponent = () => {
+interface IMemberLookupFieldProps
+  extends Partial<Omit<IPeoplePickerProps, "onChange">> {
+  onChange: (items: AssociationMember[]) => void
+}
+
+export const MemberLookupField: React.FunctionComponent<
+  IMemberLookupFieldProps
+> = (props) => {
   const client = useApolloClient()
-  const [getMembersByIds, { data: membersFound }] = useMembersByIdsLazyQuery()
 
   return (
     <NormalPeoplePicker
@@ -27,24 +39,21 @@ export const MemberLookupField: React.FunctionComponent = () => {
         })
 
         const suggestions: IPersonaProps[] = data!.AssociationMembersLookup.map(
-          (m) => ({
-            text: m.FullName,
-            size: PersonaSize.size24,
-            optionalText: m.AssociationMemberId,
-            secondaryText: m.Club1Name || m.Club2Name || undefined,
-          })
+          associationMemberToPersona
         )
 
         return suggestions
       }}
       resolveDelay={350}
+      {...props}
       onChange={(items) => {
-        const members = items ?? []
-        const ids = members
-          .map((m) => m.optionalText)
-          .filter(Boolean) as string[]
+        const members = (items ?? []).map(
+          (m) => (m as any).member as AssociationMember
+        )
 
-        getMembersByIds({ variables: { ids } })
+        if (props.onChange) {
+          props.onChange(members)
+        }
       }}
     />
   )

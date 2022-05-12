@@ -1,23 +1,23 @@
 import {
-  DefaultButton,
   Dialog,
   DialogFooter,
   DialogType,
   IButtonProps,
   Icon,
-  PrimaryButton,
   Stack,
 } from "@fluentui/react"
-import { Avatar, Badge } from "@fluentui/react-components"
-import dayjs from "dayjs"
-
-import { VerticalCard } from "$components"
 import {
-  GetAccountFencersDocument,
-  useDeleteFencerByIdMutation,
-} from "$queries"
-import { DetailsItem } from "./components"
+  Avatar,
+  Badge,
+  Button,
+  FluentProvider,
+} from "@fluentui/react-components"
+import dayjs from "dayjs"
 import { useCallback, useMemo } from "react"
+
+import { EditFencerDialog, VerticalCard } from "$components"
+import { useDeleteFencerByIdMutation } from "$queries"
+import { DetailsItem } from "./components"
 import { useDisclosure } from "$hooks"
 import {
   CardHeader,
@@ -27,11 +27,17 @@ import {
   SemiboldText,
   DialogSpinner,
 } from "./FencerCard.styles"
-import { AccountFencer } from "./FencerCard.types"
+import { AccountFencer } from "$types"
+import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
+import { cacheEvicter } from "$lib"
+
+// TODO: Break PistePanel into separate component
+// TODO: On PistePanel save, update fencer
+// TODO: Break payments into another panel
 
 export interface IFencerCardProps {
   fencer: AccountFencer
-  primaryFencerId: string
+  primaryFencerId?: string
 }
 
 export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
@@ -51,21 +57,30 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   } = fencer
 
   const {
+    isOpen: isAssociationPanelOpen,
+    onOpen: onOpenAssociationPanel,
+    onClose: onCloseAssociationPanel,
+  } = useDisclosure(false)
+
+  const {
     isOpen: isDeleteDialogOpen,
     onOpen: onDeleteDialogOpen,
     onClose: onDeleteDialogClose,
   } = useDisclosure(false)
 
+  const {
+    isOpen: isEditFencerDialogOpen,
+    onClose: onCloseEditFencerDialog,
+    onOpen: onOpenEditFencerDialog,
+  } = useDisclosure(false)
+
   const [deleteFencer, { loading: isDeletingFencer }] =
     useDeleteFencerByIdMutation({
-      refetchQueries: [
-        {
-          query: GetAccountFencersDocument,
-          variables: {
-            oid: Oid,
-          },
-        },
-      ],
+      update: cacheEvicter({
+        typeName: "Students",
+        idName: "StudentId",
+        id: StudentId,
+      }),
       onCompleted: onDeleteDialogClose,
     })
 
@@ -79,13 +94,11 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
   const isPrimaryFencer = StudentId === primaryFencerId
   const memberId = `#${AssociationMemberId}`
 
-  const onEditFencerClicked = useCallback(() => {}, [])
   const onDeleteFencerConfirmed = useCallback(() => {
     deleteFencer({
       variables: { fencerId: StudentId },
     })
   }, [deleteFencer, StudentId])
-  const onEditAssociationClicked = useCallback(() => {}, [])
 
   const fencerActions = useMemo(
     () =>
@@ -94,11 +107,12 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         !isPrimaryFencer
           ? {
               iconProps: { iconName: "Edit" },
-              onClick: onEditAssociationClicked,
+              onClick: onOpenEditFencerDialog,
             }
           : undefined,
         {
           iconProps: { iconName: "ContactLink" },
+          onClick: onOpenAssociationPanel,
         },
 
         // Don't allow the user to delete the primary fencer
@@ -109,7 +123,12 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
             }
           : undefined,
       ].filter(Boolean) as IButtonProps[],
-    [isPrimaryFencer, onEditAssociationClicked, onDeleteDialogOpen]
+    [
+      isPrimaryFencer,
+      onOpenEditFencerDialog,
+      onOpenAssociationPanel,
+      onDeleteDialogOpen,
+    ]
   )
 
   return (
@@ -165,7 +184,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
               iconLabel="USA Fencing ID"
               title="Not linked"
             >
-              Not linked
+              No membership
             </DetailsItem>
           )}
 
@@ -188,6 +207,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       </VerticalCard>
 
       <EmbedDialog>
+        {/* TODO: Migrate this into ConfirmFencerDeleteDialog component */}
         <Dialog
           hidden={!isDeleteDialogOpen}
           dialogContentProps={{
@@ -199,24 +219,39 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
                 <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
               </span>
             ) as unknown as string,
+            closeButtonAriaLabel: "Close",
           }}
         >
-          <DialogFooter>
-            {isDeletingFencer && <DialogSpinner />}
-            <PrimaryButton
-              onClick={onDeleteFencerConfirmed}
-              disabled={isDeletingFencer}
-            >
-              Delete
-            </PrimaryButton>
-            <DefaultButton
-              onClick={onDeleteDialogClose}
-              disabled={isDeletingFencer}
-            >
-              Cancel
-            </DefaultButton>
-          </DialogFooter>
+          <FluentProvider>
+            <DialogFooter>
+              {isDeletingFencer && <DialogSpinner />}
+              <Button
+                appearance="primary"
+                onClick={onDeleteFencerConfirmed}
+                disabled={isDeletingFencer}
+              >
+                Delete
+              </Button>
+              <Button onClick={onDeleteDialogClose} disabled={isDeletingFencer}>
+                Cancel
+              </Button>
+            </DialogFooter>
+          </FluentProvider>
         </Dialog>
+        <EditFencerDialog
+          fencer={fencer}
+          isOpen={isEditFencerDialogOpen}
+          onClose={onCloseEditFencerDialog}
+        />
+        <LinkAssociationPanel
+          isOpen={isAssociationPanelOpen}
+          onClose={onCloseAssociationPanel}
+          onSaved={(member) => {
+            console.log(member)
+          }}
+          fencerId={StudentId}
+          associationId={AssociationMemberId || undefined}
+        />
       </EmbedDialog>
     </>
   )
