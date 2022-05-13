@@ -3121,6 +3121,7 @@ export type Calendars = {
   created_at: Scalars['datetime2'];
   created_by: Scalars['String'];
   id: Scalars['String'];
+  provider: Scalars['String'];
   updated_at: Scalars['datetime2'];
 };
 
@@ -3158,6 +3159,7 @@ export type Calendars_Bool_Exp = {
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  provider?: InputMaybe<String_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
 };
 
@@ -3176,6 +3178,7 @@ export type Calendars_Insert_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
 
@@ -3194,6 +3197,8 @@ export enum Calendars_Insert_Match_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Provider = 'provider',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
@@ -3206,6 +3211,7 @@ export type Calendars_Max_Fields = {
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
 };
 
@@ -3218,6 +3224,7 @@ export type Calendars_Min_Fields = {
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
+  provider?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
 };
 
@@ -3239,6 +3246,7 @@ export type Calendars_Order_By = {
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  provider?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
 
@@ -3262,6 +3270,8 @@ export enum Calendars_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  Provider = 'provider',
+  /** column name */
   UpdatedAt = 'updated_at'
 }
 
@@ -3273,6 +3283,7 @@ export type Calendars_Set_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
+  provider?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
 
@@ -3290,6 +3301,8 @@ export enum Calendars_Update_Column {
   CreatedBy = 'created_by',
   /** column name */
   Id = 'id',
+  /** column name */
+  Provider = 'provider',
   /** column name */
   UpdatedAt = 'updated_at'
 }
@@ -4920,7 +4933,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, created_at: any } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -5069,6 +5082,7 @@ export const AccountProfileDocument = gql`
       id
       account_id
       access_token
+      provider
       created_at
     }
   }

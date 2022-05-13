@@ -26,24 +26,22 @@ const connect: NextApiHandler<string | Error> = async (req, res) => {
       const result = await fetch(`${process.env.NEXT_PUBLIC_GRAPHQL_API_URL}`, {
         method: "POST",
         body: JSON.stringify({
-          // TODO: This query may have a bug. If account_id column matches, it should update all other columns,
-          //  not just the access_token
           query: `
             mutation AddCalendarAccount($calendar: calendars_insert_input!) {
-              insert_calendars_one(object: $calendar, if_matched: { match_columns: account_id,  update_columns: access_token }) {
+              insert_calendars_one(object: $calendar, if_matched: {
+                match_columns: account_id,
+                update_columns: [access_token, id, provider]
+              }) {
                 id
-                account_id
-                calendar_id
-                access_token
               }
             }
-
           `,
           variables: {
             calendar: {
               id: token.accountId,
               access_token: token.accessToken,
               account_id: userId,
+              provider: token.provider,
             },
           },
         }),
