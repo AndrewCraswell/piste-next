@@ -30,7 +30,7 @@ const connect: NextApiHandler<string | Error> = async (req, res) => {
             mutation AddCalendarAccount($calendar: calendars_insert_input!) {
               insert_calendars_one(object: $calendar, if_matched: {
                 match_columns: account_id,
-                update_columns: [access_token, calendar_id, id, provider]
+                update_columns: [access_token, id, provider]
               }) {
                 id
               }
