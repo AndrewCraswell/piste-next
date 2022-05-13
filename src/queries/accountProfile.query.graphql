@@ -23,6 +23,7 @@ query AccountProfile($oid: String!) {
       id
       account_id
       access_token
+      provider
       created_at
     }
   }

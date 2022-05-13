@@ -1151,7 +1151,7 @@
     "@fluentui/set-version" "^8.2.0"
     tslib "^2.1.0"
 
-"@fluentui/react@^8.67.2", "@fluentui/react@^8.67.4":
+"@fluentui/react@^8.67.4":
   version "8.67.4"
   resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.67.4.tgz#fe161f5572f877b88eebec3e385c03bf21185fd3"
   integrity sha512-iBbSyOmsuxRJkn1P4rMrvN5uAyORrtNAXLk9qXzpI7h9ohXZPfGCImHXn7GyrVON0zGtjNEYevkW5VS/M2hDww==

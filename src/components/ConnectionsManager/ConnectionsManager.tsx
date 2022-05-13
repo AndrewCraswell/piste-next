@@ -51,7 +51,7 @@ export const ConnectionsManager: React.FunctionComponent = () => {
                   isMultiline={false}
                   actions={<MessageBarButton>Unlink</MessageBarButton>}
                 >
-                  Your calendar was linked on{" "}
+                  Your {titleCase(calendar?.provider)} calendar was linked on{" "}
                   {dayjs
                     .utc(calendar?.created_at)
                     .local()
@@ -69,4 +69,12 @@ export const ConnectionsManager: React.FunctionComponent = () => {
       </Accordion>
     </div>
   )
+}
+
+function titleCase(value: string = "") {
+  let str = value.toLowerCase().split(" ")
+  for (var i = 0; i < str.length; i++) {
+    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1)
+  }
+  return str.join(" ")
 }
