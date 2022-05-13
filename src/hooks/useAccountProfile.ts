@@ -11,7 +11,7 @@ export const useAccountProfile = () => {
   })
 
   const account = useMemo(() => {
-    let { AccountStudent, Oid, Address, PrimaryStudentId } =
+    let { AccountStudent, Oid, Address, PrimaryStudentId, calendar } =
       data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
@@ -30,6 +30,8 @@ export const useAccountProfile = () => {
     return {
       UserId: Oid,
       PrimaryStudentId,
+      isCalendarLinked: !!calendar,
+      calendar,
       FullName: accountFullName || userFullName,
       ...AccountStudent,
       ...Address,

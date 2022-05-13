@@ -340,6 +340,12 @@ export type Accounts = {
   Oid: Scalars['String'];
   PrimaryStudentId: Scalars['uniqueidentifier'];
   UpdatedAt?: Maybe<Scalars['datetime2']>;
+  /** An object relationship */
+  calendar?: Maybe<Calendars>;
+  /** An array relationship */
+  club_accounts: Array<Club_Accounts>;
+  /** An aggregate relationship */
+  club_accounts_aggregate: Club_Accounts_Aggregate;
 };
 
 
@@ -396,6 +402,24 @@ export type AccountsDependents_AggregateArgs = {
   where?: InputMaybe<Students_Bool_Exp>;
 };
 
+
+/** columns and relationships of "Accounts" */
+export type AccountsClub_AccountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Accounts" */
+export type AccountsClub_Accounts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
 /** aggregated selection of "Accounts" */
 export type Accounts_Aggregate = {
   __typename?: 'Accounts_aggregate';
@@ -442,6 +466,8 @@ export type Accounts_Bool_Exp = {
   _and?: InputMaybe<Array<Accounts_Bool_Exp>>;
   _not?: InputMaybe<Accounts_Bool_Exp>;
   _or?: InputMaybe<Array<Accounts_Bool_Exp>>;
+  calendar?: InputMaybe<Calendars_Bool_Exp>;
+  club_accounts?: InputMaybe<Club_Accounts_Bool_Exp>;
 };
 
 /** upsert condition type for table "Accounts" */
@@ -541,6 +567,8 @@ export type Accounts_Order_By = {
   Oid?: InputMaybe<Order_By>;
   PrimaryStudentId?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
+  calendar?: InputMaybe<Calendars_Order_By>;
+  club_accounts_aggregate?: InputMaybe<Club_Accounts_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: Accounts */
@@ -2401,6 +2429,10 @@ export type Clubs = {
   UpdatedAt?: Maybe<Scalars['datetime2']>;
   UsaFencingId: Scalars['String'];
   Website?: Maybe<Scalars['String']>;
+  /** An array relationship */
+  club_accounts: Array<Club_Accounts>;
+  /** An aggregate relationship */
+  club_accounts_aggregate: Club_Accounts_Aggregate;
 };
 
 
@@ -2437,6 +2469,24 @@ export type ClubsClubRoles_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
   where?: InputMaybe<AccountClubRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Clubs" */
+export type ClubsClub_AccountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Clubs" */
+export type ClubsClub_Accounts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
 };
 
 /** aggregated selection of "Clubs" */
@@ -2493,6 +2543,7 @@ export type Clubs_Bool_Exp = {
   _and?: InputMaybe<Array<Clubs_Bool_Exp>>;
   _not?: InputMaybe<Clubs_Bool_Exp>;
   _or?: InputMaybe<Array<Clubs_Bool_Exp>>;
+  club_accounts?: InputMaybe<Club_Accounts_Bool_Exp>;
 };
 
 /** upsert condition type for table "Clubs" */
@@ -2600,6 +2651,7 @@ export type Clubs_Order_By = {
   UpdatedAt?: InputMaybe<Order_By>;
   UsaFencingId?: InputMaybe<Order_By>;
   Website?: InputMaybe<Order_By>;
+  club_accounts_aggregate?: InputMaybe<Club_Accounts_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: Clubs */
@@ -3058,6 +3110,359 @@ export enum Students_Update_Column {
   UpdatedAt = 'UpdatedAt'
 }
 
+/** columns and relationships of "calendars" */
+export type Calendars = {
+  __typename?: 'calendars';
+  /** An object relationship */
+  Account: Accounts;
+  access_token: Scalars['String'];
+  account_id: Scalars['String'];
+  calendar_id?: Maybe<Scalars['String']>;
+  created_at: Scalars['datetime2'];
+  created_by: Scalars['String'];
+  id: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+/** aggregated selection of "calendars" */
+export type Calendars_Aggregate = {
+  __typename?: 'calendars_aggregate';
+  aggregate?: Maybe<Calendars_Aggregate_Fields>;
+  nodes: Array<Calendars>;
+};
+
+/** aggregate fields of "calendars" */
+export type Calendars_Aggregate_Fields = {
+  __typename?: 'calendars_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Calendars_Max_Fields>;
+  min?: Maybe<Calendars_Min_Fields>;
+};
+
+
+/** aggregate fields of "calendars" */
+export type Calendars_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Calendars_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "calendars". All fields are combined with a logical 'AND'. */
+export type Calendars_Bool_Exp = {
+  Account?: InputMaybe<Accounts_Bool_Exp>;
+  _and?: InputMaybe<Array<Calendars_Bool_Exp>>;
+  _not?: InputMaybe<Calendars_Bool_Exp>;
+  _or?: InputMaybe<Array<Calendars_Bool_Exp>>;
+  access_token?: InputMaybe<String_Mssql_Comparison_Exp>;
+  account_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  calendar_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "calendars" */
+export type Calendars_If_Matched = {
+  match_columns?: Array<Calendars_Insert_Match_Column>;
+  update_columns?: Array<Calendars_Update_Column>;
+  where?: InputMaybe<Calendars_Bool_Exp>;
+};
+
+/** input type for inserting data into table "calendars" */
+export type Calendars_Insert_Input = {
+  access_token?: InputMaybe<Scalars['String']>;
+  account_id?: InputMaybe<Scalars['String']>;
+  calendar_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "calendars" */
+export enum Calendars_Insert_Match_Column {
+  /** column name */
+  AccessToken = 'access_token',
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  CalendarId = 'calendar_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Calendars_Max_Fields = {
+  __typename?: 'calendars_max_fields';
+  access_token?: Maybe<Scalars['String']>;
+  account_id?: Maybe<Scalars['String']>;
+  calendar_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** aggregate min on columns */
+export type Calendars_Min_Fields = {
+  __typename?: 'calendars_min_fields';
+  access_token?: Maybe<Scalars['String']>;
+  account_id?: Maybe<Scalars['String']>;
+  calendar_id?: Maybe<Scalars['String']>;
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** response of any mutation on the table "calendars" */
+export type Calendars_Mutation_Response = {
+  __typename?: 'calendars_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Calendars>;
+};
+
+/** Ordering options when selecting data from "calendars". */
+export type Calendars_Order_By = {
+  Account?: InputMaybe<Accounts_Order_By>;
+  access_token?: InputMaybe<Order_By>;
+  account_id?: InputMaybe<Order_By>;
+  calendar_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: calendars */
+export type Calendars_Pk_Columns_Input = {
+  account_id: Scalars['String'];
+};
+
+/** select columns of table "calendars" */
+export enum Calendars_Select_Column {
+  /** column name */
+  AccessToken = 'access_token',
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  CalendarId = 'calendar_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "calendars" */
+export type Calendars_Set_Input = {
+  access_token?: InputMaybe<Scalars['String']>;
+  account_id?: InputMaybe<Scalars['String']>;
+  calendar_id?: InputMaybe<Scalars['String']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** update columns of table "calendars" */
+export enum Calendars_Update_Column {
+  /** column name */
+  AccessToken = 'access_token',
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  CalendarId = 'calendar_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "club_accounts" */
+export type Club_Accounts = {
+  __typename?: 'club_accounts';
+  /** An object relationship */
+  Account: Accounts;
+  /** An object relationship */
+  Club: Clubs;
+  account_id: Scalars['String'];
+  club_id: Scalars['uniqueidentifier'];
+  created_by: Scalars['String'];
+  created_on: Scalars['datetime2'];
+};
+
+/** aggregated selection of "club_accounts" */
+export type Club_Accounts_Aggregate = {
+  __typename?: 'club_accounts_aggregate';
+  aggregate?: Maybe<Club_Accounts_Aggregate_Fields>;
+  nodes: Array<Club_Accounts>;
+};
+
+/** aggregate fields of "club_accounts" */
+export type Club_Accounts_Aggregate_Fields = {
+  __typename?: 'club_accounts_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Club_Accounts_Max_Fields>;
+  min?: Maybe<Club_Accounts_Min_Fields>;
+};
+
+
+/** aggregate fields of "club_accounts" */
+export type Club_Accounts_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Club_Accounts_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "club_accounts" */
+export type Club_Accounts_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Club_Accounts_Max_Order_By>;
+  min?: InputMaybe<Club_Accounts_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "club_accounts". All fields are combined with a logical 'AND'. */
+export type Club_Accounts_Bool_Exp = {
+  Account?: InputMaybe<Accounts_Bool_Exp>;
+  Club?: InputMaybe<Clubs_Bool_Exp>;
+  _and?: InputMaybe<Array<Club_Accounts_Bool_Exp>>;
+  _not?: InputMaybe<Club_Accounts_Bool_Exp>;
+  _or?: InputMaybe<Array<Club_Accounts_Bool_Exp>>;
+  account_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  club_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  created_on?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "club_accounts" */
+export type Club_Accounts_If_Matched = {
+  match_columns?: Array<Club_Accounts_Insert_Match_Column>;
+  update_columns?: Array<Club_Accounts_Update_Column>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+/** input type for inserting data into table "club_accounts" */
+export type Club_Accounts_Insert_Input = {
+  account_id?: InputMaybe<Scalars['String']>;
+  club_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  created_on?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "club_accounts" */
+export enum Club_Accounts_Insert_Match_Column {
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  ClubId = 'club_id',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  CreatedOn = 'created_on'
+}
+
+/** aggregate max on columns */
+export type Club_Accounts_Max_Fields = {
+  __typename?: 'club_accounts_max_fields';
+  account_id?: Maybe<Scalars['String']>;
+  created_by?: Maybe<Scalars['String']>;
+  created_on?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "club_accounts" */
+export type Club_Accounts_Max_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  created_on?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Club_Accounts_Min_Fields = {
+  __typename?: 'club_accounts_min_fields';
+  account_id?: Maybe<Scalars['String']>;
+  created_by?: Maybe<Scalars['String']>;
+  created_on?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "club_accounts" */
+export type Club_Accounts_Min_Order_By = {
+  account_id?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  created_on?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "club_accounts" */
+export type Club_Accounts_Mutation_Response = {
+  __typename?: 'club_accounts_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Club_Accounts>;
+};
+
+/** Ordering options when selecting data from "club_accounts". */
+export type Club_Accounts_Order_By = {
+  Account?: InputMaybe<Accounts_Order_By>;
+  Club?: InputMaybe<Clubs_Order_By>;
+  account_id?: InputMaybe<Order_By>;
+  club_id?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  created_on?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: club_accounts */
+export type Club_Accounts_Pk_Columns_Input = {
+  account_id: Scalars['String'];
+  club_id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "club_accounts" */
+export enum Club_Accounts_Select_Column {
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  ClubId = 'club_id',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  CreatedOn = 'created_on'
+}
+
+/** input type for updating data in table "club_accounts" */
+export type Club_Accounts_Set_Input = {
+  account_id?: InputMaybe<Scalars['String']>;
+  club_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  created_on?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** update columns of table "club_accounts" */
+export enum Club_Accounts_Update_Column {
+  /** column name */
+  AccountId = 'account_id',
+  /** column name */
+  ClubId = 'club_id',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  CreatedOn = 'created_on'
+}
+
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
 export type Date_Mssql_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['date']>;
@@ -3142,6 +3547,14 @@ export type Mutation_Root = {
   delete_Students?: Maybe<Students_Mutation_Response>;
   /** delete single row from the table: "Students" */
   delete_Students_by_pk?: Maybe<Students>;
+  /** delete data from the table: "calendars" */
+  delete_calendars?: Maybe<Calendars_Mutation_Response>;
+  /** delete single row from the table: "calendars" */
+  delete_calendars_by_pk?: Maybe<Calendars>;
+  /** delete data from the table: "club_accounts" */
+  delete_club_accounts?: Maybe<Club_Accounts_Mutation_Response>;
+  /** delete single row from the table: "club_accounts" */
+  delete_club_accounts_by_pk?: Maybe<Club_Accounts>;
   /** insert data into the table: "AccountAppRoles" */
   insert_AccountAppRoles?: Maybe<AccountAppRoles_Mutation_Response>;
   /** insert a single row into the table: "AccountAppRoles" */
@@ -3186,6 +3599,14 @@ export type Mutation_Root = {
   insert_Students?: Maybe<Students_Mutation_Response>;
   /** insert a single row into the table: "Students" */
   insert_Students_one?: Maybe<Students>;
+  /** insert data into the table: "calendars" */
+  insert_calendars?: Maybe<Calendars_Mutation_Response>;
+  /** insert a single row into the table: "calendars" */
+  insert_calendars_one?: Maybe<Calendars>;
+  /** insert data into the table: "club_accounts" */
+  insert_club_accounts?: Maybe<Club_Accounts_Mutation_Response>;
+  /** insert a single row into the table: "club_accounts" */
+  insert_club_accounts_one?: Maybe<Club_Accounts>;
   /** update data of the table: "AccountAppRoles" */
   update_AccountAppRoles?: Maybe<AccountAppRoles_Mutation_Response>;
   /** update single row of the table: "AccountAppRoles" */
@@ -3228,6 +3649,14 @@ export type Mutation_Root = {
   update_Students?: Maybe<Students_Mutation_Response>;
   /** update single row of the table: "Students" */
   update_Students_by_pk?: Maybe<Students>;
+  /** update data of the table: "calendars" */
+  update_calendars?: Maybe<Calendars_Mutation_Response>;
+  /** update single row of the table: "calendars" */
+  update_calendars_by_pk?: Maybe<Calendars>;
+  /** update data of the table: "club_accounts" */
+  update_club_accounts?: Maybe<Club_Accounts_Mutation_Response>;
+  /** update single row of the table: "club_accounts" */
+  update_club_accounts_by_pk?: Maybe<Club_Accounts>;
 };
 
 
@@ -3357,6 +3786,31 @@ export type Mutation_RootDelete_StudentsArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Students_By_PkArgs = {
   StudentId: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_CalendarsArgs = {
+  where: Calendars_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Calendars_By_PkArgs = {
+  account_id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Club_AccountsArgs = {
+  where: Club_Accounts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Club_Accounts_By_PkArgs = {
+  account_id: Scalars['String'];
+  club_id: Scalars['uniqueidentifier'];
 };
 
 
@@ -3515,6 +3969,34 @@ export type Mutation_RootInsert_Students_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_CalendarsArgs = {
+  if_matched?: InputMaybe<Calendars_If_Matched>;
+  objects: Array<Calendars_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Calendars_OneArgs = {
+  if_matched?: InputMaybe<Calendars_If_Matched>;
+  object: Calendars_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Club_AccountsArgs = {
+  if_matched?: InputMaybe<Club_Accounts_If_Matched>;
+  objects: Array<Club_Accounts_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Club_Accounts_OneArgs = {
+  if_matched?: InputMaybe<Club_Accounts_If_Matched>;
+  object: Club_Accounts_Insert_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_AccountAppRolesArgs = {
   _set?: InputMaybe<AccountAppRoles_Set_Input>;
   where: AccountAppRoles_Bool_Exp;
@@ -3665,6 +4147,34 @@ export type Mutation_RootUpdate_Students_By_PkArgs = {
   pk_columns: Students_Pk_Columns_Input;
 };
 
+
+/** mutation root */
+export type Mutation_RootUpdate_CalendarsArgs = {
+  _set?: InputMaybe<Calendars_Set_Input>;
+  where: Calendars_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Calendars_By_PkArgs = {
+  _set?: InputMaybe<Calendars_Set_Input>;
+  pk_columns: Calendars_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Club_AccountsArgs = {
+  _set?: InputMaybe<Club_Accounts_Set_Input>;
+  where: Club_Accounts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Club_Accounts_By_PkArgs = {
+  _set?: InputMaybe<Club_Accounts_Set_Input>;
+  pk_columns: Club_Accounts_Pk_Columns_Input;
+};
+
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls first */
@@ -3747,6 +4257,18 @@ export type Query_Root = {
   Students_aggregate: Students_Aggregate;
   /** fetch data from the table: "Students" using primary key columns */
   Students_by_pk?: Maybe<Students>;
+  /** fetch data from the table: "calendars" */
+  calendars: Array<Calendars>;
+  /** fetch aggregated fields from the table: "calendars" */
+  calendars_aggregate: Calendars_Aggregate;
+  /** fetch data from the table: "calendars" using primary key columns */
+  calendars_by_pk?: Maybe<Calendars>;
+  /** An array relationship */
+  club_accounts: Array<Club_Accounts>;
+  /** An aggregate relationship */
+  club_accounts_aggregate: Club_Accounts_Aggregate;
+  /** fetch data from the table: "club_accounts" using primary key columns */
+  club_accounts_by_pk?: Maybe<Club_Accounts>;
 };
 
 
@@ -3978,6 +4500,49 @@ export type Query_RootStudents_By_PkArgs = {
   StudentId: Scalars['uniqueidentifier'];
 };
 
+
+export type Query_RootCalendarsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Calendars_Order_By>>;
+  where?: InputMaybe<Calendars_Bool_Exp>;
+};
+
+
+export type Query_RootCalendars_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Calendars_Order_By>>;
+  where?: InputMaybe<Calendars_Bool_Exp>;
+};
+
+
+export type Query_RootCalendars_By_PkArgs = {
+  account_id: Scalars['String'];
+};
+
+
+export type Query_RootClub_AccountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+export type Query_RootClub_Accounts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+export type Query_RootClub_Accounts_By_PkArgs = {
+  account_id: Scalars['String'];
+  club_id: Scalars['uniqueidentifier'];
+};
+
 export type Subscription_Root = {
   __typename?: 'subscription_root';
   /** fetch data from the table: "AccountAppRoles" */
@@ -4044,6 +4609,18 @@ export type Subscription_Root = {
   Students_aggregate: Students_Aggregate;
   /** fetch data from the table: "Students" using primary key columns */
   Students_by_pk?: Maybe<Students>;
+  /** fetch data from the table: "calendars" */
+  calendars: Array<Calendars>;
+  /** fetch aggregated fields from the table: "calendars" */
+  calendars_aggregate: Calendars_Aggregate;
+  /** fetch data from the table: "calendars" using primary key columns */
+  calendars_by_pk?: Maybe<Calendars>;
+  /** An array relationship */
+  club_accounts: Array<Club_Accounts>;
+  /** An aggregate relationship */
+  club_accounts_aggregate: Club_Accounts_Aggregate;
+  /** fetch data from the table: "club_accounts" using primary key columns */
+  club_accounts_by_pk?: Maybe<Club_Accounts>;
 };
 
 
@@ -4275,6 +4852,49 @@ export type Subscription_RootStudents_By_PkArgs = {
   StudentId: Scalars['uniqueidentifier'];
 };
 
+
+export type Subscription_RootCalendarsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Calendars_Order_By>>;
+  where?: InputMaybe<Calendars_Bool_Exp>;
+};
+
+
+export type Subscription_RootCalendars_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Calendars_Order_By>>;
+  where?: InputMaybe<Calendars_Bool_Exp>;
+};
+
+
+export type Subscription_RootCalendars_By_PkArgs = {
+  account_id: Scalars['String'];
+};
+
+
+export type Subscription_RootClub_AccountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+export type Subscription_RootClub_Accounts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Club_Accounts_Order_By>>;
+  where?: InputMaybe<Club_Accounts_Bool_Exp>;
+};
+
+
+export type Subscription_RootClub_Accounts_By_PkArgs = {
+  account_id: Scalars['String'];
+  club_id: Scalars['uniqueidentifier'];
+};
+
 /** Boolean expression to compare columns of type "uniqueidentifier". All fields are combined with logical 'AND'. */
 export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _eq?: InputMaybe<Scalars['uniqueidentifier']>;
@@ -4300,7 +4920,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, created_at: any } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -4353,6 +4973,14 @@ export type SearchMembersByIdQueryVariables = Exact<{
 
 
 export type SearchMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
+
+export type UpdateStudentByIdMutationVariables = Exact<{
+  id: Scalars['String'];
+  changes: Accounts_Set_Input;
+}>;
+
+
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
 
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -4436,6 +5064,12 @@ export const AccountProfileDocument = gql`
       City
       Postal
       State
+    }
+    calendar {
+      id
+      account_id
+      access_token
+      created_at
     }
   }
 }
@@ -4782,6 +5416,58 @@ export function useSearchMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type SearchMembersByIdQueryHookResult = ReturnType<typeof useSearchMembersByIdQuery>;
 export type SearchMembersByIdLazyQueryHookResult = ReturnType<typeof useSearchMembersByIdLazyQuery>;
 export type SearchMembersByIdQueryResult = Apollo.QueryResult<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>;
+export const UpdateStudentByIdDocument = gql`
+    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
+    Oid
+    PrimaryStudentId
+    AccountStudent {
+      StudentId
+      FirstName
+      LastName
+      Email
+      Phone
+      Birthdate
+      AssociationMemberId
+    }
+    Address {
+      AddressId
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+  }
+}
+    `;
+export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+
+/**
+ * __useUpdateStudentByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
+      }
+export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
 export const UpdateFencerByIdDocument = gql`
     mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
   update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {

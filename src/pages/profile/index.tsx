@@ -1,55 +1,33 @@
 import type { NextPage } from "next"
-import {
-  TabList,
-  Tab,
-  TabValue,
-  SelectTabData,
-  SelectTabEvent,
-} from "@fluentui/react-components/unstable"
-import { Text } from "@fluentui/react-components"
+import { TabList, Tab } from "@fluentui/react-components/unstable"
 import styled from "@emotion/styled"
 
 import {
-  ElementsProvider,
   PageTitle,
-  PaymentMethodForm,
   ProfileForm,
-  PaymentMethodCard,
   FencersManager,
+  ConnectionsManager,
+  PaymentMethodsManager,
 } from "$components"
-import { useTitle } from "$hooks"
-import { useGetPaymentMethodsQuery } from "$store"
-import { useState } from "react"
-
-// TODO: Move payments logic into a separate component
+import { useTabs, useTitle } from "$hooks"
 
 const ProfileTabs = styled(TabList)`
   margin-bottom: 1rem;
-`
-
-const PaymentMethodsGrid = styled.div`
-  display: grid;
-  grid-gap: 1.25rem;
-  grid-template-columns: repeat(auto-fill, 292px);
 `
 
 export const Profile: NextPage = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
 
-  const { data: paymentMethods } =
-    useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
-
-  const [selectedTab, setSelectedTab] = useState<TabValue>("profile")
-  const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
-    setSelectedTab(data.value)
-  }
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+  const { onTabSelected, selectedTab } = useTabs(params.tab || "profile")
 
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
 
-      <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
+      <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelected}>
         <Tab value="profile">Profile</Tab>
         <Tab value="connections">Connections</Tab>
         {/* <Tab value="account">Account</Tab>
@@ -62,41 +40,10 @@ export const Profile: NextPage = () => {
       {selectedTab === "connections" && <ConnectionsManager />}
       {/* {selectedTab === "account" && <></>}
       {selectedTab === "notifications" && <></>} */}
-      {selectedTab === "payment" && (
-        <>
-          <PaymentMethodsGrid>
-            {paymentMethods?.map(({ card, id, billing_details }, index) => {
-              if (card) {
-                return (
-                  <PaymentMethodCard
-                    key={id}
-                    card={card}
-                    themeIndex={index}
-                    name={billing_details.name}
-                    onEditClick={(event, card) => console.log("EDIT", card)}
-                  />
-                )
-              } else {
-                return null
-              }
-            })}
-          </PaymentMethodsGrid>
-          <ElementsProvider>
-            <PaymentMethodForm />
-          </ElementsProvider>
-        </>
-      )}
+      {selectedTab === "payment" && <PaymentMethodsManager />}
       {selectedTab === "fencers" && <FencersManager />}
     </>
   )
 }
 
 export default Profile
-
-const ConnectionsManager: React.FunctionComponent = () => {
-  return (
-    <>
-      <Text>Connect to your callendar</Text>
-    </>
-  )
-}
