@@ -4,23 +4,30 @@ import {
   AccordionItem,
   Text,
 } from "@fluentui/react-components"
+import utc from "dayjs/plugin/utc"
+import { MessageBar, MessageBarButton, MessageBarType } from "@fluentui/react"
+import dayjs from "dayjs"
 
 import { IndentedAccordionPanel, LinkButton, TabText } from "$components"
 import { useAccountProfile } from "$hooks"
-import { MessageBar, MessageBarButton, MessageBarType } from "@fluentui/react"
+import { useCallback } from "react"
+
+dayjs.extend(utc)
 
 export const ConnectionsManager: React.FunctionComponent = () => {
   const {
-    account: { UserId, Email, isSchedulerLinked },
+    account: { UserId, Email, isCalendarLinked, calendar },
     loading: isProfileLoading,
   } = useAccountProfile()
 
   // TODO: Add Usa Fencing linking
   // TODO: Add check for user role
 
-  const calendarLinkingUri = `/api/scheduling/connect/?userId=${
-    UserId ?? ""
-  }&login_hint=${Email ?? ""}`
+  const getCalendarLinkingUri = useCallback(() => {
+    return `/api/scheduling/connect/?userId=${UserId ?? ""}&login_hint=${
+      Email ?? ""
+    }`
+  }, [Email, UserId])
 
   return (
     <div style={{ maxWidth: 600 }}>
@@ -38,16 +45,21 @@ export const ConnectionsManager: React.FunctionComponent = () => {
                 Connect to your calendar to enable appointment bookings during
                 available hours.
               </Text>
-              {isSchedulerLinked ? (
+              {isCalendarLinked ? (
                 <MessageBar
                   messageBarType={MessageBarType.success}
                   isMultiline={false}
                   actions={<MessageBarButton>Unlink</MessageBarButton>}
                 >
-                  Your calendar was linked on DATE.
+                  Your calendar was linked on{" "}
+                  {dayjs
+                    .utc(calendar?.created_at)
+                    .local()
+                    .format("MMM DD, YYYY")}
+                  .
                 </MessageBar>
               ) : (
-                <LinkButton appearance="primary" href={calendarLinkingUri}>
+                <LinkButton appearance="primary" href={getCalendarLinkingUri()}>
                   Link calendar
                 </LinkButton>
               )}

@@ -2,8 +2,6 @@ query AccountProfile($oid: String!) {
   Accounts(where: { Oid: { _eq: $oid } }) {
     Oid
     PrimaryStudentId
-    SchedulerToken
-    ConnectToken
     AccountStudent {
       StudentId
       FirstName
@@ -20,6 +18,12 @@ query AccountProfile($oid: String!) {
       City
       Postal
       State
+    }
+    calendar {
+      id
+      account_id
+      access_token
+      created_at
     }
   }
 }

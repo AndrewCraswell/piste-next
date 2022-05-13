@@ -11,14 +11,8 @@ export const useAccountProfile = () => {
   })
 
   const account = useMemo(() => {
-    let {
-      AccountStudent,
-      Oid,
-      Address,
-      PrimaryStudentId,
-      SchedulerToken,
-      ConnectToken,
-    } = data?.Accounts[0] || {}
+    let { AccountStudent, Oid, Address, PrimaryStudentId, calendar } =
+      data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
     const accountFullName = `${AccountStudent?.FirstName || ""} ${
@@ -36,11 +30,8 @@ export const useAccountProfile = () => {
     return {
       UserId: Oid,
       PrimaryStudentId,
-      isSchedulerLinked: !!SchedulerToken,
-      isPaymentsConnected: !!ConnectToken,
-      schedulerToken: SchedulerToken,
-      paymentsToken: ConnectToken,
-
+      isCalendarLinked: !!calendar,
+      calendar,
       FullName: accountFullName || userFullName,
       ...AccountStudent,
       ...Address,
