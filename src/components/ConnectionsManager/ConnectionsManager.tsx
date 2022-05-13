@@ -2,13 +2,11 @@ import {
   Accordion,
   AccordionHeader,
   AccordionItem,
-  Button,
   Text,
 } from "@fluentui/react-components"
 
-import { IndentedAccordionPanel, TabText } from "$components"
+import { IndentedAccordionPanel, LinkButton, TabText } from "$components"
 import { useAccountProfile } from "$hooks"
-import { useCallback } from "react"
 import { MessageBar, MessageBarButton, MessageBarType } from "@fluentui/react"
 
 export const ConnectionsManager: React.FunctionComponent = () => {
@@ -17,14 +15,12 @@ export const ConnectionsManager: React.FunctionComponent = () => {
     loading: isProfileLoading,
   } = useAccountProfile()
 
-  const redirectToScheduler = useCallback(() => {
-    window.location.href = `/api/scheduling/connect/?userId=${
-      UserId ?? ""
-    }&login_hint=${Email ?? ""}`
-  }, [Email, UserId])
-
   // TODO: Add Usa Fencing linking
   // TODO: Add check for user role
+
+  const calendarLinkingUri = `/api/scheduling/connect/?userId=${
+    UserId ?? ""
+  }&login_hint=${Email ?? ""}`
 
   return (
     <div style={{ maxWidth: 600 }}>
@@ -51,9 +47,9 @@ export const ConnectionsManager: React.FunctionComponent = () => {
                   Your calendar was linked on DATE.
                 </MessageBar>
               ) : (
-                <Button appearance="primary" onClick={redirectToScheduler}>
+                <LinkButton appearance="primary" href={calendarLinkingUri}>
                   Link calendar
-                </Button>
+                </LinkButton>
               )}
             </IndentedAccordionPanel>
           </AccordionItem>
