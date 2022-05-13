@@ -5005,7 +5005,7 @@ export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_St
 
 
 export const MembersByIdsDocument = gql`
-    query MembersByIds($ids: [String!]) {
+    query MembersByIds($ids: [String!]) @cached(ttl: 300) {
   AssociationMembers(where: {AssociationMemberId: {_in: $ids}}) {
     FirstName
     LastName
@@ -5232,7 +5232,7 @@ export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFe
 export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
 export const MemberByIdDocument = gql`
-    query MemberById($id: String!) {
+    query MemberById($id: String!) @cached(ttl: 300) {
   member: AssociationMembers(where: {AssociationMemberId: {_eq: $id}}) {
     FirstName
     LastName
@@ -5272,7 +5272,7 @@ export type MemberByIdQueryHookResult = ReturnType<typeof useMemberByIdQuery>;
 export type MemberByIdLazyQueryHookResult = ReturnType<typeof useMemberByIdLazyQuery>;
 export type MemberByIdQueryResult = Apollo.QueryResult<MemberByIdQuery, MemberByIdQueryVariables>;
 export const MemberDetailsByNameDocument = gql`
-    query MemberDetailsByName($firstName: String!, $lastName: String!) {
+    query MemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
   AssociationMembers(
     limit: 10
     where: {FirstName: {_like: $firstName}, LastName: {_like: $lastName}}
@@ -5322,7 +5322,7 @@ export type MemberDetailsByNameQueryHookResult = ReturnType<typeof useMemberDeta
 export type MemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useMemberDetailsByNameLazyQuery>;
 export type MemberDetailsByNameQueryResult = Apollo.QueryResult<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>;
 export const SearchMembersDocument = gql`
-    query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
+    query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
   AssociationMembersLookup(
     offset: $offset
     limit: $count
@@ -5380,7 +5380,7 @@ export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQue
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
 export const SearchMembersByIdDocument = gql`
-    query SearchMembersById($id: String!) {
+    query SearchMembersById($id: String!) @cached(ttl: 300) {
   AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
     FullName
     FirstName

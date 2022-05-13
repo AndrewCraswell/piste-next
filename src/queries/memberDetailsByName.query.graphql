@@ -1,4 +1,5 @@
-query MemberDetailsByName($firstName: String!, $lastName: String!) {
+query MemberDetailsByName($firstName: String!, $lastName: String!)
+@cached(ttl: 300) {
   AssociationMembers(
     limit: 10
     where: { FirstName: { _like: $firstName }, LastName: { _like: $lastName } }
