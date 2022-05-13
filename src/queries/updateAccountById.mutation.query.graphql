@@ -1,5 +1,5 @@
-query AccountProfile($oid: String!) {
-  Accounts(where: { Oid: { _eq: $oid } }) {
+mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+  update_Accounts_by_pk(pk_columns: { Oid: $id }, _set: $changes) {
     Oid
     PrimaryStudentId
     SchedulerToken

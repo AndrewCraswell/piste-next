@@ -330,6 +330,7 @@ export type Accounts = {
   ClubRoles: Array<AccountClubRoles>;
   /** An aggregate relationship */
   ClubRoles_aggregate: AccountClubRoles_Aggregate;
+  ConnectToken?: Maybe<Scalars['String']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
   /** An array relationship */
@@ -339,6 +340,7 @@ export type Accounts = {
   LanguageId: Scalars['String'];
   Oid: Scalars['String'];
   PrimaryStudentId: Scalars['uniqueidentifier'];
+  SchedulerToken?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
 
@@ -432,12 +434,14 @@ export type Accounts_Bool_Exp = {
   AddressId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   AppRoles?: InputMaybe<AccountAppRoles_Bool_Exp>;
   ClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
+  ConnectToken?: InputMaybe<String_Mssql_Comparison_Exp>;
   CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
   Dependents?: InputMaybe<Students_Bool_Exp>;
   LanguageId?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
   PrimaryStudentId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  SchedulerToken?: InputMaybe<String_Mssql_Comparison_Exp>;
   UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   _and?: InputMaybe<Array<Accounts_Bool_Exp>>;
   _not?: InputMaybe<Accounts_Bool_Exp>;
@@ -454,11 +458,13 @@ export type Accounts_If_Matched = {
 /** input type for inserting data into table "Accounts" */
 export type Accounts_Insert_Input = {
   AddressId?: InputMaybe<Scalars['uniqueidentifier']>;
+  ConnectToken?: InputMaybe<Scalars['String']>;
   CreatedAt?: InputMaybe<Scalars['datetime2']>;
   CreatedBy?: InputMaybe<Scalars['String']>;
   LanguageId?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   PrimaryStudentId?: InputMaybe<Scalars['uniqueidentifier']>;
+  SchedulerToken?: InputMaybe<Scalars['String']>;
   UpdatedAt?: InputMaybe<Scalars['datetime2']>;
 };
 
@@ -466,6 +472,8 @@ export type Accounts_Insert_Input = {
 export enum Accounts_Insert_Match_Column {
   /** column name */
   AddressId = 'AddressId',
+  /** column name */
+  ConnectToken = 'ConnectToken',
   /** column name */
   CreatedAt = 'CreatedAt',
   /** column name */
@@ -477,44 +485,54 @@ export enum Accounts_Insert_Match_Column {
   /** column name */
   PrimaryStudentId = 'PrimaryStudentId',
   /** column name */
+  SchedulerToken = 'SchedulerToken',
+  /** column name */
   UpdatedAt = 'UpdatedAt'
 }
 
 /** aggregate max on columns */
 export type Accounts_Max_Fields = {
   __typename?: 'Accounts_max_fields';
+  ConnectToken?: Maybe<Scalars['String']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
   LanguageId?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
+  SchedulerToken?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
 
 /** order by max() on columns of table "Accounts" */
 export type Accounts_Max_Order_By = {
+  ConnectToken?: InputMaybe<Order_By>;
   CreatedAt?: InputMaybe<Order_By>;
   CreatedBy?: InputMaybe<Order_By>;
   LanguageId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
+  SchedulerToken?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
 export type Accounts_Min_Fields = {
   __typename?: 'Accounts_min_fields';
+  ConnectToken?: Maybe<Scalars['String']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
   LanguageId?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
+  SchedulerToken?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
 
 /** order by min() on columns of table "Accounts" */
 export type Accounts_Min_Order_By = {
+  ConnectToken?: InputMaybe<Order_By>;
   CreatedAt?: InputMaybe<Order_By>;
   CreatedBy?: InputMaybe<Order_By>;
   LanguageId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
+  SchedulerToken?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };
 
@@ -534,12 +552,14 @@ export type Accounts_Order_By = {
   AddressId?: InputMaybe<Order_By>;
   AppRoles_aggregate?: InputMaybe<AccountAppRoles_Aggregate_Order_By>;
   ClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
+  ConnectToken?: InputMaybe<Order_By>;
   CreatedAt?: InputMaybe<Order_By>;
   CreatedBy?: InputMaybe<Order_By>;
   Dependents_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
   LanguageId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   PrimaryStudentId?: InputMaybe<Order_By>;
+  SchedulerToken?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
 };
 
@@ -553,6 +573,8 @@ export enum Accounts_Select_Column {
   /** column name */
   AddressId = 'AddressId',
   /** column name */
+  ConnectToken = 'ConnectToken',
+  /** column name */
   CreatedAt = 'CreatedAt',
   /** column name */
   CreatedBy = 'CreatedBy',
@@ -563,17 +585,21 @@ export enum Accounts_Select_Column {
   /** column name */
   PrimaryStudentId = 'PrimaryStudentId',
   /** column name */
+  SchedulerToken = 'SchedulerToken',
+  /** column name */
   UpdatedAt = 'UpdatedAt'
 }
 
 /** input type for updating data in table "Accounts" */
 export type Accounts_Set_Input = {
   AddressId?: InputMaybe<Scalars['uniqueidentifier']>;
+  ConnectToken?: InputMaybe<Scalars['String']>;
   CreatedAt?: InputMaybe<Scalars['datetime2']>;
   CreatedBy?: InputMaybe<Scalars['String']>;
   LanguageId?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   PrimaryStudentId?: InputMaybe<Scalars['uniqueidentifier']>;
+  SchedulerToken?: InputMaybe<Scalars['String']>;
   UpdatedAt?: InputMaybe<Scalars['datetime2']>;
 };
 
@@ -582,6 +608,8 @@ export enum Accounts_Update_Column {
   /** column name */
   AddressId = 'AddressId',
   /** column name */
+  ConnectToken = 'ConnectToken',
+  /** column name */
   CreatedAt = 'CreatedAt',
   /** column name */
   CreatedBy = 'CreatedBy',
@@ -591,6 +619,8 @@ export enum Accounts_Update_Column {
   Oid = 'Oid',
   /** column name */
   PrimaryStudentId = 'PrimaryStudentId',
+  /** column name */
+  SchedulerToken = 'SchedulerToken',
   /** column name */
   UpdatedAt = 'UpdatedAt'
 }
@@ -4300,7 +4330,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, SchedulerToken?: string | null, ConnectToken?: string | null, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -4353,6 +4383,14 @@ export type SearchMembersByIdQueryVariables = Exact<{
 
 
 export type SearchMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
+
+export type UpdateStudentByIdMutationVariables = Exact<{
+  id: Scalars['String'];
+  changes: Accounts_Set_Input;
+}>;
+
+
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, SchedulerToken?: string | null, ConnectToken?: string | null, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
 
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -4420,6 +4458,8 @@ export const AccountProfileDocument = gql`
   Accounts(where: {Oid: {_eq: $oid}}) {
     Oid
     PrimaryStudentId
+    SchedulerToken
+    ConnectToken
     AccountStudent {
       StudentId
       FirstName
@@ -4782,6 +4822,60 @@ export function useSearchMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type SearchMembersByIdQueryHookResult = ReturnType<typeof useSearchMembersByIdQuery>;
 export type SearchMembersByIdLazyQueryHookResult = ReturnType<typeof useSearchMembersByIdLazyQuery>;
 export type SearchMembersByIdQueryResult = Apollo.QueryResult<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>;
+export const UpdateStudentByIdDocument = gql`
+    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
+    Oid
+    PrimaryStudentId
+    SchedulerToken
+    ConnectToken
+    AccountStudent {
+      StudentId
+      FirstName
+      LastName
+      Email
+      Phone
+      Birthdate
+      AssociationMemberId
+    }
+    Address {
+      AddressId
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+  }
+}
+    `;
+export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+
+/**
+ * __useUpdateStudentByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
+      }
+export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
 export const UpdateFencerByIdDocument = gql`
     mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
   update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {

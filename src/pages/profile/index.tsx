@@ -1,12 +1,12 @@
 import type { NextPage } from "next"
+import { TabList, Tab } from "@fluentui/react-components/unstable"
 import {
-  TabList,
-  Tab,
-  TabValue,
-  SelectTabData,
-  SelectTabEvent,
-} from "@fluentui/react-components/unstable"
-import { Text } from "@fluentui/react-components"
+  Accordion,
+  AccordionHeader,
+  AccordionItem,
+  Button,
+  Text,
+} from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 import {
@@ -16,10 +16,12 @@ import {
   ProfileForm,
   PaymentMethodCard,
   FencersManager,
+  IndentedAccordionPanel,
+  TabText,
 } from "$components"
-import { useTitle } from "$hooks"
+import { useAccountProfile, useTabs, useTitle } from "$hooks"
 import { useGetPaymentMethodsQuery } from "$store"
-import { useState } from "react"
+import { useCallback, useState } from "react"
 
 // TODO: Move payments logic into a separate component
 
@@ -37,19 +39,20 @@ export const Profile: NextPage = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
 
+  const urlSearchParams = new URLSearchParams(window.location.search)
+  const params = Object.fromEntries(urlSearchParams.entries())
+  const { onTabSelected, selectedTab, setTab } = useTabs(
+    params.tab || "profile"
+  )
+
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
-
-  const [selectedTab, setSelectedTab] = useState<TabValue>("profile")
-  const onTabSelect = (event: SelectTabEvent, data: SelectTabData) => {
-    setSelectedTab(data.value)
-  }
 
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
 
-      <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelect}>
+      <ProfileTabs selectedValue={selectedTab} onTabSelect={onTabSelected}>
         <Tab value="profile">Profile</Tab>
         <Tab value="connections">Connections</Tab>
         {/* <Tab value="account">Account</Tab>
@@ -94,9 +97,45 @@ export const Profile: NextPage = () => {
 export default Profile
 
 const ConnectionsManager: React.FunctionComponent = () => {
+  const {
+    account: { UserId, Email, isSchedulerLinked },
+  } = useAccountProfile()
+
+  const redirectToScheduler = useCallback(() => {
+    console.log(UserId)
+    window.location.href = `/api/scheduling/connect/?userId=${
+      UserId ?? ""
+    }&login_hint=${Email ?? ""}`
+  }, [Email, UserId])
+
   return (
     <>
-      <Text>Connect to your callendar</Text>
+      <TabText block>Manage external accounts linked to your profile.</TabText>
+      <Accordion collapsible defaultOpenItems="contact">
+        <AccordionItem value="membership">
+          <AccordionHeader size="large">Association membership</AccordionHeader>
+          <IndentedAccordionPanel></IndentedAccordionPanel>
+        </AccordionItem>
+        <AccordionItem value="contact">
+          <AccordionHeader size="large">Calendar</AccordionHeader>
+          <IndentedAccordionPanel>
+            <Text block style={{ marginBottom: "1rem" }}>
+              Connect to your calendar to enable appointment bookings.
+            </Text>
+            {isSchedulerLinked ? (
+              <span>Calendar is linked!</span>
+            ) : (
+              <Button appearance="primary" onClick={redirectToScheduler}>
+                Link calendar
+              </Button>
+            )}
+          </IndentedAccordionPanel>
+        </AccordionItem>
+        <AccordionItem value="address">
+          <AccordionHeader size="large">Stripe Payments</AccordionHeader>
+          <IndentedAccordionPanel></IndentedAccordionPanel>
+        </AccordionItem>
+      </Accordion>
     </>
   )
 }

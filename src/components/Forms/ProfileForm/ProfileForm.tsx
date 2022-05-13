@@ -17,11 +17,11 @@ import { FencerForm } from "../FencerForm"
 import { PanelFooter } from "$components"
 import styled from "@emotion/styled"
 
-const IndentedAccordionPanel = styled(AccordionPanel)`
+export const IndentedAccordionPanel = styled(AccordionPanel)`
   margin-left: 40px;
 `
 
-const TabText = styled(Text)`
+export const TabText = styled(Text)`
   margin: 0 0 1rem 1rem;
 `
 
