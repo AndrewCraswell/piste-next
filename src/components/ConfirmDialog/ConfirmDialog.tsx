@@ -8,6 +8,8 @@ export interface IConfirmDialogProps {
   isProcessing?: boolean
   onConfirmed: () => void
   onClose: () => void
+  confirmLabel: string
+  title: string
 }
 
 export const ConfirmDialog: React.FunctionComponent<IConfirmDialogProps> = ({
@@ -16,13 +18,15 @@ export const ConfirmDialog: React.FunctionComponent<IConfirmDialogProps> = ({
   children,
   onConfirmed,
   onClose,
+  confirmLabel,
+  title,
 }) => {
   return (
     <Dialog
       hidden={hidden}
       dialogContentProps={{
         type: DialogType.largeHeader,
-        title: "Delete fencer?",
+        title,
         subText: children as unknown as string,
         closeButtonAriaLabel: "Close",
       }}
@@ -35,7 +39,7 @@ export const ConfirmDialog: React.FunctionComponent<IConfirmDialogProps> = ({
             onClick={onConfirmed}
             disabled={isProcessing}
           >
-            Delete
+            {confirmLabel}
           </Button>
           <Button onClick={onClose} disabled={isProcessing}>
             Cancel

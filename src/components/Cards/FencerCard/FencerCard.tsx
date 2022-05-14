@@ -1,21 +1,9 @@
-import {
-  Dialog,
-  DialogFooter,
-  DialogType,
-  IButtonProps,
-  Icon,
-  Stack,
-} from "@fluentui/react"
-import {
-  Avatar,
-  Badge,
-  Button,
-  FluentProvider,
-} from "@fluentui/react-components"
+import { IButtonProps, Icon, Stack } from "@fluentui/react"
+import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
 import { useCallback, useMemo } from "react"
 
-import { EditFencerDialog, VerticalCard } from "$components"
+import { EditFencerDialog, VerticalCard, ConfirmDialog } from "$components"
 import { useDeleteFencerByIdMutation } from "$queries"
 import { DetailsItem } from "./components"
 import { useDisclosure } from "$hooks"
@@ -25,15 +13,11 @@ import {
   DetailsStack,
   EmbedDialog,
   SemiboldText,
-  DialogSpinner,
 } from "./FencerCard.styles"
 import { AccountFencer } from "$types"
 import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
 import { cacheEvicter } from "$lib"
-
-// TODO: Break PistePanel into separate component
-// TODO: On PistePanel save, update fencer
-// TODO: Break payments into another panel
+import { formatPhoneNumber } from "./FencerCard.utils"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
@@ -207,37 +191,20 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       </VerticalCard>
 
       <EmbedDialog>
-        {/* TODO: Migrate this into ConfirmFencerDeleteDialog component */}
-        <Dialog
+        <ConfirmDialog
           hidden={!isDeleteDialogOpen}
-          dialogContentProps={{
-            type: DialogType.largeHeader,
-            title: `Delete fencer?`,
-            subText: (
-              <span>
-                Are you sure you want to permanently delete{" "}
-                <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
-              </span>
-            ) as unknown as string,
-            closeButtonAriaLabel: "Close",
-          }}
+          isProcessing={isDeletingFencer}
+          onClose={onDeleteDialogClose}
+          onConfirmed={onDeleteFencerConfirmed}
+          confirmLabel="Delete"
+          title="Delete fencer?"
         >
-          <FluentProvider>
-            <DialogFooter>
-              {isDeletingFencer && <DialogSpinner />}
-              <Button
-                appearance="primary"
-                onClick={onDeleteFencerConfirmed}
-                disabled={isDeletingFencer}
-              >
-                Delete
-              </Button>
-              <Button onClick={onDeleteDialogClose} disabled={isDeletingFencer}>
-                Cancel
-              </Button>
-            </DialogFooter>
-          </FluentProvider>
-        </Dialog>
+          <>
+            Are you sure you want to permanently delete{" "}
+            <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
+          </>
+        </ConfirmDialog>
+
         <EditFencerDialog
           fencer={fencer}
           isOpen={isEditFencerDialogOpen}
@@ -253,14 +220,4 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       </EmbedDialog>
     </>
   )
-}
-
-function formatPhoneNumber(phoneNumber: string) {
-  var cleaned = phoneNumber.replace(/\D/g, "")
-  var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
-  if (match) {
-    var intlCode = match[1] ? "+1 " : ""
-    return [intlCode, "(", match[2], ") ", match[3], "-", match[4]].join("")
-  }
-  return phoneNumber
 }
