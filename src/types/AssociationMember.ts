@@ -1,4 +1,5 @@
-import { SearchMembersQuery } from "$queries"
+import { SearchMembersQuery, GetMembersByIdQuery } from "$queries"
 
-export type AssociationMember =
-  SearchMembersQuery["AssociationMembersLookup"][0]
+export type AssociationMember = NonNullable<
+  GetMembersByIdQuery["AssociationMembers_by_pk"]
+>

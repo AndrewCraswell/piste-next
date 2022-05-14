@@ -1,10 +1,9 @@
 query GetMembersById($id: String!) @cached(ttl: 300) {
-  AssociationMembersLookup(
-    where: { _or: [{ AssociationMemberId: { _eq: $id } }] }
-  ) {
+  AssociationMembers_by_pk(AssociationMemberId: $id) {
     FullName
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name

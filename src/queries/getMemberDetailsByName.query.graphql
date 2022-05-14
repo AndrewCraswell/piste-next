@@ -1,11 +1,12 @@
 query GetMemberDetailsByName($firstName: String!, $lastName: String!)
 @cached(ttl: 300) {
-  AssociationMembersLookup(
+  AssociationMembers(
     limit: 10
     where: { FirstName: { _like: $firstName }, LastName: { _like: $lastName } }
   ) {
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name

@@ -15,7 +15,6 @@ export type Scalars = {
   Int: number;
   Float: number;
   date: any;
-  datetime: any;
   datetime2: any;
   uniqueidentifier: any;
 };
@@ -25,10 +24,10 @@ export type AccountAppRoles = {
   __typename?: 'AccountAppRoles';
   /** An object relationship */
   Account: Accounts;
+  /** An object relationship */
+  AppRole: AppRoles;
   AppRoleId: Scalars['uniqueidentifier'];
   Oid: Scalars['String'];
-  /** An object relationship */
-  Role: AppRoles;
 };
 
 /** aggregated selection of "AccountAppRoles" */
@@ -63,9 +62,9 @@ export type AccountAppRoles_Aggregate_Order_By = {
 /** Boolean expression to filter rows from the table "AccountAppRoles". All fields are combined with a logical 'AND'. */
 export type AccountAppRoles_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
+  AppRole?: InputMaybe<AppRoles_Bool_Exp>;
   AppRoleId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Role?: InputMaybe<AppRoles_Bool_Exp>;
   _and?: InputMaybe<Array<AccountAppRoles_Bool_Exp>>;
   _not?: InputMaybe<AccountAppRoles_Bool_Exp>;
   _or?: InputMaybe<Array<AccountAppRoles_Bool_Exp>>;
@@ -126,9 +125,9 @@ export type AccountAppRoles_Mutation_Response = {
 /** Ordering options when selecting data from "AccountAppRoles". */
 export type AccountAppRoles_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
+  AppRole?: InputMaybe<AppRoles_Order_By>;
   AppRoleId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
-  Role?: InputMaybe<AppRoles_Order_By>;
 };
 
 /** primary key columns input for table: AccountAppRoles */
@@ -167,10 +166,10 @@ export type AccountClubRoles = {
   /** An object relationship */
   Club: Clubs;
   ClubId: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  ClubRole: ClubRoles;
   ClubRoleId: Scalars['uniqueidentifier'];
   Oid: Scalars['String'];
-  /** An object relationship */
-  Role: ClubRoles;
 };
 
 /** aggregated selection of "AccountClubRoles" */
@@ -207,9 +206,9 @@ export type AccountClubRoles_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
   Club?: InputMaybe<Clubs_Bool_Exp>;
   ClubId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  ClubRole?: InputMaybe<ClubRoles_Bool_Exp>;
   ClubRoleId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Role?: InputMaybe<ClubRoles_Bool_Exp>;
   _and?: InputMaybe<Array<AccountClubRoles_Bool_Exp>>;
   _not?: InputMaybe<AccountClubRoles_Bool_Exp>;
   _or?: InputMaybe<Array<AccountClubRoles_Bool_Exp>>;
@@ -275,9 +274,9 @@ export type AccountClubRoles_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
   Club?: InputMaybe<Clubs_Order_By>;
   ClubId?: InputMaybe<Order_By>;
+  ClubRole?: InputMaybe<ClubRoles_Order_By>;
   ClubRoleId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
-  Role?: InputMaybe<ClubRoles_Order_By>;
 };
 
 /** primary key columns input for table: AccountClubRoles */
@@ -317,28 +316,28 @@ export enum AccountClubRoles_Update_Column {
 /** columns and relationships of "Accounts" */
 export type Accounts = {
   __typename?: 'Accounts';
+  /** An array relationship */
+  AccountAppRoles: Array<AccountAppRoles>;
+  /** An aggregate relationship */
+  AccountAppRoles_aggregate: AccountAppRoles_Aggregate;
+  /** An array relationship */
+  AccountClubRoles: Array<AccountClubRoles>;
+  /** An aggregate relationship */
+  AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   /** An object relationship */
-  AccountStudent: Students;
-  /** An object relationship */
-  Address?: Maybe<Addresses>;
+  Address: Addresses;
   AddressId: Scalars['uniqueidentifier'];
-  /** An array relationship */
-  AppRoles: Array<AccountAppRoles>;
-  /** An aggregate relationship */
-  AppRoles_aggregate: AccountAppRoles_Aggregate;
-  /** An array relationship */
-  ClubRoles: Array<AccountClubRoles>;
-  /** An aggregate relationship */
-  ClubRoles_aggregate: AccountClubRoles_Aggregate;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
-  /** An array relationship */
-  Dependents: Array<Students>;
-  /** An aggregate relationship */
-  Dependents_aggregate: Students_Aggregate;
   LanguageId: Scalars['String'];
   Oid: Scalars['String'];
   PrimaryStudentId: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  Student: Students;
+  /** An array relationship */
+  Students: Array<Students>;
+  /** An aggregate relationship */
+  Students_aggregate: Students_Aggregate;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
   /** An object relationship */
   calendar?: Maybe<Calendars>;
@@ -350,7 +349,7 @@ export type Accounts = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsAppRolesArgs = {
+export type AccountsAccountAppRolesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountAppRoles_Order_By>>;
@@ -359,7 +358,7 @@ export type AccountsAppRolesArgs = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsAppRoles_AggregateArgs = {
+export type AccountsAccountAppRoles_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountAppRoles_Order_By>>;
@@ -368,7 +367,7 @@ export type AccountsAppRoles_AggregateArgs = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsClubRolesArgs = {
+export type AccountsAccountClubRolesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
@@ -377,7 +376,7 @@ export type AccountsClubRolesArgs = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsClubRoles_AggregateArgs = {
+export type AccountsAccountClubRoles_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
@@ -386,7 +385,7 @@ export type AccountsClubRoles_AggregateArgs = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsDependentsArgs = {
+export type AccountsStudentsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
@@ -395,7 +394,7 @@ export type AccountsDependentsArgs = {
 
 
 /** columns and relationships of "Accounts" */
-export type AccountsDependents_AggregateArgs = {
+export type AccountsStudents_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
@@ -451,17 +450,17 @@ export type Accounts_Aggregate_Order_By = {
 
 /** Boolean expression to filter rows from the table "Accounts". All fields are combined with a logical 'AND'. */
 export type Accounts_Bool_Exp = {
-  AccountStudent?: InputMaybe<Students_Bool_Exp>;
+  AccountAppRoles?: InputMaybe<AccountAppRoles_Bool_Exp>;
+  AccountClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
   Address?: InputMaybe<Addresses_Bool_Exp>;
   AddressId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  AppRoles?: InputMaybe<AccountAppRoles_Bool_Exp>;
-  ClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
   CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Dependents?: InputMaybe<Students_Bool_Exp>;
   LanguageId?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
   PrimaryStudentId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  Student?: InputMaybe<Students_Bool_Exp>;
+  Students?: InputMaybe<Students_Bool_Exp>;
   UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   _and?: InputMaybe<Array<Accounts_Bool_Exp>>;
   _not?: InputMaybe<Accounts_Bool_Exp>;
@@ -555,17 +554,17 @@ export type Accounts_Mutation_Response = {
 
 /** Ordering options when selecting data from "Accounts". */
 export type Accounts_Order_By = {
-  AccountStudent?: InputMaybe<Students_Order_By>;
+  AccountAppRoles_aggregate?: InputMaybe<AccountAppRoles_Aggregate_Order_By>;
+  AccountClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
   Address?: InputMaybe<Addresses_Order_By>;
   AddressId?: InputMaybe<Order_By>;
-  AppRoles_aggregate?: InputMaybe<AccountAppRoles_Aggregate_Order_By>;
-  ClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
   CreatedAt?: InputMaybe<Order_By>;
   CreatedBy?: InputMaybe<Order_By>;
-  Dependents_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
   LanguageId?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   PrimaryStudentId?: InputMaybe<Order_By>;
+  Student?: InputMaybe<Students_Order_By>;
+  Students_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
   calendar?: InputMaybe<Calendars_Order_By>;
   club_accounts_aggregate?: InputMaybe<Club_Accounts_Aggregate_Order_By>;
@@ -878,17 +877,17 @@ export enum Addresses_Update_Column {
 /** columns and relationships of "AppRoles" */
 export type AppRoles = {
   __typename?: 'AppRoles';
-  Name: Scalars['String'];
   /** An array relationship */
-  Role: Array<AccountAppRoles>;
-  RoleId: Scalars['uniqueidentifier'];
+  AccountAppRoles: Array<AccountAppRoles>;
   /** An aggregate relationship */
-  Role_aggregate: AccountAppRoles_Aggregate;
+  AccountAppRoles_aggregate: AccountAppRoles_Aggregate;
+  Name: Scalars['String'];
+  RoleId: Scalars['uniqueidentifier'];
 };
 
 
 /** columns and relationships of "AppRoles" */
-export type AppRolesRoleArgs = {
+export type AppRolesAccountAppRolesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountAppRoles_Order_By>>;
@@ -897,7 +896,7 @@ export type AppRolesRoleArgs = {
 
 
 /** columns and relationships of "AppRoles" */
-export type AppRolesRole_AggregateArgs = {
+export type AppRolesAccountAppRoles_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountAppRoles_Order_By>>;
@@ -928,8 +927,8 @@ export type AppRoles_Aggregate_FieldsCountArgs = {
 
 /** Boolean expression to filter rows from the table "AppRoles". All fields are combined with a logical 'AND'. */
 export type AppRoles_Bool_Exp = {
+  AccountAppRoles?: InputMaybe<AccountAppRoles_Bool_Exp>;
   Name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Role?: InputMaybe<AccountAppRoles_Bool_Exp>;
   RoleId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   _and?: InputMaybe<Array<AppRoles_Bool_Exp>>;
   _not?: InputMaybe<AppRoles_Bool_Exp>;
@@ -980,9 +979,9 @@ export type AppRoles_Mutation_Response = {
 
 /** Ordering options when selecting data from "AppRoles". */
 export type AppRoles_Order_By = {
+  AccountAppRoles_aggregate?: InputMaybe<AccountAppRoles_Aggregate_Order_By>;
   Name?: InputMaybe<Order_By>;
   RoleId?: InputMaybe<Order_By>;
-  Role_aggregate?: InputMaybe<AccountAppRoles_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: AppRoles */
@@ -1012,9 +1011,9 @@ export enum AppRoles_Update_Column {
   RoleId = 'RoleId'
 }
 
-/** columns and relationships of "AssociationMembersLookup" */
-export type AssociationMembersLookup = {
-  __typename?: 'AssociationMembersLookup';
+/** columns and relationships of "AssociationMembers" */
+export type AssociationMembers = {
+  __typename?: 'AssociationMembers';
   AssociationMemberId: Scalars['String'];
   BackgroundCheckExpires?: Maybe<Scalars['date']>;
   Birthdate: Scalars['Int'];
@@ -1033,7 +1032,7 @@ export type AssociationMembersLookup = {
   Foil: Scalars['String'];
   FullName: Scalars['String'];
   Gender?: Maybe<Scalars['String']>;
-  LastModified: Scalars['datetime'];
+  LastModified: Scalars['datetime2'];
   LastName: Scalars['String'];
   MemberType: Scalars['String'];
   Nickname?: Maybe<Scalars['String']>;
@@ -1044,12 +1043,12 @@ export type AssociationMembersLookup = {
   Students: Array<Students>;
   /** An aggregate relationship */
   Students_aggregate: Students_Aggregate;
-  UpdatedAt: Scalars['datetime'];
+  UpdatedAt: Scalars['datetime2'];
 };
 
 
-/** columns and relationships of "AssociationMembersLookup" */
-export type AssociationMembersLookupStudentsArgs = {
+/** columns and relationships of "AssociationMembers" */
+export type AssociationMembersStudentsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
@@ -1057,52 +1056,52 @@ export type AssociationMembersLookupStudentsArgs = {
 };
 
 
-/** columns and relationships of "AssociationMembersLookup" */
-export type AssociationMembersLookupStudents_AggregateArgs = {
+/** columns and relationships of "AssociationMembers" */
+export type AssociationMembersStudents_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
   where?: InputMaybe<Students_Bool_Exp>;
 };
 
-/** aggregated selection of "AssociationMembersLookup" */
-export type AssociationMembersLookup_Aggregate = {
-  __typename?: 'AssociationMembersLookup_aggregate';
-  aggregate?: Maybe<AssociationMembersLookup_Aggregate_Fields>;
-  nodes: Array<AssociationMembersLookup>;
+/** aggregated selection of "AssociationMembers" */
+export type AssociationMembers_Aggregate = {
+  __typename?: 'AssociationMembers_aggregate';
+  aggregate?: Maybe<AssociationMembers_Aggregate_Fields>;
+  nodes: Array<AssociationMembers>;
 };
 
-/** aggregate fields of "AssociationMembersLookup" */
-export type AssociationMembersLookup_Aggregate_Fields = {
-  __typename?: 'AssociationMembersLookup_aggregate_fields';
-  avg?: Maybe<AssociationMembersLookup_Avg_Fields>;
+/** aggregate fields of "AssociationMembers" */
+export type AssociationMembers_Aggregate_Fields = {
+  __typename?: 'AssociationMembers_aggregate_fields';
+  avg?: Maybe<AssociationMembers_Avg_Fields>;
   count: Scalars['Int'];
-  max?: Maybe<AssociationMembersLookup_Max_Fields>;
-  min?: Maybe<AssociationMembersLookup_Min_Fields>;
-  stddev?: Maybe<AssociationMembersLookup_Stddev_Fields>;
-  stddev_pop?: Maybe<AssociationMembersLookup_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<AssociationMembersLookup_Stddev_Samp_Fields>;
-  sum?: Maybe<AssociationMembersLookup_Sum_Fields>;
-  var_pop?: Maybe<AssociationMembersLookup_Var_Pop_Fields>;
-  var_samp?: Maybe<AssociationMembersLookup_Var_Samp_Fields>;
-  variance?: Maybe<AssociationMembersLookup_Variance_Fields>;
+  max?: Maybe<AssociationMembers_Max_Fields>;
+  min?: Maybe<AssociationMembers_Min_Fields>;
+  stddev?: Maybe<AssociationMembers_Stddev_Fields>;
+  stddev_pop?: Maybe<AssociationMembers_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<AssociationMembers_Stddev_Samp_Fields>;
+  sum?: Maybe<AssociationMembers_Sum_Fields>;
+  var_pop?: Maybe<AssociationMembers_Var_Pop_Fields>;
+  var_samp?: Maybe<AssociationMembers_Var_Samp_Fields>;
+  variance?: Maybe<AssociationMembers_Variance_Fields>;
 };
 
 
-/** aggregate fields of "AssociationMembersLookup" */
-export type AssociationMembersLookup_Aggregate_FieldsCountArgs = {
-  column?: InputMaybe<AssociationMembersLookup_Select_Column>;
+/** aggregate fields of "AssociationMembers" */
+export type AssociationMembers_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<AssociationMembers_Select_Column>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
 /** aggregate avg on columns */
-export type AssociationMembersLookup_Avg_Fields = {
-  __typename?: 'AssociationMembersLookup_avg_fields';
+export type AssociationMembers_Avg_Fields = {
+  __typename?: 'AssociationMembers_avg_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
-/** Boolean expression to filter rows from the table "AssociationMembersLookup". All fields are combined with a logical 'AND'. */
-export type AssociationMembersLookup_Bool_Exp = {
+/** Boolean expression to filter rows from the table "AssociationMembers". All fields are combined with a logical 'AND'. */
+export type AssociationMembers_Bool_Exp = {
   AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
   BackgroundCheckExpires?: InputMaybe<Date_Mssql_Comparison_Exp>;
   Birthdate?: InputMaybe<Int_Mssql_Comparison_Exp>;
@@ -1121,7 +1120,7 @@ export type AssociationMembersLookup_Bool_Exp = {
   Foil?: InputMaybe<String_Mssql_Comparison_Exp>;
   FullName?: InputMaybe<String_Mssql_Comparison_Exp>;
   Gender?: InputMaybe<String_Mssql_Comparison_Exp>;
-  LastModified?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
+  LastModified?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
   MemberType?: InputMaybe<String_Mssql_Comparison_Exp>;
   Nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -1129,26 +1128,26 @@ export type AssociationMembersLookup_Bool_Exp = {
   Saber?: InputMaybe<String_Mssql_Comparison_Exp>;
   SafeSportExpires?: InputMaybe<Date_Mssql_Comparison_Exp>;
   Students?: InputMaybe<Students_Bool_Exp>;
-  UpdatedAt?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
-  _and?: InputMaybe<Array<AssociationMembersLookup_Bool_Exp>>;
-  _not?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
-  _or?: InputMaybe<Array<AssociationMembersLookup_Bool_Exp>>;
+  UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  _and?: InputMaybe<Array<AssociationMembers_Bool_Exp>>;
+  _not?: InputMaybe<AssociationMembers_Bool_Exp>;
+  _or?: InputMaybe<Array<AssociationMembers_Bool_Exp>>;
 };
 
-/** upsert condition type for table "AssociationMembersLookup" */
-export type AssociationMembersLookup_If_Matched = {
-  match_columns?: Array<AssociationMembersLookup_Insert_Match_Column>;
-  update_columns?: Array<AssociationMembersLookup_Update_Column>;
-  where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+/** upsert condition type for table "AssociationMembers" */
+export type AssociationMembers_If_Matched = {
+  match_columns?: Array<AssociationMembers_Insert_Match_Column>;
+  update_columns?: Array<AssociationMembers_Update_Column>;
+  where?: InputMaybe<AssociationMembers_Bool_Exp>;
 };
 
-/** input type for incrementing numeric columns in table "AssociationMembersLookup" */
-export type AssociationMembersLookup_Inc_Input = {
+/** input type for incrementing numeric columns in table "AssociationMembers" */
+export type AssociationMembers_Inc_Input = {
   Birthdate?: InputMaybe<Scalars['Int']>;
 };
 
-/** input type for inserting data into table "AssociationMembersLookup" */
-export type AssociationMembersLookup_Insert_Input = {
+/** input type for inserting data into table "AssociationMembers" */
+export type AssociationMembers_Insert_Input = {
   AssociationMemberId?: InputMaybe<Scalars['String']>;
   BackgroundCheckExpires?: InputMaybe<Scalars['date']>;
   Birthdate?: InputMaybe<Scalars['Int']>;
@@ -1167,18 +1166,18 @@ export type AssociationMembersLookup_Insert_Input = {
   Foil?: InputMaybe<Scalars['String']>;
   FullName?: InputMaybe<Scalars['String']>;
   Gender?: InputMaybe<Scalars['String']>;
-  LastModified?: InputMaybe<Scalars['datetime']>;
+  LastModified?: InputMaybe<Scalars['datetime2']>;
   LastName?: InputMaybe<Scalars['String']>;
   MemberType?: InputMaybe<Scalars['String']>;
   Nickname?: InputMaybe<Scalars['String']>;
   Region?: InputMaybe<Scalars['String']>;
   Saber?: InputMaybe<Scalars['String']>;
   SafeSportExpires?: InputMaybe<Scalars['date']>;
-  UpdatedAt?: InputMaybe<Scalars['datetime']>;
+  UpdatedAt?: InputMaybe<Scalars['datetime2']>;
 };
 
-/** select match_columns of table "AssociationMembersLookup" */
-export enum AssociationMembersLookup_Insert_Match_Column {
+/** select match_columns of table "AssociationMembers" */
+export enum AssociationMembers_Insert_Match_Column {
   /** column name */
   AssociationMemberId = 'AssociationMemberId',
   /** column name */
@@ -1234,8 +1233,8 @@ export enum AssociationMembersLookup_Insert_Match_Column {
 }
 
 /** aggregate max on columns */
-export type AssociationMembersLookup_Max_Fields = {
-  __typename?: 'AssociationMembersLookup_max_fields';
+export type AssociationMembers_Max_Fields = {
+  __typename?: 'AssociationMembers_max_fields';
   AssociationMemberId?: Maybe<Scalars['String']>;
   BackgroundCheckExpires?: Maybe<Scalars['date']>;
   Birthdate?: Maybe<Scalars['Int']>;
@@ -1254,19 +1253,19 @@ export type AssociationMembersLookup_Max_Fields = {
   Foil?: Maybe<Scalars['String']>;
   FullName?: Maybe<Scalars['String']>;
   Gender?: Maybe<Scalars['String']>;
-  LastModified?: Maybe<Scalars['datetime']>;
+  LastModified?: Maybe<Scalars['datetime2']>;
   LastName?: Maybe<Scalars['String']>;
   MemberType?: Maybe<Scalars['String']>;
   Nickname?: Maybe<Scalars['String']>;
   Region?: Maybe<Scalars['String']>;
   Saber?: Maybe<Scalars['String']>;
   SafeSportExpires?: Maybe<Scalars['date']>;
-  UpdatedAt?: Maybe<Scalars['datetime']>;
+  UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
 
 /** aggregate min on columns */
-export type AssociationMembersLookup_Min_Fields = {
-  __typename?: 'AssociationMembersLookup_min_fields';
+export type AssociationMembers_Min_Fields = {
+  __typename?: 'AssociationMembers_min_fields';
   AssociationMemberId?: Maybe<Scalars['String']>;
   BackgroundCheckExpires?: Maybe<Scalars['date']>;
   Birthdate?: Maybe<Scalars['Int']>;
@@ -1285,27 +1284,27 @@ export type AssociationMembersLookup_Min_Fields = {
   Foil?: Maybe<Scalars['String']>;
   FullName?: Maybe<Scalars['String']>;
   Gender?: Maybe<Scalars['String']>;
-  LastModified?: Maybe<Scalars['datetime']>;
+  LastModified?: Maybe<Scalars['datetime2']>;
   LastName?: Maybe<Scalars['String']>;
   MemberType?: Maybe<Scalars['String']>;
   Nickname?: Maybe<Scalars['String']>;
   Region?: Maybe<Scalars['String']>;
   Saber?: Maybe<Scalars['String']>;
   SafeSportExpires?: Maybe<Scalars['date']>;
-  UpdatedAt?: Maybe<Scalars['datetime']>;
+  UpdatedAt?: Maybe<Scalars['datetime2']>;
 };
 
-/** response of any mutation on the table "AssociationMembersLookup" */
-export type AssociationMembersLookup_Mutation_Response = {
-  __typename?: 'AssociationMembersLookup_mutation_response';
+/** response of any mutation on the table "AssociationMembers" */
+export type AssociationMembers_Mutation_Response = {
+  __typename?: 'AssociationMembers_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<AssociationMembersLookup>;
+  returning: Array<AssociationMembers>;
 };
 
-/** Ordering options when selecting data from "AssociationMembersLookup". */
-export type AssociationMembersLookup_Order_By = {
+/** Ordering options when selecting data from "AssociationMembers". */
+export type AssociationMembers_Order_By = {
   AssociationMemberId?: InputMaybe<Order_By>;
   BackgroundCheckExpires?: InputMaybe<Order_By>;
   Birthdate?: InputMaybe<Order_By>;
@@ -1335,8 +1334,13 @@ export type AssociationMembersLookup_Order_By = {
   UpdatedAt?: InputMaybe<Order_By>;
 };
 
-/** select columns of table "AssociationMembersLookup" */
-export enum AssociationMembersLookup_Select_Column {
+/** primary key columns input for table: AssociationMembers */
+export type AssociationMembers_Pk_Columns_Input = {
+  AssociationMemberId: Scalars['String'];
+};
+
+/** select columns of table "AssociationMembers" */
+export enum AssociationMembers_Select_Column {
   /** column name */
   AssociationMemberId = 'AssociationMemberId',
   /** column name */
@@ -1391,8 +1395,8 @@ export enum AssociationMembersLookup_Select_Column {
   UpdatedAt = 'UpdatedAt'
 }
 
-/** input type for updating data in table "AssociationMembersLookup" */
-export type AssociationMembersLookup_Set_Input = {
+/** input type for updating data in table "AssociationMembers" */
+export type AssociationMembers_Set_Input = {
   AssociationMemberId?: InputMaybe<Scalars['String']>;
   BackgroundCheckExpires?: InputMaybe<Scalars['date']>;
   Birthdate?: InputMaybe<Scalars['Int']>;
@@ -1411,42 +1415,42 @@ export type AssociationMembersLookup_Set_Input = {
   Foil?: InputMaybe<Scalars['String']>;
   FullName?: InputMaybe<Scalars['String']>;
   Gender?: InputMaybe<Scalars['String']>;
-  LastModified?: InputMaybe<Scalars['datetime']>;
+  LastModified?: InputMaybe<Scalars['datetime2']>;
   LastName?: InputMaybe<Scalars['String']>;
   MemberType?: InputMaybe<Scalars['String']>;
   Nickname?: InputMaybe<Scalars['String']>;
   Region?: InputMaybe<Scalars['String']>;
   Saber?: InputMaybe<Scalars['String']>;
   SafeSportExpires?: InputMaybe<Scalars['date']>;
-  UpdatedAt?: InputMaybe<Scalars['datetime']>;
+  UpdatedAt?: InputMaybe<Scalars['datetime2']>;
 };
 
 /** aggregate stddev on columns */
-export type AssociationMembersLookup_Stddev_Fields = {
-  __typename?: 'AssociationMembersLookup_stddev_fields';
+export type AssociationMembers_Stddev_Fields = {
+  __typename?: 'AssociationMembers_stddev_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_pop on columns */
-export type AssociationMembersLookup_Stddev_Pop_Fields = {
-  __typename?: 'AssociationMembersLookup_stddev_pop_fields';
+export type AssociationMembers_Stddev_Pop_Fields = {
+  __typename?: 'AssociationMembers_stddev_pop_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate stddev_samp on columns */
-export type AssociationMembersLookup_Stddev_Samp_Fields = {
-  __typename?: 'AssociationMembersLookup_stddev_samp_fields';
+export type AssociationMembers_Stddev_Samp_Fields = {
+  __typename?: 'AssociationMembers_stddev_samp_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate sum on columns */
-export type AssociationMembersLookup_Sum_Fields = {
-  __typename?: 'AssociationMembersLookup_sum_fields';
+export type AssociationMembers_Sum_Fields = {
+  __typename?: 'AssociationMembers_sum_fields';
   Birthdate?: Maybe<Scalars['Int']>;
 };
 
-/** update columns of table "AssociationMembersLookup" */
-export enum AssociationMembersLookup_Update_Column {
+/** update columns of table "AssociationMembers" */
+export enum AssociationMembers_Update_Column {
   /** column name */
   AssociationMemberId = 'AssociationMemberId',
   /** column name */
@@ -1502,20 +1506,20 @@ export enum AssociationMembersLookup_Update_Column {
 }
 
 /** aggregate var_pop on columns */
-export type AssociationMembersLookup_Var_Pop_Fields = {
-  __typename?: 'AssociationMembersLookup_var_pop_fields';
+export type AssociationMembers_Var_Pop_Fields = {
+  __typename?: 'AssociationMembers_var_pop_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate var_samp on columns */
-export type AssociationMembersLookup_Var_Samp_Fields = {
-  __typename?: 'AssociationMembersLookup_var_samp_fields';
+export type AssociationMembers_Var_Samp_Fields = {
+  __typename?: 'AssociationMembers_var_samp_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
 /** aggregate variance on columns */
-export type AssociationMembersLookup_Variance_Fields = {
-  __typename?: 'AssociationMembersLookup_variance_fields';
+export type AssociationMembers_Variance_Fields = {
+  __typename?: 'AssociationMembers_variance_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
@@ -1774,17 +1778,17 @@ export enum ClubLocations_Update_Column {
 /** columns and relationships of "ClubRoles" */
 export type ClubRoles = {
   __typename?: 'ClubRoles';
-  Name: Scalars['String'];
   /** An array relationship */
-  Role: Array<AccountClubRoles>;
-  RoleId: Scalars['uniqueidentifier'];
+  AccountClubRoles: Array<AccountClubRoles>;
   /** An aggregate relationship */
-  Role_aggregate: AccountClubRoles_Aggregate;
+  AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
+  Name: Scalars['String'];
+  RoleId: Scalars['uniqueidentifier'];
 };
 
 
 /** columns and relationships of "ClubRoles" */
-export type ClubRolesRoleArgs = {
+export type ClubRolesAccountClubRolesArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
@@ -1793,7 +1797,7 @@ export type ClubRolesRoleArgs = {
 
 
 /** columns and relationships of "ClubRoles" */
-export type ClubRolesRole_AggregateArgs = {
+export type ClubRolesAccountClubRoles_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
@@ -1824,8 +1828,8 @@ export type ClubRoles_Aggregate_FieldsCountArgs = {
 
 /** Boolean expression to filter rows from the table "ClubRoles". All fields are combined with a logical 'AND'. */
 export type ClubRoles_Bool_Exp = {
+  AccountClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
   Name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Role?: InputMaybe<AccountClubRoles_Bool_Exp>;
   RoleId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   _and?: InputMaybe<Array<ClubRoles_Bool_Exp>>;
   _not?: InputMaybe<ClubRoles_Bool_Exp>;
@@ -1876,9 +1880,9 @@ export type ClubRoles_Mutation_Response = {
 
 /** Ordering options when selecting data from "ClubRoles". */
 export type ClubRoles_Order_By = {
+  AccountClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
   Name?: InputMaybe<Order_By>;
   RoleId?: InputMaybe<Order_By>;
-  Role_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
 };
 
 /** primary key columns input for table: ClubRoles */
@@ -1911,15 +1915,15 @@ export enum ClubRoles_Update_Column {
 /** columns and relationships of "Clubs" */
 export type Clubs = {
   __typename?: 'Clubs';
+  /** An array relationship */
+  AccountClubRoles: Array<AccountClubRoles>;
+  /** An aggregate relationship */
+  AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   ClubId: Scalars['uniqueidentifier'];
   /** An array relationship */
   ClubLocations: Array<ClubLocations>;
   /** An aggregate relationship */
   ClubLocations_aggregate: ClubLocations_Aggregate;
-  /** An array relationship */
-  ClubRoles: Array<AccountClubRoles>;
-  /** An aggregate relationship */
-  ClubRoles_aggregate: AccountClubRoles_Aggregate;
   Code?: Maybe<Scalars['String']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
@@ -1938,6 +1942,24 @@ export type Clubs = {
 
 
 /** columns and relationships of "Clubs" */
+export type ClubsAccountClubRolesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
+  where?: InputMaybe<AccountClubRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Clubs" */
+export type ClubsAccountClubRoles_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
+  where?: InputMaybe<AccountClubRoles_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Clubs" */
 export type ClubsClubLocationsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -1952,24 +1974,6 @@ export type ClubsClubLocations_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<ClubLocations_Order_By>>;
   where?: InputMaybe<ClubLocations_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Clubs" */
-export type ClubsClubRolesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
-  where?: InputMaybe<AccountClubRoles_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Clubs" */
-export type ClubsClubRoles_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AccountClubRoles_Order_By>>;
-  where?: InputMaybe<AccountClubRoles_Bool_Exp>;
 };
 
 
@@ -2028,9 +2032,9 @@ export type Clubs_Avg_Fields = {
 
 /** Boolean expression to filter rows from the table "Clubs". All fields are combined with a logical 'AND'. */
 export type Clubs_Bool_Exp = {
+  AccountClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
   ClubId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   ClubLocations?: InputMaybe<ClubLocations_Bool_Exp>;
-  ClubRoles?: InputMaybe<AccountClubRoles_Bool_Exp>;
   Code?: InputMaybe<String_Mssql_Comparison_Exp>;
   CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -2139,9 +2143,9 @@ export type Clubs_Mutation_Response = {
 
 /** Ordering options when selecting data from "Clubs". */
 export type Clubs_Order_By = {
+  AccountClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
   ClubId?: InputMaybe<Order_By>;
   ClubLocations_aggregate?: InputMaybe<ClubLocations_Aggregate_Order_By>;
-  ClubRoles_aggregate?: InputMaybe<AccountClubRoles_Aggregate_Order_By>;
   Code?: InputMaybe<Order_By>;
   CreatedAt?: InputMaybe<Order_By>;
   CreatedBy?: InputMaybe<Order_By>;
@@ -2304,8 +2308,12 @@ export type Students = {
   __typename?: 'Students';
   /** An object relationship */
   Account: Accounts;
+  /** An array relationship */
+  Accounts: Array<Accounts>;
+  /** An aggregate relationship */
+  Accounts_aggregate: Accounts_Aggregate;
   /** An object relationship */
-  AssociationMember?: Maybe<AssociationMembersLookup>;
+  AssociationMember?: Maybe<AssociationMembers>;
   AssociationMemberId?: Maybe<Scalars['String']>;
   AvatarUrl?: Maybe<Scalars['String']>;
   Birthdate: Scalars['date'];
@@ -2315,10 +2323,6 @@ export type Students = {
   FirstName: Scalars['String'];
   LastName: Scalars['String'];
   Oid: Scalars['String'];
-  /** An array relationship */
-  OwnerAccount: Array<Accounts>;
-  /** An aggregate relationship */
-  OwnerAccount_aggregate: Accounts_Aggregate;
   Phone?: Maybe<Scalars['String']>;
   StudentId: Scalars['uniqueidentifier'];
   UpdatedAt?: Maybe<Scalars['datetime2']>;
@@ -2326,7 +2330,7 @@ export type Students = {
 
 
 /** columns and relationships of "Students" */
-export type StudentsOwnerAccountArgs = {
+export type StudentsAccountsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Accounts_Order_By>>;
@@ -2335,7 +2339,7 @@ export type StudentsOwnerAccountArgs = {
 
 
 /** columns and relationships of "Students" */
-export type StudentsOwnerAccount_AggregateArgs = {
+export type StudentsAccounts_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Accounts_Order_By>>;
@@ -2374,7 +2378,8 @@ export type Students_Aggregate_Order_By = {
 /** Boolean expression to filter rows from the table "Students". All fields are combined with a logical 'AND'. */
 export type Students_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
-  AssociationMember?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+  Accounts?: InputMaybe<Accounts_Bool_Exp>;
+  AssociationMember?: InputMaybe<AssociationMembers_Bool_Exp>;
   AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
   AvatarUrl?: InputMaybe<String_Mssql_Comparison_Exp>;
   Birthdate?: InputMaybe<Date_Mssql_Comparison_Exp>;
@@ -2384,7 +2389,6 @@ export type Students_Bool_Exp = {
   FirstName?: InputMaybe<String_Mssql_Comparison_Exp>;
   LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
-  OwnerAccount?: InputMaybe<Accounts_Bool_Exp>;
   Phone?: InputMaybe<String_Mssql_Comparison_Exp>;
   StudentId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
@@ -2518,7 +2522,8 @@ export type Students_Mutation_Response = {
 /** Ordering options when selecting data from "Students". */
 export type Students_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
-  AssociationMember?: InputMaybe<AssociationMembersLookup_Order_By>;
+  Accounts_aggregate?: InputMaybe<Accounts_Aggregate_Order_By>;
+  AssociationMember?: InputMaybe<AssociationMembers_Order_By>;
   AssociationMemberId?: InputMaybe<Order_By>;
   AvatarUrl?: InputMaybe<Order_By>;
   Birthdate?: InputMaybe<Order_By>;
@@ -2528,7 +2533,6 @@ export type Students_Order_By = {
   FirstName?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
-  OwnerAccount_aggregate?: InputMaybe<Accounts_Aggregate_Order_By>;
   Phone?: InputMaybe<Order_By>;
   StudentId?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
@@ -3003,19 +3007,6 @@ export type Datetime2_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['datetime2']>>;
 };
 
-/** Boolean expression to compare columns of type "datetime". All fields are combined with logical 'AND'. */
-export type Datetime_Mssql_Comparison_Exp = {
-  _eq?: InputMaybe<Scalars['datetime']>;
-  _gt?: InputMaybe<Scalars['datetime']>;
-  _gte?: InputMaybe<Scalars['datetime']>;
-  _in?: InputMaybe<Array<Scalars['datetime']>>;
-  _is_null?: InputMaybe<Scalars['Boolean']>;
-  _lt?: InputMaybe<Scalars['datetime']>;
-  _lte?: InputMaybe<Scalars['datetime']>;
-  _neq?: InputMaybe<Scalars['datetime']>;
-  _nin?: InputMaybe<Array<Scalars['datetime']>>;
-};
-
 /** mutation root */
 export type Mutation_Root = {
   __typename?: 'mutation_root';
@@ -3039,8 +3030,10 @@ export type Mutation_Root = {
   delete_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** delete single row from the table: "AppRoles" */
   delete_AppRoles_by_pk?: Maybe<AppRoles>;
-  /** delete data from the table: "AssociationMembersLookup" */
-  delete_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
+  /** delete data from the table: "AssociationMembers" */
+  delete_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
+  /** delete single row from the table: "AssociationMembers" */
+  delete_AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** delete data from the table: "ClubLocations" */
   delete_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** delete single row from the table: "ClubLocations" */
@@ -3085,10 +3078,10 @@ export type Mutation_Root = {
   insert_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** insert a single row into the table: "AppRoles" */
   insert_AppRoles_one?: Maybe<AppRoles>;
-  /** insert data into the table: "AssociationMembersLookup" */
-  insert_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
-  /** insert a single row into the table: "AssociationMembersLookup" */
-  insert_AssociationMembersLookup_one?: Maybe<AssociationMembersLookup>;
+  /** insert data into the table: "AssociationMembers" */
+  insert_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
+  /** insert a single row into the table: "AssociationMembers" */
+  insert_AssociationMembers_one?: Maybe<AssociationMembers>;
   /** insert data into the table: "ClubLocations" */
   insert_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** insert a single row into the table: "ClubLocations" */
@@ -3133,8 +3126,10 @@ export type Mutation_Root = {
   update_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** update single row of the table: "AppRoles" */
   update_AppRoles_by_pk?: Maybe<AppRoles>;
-  /** update data of the table: "AssociationMembersLookup" */
-  update_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
+  /** update data of the table: "AssociationMembers" */
+  update_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
+  /** update single row of the table: "AssociationMembers" */
+  update_AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** update data of the table: "ClubLocations" */
   update_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** update single row of the table: "ClubLocations" */
@@ -3226,8 +3221,14 @@ export type Mutation_RootDelete_AppRoles_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_AssociationMembersLookupArgs = {
-  where: AssociationMembersLookup_Bool_Exp;
+export type Mutation_RootDelete_AssociationMembersArgs = {
+  where: AssociationMembers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_AssociationMembers_By_PkArgs = {
+  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -3375,16 +3376,16 @@ export type Mutation_RootInsert_AppRoles_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_AssociationMembersLookupArgs = {
-  if_matched?: InputMaybe<AssociationMembersLookup_If_Matched>;
-  objects: Array<AssociationMembersLookup_Insert_Input>;
+export type Mutation_RootInsert_AssociationMembersArgs = {
+  if_matched?: InputMaybe<AssociationMembers_If_Matched>;
+  objects: Array<AssociationMembers_Insert_Input>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_AssociationMembersLookup_OneArgs = {
-  if_matched?: InputMaybe<AssociationMembersLookup_If_Matched>;
-  object: AssociationMembersLookup_Insert_Input;
+export type Mutation_RootInsert_AssociationMembers_OneArgs = {
+  if_matched?: InputMaybe<AssociationMembers_If_Matched>;
+  object: AssociationMembers_Insert_Input;
 };
 
 
@@ -3543,10 +3544,18 @@ export type Mutation_RootUpdate_AppRoles_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_AssociationMembersLookupArgs = {
-  _inc?: InputMaybe<AssociationMembersLookup_Inc_Input>;
-  _set?: InputMaybe<AssociationMembersLookup_Set_Input>;
-  where: AssociationMembersLookup_Bool_Exp;
+export type Mutation_RootUpdate_AssociationMembersArgs = {
+  _inc?: InputMaybe<AssociationMembers_Inc_Input>;
+  _set?: InputMaybe<AssociationMembers_Set_Input>;
+  where: AssociationMembers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_AssociationMembers_By_PkArgs = {
+  _inc?: InputMaybe<AssociationMembers_Inc_Input>;
+  _set?: InputMaybe<AssociationMembers_Set_Input>;
+  pk_columns: AssociationMembers_Pk_Columns_Input;
 };
 
 
@@ -3653,15 +3662,15 @@ export enum Order_By {
 
 export type Query_Root = {
   __typename?: 'query_root';
-  /** fetch data from the table: "AccountAppRoles" */
+  /** An array relationship */
   AccountAppRoles: Array<AccountAppRoles>;
-  /** fetch aggregated fields from the table: "AccountAppRoles" */
+  /** An aggregate relationship */
   AccountAppRoles_aggregate: AccountAppRoles_Aggregate;
   /** fetch data from the table: "AccountAppRoles" using primary key columns */
   AccountAppRoles_by_pk?: Maybe<AccountAppRoles>;
-  /** fetch data from the table: "AccountClubRoles" */
+  /** An array relationship */
   AccountClubRoles: Array<AccountClubRoles>;
-  /** fetch aggregated fields from the table: "AccountClubRoles" */
+  /** An aggregate relationship */
   AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   /** fetch data from the table: "AccountClubRoles" using primary key columns */
   AccountClubRoles_by_pk?: Maybe<AccountClubRoles>;
@@ -3683,10 +3692,12 @@ export type Query_Root = {
   AppRoles_aggregate: AppRoles_Aggregate;
   /** fetch data from the table: "AppRoles" using primary key columns */
   AppRoles_by_pk?: Maybe<AppRoles>;
-  /** fetch data from the table: "AssociationMembersLookup" */
-  AssociationMembersLookup: Array<AssociationMembersLookup>;
-  /** fetch aggregated fields from the table: "AssociationMembersLookup" */
-  AssociationMembersLookup_aggregate: AssociationMembersLookup_Aggregate;
+  /** fetch data from the table: "AssociationMembers" */
+  AssociationMembers: Array<AssociationMembers>;
+  /** fetch aggregated fields from the table: "AssociationMembers" */
+  AssociationMembers_aggregate: AssociationMembers_Aggregate;
+  /** fetch data from the table: "AssociationMembers" using primary key columns */
+  AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** An array relationship */
   ClubLocations: Array<ClubLocations>;
   /** An aggregate relationship */
@@ -3834,19 +3845,24 @@ export type Query_RootAppRoles_By_PkArgs = {
 };
 
 
-export type Query_RootAssociationMembersLookupArgs = {
+export type Query_RootAssociationMembersArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
-  where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
+  where?: InputMaybe<AssociationMembers_Bool_Exp>;
 };
 
 
-export type Query_RootAssociationMembersLookup_AggregateArgs = {
+export type Query_RootAssociationMembers_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
-  where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
+  where?: InputMaybe<AssociationMembers_Bool_Exp>;
+};
+
+
+export type Query_RootAssociationMembers_By_PkArgs = {
+  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -3978,15 +3994,15 @@ export type Query_RootClub_Accounts_By_PkArgs = {
 
 export type Subscription_Root = {
   __typename?: 'subscription_root';
-  /** fetch data from the table: "AccountAppRoles" */
+  /** An array relationship */
   AccountAppRoles: Array<AccountAppRoles>;
-  /** fetch aggregated fields from the table: "AccountAppRoles" */
+  /** An aggregate relationship */
   AccountAppRoles_aggregate: AccountAppRoles_Aggregate;
   /** fetch data from the table: "AccountAppRoles" using primary key columns */
   AccountAppRoles_by_pk?: Maybe<AccountAppRoles>;
-  /** fetch data from the table: "AccountClubRoles" */
+  /** An array relationship */
   AccountClubRoles: Array<AccountClubRoles>;
-  /** fetch aggregated fields from the table: "AccountClubRoles" */
+  /** An aggregate relationship */
   AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   /** fetch data from the table: "AccountClubRoles" using primary key columns */
   AccountClubRoles_by_pk?: Maybe<AccountClubRoles>;
@@ -4008,10 +4024,12 @@ export type Subscription_Root = {
   AppRoles_aggregate: AppRoles_Aggregate;
   /** fetch data from the table: "AppRoles" using primary key columns */
   AppRoles_by_pk?: Maybe<AppRoles>;
-  /** fetch data from the table: "AssociationMembersLookup" */
-  AssociationMembersLookup: Array<AssociationMembersLookup>;
-  /** fetch aggregated fields from the table: "AssociationMembersLookup" */
-  AssociationMembersLookup_aggregate: AssociationMembersLookup_Aggregate;
+  /** fetch data from the table: "AssociationMembers" */
+  AssociationMembers: Array<AssociationMembers>;
+  /** fetch aggregated fields from the table: "AssociationMembers" */
+  AssociationMembers_aggregate: AssociationMembers_Aggregate;
+  /** fetch data from the table: "AssociationMembers" using primary key columns */
+  AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** An array relationship */
   ClubLocations: Array<ClubLocations>;
   /** An aggregate relationship */
@@ -4159,19 +4177,24 @@ export type Subscription_RootAppRoles_By_PkArgs = {
 };
 
 
-export type Subscription_RootAssociationMembersLookupArgs = {
+export type Subscription_RootAssociationMembersArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
-  where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
+  where?: InputMaybe<AssociationMembers_Bool_Exp>;
 };
 
 
-export type Subscription_RootAssociationMembersLookup_AggregateArgs = {
+export type Subscription_RootAssociationMembers_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
-  where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
+  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
+  where?: InputMaybe<AssociationMembers_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssociationMembers_By_PkArgs = {
+  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -4319,7 +4342,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string }, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -4348,14 +4371,14 @@ export type GetMemberDetailsByNameQueryVariables = Exact<{
 }>;
 
 
-export type GetMemberDetailsByNameQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
+export type GetMemberDetailsByNameQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, FullName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
 
 export type GetMembersByIdQueryVariables = Exact<{
   id: Scalars['String'];
 }>;
 
 
-export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
+export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> } | null };
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
@@ -4364,7 +4387,7 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
+export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
 
 export type UpdateStudentByIdMutationVariables = Exact<{
   id: Scalars['String'];
@@ -4372,7 +4395,7 @@ export type UpdateStudentByIdMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, AccountStudent: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } } | null };
 
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -4388,7 +4411,7 @@ export const AccountProfileDocument = gql`
   Accounts(where: {Oid: {_eq: $oid}}) {
     Oid
     PrimaryStudentId
-    AccountStudent {
+    Student {
       StudentId
       FirstName
       LastName
@@ -4560,12 +4583,13 @@ export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccou
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
 export const GetMemberDetailsByNameDocument = gql`
     query GetMemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
-  AssociationMembersLookup(
+  AssociationMembers(
     limit: 10
     where: {FirstName: {_like: $firstName}, LastName: {_like: $lastName}}
   ) {
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name
@@ -4610,10 +4634,11 @@ export type GetMemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useGet
 export type GetMemberDetailsByNameQueryResult = Apollo.QueryResult<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>;
 export const GetMembersByIdDocument = gql`
     query GetMembersById($id: String!) @cached(ttl: 300) {
-  AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
+  AssociationMembers_by_pk(AssociationMemberId: $id) {
     FullName
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name
@@ -4661,7 +4686,7 @@ export type GetMembersByIdLazyQueryHookResult = ReturnType<typeof useGetMembersB
 export type GetMembersByIdQueryResult = Apollo.QueryResult<GetMembersByIdQuery, GetMembersByIdQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
-  AssociationMembersLookup(
+  AssociationMembers(
     offset: $offset
     limit: $count
     where: {_or: [{FullName: {_like: $filter}}, {Club1Name: {_like: $filter}}]}
@@ -4670,6 +4695,7 @@ export const SearchMembersDocument = gql`
     FullName
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name
@@ -4722,7 +4748,7 @@ export const UpdateStudentByIdDocument = gql`
   update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
     Oid
     PrimaryStudentId
-    AccountStudent {
+    Student {
       StudentId
       FirstName
       LastName

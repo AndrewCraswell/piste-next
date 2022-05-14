@@ -1,0 +1,1131 @@
+{
+  "resource_version": 426,
+  "metadata": {
+    "version": 3,
+    "sources": [
+      {
+        "name": "piste",
+        "kind": "mssql",
+        "tables": [
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "AccountAppRoles"
+            },
+            "object_relationships": [
+              {
+                "name": "Account",
+                "using": {
+                  "foreign_key_constraint_on": "Oid"
+                }
+              },
+              {
+                "name": "AppRole",
+                "using": {
+                  "foreign_key_constraint_on": "AppRoleId"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "Oid",
+                    "AppRoleId"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "Oid",
+                    "AppRoleId"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "Oid",
+                    "AppRoleId"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "AccountClubRoles"
+            },
+            "object_relationships": [
+              {
+                "name": "Account",
+                "using": {
+                  "foreign_key_constraint_on": "Oid"
+                }
+              },
+              {
+                "name": "Club",
+                "using": {
+                  "foreign_key_constraint_on": "ClubId"
+                }
+              },
+              {
+                "name": "ClubRole",
+                "using": {
+                  "foreign_key_constraint_on": "ClubRoleId"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "ClubId",
+                    "Oid",
+                    "ClubRoleId"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "ClubId",
+                    "Oid",
+                    "ClubRoleId"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "ClubId",
+                    "Oid",
+                    "ClubRoleId"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "Accounts"
+            },
+            "object_relationships": [
+              {
+                "name": "Address",
+                "using": {
+                  "foreign_key_constraint_on": "AddressId"
+                }
+              },
+              {
+                "name": "Student",
+                "using": {
+                  "foreign_key_constraint_on": "PrimaryStudentId"
+                }
+              },
+              {
+                "name": "calendar",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "account_id",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "calendars"
+                    }
+                  }
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "AccountAppRoles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "Oid",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "AccountAppRoles"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "AccountClubRoles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "Oid",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "AccountClubRoles"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "Students",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "Oid",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "Students"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "club_accounts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "account_id",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "club_accounts"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "LanguageId",
+                    "CreatedAt",
+                    "UpdatedAt",
+                    "PrimaryStudentId",
+                    "CreatedBy",
+                    "Oid",
+                    "AddressId"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "LanguageId",
+                    "CreatedAt",
+                    "UpdatedAt",
+                    "PrimaryStudentId",
+                    "CreatedBy",
+                    "Oid",
+                    "AddressId"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "LanguageId",
+                    "CreatedAt",
+                    "UpdatedAt",
+                    "PrimaryStudentId",
+                    "CreatedBy",
+                    "Oid",
+                    "AddressId"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "Addresses"
+            },
+            "array_relationships": [
+              {
+                "name": "Accounts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "AddressId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "Accounts"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "ClubLocations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "AddressId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "ClubLocations"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "City",
+                    "Address2",
+                    "CreatedBy",
+                    "AddressId",
+                    "Postal",
+                    "State",
+                    "Address"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "City",
+                    "Address2",
+                    "CreatedBy",
+                    "AddressId",
+                    "Postal",
+                    "State",
+                    "Address"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "City",
+                    "Address2",
+                    "CreatedBy",
+                    "AddressId",
+                    "Postal",
+                    "State",
+                    "Address"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "AppRoles"
+            },
+            "array_relationships": [
+              {
+                "name": "AccountAppRoles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "AppRoleId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "AccountAppRoles"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "AssociationMembers"
+            },
+            "array_relationships": [
+              {
+                "name": "Students",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "AssociationMemberId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "Students"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "anonymous",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "LastModified",
+                    "BackgroundCheckExpires",
+                    "Club1Name",
+                    "MemberType",
+                    "LastName",
+                    "Club2Abbreviation",
+                    "Gender",
+                    "Foil",
+                    "Birthdate",
+                    "AssociationMemberId",
+                    "SafeSportExpires",
+                    "Expiration",
+                    "Club2Name",
+                    "FullName",
+                    "Saber",
+                    "Club1Id",
+                    "Nickname",
+                    "Region",
+                    "CheckEd",
+                    "FirstName",
+                    "Competitive",
+                    "Club1Abbreviation",
+                    "Epee",
+                    "Club2Id",
+                    "Division"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "LastModified",
+                    "BackgroundCheckExpires",
+                    "Club1Name",
+                    "MemberType",
+                    "LastName",
+                    "Club2Abbreviation",
+                    "Gender",
+                    "Foil",
+                    "Birthdate",
+                    "AssociationMemberId",
+                    "SafeSportExpires",
+                    "Expiration",
+                    "Club2Name",
+                    "FullName",
+                    "Saber",
+                    "Club1Id",
+                    "Nickname",
+                    "Region",
+                    "CheckEd",
+                    "FirstName",
+                    "Competitive",
+                    "Club1Abbreviation",
+                    "Epee",
+                    "Club2Id",
+                    "Division"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "ClubLocations"
+            },
+            "object_relationships": [
+              {
+                "name": "Address",
+                "using": {
+                  "foreign_key_constraint_on": "AddressId"
+                }
+              },
+              {
+                "name": "Club",
+                "using": {
+                  "foreign_key_constraint_on": "ClubId"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "Name",
+                    "AddressId",
+                    "CreatedBy",
+                    "LocationId",
+                    "Email",
+                    "Phone",
+                    "ClubId"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "Name",
+                    "AddressId",
+                    "CreatedBy",
+                    "LocationId",
+                    "Email",
+                    "Phone",
+                    "ClubId"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "Name",
+                    "AddressId",
+                    "CreatedBy",
+                    "LocationId",
+                    "Email",
+                    "Phone",
+                    "ClubId"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "ClubRoles"
+            },
+            "array_relationships": [
+              {
+                "name": "AccountClubRoles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "ClubRoleId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "AccountClubRoles"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "RoleId",
+                    "Name"
+                  ],
+                  "filter": {},
+                  "check": {}
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "Clubs"
+            },
+            "array_relationships": [
+              {
+                "name": "AccountClubRoles",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "ClubId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "AccountClubRoles"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "ClubLocations",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "ClubId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "ClubLocations"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "club_accounts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "club_id",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "club_accounts"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "UsaFencingId",
+                    "IsClaimed",
+                    "Code",
+                    "Website",
+                    "ClubId",
+                    "Region",
+                    "Division",
+                    "Name",
+                    "CreatedBy"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "anonymous",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "UsaFencingId",
+                    "IsClaimed",
+                    "Code",
+                    "Website",
+                    "ClubId",
+                    "Region",
+                    "Division",
+                    "Name",
+                    "CreatedBy"
+                  ],
+                  "filter": {}
+                }
+              },
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "UsaFencingId",
+                    "IsClaimed",
+                    "Code",
+                    "Website",
+                    "ClubId",
+                    "Region",
+                    "Division",
+                    "Name",
+                    "CreatedBy"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "UsaFencingId",
+                    "IsClaimed",
+                    "Code",
+                    "Website",
+                    "ClubId",
+                    "Region",
+                    "Division",
+                    "Name",
+                    "CreatedBy"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "Students"
+            },
+            "object_relationships": [
+              {
+                "name": "Account",
+                "using": {
+                  "foreign_key_constraint_on": "Oid"
+                }
+              },
+              {
+                "name": "AssociationMember",
+                "using": {
+                  "foreign_key_constraint_on": "AssociationMemberId"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "Accounts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "PrimaryStudentId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "Accounts"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "StudentId",
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "AvatarUrl",
+                    "FirstName",
+                    "Phone",
+                    "Email",
+                    "CreatedBy",
+                    "LastName",
+                    "Birthdate",
+                    "Oid",
+                    "AssociationMemberId"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "StudentId",
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "AvatarUrl",
+                    "FirstName",
+                    "Phone",
+                    "Email",
+                    "CreatedBy",
+                    "LastName",
+                    "Birthdate",
+                    "Oid",
+                    "AssociationMemberId"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "StudentId",
+                    "UpdatedAt",
+                    "CreatedAt",
+                    "AvatarUrl",
+                    "FirstName",
+                    "Phone",
+                    "Email",
+                    "CreatedBy",
+                    "LastName",
+                    "Birthdate",
+                    "Oid",
+                    "AssociationMemberId"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "calendars"
+            },
+            "object_relationships": [
+              {
+                "name": "Account",
+                "using": {
+                  "foreign_key_constraint_on": "account_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "created_at",
+                    "created_by",
+                    "updated_at",
+                    "calendar_id",
+                    "account_id",
+                    "id",
+                    "provider",
+                    "access_token"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "created_by",
+                    "updated_at",
+                    "calendar_id",
+                    "account_id",
+                    "id",
+                    "provider",
+                    "access_token"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "created_by",
+                    "updated_at",
+                    "calendar_id",
+                    "account_id",
+                    "id",
+                    "provider",
+                    "access_token"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "dbo",
+              "name": "club_accounts"
+            },
+            "object_relationships": [
+              {
+                "name": "Account",
+                "using": {
+                  "foreign_key_constraint_on": "account_id"
+                }
+              },
+              {
+                "name": "Club",
+                "using": {
+                  "foreign_key_constraint_on": "club_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "created_on",
+                    "account_id",
+                    "created_by",
+                    "club_id"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_on",
+                    "account_id",
+                    "created_by",
+                    "club_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_on",
+                    "account_id",
+                    "created_by",
+                    "club_id"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          }
+        ],
+        "configuration": {
+          "connection_info": {
+            "connection_string": {
+              "from_env": "PISTE_DB_CONNECTION_STRING"
+            },
+            "pool_settings": {
+              "idle_timeout": 5,
+              "max_connections": 50
+            }
+          }
+        }
+      }
+    ],
+    "api_limits": {
+      "depth_limit": {
+        "per_role": {},
+        "global": 10
+      },
+      "disabled": true,
+      "rate_limit": {
+        "per_role": {},
+        "global": {
+          "unique_params": "IP",
+          "max_reqs_per_min": 1000
+        }
+      },
+      "node_limit": {
+        "per_role": {},
+        "global": 1000
+      }
+    }
+  }
+}

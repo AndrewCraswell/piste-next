@@ -11,12 +11,12 @@ export const useAccountProfile = () => {
   })
 
   const account = useMemo(() => {
-    let { AccountStudent, Oid, Address, PrimaryStudentId, calendar } =
+    let { Student, Oid, Address, PrimaryStudentId, calendar } =
       data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
-    const accountFullName = `${AccountStudent?.FirstName || ""} ${
-      AccountStudent?.LastName || ""
+    const accountFullName = `${Student?.FirstName || ""} ${
+      Student?.LastName || ""
     }`.trim()
     const userFullName =
       user?.name ||
@@ -25,7 +25,7 @@ export const useAccountProfile = () => {
       user?.nickname
 
     // Use fallbacks to determine the best email
-    const email = AccountStudent?.Email || user?.email
+    const email = Student?.Email || user?.email
 
     return {
       UserId: Oid,
@@ -33,7 +33,7 @@ export const useAccountProfile = () => {
       isCalendarLinked: !!calendar,
       calendar,
       FullName: accountFullName || userFullName,
-      ...AccountStudent,
+      ...Student,
       ...Address,
       Picture: user?.picture,
       Email: email,

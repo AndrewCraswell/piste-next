@@ -6,7 +6,7 @@ import utc from "dayjs/plugin/utc"
 
 import { LinkButton, ConfirmDialog } from "$components"
 import { useAccountProfile, useDisclosure } from "$hooks"
-import { useLazyDeleteCalendarQuery } from "$store"
+import { useLazyDeleteCalendarQuery, useGetCalendarsQuery } from "$store"
 import { titleCase } from "./CalendarLinker.utils"
 
 dayjs.extend(utc)
@@ -19,6 +19,10 @@ export const CalendarLinker: React.FunctionComponent = () => {
     loading: isProfileLoading,
     refetch: refetchAccount,
   } = useAccountProfile()
+
+  const { data } = useGetCalendarsQuery(calendar?.access_token!, {
+    skip: !calendar?.access_token,
+  })
 
   const [deleteCalendar, { isLoading: isUnlinking }] =
     useLazyDeleteCalendarQuery()
@@ -64,6 +68,7 @@ export const CalendarLinker: React.FunctionComponent = () => {
           Link calendar
         </LinkButton>
       )}
+      <>{JSON.stringify(data)}</>
       <ConfirmDialog
         hidden={!isOpen}
         onClose={onClose}

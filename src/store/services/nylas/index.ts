@@ -5,10 +5,6 @@ export const nylasApi = createApi({
   reducerPath: "nylas",
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.nylas.com/",
-    prepareHeaders: (headers) => {
-      headers.set("Authorization", "Basic cn6romyhulmgkedqk9nn9snt3:")
-      return headers
-    },
   }),
   endpoints: (builder) => ({
     createComponent: builder.query<any, string>({
@@ -43,9 +39,23 @@ export const nylasApi = createApi({
         },
       }),
     }),
+    getCalendars: builder.query<any, string>({
+      query: (accessToken) => ({
+        url: `calendars/`,
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }),
+    }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useCreateComponentQuery, useLazyCreateComponentQuery } = nylasApi
+export const {
+  useCreateComponentQuery,
+  useLazyCreateComponentQuery,
+  useGetCalendarsQuery,
+  useLazyGetCalendarsQuery,
+} = nylasApi

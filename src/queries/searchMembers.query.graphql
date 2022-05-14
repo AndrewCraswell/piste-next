@@ -1,6 +1,6 @@
 query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12)
 @cached(ttl: 300) {
-  AssociationMembersLookup(
+  AssociationMembers(
     offset: $offset
     limit: $count
     where: {
@@ -11,6 +11,7 @@ query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12)
     FullName
     FirstName
     LastName
+    FullName
     Birthdate
     Club1Name
     Club2Name
