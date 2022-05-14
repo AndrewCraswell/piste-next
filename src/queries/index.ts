@@ -4559,7 +4559,7 @@ export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFe
 export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
 export const GetMemberDetailsByNameDocument = gql`
-    query GetMemberDetailsByName($firstName: String!, $lastName: String!) {
+    query GetMemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
   AssociationMembersLookup(
     limit: 10
     where: {FirstName: {_like: $firstName}, LastName: {_like: $lastName}}
@@ -4609,7 +4609,7 @@ export type GetMemberDetailsByNameQueryHookResult = ReturnType<typeof useGetMemb
 export type GetMemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useGetMemberDetailsByNameLazyQuery>;
 export type GetMemberDetailsByNameQueryResult = Apollo.QueryResult<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>;
 export const GetMembersByIdDocument = gql`
-    query GetMembersById($id: String!) {
+    query GetMembersById($id: String!) @cached(ttl: 300) {
   AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
     FullName
     FirstName
@@ -4660,7 +4660,7 @@ export type GetMembersByIdQueryHookResult = ReturnType<typeof useGetMembersByIdQ
 export type GetMembersByIdLazyQueryHookResult = ReturnType<typeof useGetMembersByIdLazyQuery>;
 export type GetMembersByIdQueryResult = Apollo.QueryResult<GetMembersByIdQuery, GetMembersByIdQueryVariables>;
 export const SearchMembersDocument = gql`
-    query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
+    query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
   AssociationMembersLookup(
     offset: $offset
     limit: $count

@@ -18,20 +18,9 @@ export const DetailsStack = styled(Stack)`
   margin: 1.5rem 0 1rem 0;
 `
 
-export const SemiboldText = styled.span`
-  font-weight: ${FontWeights.semibold};
-`
-
 export const EmbedDialog = styled.div`
   display: none;
 `
-
-export const DialogSpinner = styled(Spinner)`
-  display: inline-block;
-  height: 15px;
-  margin-right: 4px;
+export const SemiboldText = styled.span`
+  font-weight: ${FontWeights.semibold};
 `
-
-DialogSpinner.defaultProps = {
-  size: SpinnerSize.medium,
-}
