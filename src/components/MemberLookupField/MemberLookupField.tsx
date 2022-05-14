@@ -39,7 +39,7 @@ export const MemberLookupField: React.FunctionComponent<
         },
       })
 
-      const suggestions: IPersonaProps[] = data!.AssociationMembersLookup.map(
+      const suggestions: IPersonaProps[] = data!.AssociationMembers.map(
         associationMemberToPersona
       )
 

@@ -2,7 +2,7 @@ query AccountProfile($oid: String!) {
   Accounts(where: { Oid: { _eq: $oid } }) {
     Oid
     PrimaryStudentId
-    AccountStudent {
+    Student {
       StudentId
       FirstName
       LastName

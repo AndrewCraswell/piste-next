@@ -32,11 +32,11 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
       </Card>
 
       <div style={{ width: 400 }}>
-        {members?.AssociationMembersLookup.map((member) => (
+        {members?.AssociationMembers.map((member) => (
           <MemberDetailsCard
             key={member.AssociationMemberId}
             details={{
-              fullName: `${member.FirstName} ${member.LastName}`,
+              fullName: member.FullName,
               secondaryText:
                 member.Club1Name || member.Club2Name || member.Division || "",
               memberId: member.AssociationMemberId,

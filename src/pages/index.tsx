@@ -36,9 +36,9 @@ export const Overview: NextPage = () => {
         count: pageSize,
       },
       updateQuery: (existing, incoming) => ({
-        AssociationMembersLookup: [
-          ...existing.AssociationMembersLookup,
-          ...incoming.fetchMoreResult?.AssociationMembersLookup!,
+        AssociationMembers: [
+          ...existing.AssociationMembers,
+          ...incoming.fetchMoreResult?.AssociationMembers!,
         ],
       }),
     })
@@ -86,7 +86,7 @@ export const Overview: NextPage = () => {
       <SearchBox placeholder="Search" onSearch={onSearch} />
 
       <GridContainer>
-        {members?.AssociationMembersLookup.map((member) => (
+        {members?.AssociationMembers.map((member) => (
           <MemberDetailsCard
             key={member.AssociationMemberId}
             details={{

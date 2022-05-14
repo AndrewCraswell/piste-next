@@ -59,9 +59,9 @@ export const LinkAssociationPanel: React.FunctionComponent<
     },
     skip: !associationId,
     onCompleted: (data) => {
-      const member = data.AssociationMembersLookup[0]
-      initialMember.current = member
+      const member = data.AssociationMembers_by_pk
       if (member) {
+        initialMember.current = member
         setMember(member)
       }
     },
