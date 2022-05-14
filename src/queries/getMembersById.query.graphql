@@ -1,4 +1,4 @@
-query SearchMembersById($id: String!) {
+query GetMembersById($id: String!) {
   AssociationMembersLookup(
     where: { _or: [{ AssociationMemberId: { _eq: $id } }] }
   ) {

@@ -48,9 +48,6 @@ export function createApolloClient(
         AppRoles: {
           keyFields: ["RoleId"],
         },
-        AssociationMembers: {
-          keyFields: ["AssociationMemberId"],
-        },
         AssociationMembersLookup: {
           keyFields: ["AssociationMemberId"],
         },

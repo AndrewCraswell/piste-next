@@ -1,5 +1,5 @@
-query MemberDetailsByName($firstName: String!, $lastName: String!) {
-  AssociationMembers(
+query GetMemberDetailsByName($firstName: String!, $lastName: String!) {
+  AssociationMembersLookup(
     limit: 10
     where: { FirstName: { _like: $firstName }, LastName: { _like: $lastName } }
   ) {
