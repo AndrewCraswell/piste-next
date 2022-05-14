@@ -1,4 +1,4 @@
-query MemberById($id: String!) {
+query MemberById($id: String!) @cached(ttl: 300) {
   member: AssociationMembers(where: { AssociationMemberId: { _eq: $id } }) {
     FirstName
     LastName

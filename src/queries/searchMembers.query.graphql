@@ -1,4 +1,5 @@
-query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) {
+query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12)
+@cached(ttl: 300) {
   AssociationMembersLookup(
     offset: $offset
     limit: $count

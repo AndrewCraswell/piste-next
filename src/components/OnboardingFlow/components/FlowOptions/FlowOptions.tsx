@@ -22,7 +22,9 @@ export const FlowOptions: React.FunctionComponent = () => {
         horizontalAlign="center"
         tokens={{ childrenGap: 32 }}
       >
-        <Text size={800}>Welcome to the Piste!</Text>
+        <Text size={800}>
+          Welcome to the {process.env.NEXT_PUBLIC_SITE_NAME}!
+        </Text>
         <Text size={500}>
           Let's find the best onboarding experience for you
         </Text>

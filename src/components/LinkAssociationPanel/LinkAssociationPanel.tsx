@@ -123,8 +123,8 @@ export const LinkAssociationPanel: React.FunctionComponent<
       <FluentProvider>
         <FormSection>
           <Text>
-            You must link your membership in order to get access to all Piste
-            features.
+            You must link your membership in order to get access to all{" "}
+            {process.env.NEXT_PUBLIC_SITE_NAME} features.
           </Text>
 
           <MemberLookupField

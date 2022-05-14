@@ -59,8 +59,7 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
           {/* TODO: Parameterize this */}
           <HeaderButton icon="Waffle" variant="large" />
           <BrandingAnchor href="/">
-            {/* TODO: Parameterize the siteName */}
-            {process.env.NEXT_PUBLIC_SITE_NAME}
+            {process.env.NEXT_PUBLIC_BRANDING_NAME}
           </BrandingAnchor>
 
           <CenterRegion></CenterRegion>
@@ -72,7 +71,6 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
 
           {/* TODO: Pass all user menu props up to the AppShell level */}
           <UserMenu
-            // Get fullName from profile
             avatarUrl={account.Picture}
             fullName={account.FullName}
             email={account.Email}
