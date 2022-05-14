@@ -5,10 +5,11 @@ import {
   MemberLookupField,
   associationMemberToPersona,
 } from "$components"
+import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
 import { AssociationMember } from "$types"
 import styled from "@emotion/styled"
-import { DialogFooter } from "@fluentui/react"
+import { DialogFooter, MessageBar, MessageBarType } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useState, useCallback, useEffect, useRef } from "react"
 
@@ -39,6 +40,17 @@ export const LinkAssociationPanel: React.FunctionComponent<
 > = ({ associationId, fencerId, defaultFilter, onClose, onSaved, isOpen }) => {
   const initialMember = useRef<AssociationMember>()
   const [member, setMember] = useState<AssociationMember | undefined>()
+  const {
+    account: { UserId },
+  } = useAccountProfile()
+
+  const preselectedPersonas = member ? [associationMemberToPersona(member)] : []
+
+  const otherLinkedAccount = member?.Students.find(
+    (f) => f.StudentId !== fencerId
+  )
+  const isAlreadyLinked = !!otherLinkedAccount
+  const isLinkedToThisAccount = otherLinkedAccount?.Oid === UserId
 
   const [linkAccount] = useUpdateFencerByIdMutation()
   const { data } = useGetMembersByIdQuery({
@@ -91,22 +103,24 @@ export const LinkAssociationPanel: React.FunctionComponent<
     () => (
       <FluentProvider>
         <PanelFooter>
-          <Button appearance="primary" onClick={onLinkClicked}>
+          <Button
+            appearance="primary"
+            onClick={onLinkClicked}
+            disabled={isAlreadyLinked}
+          >
             Save
           </Button>
           <Button onClick={resetOnClose}>Cancel</Button>
         </PanelFooter>
       </FluentProvider>
     ),
-    [onLinkClicked, resetOnClose]
+    [isAlreadyLinked, onLinkClicked, resetOnClose]
   )
 
   useEffect(() => {
     if (associationId) {
     }
   }, [associationId])
-
-  const preselectedPersonas = member ? [associationMemberToPersona(member)] : []
 
   return (
     <PistePanel
@@ -132,22 +146,36 @@ export const LinkAssociationPanel: React.FunctionComponent<
           />
 
           {member && (
-            <MemberDetailsCard
-              details={{
-                fullName: member.FullName,
-                secondaryText:
-                  member.Club1Name ||
-                  member.Club2Name ||
-                  member.Division ||
-                  member.Birthdate.toString(),
-                memberId: member.AssociationMemberId,
-                membershipExpiration: member.Expiration,
-                birthdate: member.Birthdate,
-                foilRating: member.Foil,
-                epeeRating: member.Epee,
-                sabreRating: member.Saber,
-              }}
-            />
+            <>
+              <MemberDetailsCard
+                details={{
+                  fullName: member.FullName,
+                  secondaryText:
+                    member.Club1Name ||
+                    member.Club2Name ||
+                    member.Division ||
+                    member.Birthdate.toString(),
+                  memberId: member.AssociationMemberId,
+                  membershipExpiration: member.Expiration,
+                  birthdate: member.Birthdate,
+                  foilRating: member.Foil,
+                  epeeRating: member.Epee,
+                  sabreRating: member.Saber,
+                }}
+              />
+              {isAlreadyLinked && (
+                <MessageBar messageBarType={MessageBarType.blocked}>
+                  {isLinkedToThisAccount ? (
+                    <>
+                      This membership is already linked to another fencer in
+                      your account.
+                    </>
+                  ) : (
+                    <>This membership is already linked to another fencer.</>
+                  )}
+                </MessageBar>
+              )}
+            </>
           )}
         </FormSection>
       </FluentProvider>
