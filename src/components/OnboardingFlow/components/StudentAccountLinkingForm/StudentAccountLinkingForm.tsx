@@ -1,11 +1,11 @@
 import { Card, MemberDetailsCard, useDecisionTree } from "$components"
-import { useMemberDetailsByNameQuery } from "$queries"
+import { useGetMemberDetailsByNameQuery } from "$queries"
 import { DialogFooter } from "@fluentui/react"
 import { Button, Text } from "@fluentui/react-components"
 
 export const StudentAccountLinkingForm: React.FunctionComponent = () => {
   const { back, next } = useDecisionTree()
-  const { data: members } = useMemberDetailsByNameQuery({
+  const { data: members } = useGetMemberDetailsByNameQuery({
     variables: {
       firstName: "Andrew",
       lastName: "Chen",
@@ -32,7 +32,7 @@ export const StudentAccountLinkingForm: React.FunctionComponent = () => {
       </Card>
 
       <div style={{ width: 400 }}>
-        {members?.AssociationMembers.map((member) => (
+        {members?.AssociationMembersLookup.map((member) => (
           <MemberDetailsCard
             key={member.AssociationMemberId}
             details={{

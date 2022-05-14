@@ -1012,58 +1012,6 @@ export enum AppRoles_Update_Column {
   RoleId = 'RoleId'
 }
 
-/** columns and relationships of "AssociationMembers" */
-export type AssociationMembers = {
-  __typename?: 'AssociationMembers';
-  AssociationMemberId: Scalars['String'];
-  BackgroundCheckExpires?: Maybe<Scalars['date']>;
-  Birthdate: Scalars['Int'];
-  CheckEd: Scalars['String'];
-  Club1Abbreviation?: Maybe<Scalars['String']>;
-  Club1Id?: Maybe<Scalars['String']>;
-  Club1Name?: Maybe<Scalars['String']>;
-  Club2Abbreviation?: Maybe<Scalars['String']>;
-  Club2Id?: Maybe<Scalars['String']>;
-  Club2Name?: Maybe<Scalars['String']>;
-  Competitive: Scalars['String'];
-  Division?: Maybe<Scalars['String']>;
-  Epee: Scalars['String'];
-  Expiration: Scalars['date'];
-  FirstName: Scalars['String'];
-  Foil: Scalars['String'];
-  Gender?: Maybe<Scalars['String']>;
-  LastModified: Scalars['datetime'];
-  LastName: Scalars['String'];
-  MemberType: Scalars['String'];
-  Nickname?: Maybe<Scalars['String']>;
-  Region?: Maybe<Scalars['String']>;
-  Saber: Scalars['String'];
-  SafeSportExpires?: Maybe<Scalars['date']>;
-  /** An array relationship */
-  Students: Array<Students>;
-  /** An aggregate relationship */
-  Students_aggregate: Students_Aggregate;
-  UpdatedAt: Scalars['datetime'];
-};
-
-
-/** columns and relationships of "AssociationMembers" */
-export type AssociationMembersStudentsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Students_Order_By>>;
-  where?: InputMaybe<Students_Bool_Exp>;
-};
-
-
-/** columns and relationships of "AssociationMembers" */
-export type AssociationMembersStudents_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Students_Order_By>>;
-  where?: InputMaybe<Students_Bool_Exp>;
-};
-
 /** columns and relationships of "AssociationMembersLookup" */
 export type AssociationMembersLookup = {
   __typename?: 'AssociationMembersLookup';
@@ -1568,453 +1516,6 @@ export type AssociationMembersLookup_Var_Samp_Fields = {
 /** aggregate variance on columns */
 export type AssociationMembersLookup_Variance_Fields = {
   __typename?: 'AssociationMembersLookup_variance_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregated selection of "AssociationMembers" */
-export type AssociationMembers_Aggregate = {
-  __typename?: 'AssociationMembers_aggregate';
-  aggregate?: Maybe<AssociationMembers_Aggregate_Fields>;
-  nodes: Array<AssociationMembers>;
-};
-
-/** aggregate fields of "AssociationMembers" */
-export type AssociationMembers_Aggregate_Fields = {
-  __typename?: 'AssociationMembers_aggregate_fields';
-  avg?: Maybe<AssociationMembers_Avg_Fields>;
-  count: Scalars['Int'];
-  max?: Maybe<AssociationMembers_Max_Fields>;
-  min?: Maybe<AssociationMembers_Min_Fields>;
-  stddev?: Maybe<AssociationMembers_Stddev_Fields>;
-  stddev_pop?: Maybe<AssociationMembers_Stddev_Pop_Fields>;
-  stddev_samp?: Maybe<AssociationMembers_Stddev_Samp_Fields>;
-  sum?: Maybe<AssociationMembers_Sum_Fields>;
-  var_pop?: Maybe<AssociationMembers_Var_Pop_Fields>;
-  var_samp?: Maybe<AssociationMembers_Var_Samp_Fields>;
-  variance?: Maybe<AssociationMembers_Variance_Fields>;
-};
-
-
-/** aggregate fields of "AssociationMembers" */
-export type AssociationMembers_Aggregate_FieldsCountArgs = {
-  column?: InputMaybe<AssociationMembers_Select_Column>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** aggregate avg on columns */
-export type AssociationMembers_Avg_Fields = {
-  __typename?: 'AssociationMembers_avg_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** Boolean expression to filter rows from the table "AssociationMembers". All fields are combined with a logical 'AND'. */
-export type AssociationMembers_Bool_Exp = {
-  AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
-  BackgroundCheckExpires?: InputMaybe<Date_Mssql_Comparison_Exp>;
-  Birthdate?: InputMaybe<Int_Mssql_Comparison_Exp>;
-  CheckEd?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club1Abbreviation?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club1Id?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club1Name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club2Abbreviation?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club2Id?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Club2Name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Competitive?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Division?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Epee?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Expiration?: InputMaybe<Date_Mssql_Comparison_Exp>;
-  FirstName?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Foil?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Gender?: InputMaybe<String_Mssql_Comparison_Exp>;
-  LastModified?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
-  LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
-  MemberType?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Region?: InputMaybe<String_Mssql_Comparison_Exp>;
-  Saber?: InputMaybe<String_Mssql_Comparison_Exp>;
-  SafeSportExpires?: InputMaybe<Date_Mssql_Comparison_Exp>;
-  Students?: InputMaybe<Students_Bool_Exp>;
-  UpdatedAt?: InputMaybe<Datetime_Mssql_Comparison_Exp>;
-  _and?: InputMaybe<Array<AssociationMembers_Bool_Exp>>;
-  _not?: InputMaybe<AssociationMembers_Bool_Exp>;
-  _or?: InputMaybe<Array<AssociationMembers_Bool_Exp>>;
-};
-
-/** upsert condition type for table "AssociationMembers" */
-export type AssociationMembers_If_Matched = {
-  match_columns?: Array<AssociationMembers_Insert_Match_Column>;
-  update_columns?: Array<AssociationMembers_Update_Column>;
-  where?: InputMaybe<AssociationMembers_Bool_Exp>;
-};
-
-/** input type for incrementing numeric columns in table "AssociationMembers" */
-export type AssociationMembers_Inc_Input = {
-  Birthdate?: InputMaybe<Scalars['Int']>;
-};
-
-/** input type for inserting data into table "AssociationMembers" */
-export type AssociationMembers_Insert_Input = {
-  AssociationMemberId?: InputMaybe<Scalars['String']>;
-  BackgroundCheckExpires?: InputMaybe<Scalars['date']>;
-  Birthdate?: InputMaybe<Scalars['Int']>;
-  CheckEd?: InputMaybe<Scalars['String']>;
-  Club1Abbreviation?: InputMaybe<Scalars['String']>;
-  Club1Id?: InputMaybe<Scalars['String']>;
-  Club1Name?: InputMaybe<Scalars['String']>;
-  Club2Abbreviation?: InputMaybe<Scalars['String']>;
-  Club2Id?: InputMaybe<Scalars['String']>;
-  Club2Name?: InputMaybe<Scalars['String']>;
-  Competitive?: InputMaybe<Scalars['String']>;
-  Division?: InputMaybe<Scalars['String']>;
-  Epee?: InputMaybe<Scalars['String']>;
-  Expiration?: InputMaybe<Scalars['date']>;
-  FirstName?: InputMaybe<Scalars['String']>;
-  Foil?: InputMaybe<Scalars['String']>;
-  Gender?: InputMaybe<Scalars['String']>;
-  LastModified?: InputMaybe<Scalars['datetime']>;
-  LastName?: InputMaybe<Scalars['String']>;
-  MemberType?: InputMaybe<Scalars['String']>;
-  Nickname?: InputMaybe<Scalars['String']>;
-  Region?: InputMaybe<Scalars['String']>;
-  Saber?: InputMaybe<Scalars['String']>;
-  SafeSportExpires?: InputMaybe<Scalars['date']>;
-  UpdatedAt?: InputMaybe<Scalars['datetime']>;
-};
-
-/** select match_columns of table "AssociationMembers" */
-export enum AssociationMembers_Insert_Match_Column {
-  /** column name */
-  AssociationMemberId = 'AssociationMemberId',
-  /** column name */
-  BackgroundCheckExpires = 'BackgroundCheckExpires',
-  /** column name */
-  Birthdate = 'Birthdate',
-  /** column name */
-  CheckEd = 'CheckEd',
-  /** column name */
-  Club1Abbreviation = 'Club1Abbreviation',
-  /** column name */
-  Club1Id = 'Club1Id',
-  /** column name */
-  Club1Name = 'Club1Name',
-  /** column name */
-  Club2Abbreviation = 'Club2Abbreviation',
-  /** column name */
-  Club2Id = 'Club2Id',
-  /** column name */
-  Club2Name = 'Club2Name',
-  /** column name */
-  Competitive = 'Competitive',
-  /** column name */
-  Division = 'Division',
-  /** column name */
-  Epee = 'Epee',
-  /** column name */
-  Expiration = 'Expiration',
-  /** column name */
-  FirstName = 'FirstName',
-  /** column name */
-  Foil = 'Foil',
-  /** column name */
-  Gender = 'Gender',
-  /** column name */
-  LastModified = 'LastModified',
-  /** column name */
-  LastName = 'LastName',
-  /** column name */
-  MemberType = 'MemberType',
-  /** column name */
-  Nickname = 'Nickname',
-  /** column name */
-  Region = 'Region',
-  /** column name */
-  Saber = 'Saber',
-  /** column name */
-  SafeSportExpires = 'SafeSportExpires',
-  /** column name */
-  UpdatedAt = 'UpdatedAt'
-}
-
-/** aggregate max on columns */
-export type AssociationMembers_Max_Fields = {
-  __typename?: 'AssociationMembers_max_fields';
-  AssociationMemberId?: Maybe<Scalars['String']>;
-  BackgroundCheckExpires?: Maybe<Scalars['date']>;
-  Birthdate?: Maybe<Scalars['Int']>;
-  CheckEd?: Maybe<Scalars['String']>;
-  Club1Abbreviation?: Maybe<Scalars['String']>;
-  Club1Id?: Maybe<Scalars['String']>;
-  Club1Name?: Maybe<Scalars['String']>;
-  Club2Abbreviation?: Maybe<Scalars['String']>;
-  Club2Id?: Maybe<Scalars['String']>;
-  Club2Name?: Maybe<Scalars['String']>;
-  Competitive?: Maybe<Scalars['String']>;
-  Division?: Maybe<Scalars['String']>;
-  Epee?: Maybe<Scalars['String']>;
-  Expiration?: Maybe<Scalars['date']>;
-  FirstName?: Maybe<Scalars['String']>;
-  Foil?: Maybe<Scalars['String']>;
-  Gender?: Maybe<Scalars['String']>;
-  LastModified?: Maybe<Scalars['datetime']>;
-  LastName?: Maybe<Scalars['String']>;
-  MemberType?: Maybe<Scalars['String']>;
-  Nickname?: Maybe<Scalars['String']>;
-  Region?: Maybe<Scalars['String']>;
-  Saber?: Maybe<Scalars['String']>;
-  SafeSportExpires?: Maybe<Scalars['date']>;
-  UpdatedAt?: Maybe<Scalars['datetime']>;
-};
-
-/** aggregate min on columns */
-export type AssociationMembers_Min_Fields = {
-  __typename?: 'AssociationMembers_min_fields';
-  AssociationMemberId?: Maybe<Scalars['String']>;
-  BackgroundCheckExpires?: Maybe<Scalars['date']>;
-  Birthdate?: Maybe<Scalars['Int']>;
-  CheckEd?: Maybe<Scalars['String']>;
-  Club1Abbreviation?: Maybe<Scalars['String']>;
-  Club1Id?: Maybe<Scalars['String']>;
-  Club1Name?: Maybe<Scalars['String']>;
-  Club2Abbreviation?: Maybe<Scalars['String']>;
-  Club2Id?: Maybe<Scalars['String']>;
-  Club2Name?: Maybe<Scalars['String']>;
-  Competitive?: Maybe<Scalars['String']>;
-  Division?: Maybe<Scalars['String']>;
-  Epee?: Maybe<Scalars['String']>;
-  Expiration?: Maybe<Scalars['date']>;
-  FirstName?: Maybe<Scalars['String']>;
-  Foil?: Maybe<Scalars['String']>;
-  Gender?: Maybe<Scalars['String']>;
-  LastModified?: Maybe<Scalars['datetime']>;
-  LastName?: Maybe<Scalars['String']>;
-  MemberType?: Maybe<Scalars['String']>;
-  Nickname?: Maybe<Scalars['String']>;
-  Region?: Maybe<Scalars['String']>;
-  Saber?: Maybe<Scalars['String']>;
-  SafeSportExpires?: Maybe<Scalars['date']>;
-  UpdatedAt?: Maybe<Scalars['datetime']>;
-};
-
-/** response of any mutation on the table "AssociationMembers" */
-export type AssociationMembers_Mutation_Response = {
-  __typename?: 'AssociationMembers_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<AssociationMembers>;
-};
-
-/** Ordering options when selecting data from "AssociationMembers". */
-export type AssociationMembers_Order_By = {
-  AssociationMemberId?: InputMaybe<Order_By>;
-  BackgroundCheckExpires?: InputMaybe<Order_By>;
-  Birthdate?: InputMaybe<Order_By>;
-  CheckEd?: InputMaybe<Order_By>;
-  Club1Abbreviation?: InputMaybe<Order_By>;
-  Club1Id?: InputMaybe<Order_By>;
-  Club1Name?: InputMaybe<Order_By>;
-  Club2Abbreviation?: InputMaybe<Order_By>;
-  Club2Id?: InputMaybe<Order_By>;
-  Club2Name?: InputMaybe<Order_By>;
-  Competitive?: InputMaybe<Order_By>;
-  Division?: InputMaybe<Order_By>;
-  Epee?: InputMaybe<Order_By>;
-  Expiration?: InputMaybe<Order_By>;
-  FirstName?: InputMaybe<Order_By>;
-  Foil?: InputMaybe<Order_By>;
-  Gender?: InputMaybe<Order_By>;
-  LastModified?: InputMaybe<Order_By>;
-  LastName?: InputMaybe<Order_By>;
-  MemberType?: InputMaybe<Order_By>;
-  Nickname?: InputMaybe<Order_By>;
-  Region?: InputMaybe<Order_By>;
-  Saber?: InputMaybe<Order_By>;
-  SafeSportExpires?: InputMaybe<Order_By>;
-  Students_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
-  UpdatedAt?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: AssociationMembers */
-export type AssociationMembers_Pk_Columns_Input = {
-  AssociationMemberId: Scalars['String'];
-};
-
-/** select columns of table "AssociationMembers" */
-export enum AssociationMembers_Select_Column {
-  /** column name */
-  AssociationMemberId = 'AssociationMemberId',
-  /** column name */
-  BackgroundCheckExpires = 'BackgroundCheckExpires',
-  /** column name */
-  Birthdate = 'Birthdate',
-  /** column name */
-  CheckEd = 'CheckEd',
-  /** column name */
-  Club1Abbreviation = 'Club1Abbreviation',
-  /** column name */
-  Club1Id = 'Club1Id',
-  /** column name */
-  Club1Name = 'Club1Name',
-  /** column name */
-  Club2Abbreviation = 'Club2Abbreviation',
-  /** column name */
-  Club2Id = 'Club2Id',
-  /** column name */
-  Club2Name = 'Club2Name',
-  /** column name */
-  Competitive = 'Competitive',
-  /** column name */
-  Division = 'Division',
-  /** column name */
-  Epee = 'Epee',
-  /** column name */
-  Expiration = 'Expiration',
-  /** column name */
-  FirstName = 'FirstName',
-  /** column name */
-  Foil = 'Foil',
-  /** column name */
-  Gender = 'Gender',
-  /** column name */
-  LastModified = 'LastModified',
-  /** column name */
-  LastName = 'LastName',
-  /** column name */
-  MemberType = 'MemberType',
-  /** column name */
-  Nickname = 'Nickname',
-  /** column name */
-  Region = 'Region',
-  /** column name */
-  Saber = 'Saber',
-  /** column name */
-  SafeSportExpires = 'SafeSportExpires',
-  /** column name */
-  UpdatedAt = 'UpdatedAt'
-}
-
-/** input type for updating data in table "AssociationMembers" */
-export type AssociationMembers_Set_Input = {
-  AssociationMemberId?: InputMaybe<Scalars['String']>;
-  BackgroundCheckExpires?: InputMaybe<Scalars['date']>;
-  Birthdate?: InputMaybe<Scalars['Int']>;
-  CheckEd?: InputMaybe<Scalars['String']>;
-  Club1Abbreviation?: InputMaybe<Scalars['String']>;
-  Club1Id?: InputMaybe<Scalars['String']>;
-  Club1Name?: InputMaybe<Scalars['String']>;
-  Club2Abbreviation?: InputMaybe<Scalars['String']>;
-  Club2Id?: InputMaybe<Scalars['String']>;
-  Club2Name?: InputMaybe<Scalars['String']>;
-  Competitive?: InputMaybe<Scalars['String']>;
-  Division?: InputMaybe<Scalars['String']>;
-  Epee?: InputMaybe<Scalars['String']>;
-  Expiration?: InputMaybe<Scalars['date']>;
-  FirstName?: InputMaybe<Scalars['String']>;
-  Foil?: InputMaybe<Scalars['String']>;
-  Gender?: InputMaybe<Scalars['String']>;
-  LastModified?: InputMaybe<Scalars['datetime']>;
-  LastName?: InputMaybe<Scalars['String']>;
-  MemberType?: InputMaybe<Scalars['String']>;
-  Nickname?: InputMaybe<Scalars['String']>;
-  Region?: InputMaybe<Scalars['String']>;
-  Saber?: InputMaybe<Scalars['String']>;
-  SafeSportExpires?: InputMaybe<Scalars['date']>;
-  UpdatedAt?: InputMaybe<Scalars['datetime']>;
-};
-
-/** aggregate stddev on columns */
-export type AssociationMembers_Stddev_Fields = {
-  __typename?: 'AssociationMembers_stddev_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_pop on columns */
-export type AssociationMembers_Stddev_Pop_Fields = {
-  __typename?: 'AssociationMembers_stddev_pop_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate stddev_samp on columns */
-export type AssociationMembers_Stddev_Samp_Fields = {
-  __typename?: 'AssociationMembers_stddev_samp_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate sum on columns */
-export type AssociationMembers_Sum_Fields = {
-  __typename?: 'AssociationMembers_sum_fields';
-  Birthdate?: Maybe<Scalars['Int']>;
-};
-
-/** update columns of table "AssociationMembers" */
-export enum AssociationMembers_Update_Column {
-  /** column name */
-  AssociationMemberId = 'AssociationMemberId',
-  /** column name */
-  BackgroundCheckExpires = 'BackgroundCheckExpires',
-  /** column name */
-  Birthdate = 'Birthdate',
-  /** column name */
-  CheckEd = 'CheckEd',
-  /** column name */
-  Club1Abbreviation = 'Club1Abbreviation',
-  /** column name */
-  Club1Id = 'Club1Id',
-  /** column name */
-  Club1Name = 'Club1Name',
-  /** column name */
-  Club2Abbreviation = 'Club2Abbreviation',
-  /** column name */
-  Club2Id = 'Club2Id',
-  /** column name */
-  Club2Name = 'Club2Name',
-  /** column name */
-  Competitive = 'Competitive',
-  /** column name */
-  Division = 'Division',
-  /** column name */
-  Epee = 'Epee',
-  /** column name */
-  Expiration = 'Expiration',
-  /** column name */
-  FirstName = 'FirstName',
-  /** column name */
-  Foil = 'Foil',
-  /** column name */
-  Gender = 'Gender',
-  /** column name */
-  LastModified = 'LastModified',
-  /** column name */
-  LastName = 'LastName',
-  /** column name */
-  MemberType = 'MemberType',
-  /** column name */
-  Nickname = 'Nickname',
-  /** column name */
-  Region = 'Region',
-  /** column name */
-  Saber = 'Saber',
-  /** column name */
-  SafeSportExpires = 'SafeSportExpires',
-  /** column name */
-  UpdatedAt = 'UpdatedAt'
-}
-
-/** aggregate var_pop on columns */
-export type AssociationMembers_Var_Pop_Fields = {
-  __typename?: 'AssociationMembers_var_pop_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate var_samp on columns */
-export type AssociationMembers_Var_Samp_Fields = {
-  __typename?: 'AssociationMembers_var_samp_fields';
-  Birthdate?: Maybe<Scalars['Float']>;
-};
-
-/** aggregate variance on columns */
-export type AssociationMembers_Variance_Fields = {
-  __typename?: 'AssociationMembers_variance_fields';
   Birthdate?: Maybe<Scalars['Float']>;
 };
 
@@ -2804,7 +2305,7 @@ export type Students = {
   /** An object relationship */
   Account: Accounts;
   /** An object relationship */
-  AssociationMember?: Maybe<AssociationMembers>;
+  AssociationMember?: Maybe<AssociationMembersLookup>;
   AssociationMemberId?: Maybe<Scalars['String']>;
   AvatarUrl?: Maybe<Scalars['String']>;
   Birthdate: Scalars['date'];
@@ -2873,7 +2374,7 @@ export type Students_Aggregate_Order_By = {
 /** Boolean expression to filter rows from the table "Students". All fields are combined with a logical 'AND'. */
 export type Students_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
-  AssociationMember?: InputMaybe<AssociationMembers_Bool_Exp>;
+  AssociationMember?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
   AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
   AvatarUrl?: InputMaybe<String_Mssql_Comparison_Exp>;
   Birthdate?: InputMaybe<Date_Mssql_Comparison_Exp>;
@@ -3017,7 +2518,7 @@ export type Students_Mutation_Response = {
 /** Ordering options when selecting data from "Students". */
 export type Students_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
-  AssociationMember?: InputMaybe<AssociationMembers_Order_By>;
+  AssociationMember?: InputMaybe<AssociationMembersLookup_Order_By>;
   AssociationMemberId?: InputMaybe<Order_By>;
   AvatarUrl?: InputMaybe<Order_By>;
   Birthdate?: InputMaybe<Order_By>;
@@ -3538,12 +3039,8 @@ export type Mutation_Root = {
   delete_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** delete single row from the table: "AppRoles" */
   delete_AppRoles_by_pk?: Maybe<AppRoles>;
-  /** delete data from the table: "AssociationMembers" */
-  delete_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
   /** delete data from the table: "AssociationMembersLookup" */
   delete_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
-  /** delete single row from the table: "AssociationMembers" */
-  delete_AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** delete data from the table: "ClubLocations" */
   delete_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** delete single row from the table: "ClubLocations" */
@@ -3588,14 +3085,10 @@ export type Mutation_Root = {
   insert_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** insert a single row into the table: "AppRoles" */
   insert_AppRoles_one?: Maybe<AppRoles>;
-  /** insert data into the table: "AssociationMembers" */
-  insert_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
   /** insert data into the table: "AssociationMembersLookup" */
   insert_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
   /** insert a single row into the table: "AssociationMembersLookup" */
   insert_AssociationMembersLookup_one?: Maybe<AssociationMembersLookup>;
-  /** insert a single row into the table: "AssociationMembers" */
-  insert_AssociationMembers_one?: Maybe<AssociationMembers>;
   /** insert data into the table: "ClubLocations" */
   insert_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** insert a single row into the table: "ClubLocations" */
@@ -3640,12 +3133,8 @@ export type Mutation_Root = {
   update_AppRoles?: Maybe<AppRoles_Mutation_Response>;
   /** update single row of the table: "AppRoles" */
   update_AppRoles_by_pk?: Maybe<AppRoles>;
-  /** update data of the table: "AssociationMembers" */
-  update_AssociationMembers?: Maybe<AssociationMembers_Mutation_Response>;
   /** update data of the table: "AssociationMembersLookup" */
   update_AssociationMembersLookup?: Maybe<AssociationMembersLookup_Mutation_Response>;
-  /** update single row of the table: "AssociationMembers" */
-  update_AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** update data of the table: "ClubLocations" */
   update_ClubLocations?: Maybe<ClubLocations_Mutation_Response>;
   /** update single row of the table: "ClubLocations" */
@@ -3737,20 +3226,8 @@ export type Mutation_RootDelete_AppRoles_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_AssociationMembersArgs = {
-  where: AssociationMembers_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootDelete_AssociationMembersLookupArgs = {
   where: AssociationMembersLookup_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_AssociationMembers_By_PkArgs = {
-  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -3898,13 +3375,6 @@ export type Mutation_RootInsert_AppRoles_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_AssociationMembersArgs = {
-  if_matched?: InputMaybe<AssociationMembers_If_Matched>;
-  objects: Array<AssociationMembers_Insert_Input>;
-};
-
-
-/** mutation root */
 export type Mutation_RootInsert_AssociationMembersLookupArgs = {
   if_matched?: InputMaybe<AssociationMembersLookup_If_Matched>;
   objects: Array<AssociationMembersLookup_Insert_Input>;
@@ -3915,13 +3385,6 @@ export type Mutation_RootInsert_AssociationMembersLookupArgs = {
 export type Mutation_RootInsert_AssociationMembersLookup_OneArgs = {
   if_matched?: InputMaybe<AssociationMembersLookup_If_Matched>;
   object: AssociationMembersLookup_Insert_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_AssociationMembers_OneArgs = {
-  if_matched?: InputMaybe<AssociationMembers_If_Matched>;
-  object: AssociationMembers_Insert_Input;
 };
 
 
@@ -4080,26 +3543,10 @@ export type Mutation_RootUpdate_AppRoles_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_AssociationMembersArgs = {
-  _inc?: InputMaybe<AssociationMembers_Inc_Input>;
-  _set?: InputMaybe<AssociationMembers_Set_Input>;
-  where: AssociationMembers_Bool_Exp;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_AssociationMembersLookupArgs = {
   _inc?: InputMaybe<AssociationMembersLookup_Inc_Input>;
   _set?: InputMaybe<AssociationMembersLookup_Set_Input>;
   where: AssociationMembersLookup_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_AssociationMembers_By_PkArgs = {
-  _inc?: InputMaybe<AssociationMembers_Inc_Input>;
-  _set?: InputMaybe<AssociationMembers_Set_Input>;
-  pk_columns: AssociationMembers_Pk_Columns_Input;
 };
 
 
@@ -4236,16 +3683,10 @@ export type Query_Root = {
   AppRoles_aggregate: AppRoles_Aggregate;
   /** fetch data from the table: "AppRoles" using primary key columns */
   AppRoles_by_pk?: Maybe<AppRoles>;
-  /** fetch data from the table: "AssociationMembers" */
-  AssociationMembers: Array<AssociationMembers>;
   /** fetch data from the table: "AssociationMembersLookup" */
   AssociationMembersLookup: Array<AssociationMembersLookup>;
   /** fetch aggregated fields from the table: "AssociationMembersLookup" */
   AssociationMembersLookup_aggregate: AssociationMembersLookup_Aggregate;
-  /** fetch aggregated fields from the table: "AssociationMembers" */
-  AssociationMembers_aggregate: AssociationMembers_Aggregate;
-  /** fetch data from the table: "AssociationMembers" using primary key columns */
-  AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** An array relationship */
   ClubLocations: Array<ClubLocations>;
   /** An aggregate relationship */
@@ -4393,14 +3834,6 @@ export type Query_RootAppRoles_By_PkArgs = {
 };
 
 
-export type Query_RootAssociationMembersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
-  where?: InputMaybe<AssociationMembers_Bool_Exp>;
-};
-
-
 export type Query_RootAssociationMembersLookupArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4414,19 +3847,6 @@ export type Query_RootAssociationMembersLookup_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
   where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
-};
-
-
-export type Query_RootAssociationMembers_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
-  where?: InputMaybe<AssociationMembers_Bool_Exp>;
-};
-
-
-export type Query_RootAssociationMembers_By_PkArgs = {
-  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -4588,16 +4008,10 @@ export type Subscription_Root = {
   AppRoles_aggregate: AppRoles_Aggregate;
   /** fetch data from the table: "AppRoles" using primary key columns */
   AppRoles_by_pk?: Maybe<AppRoles>;
-  /** fetch data from the table: "AssociationMembers" */
-  AssociationMembers: Array<AssociationMembers>;
   /** fetch data from the table: "AssociationMembersLookup" */
   AssociationMembersLookup: Array<AssociationMembersLookup>;
   /** fetch aggregated fields from the table: "AssociationMembersLookup" */
   AssociationMembersLookup_aggregate: AssociationMembersLookup_Aggregate;
-  /** fetch aggregated fields from the table: "AssociationMembers" */
-  AssociationMembers_aggregate: AssociationMembers_Aggregate;
-  /** fetch data from the table: "AssociationMembers" using primary key columns */
-  AssociationMembers_by_pk?: Maybe<AssociationMembers>;
   /** An array relationship */
   ClubLocations: Array<ClubLocations>;
   /** An aggregate relationship */
@@ -4745,14 +4159,6 @@ export type Subscription_RootAppRoles_By_PkArgs = {
 };
 
 
-export type Subscription_RootAssociationMembersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
-  where?: InputMaybe<AssociationMembers_Bool_Exp>;
-};
-
-
 export type Subscription_RootAssociationMembersLookupArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4766,19 +4172,6 @@ export type Subscription_RootAssociationMembersLookup_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<AssociationMembersLookup_Order_By>>;
   where?: InputMaybe<AssociationMembersLookup_Bool_Exp>;
-};
-
-
-export type Subscription_RootAssociationMembers_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<AssociationMembers_Order_By>>;
-  where?: InputMaybe<AssociationMembers_Bool_Exp>;
-};
-
-
-export type Subscription_RootAssociationMembers_By_PkArgs = {
-  AssociationMemberId: Scalars['String'];
 };
 
 
@@ -4921,13 +4314,6 @@ export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uniqueidentifier']>>;
 };
 
-export type MembersByIdsQueryVariables = Exact<{
-  ids?: InputMaybe<Array<Scalars['String']> | Scalars['String']>;
-}>;
-
-
-export type MembersByIdsQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, Region?: string | null, Expiration: any, Gender?: string | null, MemberType: string, AssociationMemberId: string, Nickname?: string | null, Epee: string, Foil: string, Saber: string, Competitive: string, Club1Id?: string | null, Club2Id?: string | null }> };
-
 export type AccountProfileQueryVariables = Exact<{
   oid: Scalars['String'];
 }>;
@@ -4956,20 +4342,20 @@ export type GetAccountFencersQueryVariables = Exact<{
 
 export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
 
-export type MemberByIdQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type MemberByIdQuery = { __typename?: 'query_root', member: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, AssociationMemberId: string, Club1Name?: string | null, Division?: string | null, Birthdate: number }> };
-
-export type MemberDetailsByNameQueryVariables = Exact<{
+export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
   lastName: Scalars['String'];
 }>;
 
 
-export type MemberDetailsByNameQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
+export type GetMemberDetailsByNameQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string }> };
+
+export type GetMembersByIdQueryVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+
+export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
@@ -4979,13 +4365,6 @@ export type SearchMembersQueryVariables = Exact<{
 
 
 export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
-
-export type SearchMembersByIdQueryVariables = Exact<{
-  id: Scalars['String'];
-}>;
-
-
-export type SearchMembersByIdQuery = { __typename?: 'query_root', AssociationMembersLookup: Array<{ __typename?: 'AssociationMembersLookup', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> }> };
 
 export type UpdateStudentByIdMutationVariables = Exact<{
   id: Scalars['String'];
@@ -5004,58 +4383,6 @@ export type UpdateFencerByIdMutationVariables = Exact<{
 export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid: string } | null };
 
 
-export const MembersByIdsDocument = gql`
-    query MembersByIds($ids: [String!]) @cached(ttl: 300) {
-  AssociationMembers(where: {AssociationMemberId: {_in: $ids}}) {
-    FirstName
-    LastName
-    Birthdate
-    Club1Name
-    Club2Name
-    Division
-    Region
-    Expiration
-    Gender
-    MemberType
-    AssociationMemberId
-    Nickname
-    Epee
-    Foil
-    Saber
-    Competitive
-    Club1Id
-    Club2Id
-  }
-}
-    `;
-
-/**
- * __useMembersByIdsQuery__
- *
- * To run a query within a React component, call `useMembersByIdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMembersByIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMembersByIdsQuery({
- *   variables: {
- *      ids: // value for 'ids'
- *   },
- * });
- */
-export function useMembersByIdsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
-      }
-export function useMembersByIdsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MembersByIdsQuery, MembersByIdsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<MembersByIdsQuery, MembersByIdsQueryVariables>(MembersByIdsDocument, options);
-        }
-export type MembersByIdsQueryHookResult = ReturnType<typeof useMembersByIdsQuery>;
-export type MembersByIdsLazyQueryHookResult = ReturnType<typeof useMembersByIdsLazyQuery>;
-export type MembersByIdsQueryResult = Apollo.QueryResult<MembersByIdsQuery, MembersByIdsQueryVariables>;
 export const AccountProfileDocument = gql`
     query AccountProfile($oid: String!) {
   Accounts(where: {Oid: {_eq: $oid}}) {
@@ -5231,49 +4558,9 @@ export function useGetAccountFencersLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFencersQuery>;
 export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
-export const MemberByIdDocument = gql`
-    query MemberById($id: String!) @cached(ttl: 300) {
-  member: AssociationMembers(where: {AssociationMemberId: {_eq: $id}}) {
-    FirstName
-    LastName
-    AssociationMemberId
-    Club1Name
-    Division
-    Birthdate
-  }
-}
-    `;
-
-/**
- * __useMemberByIdQuery__
- *
- * To run a query within a React component, call `useMemberByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useMemberByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMemberByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useMemberByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<MemberByIdQuery, MemberByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<MemberByIdQuery, MemberByIdQueryVariables>(MemberByIdDocument, options);
-      }
-export function useMemberByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MemberByIdQuery, MemberByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<MemberByIdQuery, MemberByIdQueryVariables>(MemberByIdDocument, options);
-        }
-export type MemberByIdQueryHookResult = ReturnType<typeof useMemberByIdQuery>;
-export type MemberByIdLazyQueryHookResult = ReturnType<typeof useMemberByIdLazyQuery>;
-export type MemberByIdQueryResult = Apollo.QueryResult<MemberByIdQuery, MemberByIdQueryVariables>;
-export const MemberDetailsByNameDocument = gql`
-    query MemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
-  AssociationMembers(
+export const GetMemberDetailsByNameDocument = gql`
+    query GetMemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
+  AssociationMembersLookup(
     limit: 10
     where: {FirstName: {_like: $firstName}, LastName: {_like: $lastName}}
   ) {
@@ -5294,33 +4581,84 @@ export const MemberDetailsByNameDocument = gql`
     `;
 
 /**
- * __useMemberDetailsByNameQuery__
+ * __useGetMemberDetailsByNameQuery__
  *
- * To run a query within a React component, call `useMemberDetailsByNameQuery` and pass it any options that fit your needs.
- * When your component renders, `useMemberDetailsByNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetMemberDetailsByNameQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMemberDetailsByNameQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMemberDetailsByNameQuery({
+ * const { data, loading, error } = useGetMemberDetailsByNameQuery({
  *   variables: {
  *      firstName: // value for 'firstName'
  *      lastName: // value for 'lastName'
  *   },
  * });
  */
-export function useMemberDetailsByNameQuery(baseOptions: ApolloReactHooks.QueryHookOptions<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>) {
+export function useGetMemberDetailsByNameQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>(MemberDetailsByNameDocument, options);
+        return ApolloReactHooks.useQuery<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>(GetMemberDetailsByNameDocument, options);
       }
-export function useMemberDetailsByNameLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>) {
+export function useGetMemberDetailsByNameLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>(MemberDetailsByNameDocument, options);
+          return ApolloReactHooks.useLazyQuery<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>(GetMemberDetailsByNameDocument, options);
         }
-export type MemberDetailsByNameQueryHookResult = ReturnType<typeof useMemberDetailsByNameQuery>;
-export type MemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useMemberDetailsByNameLazyQuery>;
-export type MemberDetailsByNameQueryResult = Apollo.QueryResult<MemberDetailsByNameQuery, MemberDetailsByNameQueryVariables>;
+export type GetMemberDetailsByNameQueryHookResult = ReturnType<typeof useGetMemberDetailsByNameQuery>;
+export type GetMemberDetailsByNameLazyQueryHookResult = ReturnType<typeof useGetMemberDetailsByNameLazyQuery>;
+export type GetMemberDetailsByNameQueryResult = Apollo.QueryResult<GetMemberDetailsByNameQuery, GetMemberDetailsByNameQueryVariables>;
+export const GetMembersByIdDocument = gql`
+    query GetMembersById($id: String!) @cached(ttl: 300) {
+  AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
+    FullName
+    FirstName
+    LastName
+    Birthdate
+    Club1Name
+    Club2Name
+    Division
+    AssociationMemberId
+    MemberType
+    Expiration
+    Foil
+    Epee
+    Saber
+    Students {
+      Oid
+      StudentId
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMembersByIdQuery__
+ *
+ * To run a query within a React component, call `useGetMembersByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMembersByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMembersByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetMembersByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetMembersByIdQuery, GetMembersByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetMembersByIdQuery, GetMembersByIdQueryVariables>(GetMembersByIdDocument, options);
+      }
+export function useGetMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMembersByIdQuery, GetMembersByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetMembersByIdQuery, GetMembersByIdQueryVariables>(GetMembersByIdDocument, options);
+        }
+export type GetMembersByIdQueryHookResult = ReturnType<typeof useGetMembersByIdQuery>;
+export type GetMembersByIdLazyQueryHookResult = ReturnType<typeof useGetMembersByIdLazyQuery>;
+export type GetMembersByIdQueryResult = Apollo.QueryResult<GetMembersByIdQuery, GetMembersByIdQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
   AssociationMembersLookup(
@@ -5379,57 +4717,6 @@ export function useSearchMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
 export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQuery>;
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
-export const SearchMembersByIdDocument = gql`
-    query SearchMembersById($id: String!) @cached(ttl: 300) {
-  AssociationMembersLookup(where: {_or: [{AssociationMemberId: {_eq: $id}}]}) {
-    FullName
-    FirstName
-    LastName
-    Birthdate
-    Club1Name
-    Club2Name
-    Division
-    AssociationMemberId
-    MemberType
-    Expiration
-    Foil
-    Epee
-    Saber
-    Students {
-      Oid
-      StudentId
-    }
-  }
-}
-    `;
-
-/**
- * __useSearchMembersByIdQuery__
- *
- * To run a query within a React component, call `useSearchMembersByIdQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchMembersByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchMembersByIdQuery({
- *   variables: {
- *      id: // value for 'id'
- *   },
- * });
- */
-export function useSearchMembersByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>(SearchMembersByIdDocument, options);
-      }
-export function useSearchMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>(SearchMembersByIdDocument, options);
-        }
-export type SearchMembersByIdQueryHookResult = ReturnType<typeof useSearchMembersByIdQuery>;
-export type SearchMembersByIdLazyQueryHookResult = ReturnType<typeof useSearchMembersByIdLazyQuery>;
-export type SearchMembersByIdQueryResult = Apollo.QueryResult<SearchMembersByIdQuery, SearchMembersByIdQueryVariables>;
 export const UpdateStudentByIdDocument = gql`
     mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
   update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {

@@ -5,10 +5,7 @@ import {
   MemberLookupField,
   associationMemberToPersona,
 } from "$components"
-import {
-  useSearchMembersByIdQuery,
-  useUpdateFencerByIdMutation,
-} from "$queries"
+import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
 import { AssociationMember } from "$types"
 import styled from "@emotion/styled"
 import { DialogFooter } from "@fluentui/react"
@@ -44,7 +41,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
   const [member, setMember] = useState<AssociationMember | undefined>()
 
   const [linkAccount] = useUpdateFencerByIdMutation()
-  const { data } = useSearchMembersByIdQuery({
+  const { data } = useGetMembersByIdQuery({
     variables: {
       id: associationId!,
     },
