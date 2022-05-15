@@ -3,27 +3,16 @@ import {
   MemberDetailsCard,
   PistePanel,
   associationMemberToPersona,
+  PanelFooter,
+  IAssociationMemberPersona,
 } from "$components"
 import { FormMemberLookupField } from "$components"
-import { IAssociationMemberPersona } from "$components/MemberLookupField"
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
-import styled from "@emotion/styled"
-import { DialogFooter, MessageBar, MessageBarType } from "@fluentui/react"
+import { MessageBar, MessageBarType } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-
-// TODO: Move this PanelFooter into another component file
-export const PanelFooter = styled(DialogFooter)`
-  .ms-Dialog-actionsRight {
-    text-align: left;
-  }
-
-  .ms-Dialog-action:first-of-type {
-    margin-left: 0;
-  }
-`
 
 type AssociationMembershipForm = {
   members: IAssociationMemberPersona[]
