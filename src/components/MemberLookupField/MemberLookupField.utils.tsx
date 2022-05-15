@@ -1,8 +1,19 @@
-import { PersonaSize } from "@fluentui/react"
+import { IPersonaProps, PersonaSize } from "@fluentui/react"
 
 import { AssociationMember } from "$types"
 
-export function associationMemberToPersona(member: AssociationMember) {
+// TODO: Put this in types file
+export interface IAssociationMemberPersona
+  extends Pick<
+    IPersonaProps,
+    "text" | "size" | "optionalText" | "secondaryText"
+  > {
+  member: AssociationMember
+}
+
+export function associationMemberToPersona(
+  member: AssociationMember
+): IAssociationMemberPersona {
   return {
     text: member.FullName,
     size: PersonaSize.size24,

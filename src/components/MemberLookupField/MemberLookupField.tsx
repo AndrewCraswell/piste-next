@@ -1,7 +1,6 @@
 import { useApolloClient } from "@apollo/client"
 import {
   NormalPeoplePicker,
-  PersonaSize,
   IPersonaProps,
   IPeoplePickerProps,
 } from "@fluentui/react"
@@ -14,10 +13,11 @@ import {
 import { AssociationMember } from "$types"
 import { associationMemberToPersona } from "./MemberLookupField.utils"
 import { useCallback } from "react"
+import { IAssociationMemberPersona } from "$components"
 
-interface IMemberLookupFieldProps
+export interface IMemberLookupFieldProps
   extends Partial<Omit<IPeoplePickerProps, "onChange">> {
-  onChange: (items: AssociationMember[]) => void
+  onChange?: (items: IAssociationMemberPersona[]) => void
   defaultFilter?: string
 }
 
@@ -60,12 +60,8 @@ export const MemberLookupField: React.FunctionComponent<
       resolveDelay={350}
       {...pickerProps}
       onChange={(items) => {
-        const members = (items ?? []).map(
-          (m) => (m as any).member as AssociationMember
-        )
-
         if (pickerProps.onChange) {
-          pickerProps.onChange(members)
+          pickerProps.onChange(items as IAssociationMemberPersona[])
         }
       }}
     />
