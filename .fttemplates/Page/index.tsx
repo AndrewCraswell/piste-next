@@ -17,7 +17,6 @@ export const <FTName | capitalize>: NextPage = () => {
 export const getStaticProps = async () => {
   const apolloClient = initializeApollo()
 
-  // TODO: Perform query here
   // await apolloClient.query({
   //   query: SearchMembersDocument,
   //   variables: {
