@@ -3,7 +3,6 @@ import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import { IButtonProps, Persona } from "@fluentui/react"
 import { Text } from "@fluentui/react-components"
-import { useDisclosure } from "$hooks"
 import dayjs from "dayjs"
 
 const MemberDetailsList = styled.ul`

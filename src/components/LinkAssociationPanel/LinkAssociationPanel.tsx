@@ -1,3 +1,8 @@
+import { MessageBar, MessageBarType } from "@fluentui/react"
+import { Button, FluentProvider, Text } from "@fluentui/react-components"
+import { useCallback, useEffect, useMemo, useState } from "react"
+import { useForm } from "react-hook-form"
+
 import {
   FormSection,
   MemberDetailsCard,
@@ -9,20 +14,17 @@ import {
 import { FormMemberLookupField } from "$components"
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
-import { MessageBar, MessageBarType } from "@fluentui/react"
-import { Button, FluentProvider, Text } from "@fluentui/react-components"
-import { useCallback, useEffect, useState } from "react"
-import { useForm } from "react-hook-form"
+import { getMemberDetailsFromAssociation } from "$lib"
 
 type AssociationMembershipForm = {
-  members: IAssociationMemberPersona[]
+  personas: IAssociationMemberPersona[]
 }
 
 export interface ILinkAssociationPanelProps {
   fencerId: string
   defaultFilter?: string
-  associationId?: string
-  isOpen?: boolean
+  associationId?: string | null
+  isOpen: boolean
   onSaved?: (membershipId?: string) => void
   onClose: () => void
 }
@@ -40,28 +42,10 @@ export const LinkAssociationPanel: React.FunctionComponent<
   const { handleSubmit, control, reset, formState, getValues, watch } =
     useForm<AssociationMembershipForm>({
       defaultValues: {
-        members: [],
+        personas: [],
       },
     })
-
-  useEffect(() => {
-    const subscription = watch((value, { name, type }) => {
-      if (value.members?.length) {
-        const member = value.members[0]?.member
-        const otherAccount = member?.Students?.find(
-          (f) => f?.StudentId !== fencerId
-        )
-        console.log(otherAccount)
-        if (otherAccount) {
-          setAlreadyLinkedTo(otherAccount.Oid)
-          return
-        }
-      }
-
-      setAlreadyLinkedTo(undefined)
-    })
-    return () => subscription.unsubscribe()
-  }, [fencerId, watch])
+  const watchedPersonas = watch("personas")
 
   const [linkAccount] = useUpdateFencerByIdMutation()
   const { data } = useGetMembersByIdQuery({
@@ -73,14 +57,14 @@ export const LinkAssociationPanel: React.FunctionComponent<
       const member = data.AssociationMembers_by_pk
       if (member) {
         reset({
-          members: [associationMemberToPersona(member)],
+          personas: [associationMemberToPersona(member)],
         })
       }
     },
   })
 
   const onLinkClicked = useCallback(() => {
-    const member = getValues("members")[0].member
+    const member = getValues("personas")[0].member
 
     linkAccount({
       variables: {
@@ -102,6 +86,11 @@ export const LinkAssociationPanel: React.FunctionComponent<
     reset()
     onClose()
   }, [onClose, reset])
+
+  const memberDetails = useMemo(() => {
+    const member = watchedPersonas[0]?.member
+    return getMemberDetailsFromAssociation(member)
+  }, [watchedPersonas])
 
   const onRenderFooterContent = useCallback(
     () => (
@@ -127,7 +116,21 @@ export const LinkAssociationPanel: React.FunctionComponent<
     ]
   )
 
-  const member = getValues("members")[0]?.member
+  useEffect(() => {
+    const member = watchedPersonas[0]?.member
+    if (member) {
+      const otherAccount = member?.Students?.find(
+        (f) => f?.StudentId !== fencerId
+      )
+
+      if (otherAccount) {
+        setAlreadyLinkedTo(otherAccount.Oid)
+        return
+      }
+    }
+
+    setAlreadyLinkedTo(undefined)
+  }, [fencerId, watchedPersonas])
 
   return (
     <PistePanel
@@ -147,30 +150,15 @@ export const LinkAssociationPanel: React.FunctionComponent<
             </Text>
 
             <FormMemberLookupField
-              name="members"
+              name="personas"
               control={control}
               defaultFilter={defaultFilter}
               itemLimit={1}
             />
 
-            {member && (
+            {memberDetails && (
               <>
-                <MemberDetailsCard
-                  details={{
-                    fullName: member.FullName,
-                    secondaryText:
-                      member.Club1Name ||
-                      member.Club2Name ||
-                      member.Division ||
-                      member.Birthdate.toString(),
-                    memberId: member.AssociationMemberId,
-                    membershipExpiration: member.Expiration,
-                    birthdate: member.Birthdate,
-                    foilRating: member.Foil,
-                    epeeRating: member.Epee,
-                    sabreRating: member.Saber,
-                  }}
-                />
+                <MemberDetailsCard details={memberDetails} />
                 {!!alreadyLinkedTo && (
                   <MessageBar messageBarType={MessageBarType.blocked}>
                     {alreadyLinkedTo === UserId ? (

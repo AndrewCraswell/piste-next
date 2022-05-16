@@ -10,6 +10,22 @@ query AccountProfile($oid: String!) {
       Phone
       Birthdate
       AssociationMemberId
+      AssociationMember {
+        FullName
+        FirstName
+        LastName
+        FullName
+        Birthdate
+        Club1Name
+        Club2Name
+        Division
+        AssociationMemberId
+        MemberType
+        Expiration
+        Foil
+        Epee
+        Saber
+      }
     }
     Address {
       AddressId

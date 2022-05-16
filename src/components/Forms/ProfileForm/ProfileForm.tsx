@@ -47,8 +47,10 @@ export const ProfileForm: React.FunctionComponent = () => {
   useEffect(() => {
     if (!loading) {
       const fields: Partial<IProfileFormFields> = {
-        ...account,
-        Birthdate: dayjs(account.Birthdate).toDate(),
+        ...account.Student,
+        Birthdate: account.Student
+          ? dayjs(account.Student.Birthdate).toDate()
+          : undefined,
       }
 
       setFormFields(fields)
@@ -98,12 +100,6 @@ export const ProfileForm: React.FunctionComponent = () => {
                 <Button>Cancel</Button>
               </PanelFooter>
             </IndentedAccordionPanel>
-          </AccordionItem>
-          <AccordionItem value="membership">
-            <AccordionHeader size="large">
-              Association membership
-            </AccordionHeader>
-            <IndentedAccordionPanel></IndentedAccordionPanel>
           </AccordionItem>
         </Accordion>
       </form>
