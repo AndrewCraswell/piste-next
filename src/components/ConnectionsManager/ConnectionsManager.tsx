@@ -6,7 +6,7 @@ import {
 
 import { IndentedAccordionPanel, TabText } from "$components"
 import { CalendarLinker } from "./components"
-import { AssociationMembershipLinker } from "./AssociationMembershipLinker"
+import { AssociationMembershipLinker } from "./components"
 
 export const ConnectionsManager: React.FunctionComponent = () => {
   // TODO: Add check for user role
