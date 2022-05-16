@@ -1,4 +1,3 @@
-import { OnboardingFlow } from "$components"
 import { useAccountProfile } from "$hooks"
 import styled from "@emotion/styled"
 import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
@@ -24,7 +23,7 @@ export const OnboardingGate: React.FunctionComponent = ({ children }) => {
       return <>{children}</>
     } else {
       // If profile does not exist, guide user to create it
-      return <OnboardingFlow />
+      return <>Profile does not exist.</>
     }
   }
 }
