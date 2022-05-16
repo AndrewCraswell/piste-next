@@ -5,31 +5,28 @@ import {
 } from "@fluentui/react-components"
 
 import { IndentedAccordionPanel, TabText } from "$components"
-import { useAccountProfile } from "$hooks"
 import { CalendarLinker } from "./components"
+import { AssociationMembershipLinker } from "./AssociationMembershipLinker"
 
 export const ConnectionsManager: React.FunctionComponent = () => {
-  const { loading: isProfileLoading } = useAccountProfile()
-
-  // TODO: Add Usa Fencing linking
   // TODO: Add check for user role
 
   return (
     <div style={{ maxWidth: 600 }}>
       <TabText block>Manage external connections to your account.</TabText>
-      <Accordion collapsible defaultOpenItems="membership">
+      <Accordion collapsible multiple defaultOpenItems="membership">
         <AccordionItem value="membership">
           <AccordionHeader size="large">Association membership</AccordionHeader>
-          <IndentedAccordionPanel></IndentedAccordionPanel>
+          <IndentedAccordionPanel>
+            <AssociationMembershipLinker />
+          </IndentedAccordionPanel>
         </AccordionItem>
-        {!isProfileLoading && (
-          <AccordionItem value="calendar">
-            <AccordionHeader size="large">Calendar</AccordionHeader>
-            <IndentedAccordionPanel>
-              <CalendarLinker />
-            </IndentedAccordionPanel>
-          </AccordionItem>
-        )}
+        <AccordionItem value="calendar">
+          <AccordionHeader size="large">Calendar</AccordionHeader>
+          <IndentedAccordionPanel>
+            <CalendarLinker />
+          </IndentedAccordionPanel>
+        </AccordionItem>
       </Accordion>
     </div>
   )

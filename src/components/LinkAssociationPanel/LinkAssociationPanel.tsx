@@ -14,7 +14,7 @@ import {
 import { FormMemberLookupField } from "$components"
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
-import { getMemberDetailsFromAssociation } from "./LinkAssociationPanel.utils"
+import { getMemberDetailsFromAssociation } from "$lib"
 
 type AssociationMembershipForm = {
   personas: IAssociationMemberPersona[]
@@ -23,8 +23,8 @@ type AssociationMembershipForm = {
 export interface ILinkAssociationPanelProps {
   fencerId: string
   defaultFilter?: string
-  associationId?: string
-  isOpen?: boolean
+  associationId?: string | null
+  isOpen: boolean
   onSaved?: (membershipId?: string) => void
   onClose: () => void
 }

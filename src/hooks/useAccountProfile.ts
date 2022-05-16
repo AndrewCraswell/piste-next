@@ -33,7 +33,7 @@ export const useAccountProfile = () => {
       isCalendarLinked: !!calendar,
       calendar,
       FullName: accountFullName || userFullName,
-      ...Student,
+      Student,
       ...Address,
       Picture: user?.picture,
       Email: email,

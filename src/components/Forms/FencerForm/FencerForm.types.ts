@@ -3,5 +3,5 @@ export interface IFencerFormFields {
   LastName: string
   Birthdate: string | Date
   Phone?: string | null
-  Email?: string
+  Email?: string | null
 }
