@@ -18,6 +18,7 @@
     "paths": {
       "$components": ["components"],
       "$components/*": ["components/*"],
+      "$internal": ["components/internal"],
       "$queries": ["queries"],
       "$queries/*": ["queries/*"],
       "$lib": ["lib"],
