@@ -1,7 +1,6 @@
 import { PersonaSize } from "@fluentui/react"
 
-import { AssociationMember } from "$types"
-import { IAssociationMemberPersona } from "./MembershipLookupField.types"
+import { AssociationMember, IAssociationMemberPersona } from "$types"
 
 export function associationMemberToPersona(
   member: AssociationMember

@@ -1,4 +1,4 @@
-import { MessageBar, MessageBarType } from "@fluentui/react"
+import { MessageBar, MessageBarType, PersonaSize } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -7,20 +7,22 @@ import {
   FormSection,
   MemberDetailsCard,
   PistePanel,
-  associationMemberToPersona,
   PanelFooter,
-  IAssociationMemberPersona,
+  FormMemberLookupField,
 } from "$components"
-import { FormMemberLookupField } from "$components"
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
-import { getMemberDetailsFromAssociation } from "$lib"
+import {
+  getMemberDetailsFromAssociation,
+  associationMemberToPersona,
+} from "$lib"
+import { IAssociationMemberPersona } from "$types"
 
 type AssociationMembershipForm = {
   personas: IAssociationMemberPersona[]
 }
 
-export interface ILinkAssociationPanelProps {
+interface ILinkAssociationPanelProps {
   fencerId: string
   defaultFilter?: string
   associationId?: string | null

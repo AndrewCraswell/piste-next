@@ -4,16 +4,15 @@ import {
   IPersonaProps,
   IPeoplePickerProps,
 } from "@fluentui/react"
+import { useCallback } from "react"
 
 import {
   SearchMembersDocument,
   SearchMembersQuery,
   SearchMembersQueryVariables,
 } from "$queries"
-import { AssociationMember } from "$types"
-import { associationMemberToPersona } from "./MemberLookupField.utils"
-import { useCallback } from "react"
-import { IAssociationMemberPersona } from "$components"
+import { associationMemberToPersona } from "$lib"
+import { IAssociationMemberPersona } from "$types"
 
 export interface IMemberLookupFieldProps
   extends Partial<Omit<IPeoplePickerProps, "onChange">> {
