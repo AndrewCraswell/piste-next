@@ -1,11 +1,12 @@
 import type { NextPage } from "next"
-import { useSearchMembersLazyQuery } from "$queries"
-import { MemberDetailsCard, PageTitle } from "$components"
 import styled from "@emotion/styled"
-import { useTitle } from "$hooks"
 import { SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import { useCallback, useEffect, useState } from "react"
 import { Button } from "@fluentui/react-components"
+
+import { useTitle } from "$hooks"
+import { useSearchMembersLazyQuery } from "$queries"
+import { MemberDetailsCard, PageTitle } from "$components"
 
 const pageSize = 12
 
