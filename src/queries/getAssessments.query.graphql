@@ -1,0 +1,34 @@
+query GetAssessments {
+  assessments_assessments {
+    id
+    title
+    description
+    created_at
+    assessment_cohorts {
+      id
+      title
+      description
+      metric_responses {
+        id
+        fencer {
+          id
+          first_name
+          last_name
+        }
+        value
+      }
+    }
+    assessment_metrics {
+      metric_question {
+        id
+        title
+        description
+        metric_type {
+          id
+          description
+          name
+        }
+      }
+    }
+  }
+}

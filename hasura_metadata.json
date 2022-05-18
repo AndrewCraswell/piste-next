@@ -1,5 +1,5 @@
 {
-  "resource_version": 426,
+  "resource_version": 466,
   "metadata": {
     "version": 3,
     "sources": [
@@ -947,6 +947,251 @@
           },
           {
             "table": {
+              "schema": "assessments",
+              "name": "assessment_cohorts"
+            },
+            "object_relationships": [
+              {
+                "name": "assessment",
+                "using": {
+                  "foreign_key_constraint_on": "assessment_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "cohort_fencers",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "cohort_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "cohort_fencers"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "metric_responses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "cohort_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_responses"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "description",
+                    "id",
+                    "title"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "assessment_id",
+                    "title",
+                    "description",
+                    "created_by",
+                    "created_at",
+                    "updated_at"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "description",
+                    "id",
+                    "title"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "assessment_metrics"
+            },
+            "object_relationships": [
+              {
+                "name": "assessment",
+                "using": {
+                  "foreign_key_constraint_on": "assessment_id"
+                }
+              },
+              {
+                "name": "metric_question",
+                "using": {
+                  "foreign_key_constraint_on": "metric_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "assessment_id",
+                    "metric_id",
+                    "order_number"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "updated_at",
+                    "order_number",
+                    "assessment_id",
+                    "created_by",
+                    "metric_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "order_number"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "assessments"
+            },
+            "array_relationships": [
+              {
+                "name": "assessment_cohorts",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "assessment_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "assessment_cohorts"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "assessment_metrics",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "assessment_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "assessment_metrics"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "description",
+                    "title"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "created_at",
+                    "updated_at",
+                    "description",
+                    "created_by",
+                    "title"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "description",
+                    "title"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
               "schema": "dbo",
               "name": "calendars"
             },
@@ -1090,6 +1335,320 @@
               {
                 "role": "user",
                 "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "cohort_fencers"
+            },
+            "object_relationships": [
+              {
+                "name": "assessment_cohort",
+                "using": {
+                  "foreign_key_constraint_on": "cohort_id"
+                }
+              },
+              {
+                "name": "fencer",
+                "using": {
+                  "foreign_key_constraint_on": "fencer_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "cohort_id",
+                    "fencer_id"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "created_by",
+                    "fencer_id",
+                    "cohort_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "fencers"
+            },
+            "array_relationships": [
+              {
+                "name": "cohort_fencers",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "fencer_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "cohort_fencers"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "metric_responses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "fencer_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_responses"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "created_at",
+                    "updated_at",
+                    "association_member_id",
+                    "last_name",
+                    "phone",
+                    "birthdate",
+                    "created_by",
+                    "nickname",
+                    "email",
+                    "first_name",
+                    "gender"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "metric_questions"
+            },
+            "object_relationships": [
+              {
+                "name": "metric_type",
+                "using": {
+                  "foreign_key_constraint_on": "metric_type_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "assessment_metrics",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "metric_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "assessment_metrics"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "metric_responses",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "metric_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_responses"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "description",
+                    "metric_type_id",
+                    "title"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "updated_at",
+                    "created_at",
+                    "title",
+                    "created_by",
+                    "description",
+                    "metric_type_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "description",
+                    "metric_type_id",
+                    "title"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "metric_responses"
+            },
+            "object_relationships": [
+              {
+                "name": "assessment_cohort",
+                "using": {
+                  "foreign_key_constraint_on": "cohort_id"
+                }
+              },
+              {
+                "name": "fencer",
+                "using": {
+                  "foreign_key_constraint_on": "fencer_id"
+                }
+              },
+              {
+                "name": "metric_question",
+                "using": {
+                  "foreign_key_constraint_on": "metric_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "cohort_id",
+                    "fencer_id",
+                    "metric_id",
+                    "value"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "created_at",
+                    "updated_at",
+                    "metric_id",
+                    "value",
+                    "created_by",
+                    "cohort_id",
+                    "fencer_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "value"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "metric_types"
+            },
+            "array_relationships": [
+              {
+                "name": "metric_questions",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "metric_type_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_questions"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "description",
+                    "name"
+                  ],
                   "filter": {}
                 }
               }
