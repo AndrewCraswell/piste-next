@@ -1,12 +1,12 @@
 import styled from "@emotion/styled"
-import { Text } from "@fluentui/react-components"
+import { Headline } from "@fluentui/react-components"
 
-const Title = styled(Text)`
+const Title = styled(Headline)`
   margin: 0 0 1rem 0;
 `
 
 export const PageTitle: React.FunctionComponent = ({ children }) => (
-  <Title as="h1" size={500} weight="semibold" block>
+  <Title as="h1" block>
     {children}
   </Title>
 )
