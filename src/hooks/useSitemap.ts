@@ -72,7 +72,7 @@ function groupLinks(links: INavLink[]): INavLinkGroup[] {
 }
 
 export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
-  const shims = useLinkShims()
+  const { onClick, onMouseOver } = useLinkShims()
 
   const links = sitemap
     .map((item) => traverseSitemap(item, options))
@@ -80,8 +80,13 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
 
   return flattenNavLinks(links).map((item) => {
     if (options.injectLinkShims && !item.disabled) {
-      item.onMouseOver = shims.onMouseOver
-      item.onClick = shims.onClick
+      item.onMouseOver = onMouseOver
+      item.onClick = onClick
+      item.links = item.links?.map((link) => ({
+        ...link,
+        onClick,
+        onMouseOver,
+      }))
     }
 
     return item
