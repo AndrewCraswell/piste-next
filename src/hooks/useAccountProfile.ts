@@ -26,9 +26,10 @@ export const useAccountProfile = () => {
 
     // Use fallbacks to determine the best email
     const email = Student?.Email || user?.email
+    const userId = Oid || user?.sub!
 
     return {
-      UserId: Oid,
+      UserId: userId,
       PrimaryStudentId,
       isCalendarLinked: !!calendar,
       calendar,
