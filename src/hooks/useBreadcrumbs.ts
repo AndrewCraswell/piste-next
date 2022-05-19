@@ -1,5 +1,7 @@
 import { IBreadcrumbItem, INavLink } from "@fluentui/react"
 import { useRouter } from "next/router"
+import type { ParsedUrlQuery } from "querystring"
+import { useMemo } from "react"
 import { useSitemap } from "./useSitemap"
 
 export function useBreadcrumbs(): IBreadcrumbItem[] {
@@ -9,7 +11,21 @@ export function useBreadcrumbs(): IBreadcrumbItem[] {
     injectLinkShims: true,
   })
 
-  return getBreadcrumbs(router.pathname, sitemap, [])
+  const breadcrumbs = useMemo(() => {
+    const query = router.query
+
+    const crumbs = getBreadcrumbs(router.pathname + "/", sitemap, []).map(
+      (b) => ({
+        ...b,
+        text: replaceRouteTokens(b.text, query),
+        href: b.href ? replaceRouteTokens(b.href, query) : undefined,
+      })
+    )
+
+    return crumbs
+  }, [router, sitemap])
+
+  return breadcrumbs
 }
 
 function getBreadcrumbs(
@@ -34,4 +50,19 @@ function getBreadcrumbs(
     onMouseOver: item.onMouseOver,
     onClick: item.onClick,
   })) as IBreadcrumbItem[]
+}
+
+function replaceRouteTokens(str: string, query: ParsedUrlQuery) {
+  let result = str
+
+  Object.keys(query).forEach((k) => {
+    const token = `[${k}]`
+    const value = Array.isArray(query[k])
+      ? (query[k] as string[]).join("")
+      : (query[k] as string)
+
+    result = result.replaceAll(token, value)
+  })
+
+  return result
 }

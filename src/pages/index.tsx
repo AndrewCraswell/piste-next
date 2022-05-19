@@ -2,7 +2,7 @@ import type { NextPage } from "next"
 import styled from "@emotion/styled"
 import { SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import { useCallback, useEffect, useState } from "react"
-import { Button } from "@fluentui/react-components"
+import { Button, Text } from "@fluentui/react-components"
 
 import { useTitle } from "$hooks"
 import { useSearchMembersLazyQuery } from "$queries"
@@ -13,7 +13,7 @@ const pageSize = 12
 const GridContainer = styled.div`
   display: grid;
   grid-gap: 1rem;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 330px));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 290px));
   margin-top: 2em;
 `
 
@@ -84,6 +84,9 @@ export const Overview: NextPage = () => {
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
+      <Text style={{ marginBottom: "2rem" }} block>
+        Search by name or club to find any association members.
+      </Text>
       <SearchBox placeholder="Search" onSearch={onSearch} />
 
       <GridContainer>
