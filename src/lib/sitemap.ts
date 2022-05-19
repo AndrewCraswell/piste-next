@@ -57,6 +57,15 @@ export const sitemap: IPageItem[] = [
           nav: { group: "Club", link: { icon: "TestPlan", disabled: false } },
           breadcrumb: {},
         },
+        children: [
+          {
+            name: "Assessment [assessmentId]",
+            url: "[assessmentId]/",
+            tags: {
+              breadcrumb: {},
+            },
+          },
+        ],
       },
       {
         name: "Classes",
