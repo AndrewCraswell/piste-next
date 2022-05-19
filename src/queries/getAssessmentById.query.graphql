@@ -1,0 +1,18 @@
+query GetAssessmentById($id: uniqueidentifier!) {
+  assessments_assessments_by_pk(id: $id) {
+    id
+    title
+    description
+    assessment_metrics(order_by: { order_number: asc }) {
+      order_number
+      assessment_id
+      metric_id
+      metric_question {
+        id
+        title
+        description
+        metric_type_id
+      }
+    }
+  }
+}

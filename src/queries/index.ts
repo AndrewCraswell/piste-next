@@ -7064,6 +7064,13 @@ export type GetAccountFencersQueryVariables = Exact<{
 
 export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
 
+export type GetAssessmentByIdQueryVariables = Exact<{
+  id: Scalars['uniqueidentifier'];
+}>;
+
+
+export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_assessments_by_pk?: { __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', order_number: number, assessment_id: any, metric_id: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type_id: any } }> } | null };
+
 export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7301,6 +7308,54 @@ export function useGetAccountFencersLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFencersQuery>;
 export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
+export const GetAssessmentByIdDocument = gql`
+    query GetAssessmentById($id: uniqueidentifier!) {
+  assessments_assessments_by_pk(id: $id) {
+    id
+    title
+    description
+    assessment_metrics(order_by: {order_number: asc}) {
+      order_number
+      assessment_id
+      metric_id
+      metric_question {
+        id
+        title
+        description
+        metric_type_id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAssessmentByIdQuery__
+ *
+ * To run a query within a React component, call `useGetAssessmentByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAssessmentByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAssessmentByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetAssessmentByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>(GetAssessmentByIdDocument, options);
+      }
+export function useGetAssessmentByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>(GetAssessmentByIdDocument, options);
+        }
+export type GetAssessmentByIdQueryHookResult = ReturnType<typeof useGetAssessmentByIdQuery>;
+export type GetAssessmentByIdLazyQueryHookResult = ReturnType<typeof useGetAssessmentByIdLazyQuery>;
+export type GetAssessmentByIdQueryResult = Apollo.QueryResult<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>;
 export const GetAssessmentsDocument = gql`
     query GetAssessments {
   assessments_assessments {
