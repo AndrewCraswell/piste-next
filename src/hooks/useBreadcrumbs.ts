@@ -9,7 +9,7 @@ export function useBreadcrumbs(): IBreadcrumbItem[] {
     injectLinkShims: true,
   })
 
-  return getBreadcrumbs(router.pathname, sitemap, [])
+  return getBreadcrumbs(router.pathname + "/", sitemap, [])
 }
 
 function getBreadcrumbs(
