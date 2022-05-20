@@ -1,5 +1,5 @@
 {
-  "resource_version": 466,
+  "resource_version": 494,
   "metadata": {
     "version": 3,
     "sources": [
@@ -212,6 +212,21 @@
                     "table": {
                       "schema": "dbo",
                       "name": "Students"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "assessments",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "assessments",
+                      "name": "assessments"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {
+                      "Oid": "created_by"
                     }
                   }
                 }
@@ -854,20 +869,6 @@
                 }
               }
             ],
-            "array_relationships": [
-              {
-                "name": "Accounts",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "PrimaryStudentId",
-                    "table": {
-                      "schema": "dbo",
-                      "name": "Accounts"
-                    }
-                  }
-                }
-              }
-            ],
             "insert_permissions": [
               {
                 "role": "user",
@@ -1113,6 +1114,23 @@
               "schema": "assessments",
               "name": "assessments"
             },
+            "object_relationships": [
+              {
+                "name": "account",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "dbo",
+                      "name": "Accounts"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {
+                      "created_by": "Oid"
+                    }
+                  }
+                }
+              }
+            ],
             "array_relationships": [
               {
                 "name": "assessment_cohorts",
@@ -1209,14 +1227,10 @@
                 "permission": {
                   "check": {},
                   "columns": [
-                    "created_at",
-                    "created_by",
-                    "updated_at",
-                    "calendar_id",
+                    "access_token",
                     "account_id",
                     "id",
-                    "provider",
-                    "access_token"
+                    "provider"
                   ],
                   "backend_only": false
                 }
@@ -1227,14 +1241,13 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "created_at",
-                    "created_by",
-                    "updated_at",
-                    "calendar_id",
                     "account_id",
+                    "access_token",
                     "id",
                     "provider",
-                    "access_token"
+                    "created_at",
+                    "created_by",
+                    "updated_at"
                   ],
                   "filter": {}
                 }
@@ -1245,13 +1258,6 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "created_at",
-                    "created_by",
-                    "updated_at",
-                    "calendar_id",
-                    "account_id",
-                    "id",
-                    "provider",
                     "access_token"
                   ],
                   "filter": {},

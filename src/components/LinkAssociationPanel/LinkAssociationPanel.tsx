@@ -125,7 +125,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
         (f) => f?.StudentId !== fencerId
       )
 
-      if (otherAccount) {
+      if (otherAccount?.Oid) {
         setAlreadyLinkedTo(otherAccount.Oid)
         return
       }

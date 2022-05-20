@@ -325,20 +325,24 @@ export type Accounts = {
   /** An aggregate relationship */
   AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   /** An object relationship */
-  Address: Addresses;
-  AddressId: Scalars['uniqueidentifier'];
+  Address?: Maybe<Addresses>;
+  AddressId?: Maybe<Scalars['uniqueidentifier']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
   LanguageId: Scalars['String'];
   Oid: Scalars['String'];
-  PrimaryStudentId: Scalars['uniqueidentifier'];
+  PrimaryStudentId?: Maybe<Scalars['uniqueidentifier']>;
   /** An object relationship */
-  Student: Students;
+  Student?: Maybe<Students>;
   /** An array relationship */
   Students: Array<Students>;
   /** An aggregate relationship */
   Students_aggregate: Students_Aggregate;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
+  /** An array relationship */
+  assessments: Array<Assessments_Assessments>;
+  /** An aggregate relationship */
+  assessments_aggregate: Assessments_Assessments_Aggregate;
   /** An object relationship */
   calendar?: Maybe<Calendars>;
   /** An array relationship */
@@ -399,6 +403,24 @@ export type AccountsStudents_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
   where?: InputMaybe<Students_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Accounts" */
+export type AccountsAssessmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Accounts" */
+export type AccountsAssessments_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
 };
 
 
@@ -465,6 +487,7 @@ export type Accounts_Bool_Exp = {
   _and?: InputMaybe<Array<Accounts_Bool_Exp>>;
   _not?: InputMaybe<Accounts_Bool_Exp>;
   _or?: InputMaybe<Array<Accounts_Bool_Exp>>;
+  assessments?: InputMaybe<Assessments_Assessments_Bool_Exp>;
   calendar?: InputMaybe<Calendars_Bool_Exp>;
   club_accounts?: InputMaybe<Club_Accounts_Bool_Exp>;
 };
@@ -566,6 +589,7 @@ export type Accounts_Order_By = {
   Student?: InputMaybe<Students_Order_By>;
   Students_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
+  assessments_aggregate?: InputMaybe<Assessments_Assessments_Aggregate_Order_By>;
   calendar?: InputMaybe<Calendars_Order_By>;
   club_accounts_aggregate?: InputMaybe<Club_Accounts_Aggregate_Order_By>;
 };
@@ -2307,43 +2331,22 @@ export type String_Mssql_Comparison_Exp = {
 export type Students = {
   __typename?: 'Students';
   /** An object relationship */
-  Account: Accounts;
-  /** An array relationship */
-  Accounts: Array<Accounts>;
-  /** An aggregate relationship */
-  Accounts_aggregate: Accounts_Aggregate;
+  Account?: Maybe<Accounts>;
   /** An object relationship */
   AssociationMember?: Maybe<AssociationMembers>;
   AssociationMemberId?: Maybe<Scalars['String']>;
   AvatarUrl?: Maybe<Scalars['String']>;
-  Birthdate: Scalars['date'];
+  Birthdate?: Maybe<Scalars['date']>;
   CreatedAt?: Maybe<Scalars['datetime2']>;
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName: Scalars['String'];
   LastName: Scalars['String'];
-  Oid: Scalars['String'];
+  Nickname?: Maybe<Scalars['String']>;
+  Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   StudentId: Scalars['uniqueidentifier'];
   UpdatedAt?: Maybe<Scalars['datetime2']>;
-};
-
-
-/** columns and relationships of "Students" */
-export type StudentsAccountsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Accounts_Order_By>>;
-  where?: InputMaybe<Accounts_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Students" */
-export type StudentsAccounts_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Accounts_Order_By>>;
-  where?: InputMaybe<Accounts_Bool_Exp>;
 };
 
 /** aggregated selection of "Students" */
@@ -2378,7 +2381,6 @@ export type Students_Aggregate_Order_By = {
 /** Boolean expression to filter rows from the table "Students". All fields are combined with a logical 'AND'. */
 export type Students_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
-  Accounts?: InputMaybe<Accounts_Bool_Exp>;
   AssociationMember?: InputMaybe<AssociationMembers_Bool_Exp>;
   AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
   AvatarUrl?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -2388,6 +2390,7 @@ export type Students_Bool_Exp = {
   Email?: InputMaybe<String_Mssql_Comparison_Exp>;
   FirstName?: InputMaybe<String_Mssql_Comparison_Exp>;
   LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
   Phone?: InputMaybe<String_Mssql_Comparison_Exp>;
   StudentId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
@@ -2414,6 +2417,7 @@ export type Students_Insert_Input = {
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
+  Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   Phone?: InputMaybe<Scalars['String']>;
   StudentId?: InputMaybe<Scalars['uniqueidentifier']>;
@@ -2439,6 +2443,8 @@ export enum Students_Insert_Match_Column {
   /** column name */
   LastName = 'LastName',
   /** column name */
+  Nickname = 'Nickname',
+  /** column name */
   Oid = 'Oid',
   /** column name */
   Phone = 'Phone',
@@ -2459,6 +2465,7 @@ export type Students_Max_Fields = {
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
+  Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
@@ -2474,6 +2481,7 @@ export type Students_Max_Order_By = {
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
@@ -2490,6 +2498,7 @@ export type Students_Min_Fields = {
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
+  Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
@@ -2505,6 +2514,7 @@ export type Students_Min_Order_By = {
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
@@ -2522,7 +2532,6 @@ export type Students_Mutation_Response = {
 /** Ordering options when selecting data from "Students". */
 export type Students_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
-  Accounts_aggregate?: InputMaybe<Accounts_Aggregate_Order_By>;
   AssociationMember?: InputMaybe<AssociationMembers_Order_By>;
   AssociationMemberId?: InputMaybe<Order_By>;
   AvatarUrl?: InputMaybe<Order_By>;
@@ -2532,6 +2541,7 @@ export type Students_Order_By = {
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   StudentId?: InputMaybe<Order_By>;
@@ -2562,6 +2572,8 @@ export enum Students_Select_Column {
   /** column name */
   LastName = 'LastName',
   /** column name */
+  Nickname = 'Nickname',
+  /** column name */
   Oid = 'Oid',
   /** column name */
   Phone = 'Phone',
@@ -2581,6 +2593,7 @@ export type Students_Set_Input = {
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
+  Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   Phone?: InputMaybe<Scalars['String']>;
   StudentId?: InputMaybe<Scalars['uniqueidentifier']>;
@@ -2605,6 +2618,8 @@ export enum Students_Update_Column {
   FirstName = 'FirstName',
   /** column name */
   LastName = 'LastName',
+  /** column name */
+  Nickname = 'Nickname',
   /** column name */
   Oid = 'Oid',
   /** column name */
@@ -3173,6 +3188,8 @@ export type Assessments_Assessment_Metrics_Variance_Order_By = {
 /** columns and relationships of "assessments.assessments" */
 export type Assessments_Assessments = {
   __typename?: 'assessments_assessments';
+  /** An object relationship */
+  account?: Maybe<Accounts>;
   /** An array relationship */
   assessment_cohorts: Array<Assessments_Assessment_Cohorts>;
   /** An aggregate relationship */
@@ -3247,11 +3264,19 @@ export type Assessments_Assessments_Aggregate_FieldsCountArgs = {
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
+/** order by aggregate values of table "assessments.assessments" */
+export type Assessments_Assessments_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessments_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessments_Min_Order_By>;
+};
+
 /** Boolean expression to filter rows from the table "assessments.assessments". All fields are combined with a logical 'AND'. */
 export type Assessments_Assessments_Bool_Exp = {
   _and?: InputMaybe<Array<Assessments_Assessments_Bool_Exp>>;
   _not?: InputMaybe<Assessments_Assessments_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Assessments_Bool_Exp>>;
+  account?: InputMaybe<Accounts_Bool_Exp>;
   assessment_cohorts?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
   assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
@@ -3303,6 +3328,15 @@ export type Assessments_Assessments_Max_Fields = {
   updated_at?: Maybe<Scalars['datetime2']>;
 };
 
+/** order by max() on columns of table "assessments.assessments" */
+export type Assessments_Assessments_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
 /** aggregate min on columns */
 export type Assessments_Assessments_Min_Fields = {
   __typename?: 'assessments_assessments_min_fields';
@@ -3311,6 +3345,15 @@ export type Assessments_Assessments_Min_Fields = {
   description?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessments" */
+export type Assessments_Assessments_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
 };
 
 /** response of any mutation on the table "assessments.assessments" */
@@ -3324,6 +3367,7 @@ export type Assessments_Assessments_Mutation_Response = {
 
 /** Ordering options when selecting data from "assessments.assessments". */
 export type Assessments_Assessments_Order_By = {
+  account?: InputMaybe<Accounts_Order_By>;
   assessment_cohorts_aggregate?: InputMaybe<Assessments_Assessment_Cohorts_Aggregate_Order_By>;
   assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
@@ -3854,7 +3898,7 @@ export type Assessments_Metric_Questions = {
   metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
   /** An object relationship */
   metric_type: Assessments_Metric_Types;
-  metric_type_id: Scalars['uniqueidentifier'];
+  metric_type_id: Scalars['String'];
   title: Scalars['String'];
   updated_at?: Maybe<Scalars['datetime2']>;
 };
@@ -3936,7 +3980,7 @@ export type Assessments_Metric_Questions_Bool_Exp = {
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   metric_responses?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
   metric_type?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
-  metric_type_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_type_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   title?: InputMaybe<String_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
 };
@@ -3954,7 +3998,7 @@ export type Assessments_Metric_Questions_Insert_Input = {
   created_by?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_type_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_type_id?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
@@ -3981,6 +4025,7 @@ export type Assessments_Metric_Questions_Max_Fields = {
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  metric_type_id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
 };
@@ -3990,6 +4035,7 @@ export type Assessments_Metric_Questions_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  metric_type_id?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -4000,6 +4046,7 @@ export type Assessments_Metric_Questions_Min_Fields = {
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
+  metric_type_id?: Maybe<Scalars['String']>;
   title?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
 };
@@ -4009,6 +4056,7 @@ export type Assessments_Metric_Questions_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
+  metric_type_id?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -4065,7 +4113,7 @@ export type Assessments_Metric_Questions_Set_Input = {
   created_by?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_type_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_type_id?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
@@ -4312,7 +4360,7 @@ export enum Assessments_Metric_Responses_Update_Column {
 export type Assessments_Metric_Types = {
   __typename?: 'assessments_metric_types';
   description?: Maybe<Scalars['String']>;
-  id: Scalars['uniqueidentifier'];
+  id: Scalars['String'];
   /** An array relationship */
   metric_questions: Array<Assessments_Metric_Questions>;
   /** An aggregate relationship */
@@ -4366,7 +4414,7 @@ export type Assessments_Metric_Types_Bool_Exp = {
   _not?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Metric_Types_Bool_Exp>>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
-  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  id?: InputMaybe<String_Mssql_Comparison_Exp>;
   metric_questions?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
   name?: InputMaybe<String_Mssql_Comparison_Exp>;
 };
@@ -4381,7 +4429,7 @@ export type Assessments_Metric_Types_If_Matched = {
 /** input type for inserting data into table "assessments.metric_types" */
 export type Assessments_Metric_Types_Insert_Input = {
   description?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -4399,6 +4447,7 @@ export enum Assessments_Metric_Types_Insert_Match_Column {
 export type Assessments_Metric_Types_Max_Fields = {
   __typename?: 'assessments_metric_types_max_fields';
   description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -4406,6 +4455,7 @@ export type Assessments_Metric_Types_Max_Fields = {
 export type Assessments_Metric_Types_Min_Fields = {
   __typename?: 'assessments_metric_types_min_fields';
   description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
   name?: Maybe<Scalars['String']>;
 };
 
@@ -4428,7 +4478,7 @@ export type Assessments_Metric_Types_Order_By = {
 
 /** primary key columns input for table: assessments_metric_types */
 export type Assessments_Metric_Types_Pk_Columns_Input = {
-  id: Scalars['uniqueidentifier'];
+  id: Scalars['String'];
 };
 
 /** select columns of table "assessments.metric_types" */
@@ -4444,7 +4494,7 @@ export enum Assessments_Metric_Types_Select_Column {
 /** input type for updating data in table "assessments.metric_types" */
 export type Assessments_Metric_Types_Set_Input = {
   description?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
 };
 
@@ -4465,7 +4515,6 @@ export type Calendars = {
   Account: Accounts;
   access_token: Scalars['String'];
   account_id: Scalars['String'];
-  calendar_id?: Maybe<Scalars['String']>;
   created_at: Scalars['datetime2'];
   created_by: Scalars['String'];
   id: Scalars['String'];
@@ -4503,7 +4552,6 @@ export type Calendars_Bool_Exp = {
   _or?: InputMaybe<Array<Calendars_Bool_Exp>>;
   access_token?: InputMaybe<String_Mssql_Comparison_Exp>;
   account_id?: InputMaybe<String_Mssql_Comparison_Exp>;
-  calendar_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -4522,7 +4570,6 @@ export type Calendars_If_Matched = {
 export type Calendars_Insert_Input = {
   access_token?: InputMaybe<Scalars['String']>;
   account_id?: InputMaybe<Scalars['String']>;
-  calendar_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -4536,8 +4583,6 @@ export enum Calendars_Insert_Match_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -4555,7 +4600,6 @@ export type Calendars_Max_Fields = {
   __typename?: 'calendars_max_fields';
   access_token?: Maybe<Scalars['String']>;
   account_id?: Maybe<Scalars['String']>;
-  calendar_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
@@ -4568,7 +4612,6 @@ export type Calendars_Min_Fields = {
   __typename?: 'calendars_min_fields';
   access_token?: Maybe<Scalars['String']>;
   account_id?: Maybe<Scalars['String']>;
-  calendar_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
@@ -4590,7 +4633,6 @@ export type Calendars_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
   access_token?: InputMaybe<Order_By>;
   account_id?: InputMaybe<Order_By>;
-  calendar_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -4600,7 +4642,7 @@ export type Calendars_Order_By = {
 
 /** primary key columns input for table: calendars */
 export type Calendars_Pk_Columns_Input = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 /** select columns of table "calendars" */
@@ -4609,8 +4651,6 @@ export enum Calendars_Select_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -4627,7 +4667,6 @@ export enum Calendars_Select_Column {
 export type Calendars_Set_Input = {
   access_token?: InputMaybe<Scalars['String']>;
   account_id?: InputMaybe<Scalars['String']>;
-  calendar_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -4641,8 +4680,6 @@ export enum Calendars_Update_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -5313,7 +5350,7 @@ export type Mutation_RootDelete_Assessments_Metric_TypesArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Assessments_Metric_Types_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
+  id: Scalars['String'];
 };
 
 
@@ -5325,7 +5362,7 @@ export type Mutation_RootDelete_CalendarsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Calendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -6427,7 +6464,7 @@ export type Query_RootAssessments_Metric_Types_AggregateArgs = {
 
 
 export type Query_RootAssessments_Metric_Types_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
+  id: Scalars['String'];
 };
 
 
@@ -6448,7 +6485,7 @@ export type Query_RootCalendars_AggregateArgs = {
 
 
 export type Query_RootCalendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -6977,7 +7014,7 @@ export type Subscription_RootAssessments_Metric_Types_AggregateArgs = {
 
 
 export type Subscription_RootAssessments_Metric_Types_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
+  id: Scalars['String'];
 };
 
 
@@ -6998,7 +7035,7 @@ export type Subscription_RootCalendars_AggregateArgs = {
 
 
 export type Subscription_RootCalendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -7041,14 +7078,14 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string }, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
 }>;
 
 
-export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
+export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid?: string | null, StudentId: any, FirstName: string, LastName: string, Birthdate?: any | null, Phone?: string | null, Email?: string | null } | null };
 
 export type DeleteFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -7062,19 +7099,19 @@ export type GetAccountFencersQueryVariables = Exact<{
 }>;
 
 
-export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
+export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid?: string | null, StudentId: any, FirstName: string, LastName: string, Birthdate?: any | null, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
 
 export type GetAssessmentByIdQueryVariables = Exact<{
   id: Scalars['uniqueidentifier'];
 }>;
 
 
-export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_assessments_by_pk?: { __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', order_number: number, assessment_id: any, metric_id: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type_id: any } }> } | null };
+export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_assessments_by_pk?: { __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', order_number: number, assessment_id: any, metric_id: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type_id: string } }> } | null };
 
 export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, fencer: { __typename?: 'assessments_fencers', id: any, first_name: string, last_name: string } }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: any, description?: string | null, name: string } } }> }> };
+export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, fencer: { __typename?: 'assessments_fencers', id: any, first_name: string, last_name: string } }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
 
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -7089,7 +7126,7 @@ export type GetMembersByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> } | null };
+export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid?: string | null, StudentId: any }> } | null };
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
@@ -7098,7 +7135,7 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
+export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid?: string | null }> }> };
 
 export type UpdateStudentByIdMutationVariables = Exact<{
   id: Scalars['String'];
@@ -7106,7 +7143,7 @@ export type UpdateStudentByIdMutationVariables = Exact<{
 }>;
 
 
-export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } } | null };
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
 
 export type UpdateFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -7114,7 +7151,7 @@ export type UpdateFencerByIdMutationVariables = Exact<{
 }>;
 
 
-export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid: string } | null };
+export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate?: any | null, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid?: string | null } | null };
 
 
 export const AccountProfileDocument = gql`
