@@ -28,8 +28,7 @@ export const ViewAssessment: NextPage = () => {
   const pageTitle = "View assessment"
   useTitle(pageTitle)
   const { query } = useRouter()
-
-  const { control, handleSubmit, reset } = useForm()
+  const { control, handleSubmit } = useForm()
 
   const assessmentId = query.assessmentId as string
 
@@ -133,6 +132,10 @@ const MetricForm: React.FunctionComponent<IMetricFormProps> = (props) => {
             layout="horizontalStacked"
             aria-labelledby={id}
             {...field}
+            onChange={(event, data) => {
+              setValue(data.value)
+              field.onChange(event)
+            }}
           >
             <Radio label="0" value="0" />
             <Radio label="1" value="1" />
