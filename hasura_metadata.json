@@ -1,5 +1,5 @@
 {
-  "resource_version": 494,
+  "resource_version": 498,
   "metadata": {
     "version": 3,
     "sources": [
@@ -867,6 +867,18 @@
                 "using": {
                   "foreign_key_constraint_on": "AssociationMemberId"
                 }
+              },
+              {
+                "name": "account",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "PrimaryStudentId",
+                    "table": {
+                      "schema": "dbo",
+                      "name": "Accounts"
+                    }
+                  }
+                }
               }
             ],
             "insert_permissions": [
@@ -1357,12 +1369,6 @@
                 "using": {
                   "foreign_key_constraint_on": "cohort_id"
                 }
-              },
-              {
-                "name": "fencer",
-                "using": {
-                  "foreign_key_constraint_on": "fencer_id"
-                }
               }
             ],
             "insert_permissions": [
@@ -1396,60 +1402,6 @@
               {
                 "role": "user",
                 "permission": {
-                  "filter": {}
-                }
-              }
-            ]
-          },
-          {
-            "table": {
-              "schema": "assessments",
-              "name": "fencers"
-            },
-            "array_relationships": [
-              {
-                "name": "cohort_fencers",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "fencer_id",
-                    "table": {
-                      "schema": "assessments",
-                      "name": "cohort_fencers"
-                    }
-                  }
-                }
-              },
-              {
-                "name": "metric_responses",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "fencer_id",
-                    "table": {
-                      "schema": "assessments",
-                      "name": "metric_responses"
-                    }
-                  }
-                }
-              }
-            ],
-            "select_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "columns": [
-                    "id",
-                    "created_at",
-                    "updated_at",
-                    "association_member_id",
-                    "last_name",
-                    "phone",
-                    "birthdate",
-                    "created_by",
-                    "nickname",
-                    "email",
-                    "first_name",
-                    "gender"
-                  ],
                   "filter": {}
                 }
               }
@@ -1558,12 +1510,6 @@
                 "name": "assessment_cohort",
                 "using": {
                   "foreign_key_constraint_on": "cohort_id"
-                }
-              },
-              {
-                "name": "fencer",
-                "using": {
-                  "foreign_key_constraint_on": "fencer_id"
                 }
               },
               {

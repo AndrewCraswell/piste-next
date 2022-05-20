@@ -18,10 +18,10 @@ query GetAssessments {
       description
       metric_responses {
         id
-        fencer {
-          id
-          first_name
-          last_name
+        Student {
+          StudentId
+          FirstName
+          LastName
         }
         value
       }

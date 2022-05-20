@@ -327,7 +327,7 @@ export type Accounts = {
   /** An object relationship */
   Address?: Maybe<Addresses>;
   AddressId?: Maybe<Scalars['uniqueidentifier']>;
-  CreatedAt?: Maybe<Scalars['datetime2']>;
+  CreatedAt: Scalars['datetime2'];
   CreatedBy?: Maybe<Scalars['String']>;
   LanguageId: Scalars['String'];
   Oid: Scalars['String'];
@@ -338,7 +338,7 @@ export type Accounts = {
   Students: Array<Students>;
   /** An aggregate relationship */
   Students_aggregate: Students_Aggregate;
-  UpdatedAt?: Maybe<Scalars['datetime2']>;
+  UpdatedAt: Scalars['datetime2'];
   /** An array relationship */
   assessments: Array<Assessments_Assessments>;
   /** An aggregate relationship */
@@ -2337,16 +2337,19 @@ export type Students = {
   AssociationMemberId?: Maybe<Scalars['String']>;
   AvatarUrl?: Maybe<Scalars['String']>;
   Birthdate?: Maybe<Scalars['date']>;
-  CreatedAt?: Maybe<Scalars['datetime2']>;
+  CreatedAt: Scalars['datetime2'];
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName: Scalars['String'];
+  Gender?: Maybe<Scalars['String']>;
   LastName: Scalars['String'];
   Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   StudentId: Scalars['uniqueidentifier'];
-  UpdatedAt?: Maybe<Scalars['datetime2']>;
+  UpdatedAt: Scalars['datetime2'];
+  /** An object relationship */
+  account?: Maybe<Accounts>;
 };
 
 /** aggregated selection of "Students" */
@@ -2389,6 +2392,7 @@ export type Students_Bool_Exp = {
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
   Email?: InputMaybe<String_Mssql_Comparison_Exp>;
   FirstName?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Gender?: InputMaybe<String_Mssql_Comparison_Exp>;
   LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
   Nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -2398,6 +2402,7 @@ export type Students_Bool_Exp = {
   _and?: InputMaybe<Array<Students_Bool_Exp>>;
   _not?: InputMaybe<Students_Bool_Exp>;
   _or?: InputMaybe<Array<Students_Bool_Exp>>;
+  account?: InputMaybe<Accounts_Bool_Exp>;
 };
 
 /** upsert condition type for table "Students" */
@@ -2416,6 +2421,7 @@ export type Students_Insert_Input = {
   CreatedBy?: InputMaybe<Scalars['String']>;
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
+  Gender?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
   Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
@@ -2441,6 +2447,8 @@ export enum Students_Insert_Match_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
   /** column name */
   Nickname = 'Nickname',
@@ -2464,6 +2472,7 @@ export type Students_Max_Fields = {
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
+  Gender?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
   Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
@@ -2480,6 +2489,7 @@ export type Students_Max_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
   Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
@@ -2497,6 +2507,7 @@ export type Students_Min_Fields = {
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
+  Gender?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
   Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
@@ -2513,6 +2524,7 @@ export type Students_Min_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
   Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
@@ -2540,12 +2552,14 @@ export type Students_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
   Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   StudentId?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
+  account?: InputMaybe<Accounts_Order_By>;
 };
 
 /** primary key columns input for table: Students */
@@ -2570,6 +2584,8 @@ export enum Students_Select_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
   /** column name */
   Nickname = 'Nickname',
@@ -2592,6 +2608,7 @@ export type Students_Set_Input = {
   CreatedBy?: InputMaybe<Scalars['String']>;
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
+  Gender?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
   Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
@@ -2617,6 +2634,8 @@ export enum Students_Update_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
   /** column name */
   Nickname = 'Nickname',
@@ -2640,7 +2659,7 @@ export type Assessments_Assessment_Cohorts = {
   cohort_fencers: Array<Assessments_Cohort_Fencers>;
   /** An aggregate relationship */
   cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
-  created_at?: Maybe<Scalars['datetime2']>;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   id: Scalars['uniqueidentifier'];
@@ -2649,7 +2668,7 @@ export type Assessments_Assessment_Cohorts = {
   /** An aggregate relationship */
   metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
   title: Scalars['String'];
-  updated_at?: Maybe<Scalars['datetime2']>;
+  updated_at: Scalars['datetime2'];
 };
 
 
@@ -2887,13 +2906,13 @@ export type Assessments_Assessment_Metrics = {
   /** An object relationship */
   assessment: Assessments_Assessments;
   assessment_id: Scalars['uniqueidentifier'];
-  created_at?: Maybe<Scalars['datetime2']>;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   metric_id: Scalars['uniqueidentifier'];
   /** An object relationship */
   metric_question: Assessments_Metric_Questions;
   order_number: Scalars['Int'];
-  updated_at?: Maybe<Scalars['datetime2']>;
+  updated_at: Scalars['datetime2'];
 };
 
 /** aggregated selection of "assessments.assessment_metrics" */
@@ -3203,7 +3222,7 @@ export type Assessments_Assessments = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['uniqueidentifier'];
   title: Scalars['String'];
-  updated_at?: Maybe<Scalars['datetime2']>;
+  updated_at: Scalars['datetime2'];
 };
 
 
@@ -3429,12 +3448,12 @@ export enum Assessments_Assessments_Update_Column {
 export type Assessments_Cohort_Fencers = {
   __typename?: 'assessments_cohort_fencers';
   /** An object relationship */
+  Student?: Maybe<Students>;
+  /** An object relationship */
   assessment_cohort: Assessments_Assessment_Cohorts;
   cohort_id: Scalars['uniqueidentifier'];
-  created_at?: Maybe<Scalars['datetime2']>;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  fencer: Assessments_Fencers;
   fencer_id: Scalars['uniqueidentifier'];
 };
 
@@ -3469,6 +3488,7 @@ export type Assessments_Cohort_Fencers_Aggregate_Order_By = {
 
 /** Boolean expression to filter rows from the table "assessments.cohort_fencers". All fields are combined with a logical 'AND'. */
 export type Assessments_Cohort_Fencers_Bool_Exp = {
+  Student?: InputMaybe<Students_Bool_Exp>;
   _and?: InputMaybe<Array<Assessments_Cohort_Fencers_Bool_Exp>>;
   _not?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Cohort_Fencers_Bool_Exp>>;
@@ -3476,7 +3496,6 @@ export type Assessments_Cohort_Fencers_Bool_Exp = {
   cohort_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
-  fencer?: InputMaybe<Assessments_Fencers_Bool_Exp>;
   fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
 };
 
@@ -3544,11 +3563,11 @@ export type Assessments_Cohort_Fencers_Mutation_Response = {
 
 /** Ordering options when selecting data from "assessments.cohort_fencers". */
 export type Assessments_Cohort_Fencers_Order_By = {
+  Student?: InputMaybe<Students_Order_By>;
   assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Order_By>;
   cohort_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
-  fencer?: InputMaybe<Assessments_Fencers_Order_By>;
   fencer_id?: InputMaybe<Order_By>;
 };
 
@@ -3590,297 +3609,6 @@ export enum Assessments_Cohort_Fencers_Update_Column {
   FencerId = 'fencer_id'
 }
 
-/** columns and relationships of "assessments.fencers" */
-export type Assessments_Fencers = {
-  __typename?: 'assessments_fencers';
-  association_member_id?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['date']>;
-  /** An array relationship */
-  cohort_fencers: Array<Assessments_Cohort_Fencers>;
-  /** An aggregate relationship */
-  cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
-  created_at?: Maybe<Scalars['datetime2']>;
-  created_by?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  first_name: Scalars['String'];
-  gender?: Maybe<Scalars['String']>;
-  id: Scalars['uniqueidentifier'];
-  last_name: Scalars['String'];
-  /** An array relationship */
-  metric_responses: Array<Assessments_Metric_Responses>;
-  /** An aggregate relationship */
-  metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
-  nickname?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['datetime2']>;
-};
-
-
-/** columns and relationships of "assessments.fencers" */
-export type Assessments_FencersCohort_FencersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.fencers" */
-export type Assessments_FencersCohort_Fencers_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.fencers" */
-export type Assessments_FencersMetric_ResponsesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.fencers" */
-export type Assessments_FencersMetric_Responses_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
-};
-
-/** aggregated selection of "assessments.fencers" */
-export type Assessments_Fencers_Aggregate = {
-  __typename?: 'assessments_fencers_aggregate';
-  aggregate?: Maybe<Assessments_Fencers_Aggregate_Fields>;
-  nodes: Array<Assessments_Fencers>;
-};
-
-/** aggregate fields of "assessments.fencers" */
-export type Assessments_Fencers_Aggregate_Fields = {
-  __typename?: 'assessments_fencers_aggregate_fields';
-  count: Scalars['Int'];
-  max?: Maybe<Assessments_Fencers_Max_Fields>;
-  min?: Maybe<Assessments_Fencers_Min_Fields>;
-};
-
-
-/** aggregate fields of "assessments.fencers" */
-export type Assessments_Fencers_Aggregate_FieldsCountArgs = {
-  column?: InputMaybe<Assessments_Fencers_Select_Column>;
-  distinct?: InputMaybe<Scalars['Boolean']>;
-};
-
-/** Boolean expression to filter rows from the table "assessments.fencers". All fields are combined with a logical 'AND'. */
-export type Assessments_Fencers_Bool_Exp = {
-  _and?: InputMaybe<Array<Assessments_Fencers_Bool_Exp>>;
-  _not?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-  _or?: InputMaybe<Array<Assessments_Fencers_Bool_Exp>>;
-  association_member_id?: InputMaybe<String_Mssql_Comparison_Exp>;
-  birthdate?: InputMaybe<Date_Mssql_Comparison_Exp>;
-  cohort_fencers?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
-  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
-  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
-  email?: InputMaybe<String_Mssql_Comparison_Exp>;
-  first_name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  gender?: InputMaybe<String_Mssql_Comparison_Exp>;
-  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  last_name?: InputMaybe<String_Mssql_Comparison_Exp>;
-  metric_responses?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
-  nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
-  phone?: InputMaybe<String_Mssql_Comparison_Exp>;
-  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
-};
-
-/** upsert condition type for table "assessments.fencers" */
-export type Assessments_Fencers_If_Matched = {
-  match_columns?: Array<Assessments_Fencers_Insert_Match_Column>;
-  update_columns?: Array<Assessments_Fencers_Update_Column>;
-  where?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-};
-
-/** input type for inserting data into table "assessments.fencers" */
-export type Assessments_Fencers_Insert_Input = {
-  association_member_id?: InputMaybe<Scalars['String']>;
-  birthdate?: InputMaybe<Scalars['date']>;
-  created_at?: InputMaybe<Scalars['datetime2']>;
-  created_by?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  first_name?: InputMaybe<Scalars['String']>;
-  gender?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uniqueidentifier']>;
-  last_name?: InputMaybe<Scalars['String']>;
-  nickname?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['datetime2']>;
-};
-
-/** select match_columns of table "assessments.fencers" */
-export enum Assessments_Fencers_Insert_Match_Column {
-  /** column name */
-  AssociationMemberId = 'association_member_id',
-  /** column name */
-  Birthdate = 'birthdate',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  FirstName = 'first_name',
-  /** column name */
-  Gender = 'gender',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  LastName = 'last_name',
-  /** column name */
-  Nickname = 'nickname',
-  /** column name */
-  Phone = 'phone',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** aggregate max on columns */
-export type Assessments_Fencers_Max_Fields = {
-  __typename?: 'assessments_fencers_max_fields';
-  association_member_id?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['date']>;
-  created_at?: Maybe<Scalars['datetime2']>;
-  created_by?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  first_name?: Maybe<Scalars['String']>;
-  gender?: Maybe<Scalars['String']>;
-  last_name?: Maybe<Scalars['String']>;
-  nickname?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['datetime2']>;
-};
-
-/** aggregate min on columns */
-export type Assessments_Fencers_Min_Fields = {
-  __typename?: 'assessments_fencers_min_fields';
-  association_member_id?: Maybe<Scalars['String']>;
-  birthdate?: Maybe<Scalars['date']>;
-  created_at?: Maybe<Scalars['datetime2']>;
-  created_by?: Maybe<Scalars['String']>;
-  email?: Maybe<Scalars['String']>;
-  first_name?: Maybe<Scalars['String']>;
-  gender?: Maybe<Scalars['String']>;
-  last_name?: Maybe<Scalars['String']>;
-  nickname?: Maybe<Scalars['String']>;
-  phone?: Maybe<Scalars['String']>;
-  updated_at?: Maybe<Scalars['datetime2']>;
-};
-
-/** response of any mutation on the table "assessments.fencers" */
-export type Assessments_Fencers_Mutation_Response = {
-  __typename?: 'assessments_fencers_mutation_response';
-  /** number of rows affected by the mutation */
-  affected_rows: Scalars['Int'];
-  /** data from the rows affected by the mutation */
-  returning: Array<Assessments_Fencers>;
-};
-
-/** Ordering options when selecting data from "assessments.fencers". */
-export type Assessments_Fencers_Order_By = {
-  association_member_id?: InputMaybe<Order_By>;
-  birthdate?: InputMaybe<Order_By>;
-  cohort_fencers_aggregate?: InputMaybe<Assessments_Cohort_Fencers_Aggregate_Order_By>;
-  created_at?: InputMaybe<Order_By>;
-  created_by?: InputMaybe<Order_By>;
-  email?: InputMaybe<Order_By>;
-  first_name?: InputMaybe<Order_By>;
-  gender?: InputMaybe<Order_By>;
-  id?: InputMaybe<Order_By>;
-  last_name?: InputMaybe<Order_By>;
-  metric_responses_aggregate?: InputMaybe<Assessments_Metric_Responses_Aggregate_Order_By>;
-  nickname?: InputMaybe<Order_By>;
-  phone?: InputMaybe<Order_By>;
-  updated_at?: InputMaybe<Order_By>;
-};
-
-/** primary key columns input for table: assessments_fencers */
-export type Assessments_Fencers_Pk_Columns_Input = {
-  id: Scalars['uniqueidentifier'];
-};
-
-/** select columns of table "assessments.fencers" */
-export enum Assessments_Fencers_Select_Column {
-  /** column name */
-  AssociationMemberId = 'association_member_id',
-  /** column name */
-  Birthdate = 'birthdate',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  FirstName = 'first_name',
-  /** column name */
-  Gender = 'gender',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  LastName = 'last_name',
-  /** column name */
-  Nickname = 'nickname',
-  /** column name */
-  Phone = 'phone',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
-/** input type for updating data in table "assessments.fencers" */
-export type Assessments_Fencers_Set_Input = {
-  association_member_id?: InputMaybe<Scalars['String']>;
-  birthdate?: InputMaybe<Scalars['date']>;
-  created_at?: InputMaybe<Scalars['datetime2']>;
-  created_by?: InputMaybe<Scalars['String']>;
-  email?: InputMaybe<Scalars['String']>;
-  first_name?: InputMaybe<Scalars['String']>;
-  gender?: InputMaybe<Scalars['String']>;
-  id?: InputMaybe<Scalars['uniqueidentifier']>;
-  last_name?: InputMaybe<Scalars['String']>;
-  nickname?: InputMaybe<Scalars['String']>;
-  phone?: InputMaybe<Scalars['String']>;
-  updated_at?: InputMaybe<Scalars['datetime2']>;
-};
-
-/** update columns of table "assessments.fencers" */
-export enum Assessments_Fencers_Update_Column {
-  /** column name */
-  AssociationMemberId = 'association_member_id',
-  /** column name */
-  Birthdate = 'birthdate',
-  /** column name */
-  CreatedAt = 'created_at',
-  /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  Email = 'email',
-  /** column name */
-  FirstName = 'first_name',
-  /** column name */
-  Gender = 'gender',
-  /** column name */
-  Id = 'id',
-  /** column name */
-  LastName = 'last_name',
-  /** column name */
-  Nickname = 'nickname',
-  /** column name */
-  Phone = 'phone',
-  /** column name */
-  UpdatedAt = 'updated_at'
-}
-
 /** columns and relationships of "assessments.metric_questions" */
 export type Assessments_Metric_Questions = {
   __typename?: 'assessments_metric_questions';
@@ -3888,7 +3616,7 @@ export type Assessments_Metric_Questions = {
   assessment_metrics: Array<Assessments_Assessment_Metrics>;
   /** An aggregate relationship */
   assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
-  created_at?: Maybe<Scalars['datetime2']>;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['uniqueidentifier'];
@@ -3900,7 +3628,7 @@ export type Assessments_Metric_Questions = {
   metric_type: Assessments_Metric_Types;
   metric_type_id: Scalars['String'];
   title: Scalars['String'];
-  updated_at?: Maybe<Scalars['datetime2']>;
+  updated_at: Scalars['datetime2'];
 };
 
 
@@ -4140,18 +3868,18 @@ export enum Assessments_Metric_Questions_Update_Column {
 export type Assessments_Metric_Responses = {
   __typename?: 'assessments_metric_responses';
   /** An object relationship */
+  Student?: Maybe<Students>;
+  /** An object relationship */
   assessment_cohort: Assessments_Assessment_Cohorts;
   cohort_id: Scalars['uniqueidentifier'];
-  created_at?: Maybe<Scalars['datetime2']>;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
-  /** An object relationship */
-  fencer: Assessments_Fencers;
   fencer_id: Scalars['uniqueidentifier'];
   id: Scalars['uniqueidentifier'];
   metric_id: Scalars['uniqueidentifier'];
   /** An object relationship */
   metric_question: Assessments_Metric_Questions;
-  updated_at?: Maybe<Scalars['datetime2']>;
+  updated_at: Scalars['datetime2'];
   value?: Maybe<Scalars['String']>;
 };
 
@@ -4186,6 +3914,7 @@ export type Assessments_Metric_Responses_Aggregate_Order_By = {
 
 /** Boolean expression to filter rows from the table "assessments.metric_responses". All fields are combined with a logical 'AND'. */
 export type Assessments_Metric_Responses_Bool_Exp = {
+  Student?: InputMaybe<Students_Bool_Exp>;
   _and?: InputMaybe<Array<Assessments_Metric_Responses_Bool_Exp>>;
   _not?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Metric_Responses_Bool_Exp>>;
@@ -4193,7 +3922,6 @@ export type Assessments_Metric_Responses_Bool_Exp = {
   cohort_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
-  fencer?: InputMaybe<Assessments_Fencers_Bool_Exp>;
   fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   metric_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
@@ -4286,11 +4014,11 @@ export type Assessments_Metric_Responses_Mutation_Response = {
 
 /** Ordering options when selecting data from "assessments.metric_responses". */
 export type Assessments_Metric_Responses_Order_By = {
+  Student?: InputMaybe<Students_Order_By>;
   assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Order_By>;
   cohort_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
-  fencer?: InputMaybe<Assessments_Fencers_Order_By>;
   fencer_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   metric_id?: InputMaybe<Order_By>;
@@ -4946,10 +4674,6 @@ export type Mutation_Root = {
   delete_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
   /** delete single row from the table: "assessments.cohort_fencers" */
   delete_assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
-  /** delete data from the table: "assessments.fencers" */
-  delete_assessments_fencers?: Maybe<Assessments_Fencers_Mutation_Response>;
-  /** delete single row from the table: "assessments.fencers" */
-  delete_assessments_fencers_by_pk?: Maybe<Assessments_Fencers>;
   /** delete data from the table: "assessments.metric_questions" */
   delete_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** delete single row from the table: "assessments.metric_questions" */
@@ -5026,10 +4750,6 @@ export type Mutation_Root = {
   insert_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
   /** insert a single row into the table: "assessments.cohort_fencers" */
   insert_assessments_cohort_fencers_one?: Maybe<Assessments_Cohort_Fencers>;
-  /** insert data into the table: "assessments.fencers" */
-  insert_assessments_fencers?: Maybe<Assessments_Fencers_Mutation_Response>;
-  /** insert a single row into the table: "assessments.fencers" */
-  insert_assessments_fencers_one?: Maybe<Assessments_Fencers>;
   /** insert data into the table: "assessments.metric_questions" */
   insert_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** insert a single row into the table: "assessments.metric_questions" */
@@ -5106,10 +4826,6 @@ export type Mutation_Root = {
   update_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
   /** update single row of the table: "assessments.cohort_fencers" */
   update_assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
-  /** update data of the table: "assessments.fencers" */
-  update_assessments_fencers?: Maybe<Assessments_Fencers_Mutation_Response>;
-  /** update single row of the table: "assessments.fencers" */
-  update_assessments_fencers_by_pk?: Maybe<Assessments_Fencers>;
   /** update data of the table: "assessments.metric_questions" */
   update_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** update single row of the table: "assessments.metric_questions" */
@@ -5303,18 +5019,6 @@ export type Mutation_RootDelete_Assessments_Cohort_FencersArgs = {
 export type Mutation_RootDelete_Assessments_Cohort_Fencers_By_PkArgs = {
   cohort_id: Scalars['uniqueidentifier'];
   fencer_id: Scalars['uniqueidentifier'];
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Assessments_FencersArgs = {
-  where: Assessments_Fencers_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootDelete_Assessments_Fencers_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
 };
 
 
@@ -5572,20 +5276,6 @@ export type Mutation_RootInsert_Assessments_Cohort_FencersArgs = {
 export type Mutation_RootInsert_Assessments_Cohort_Fencers_OneArgs = {
   if_matched?: InputMaybe<Assessments_Cohort_Fencers_If_Matched>;
   object: Assessments_Cohort_Fencers_Insert_Input;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Assessments_FencersArgs = {
-  if_matched?: InputMaybe<Assessments_Fencers_If_Matched>;
-  objects: Array<Assessments_Fencers_Insert_Input>;
-};
-
-
-/** mutation root */
-export type Mutation_RootInsert_Assessments_Fencers_OneArgs = {
-  if_matched?: InputMaybe<Assessments_Fencers_If_Matched>;
-  object: Assessments_Fencers_Insert_Input;
 };
 
 
@@ -5862,20 +5552,6 @@ export type Mutation_RootUpdate_Assessments_Cohort_Fencers_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Assessments_FencersArgs = {
-  _set?: InputMaybe<Assessments_Fencers_Set_Input>;
-  where: Assessments_Fencers_Bool_Exp;
-};
-
-
-/** mutation root */
-export type Mutation_RootUpdate_Assessments_Fencers_By_PkArgs = {
-  _set?: InputMaybe<Assessments_Fencers_Set_Input>;
-  pk_columns: Assessments_Fencers_Pk_Columns_Input;
-};
-
-
-/** mutation root */
 export type Mutation_RootUpdate_Assessments_Metric_QuestionsArgs = {
   _set?: InputMaybe<Assessments_Metric_Questions_Set_Input>;
   where: Assessments_Metric_Questions_Bool_Exp;
@@ -6046,12 +5722,6 @@ export type Query_Root = {
   assessments_cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
   /** fetch data from the table: "assessments.cohort_fencers" using primary key columns */
   assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
-  /** fetch data from the table: "assessments.fencers" */
-  assessments_fencers: Array<Assessments_Fencers>;
-  /** fetch aggregated fields from the table: "assessments.fencers" */
-  assessments_fencers_aggregate: Assessments_Fencers_Aggregate;
-  /** fetch data from the table: "assessments.fencers" using primary key columns */
-  assessments_fencers_by_pk?: Maybe<Assessments_Fencers>;
   /** fetch data from the table: "assessments.metric_questions" */
   assessments_metric_questions: Array<Assessments_Metric_Questions>;
   /** fetch aggregated fields from the table: "assessments.metric_questions" */
@@ -6384,27 +6054,6 @@ export type Query_RootAssessments_Cohort_Fencers_By_PkArgs = {
 };
 
 
-export type Query_RootAssessments_FencersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-};
-
-
-export type Query_RootAssessments_Fencers_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-};
-
-
-export type Query_RootAssessments_Fencers_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
-};
-
-
 export type Query_RootAssessments_Metric_QuestionsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -6596,12 +6245,6 @@ export type Subscription_Root = {
   assessments_cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
   /** fetch data from the table: "assessments.cohort_fencers" using primary key columns */
   assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
-  /** fetch data from the table: "assessments.fencers" */
-  assessments_fencers: Array<Assessments_Fencers>;
-  /** fetch aggregated fields from the table: "assessments.fencers" */
-  assessments_fencers_aggregate: Assessments_Fencers_Aggregate;
-  /** fetch data from the table: "assessments.fencers" using primary key columns */
-  assessments_fencers_by_pk?: Maybe<Assessments_Fencers>;
   /** fetch data from the table: "assessments.metric_questions" */
   assessments_metric_questions: Array<Assessments_Metric_Questions>;
   /** fetch aggregated fields from the table: "assessments.metric_questions" */
@@ -6934,27 +6577,6 @@ export type Subscription_RootAssessments_Cohort_Fencers_By_PkArgs = {
 };
 
 
-export type Subscription_RootAssessments_FencersArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-};
-
-
-export type Subscription_RootAssessments_Fencers_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Fencers_Order_By>>;
-  where?: InputMaybe<Assessments_Fencers_Bool_Exp>;
-};
-
-
-export type Subscription_RootAssessments_Fencers_By_PkArgs = {
-  id: Scalars['uniqueidentifier'];
-};
-
-
 export type Subscription_RootAssessments_Metric_QuestionsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -7111,7 +6733,7 @@ export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_as
 export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, fencer: { __typename?: 'assessments_fencers', id: any, first_name: string, last_name: string } }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
+export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
 
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -7414,10 +7036,10 @@ export const GetAssessmentsDocument = gql`
       description
       metric_responses {
         id
-        fencer {
-          id
-          first_name
-          last_name
+        Student {
+          StudentId
+          FirstName
+          LastName
         }
         value
       }
