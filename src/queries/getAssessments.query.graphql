@@ -4,6 +4,14 @@ query GetAssessments {
     title
     description
     created_at
+    account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+      }
+    }
     assessment_cohorts {
       id
       title

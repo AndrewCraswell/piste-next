@@ -7111,7 +7111,7 @@ export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_as
 export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, fencer: { __typename?: 'assessments_fencers', id: any, first_name: string, last_name: string } }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
+export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, fencer: { __typename?: 'assessments_fencers', id: any, first_name: string, last_name: string } }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
 
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -7400,6 +7400,14 @@ export const GetAssessmentsDocument = gql`
     title
     description
     created_at
+    account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+      }
+    }
     assessment_cohorts {
       id
       title

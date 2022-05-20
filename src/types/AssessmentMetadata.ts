@@ -5,4 +5,5 @@ export interface IAssessmentMetadata {
   createdAt: Date
   metricsCount: number
   cohortsCount: number
+  authorName: string
 }

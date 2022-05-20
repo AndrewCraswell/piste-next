@@ -17,8 +17,15 @@ interface IAssessmentCardProps {
 export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
   assessment,
 }) => {
-  const { id, title, description, createdAt, metricsCount, cohortsCount } =
-    assessment
+  const {
+    id,
+    title,
+    description,
+    createdAt,
+    metricsCount,
+    cohortsCount,
+    authorName,
+  } = assessment
 
   return (
     <Card>
@@ -37,7 +44,7 @@ export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
       />
       <Body block>{description}</Body>
       <Text size={100} block>
-        Stewart Watson on {dayjs(createdAt).format("MMMM D, YYYY")}
+        {authorName} on {dayjs(createdAt).format("MMMM D, YYYY")}
       </Text>
       <CardFooter>
         <LinkButton appearance="primary" href={`/assessments/${id}/`}>
