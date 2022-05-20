@@ -1,21 +1,16 @@
-import type { NextPage } from "next"
-import { useRouter } from "next/router"
-import { Badge, BadgeProps, Body } from "@fluentui/react-components"
-
-import { PageTitle } from "$components"
-import { useTitle } from "$hooks"
 import {
   CheckboxVisibility,
-  CommandBar,
   DetailsListLayoutMode,
   ICommandBarItemProps,
   SelectionMode,
   ShimmeredDetailsList,
+  Selection,
 } from "@fluentui/react"
-import { useGetAssessmentByIdQuery } from "$queries"
-import styled from "@emotion/styled"
-import { AssessmentResponseActions } from "./AssessmentResponseList.styles"
-import { useMemo } from "react"
+import {
+  AssessmentResponseActions,
+  ResponseDetailsList,
+} from "./AssessmentResponseList.styles"
+import { useMemo, useState } from "react"
 import {
   metricResponseColumns,
   metricResponses,
@@ -28,8 +23,10 @@ export interface IAssessmentResponseListProps {
 export const AssessmentResponseList: React.FunctionComponent<
   IAssessmentResponseListProps
 > = ({ isLoadingResponses }) => {
-  const responseActions: ICommandBarItemProps[] = useMemo(
-    () => [
+  const [selectedResponse, setSelectedResponse] = useState<any>(undefined)
+
+  const responseActions = useMemo(
+    (): ICommandBarItemProps[] => [
       {
         key: "new",
         text: "New",
@@ -39,23 +36,36 @@ export const AssessmentResponseList: React.FunctionComponent<
         key: "edit",
         text: "Edit",
         iconProps: { iconName: "Edit" },
+        disabled: !selectedResponse,
       },
       {
         key: "delete",
         text: "Delete",
         iconProps: { iconName: "Delete" },
+        disabled: !selectedResponse,
       },
     ],
-    []
+    [selectedResponse]
   )
+
+  const selection = new Selection({
+    onSelectionChanged: () => {
+      setSelectedResponse(getSelectedItem())
+    },
+  })
+
+  function getSelectedItem() {
+    const items = selection.getSelection()
+    return items.length ? items[0] : undefined
+  }
 
   return (
     <>
-      {/* <AssessmentResponseActions
+      <AssessmentResponseActions
         items={responseActions}
         ariaLabel="Assessment response actions"
-      /> */}
-      <ShimmeredDetailsList
+      />
+      <ResponseDetailsList
         items={metricResponses}
         columns={metricResponseColumns}
         selectionMode={SelectionMode.single}
@@ -64,10 +74,7 @@ export const AssessmentResponseList: React.FunctionComponent<
         checkboxVisibility={CheckboxVisibility.always}
         enableShimmer={isLoadingResponses}
         shimmerLines={5}
-        onActiveItemChanged={(item) => {
-          console.log("SELECTED")
-          console.log(item)
-        }}
+        selection={selection}
       />
     </>
   )
