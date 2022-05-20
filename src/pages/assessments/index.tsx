@@ -36,7 +36,8 @@ export const Assessments: NextPage = () => {
       createdAt: a.created_at,
       metricsCount: a.assessment_metrics.length,
       cohortsCount: a.assessment_cohorts.length,
-      authorName: `${a.account.Student.FirstName} ${a.account.Student.LastName}`,
+      authorName:
+        `${a.account?.Student?.FirstName} ${a.account?.Student?.LastName}`.trim(),
     })) || []
 
   return (

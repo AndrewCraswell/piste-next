@@ -44,7 +44,7 @@ export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
       />
       <Body block>{description}</Body>
       <Text size={100} block>
-        {authorName} on {dayjs(createdAt).format("MMMM D, YYYY")}
+        {authorName || "Authored"} on {dayjs(createdAt).format("MMMM D, YYYY")}
       </Text>
       <CardFooter>
         <LinkButton appearance="primary" href={`/assessments/${id}/`}>
