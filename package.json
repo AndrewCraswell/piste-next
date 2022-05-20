@@ -20,7 +20,7 @@
     "@fluentui/react-components": "^9.0.0-rc.10",
     "@fluentui/react-hooks": "^8.5.5",
     "@fluentui/react-icons": "^1.1.145",
-    "@fluentui/theme-samples": "^8.4.32",
+    "@fluentui/theme-samples": "^8.4.34",
     "@nylas/components-agenda": "^1.1.6",
     "@nylas/components-availability": "^1.1.4",
     "@nylas/components-booking": "^1.0.0-canary.1",
