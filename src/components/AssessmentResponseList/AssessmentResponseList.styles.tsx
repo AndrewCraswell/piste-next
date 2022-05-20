@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { CommandBar, ShimmeredDetailsList } from "@fluentui/react"
+import { CardHeader } from "@fluentui/react-components/unstable"
 
 export const AssessmentResponseActions = styled(CommandBar)`
   .ms-CommandBar {
@@ -7,8 +8,8 @@ export const AssessmentResponseActions = styled(CommandBar)`
   }
 `
 
-export const ResponseDetailsList = styled(ShimmeredDetailsList)`
-  .ms-DetailsHeader {
-    padding-top: 0;
+export const NoImageCardHeader = styled(CardHeader)`
+  .fui-CardHeader__image {
+    display: none;
   }
 `
