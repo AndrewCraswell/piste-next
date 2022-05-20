@@ -41,10 +41,11 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
       ></CardHeader>
 
       <Body block>
-        <ReactMarkdown>{description || ""}</ReactMarkdown>
+        <ReactMarkdown linkTarget="_blank">{description || ""}</ReactMarkdown>
       </Body>
 
       {/* TODO: use an adapter component to determine the proper type */}
+      {/* TODO: Shift the RadioGroup into it's own Controller implementation */}
       <Label id={id}>Rate the student's proficiency</Label>
 
       <Controller
