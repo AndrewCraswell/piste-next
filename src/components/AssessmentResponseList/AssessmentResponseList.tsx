@@ -15,7 +15,8 @@ import {
   metricResponseColumns,
   metricResponses,
 } from "./AssessmentResponseList.data"
-import { Card } from "@fluentui/react-components/unstable"
+import { Card, Input } from "@fluentui/react-components/unstable"
+import { SearchRegular } from "@fluentui/react-icons"
 
 export interface IAssessmentResponseListProps {
   isLoadingResponses: boolean
@@ -25,6 +26,7 @@ export const AssessmentResponseList: React.FunctionComponent<
   IAssessmentResponseListProps
 > = ({ isLoadingResponses }) => {
   const [selectedResponse, setSelectedResponse] = useState<any>(undefined)
+  const [responses, setResponses] = useState(metricResponses)
 
   const responseActions = useMemo(
     (): ICommandBarItemProps[] => [
@@ -62,12 +64,65 @@ export const AssessmentResponseList: React.FunctionComponent<
           header={
             <AssessmentResponseActions
               items={responseActions}
+              farItems={[
+                {
+                  key: "edit",
+                  text: "Edit",
+                  iconProps: { iconName: "Edit" },
+                  disabled: !selectedResponse,
+                },
+                {
+                  key: "delete",
+                  text: "Delete",
+                  iconProps: { iconName: "Delete" },
+                  disabled: !selectedResponse,
+                },
+                {
+                  key: "search",
+                  onRender: () => {
+                    return (
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          paddingLeft: 8,
+                        }}
+                      >
+                        <Input
+                          contentBefore={<SearchRegular />}
+                          onChange={(e, data) => {
+                            if (data.value) {
+                              const filteredItems = responses.filter((r) => {
+                                return (
+                                  r.name
+                                    .toLocaleLowerCase()
+                                    .includes(data.value.toLocaleLowerCase()) ||
+                                  r.proctor
+                                    .toLocaleLowerCase()
+                                    .includes(data.value.toLocaleLowerCase()) ||
+                                  r.status
+                                    .toLocaleLowerCase()
+                                    .includes(data.value.toLocaleLowerCase())
+                                )
+                              })
+                              setResponses(filteredItems)
+                            } else {
+                              // Reset the responses
+                              setResponses(metricResponses)
+                            }
+                          }}
+                        />
+                      </div>
+                    )
+                  },
+                },
+              ]}
               ariaLabel="Assessment response actions"
             />
           }
         />
         <ShimmeredDetailsList
-          items={metricResponses}
+          items={responses}
           columns={metricResponseColumns}
           selectionMode={SelectionMode.single}
           layoutMode={DetailsListLayoutMode.justified}
