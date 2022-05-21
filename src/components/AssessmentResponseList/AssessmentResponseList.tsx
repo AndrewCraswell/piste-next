@@ -79,20 +79,27 @@ export const AssessmentResponseList: React.FunctionComponent<
                         <Input
                           contentBefore={<SearchRegular />}
                           onChange={(e, data) => {
+                            console.log(data.value)
                             if (data.value) {
-                              const filteredItems = responses.filter((r) => {
-                                return (
-                                  r.name
-                                    .toLocaleLowerCase()
-                                    .includes(data.value.toLocaleLowerCase()) ||
-                                  r.proctor
-                                    .toLocaleLowerCase()
-                                    .includes(data.value.toLocaleLowerCase()) ||
-                                  r.status
-                                    .toLocaleLowerCase()
-                                    .includes(data.value.toLocaleLowerCase())
-                                )
-                              })
+                              const filteredItems = metricResponses.filter(
+                                (r) => {
+                                  return (
+                                    r.name
+                                      .toLocaleLowerCase()
+                                      .includes(
+                                        data.value.toLocaleLowerCase()
+                                      ) ||
+                                    r.proctor
+                                      .toLocaleLowerCase()
+                                      .includes(
+                                        data.value.toLocaleLowerCase()
+                                      ) ||
+                                    r.status
+                                      .toLocaleLowerCase()
+                                      .includes(data.value.toLocaleLowerCase())
+                                  )
+                                }
+                              )
                               setResponses(filteredItems)
                             } else {
                               // Reset the responses
