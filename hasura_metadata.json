@@ -1,5 +1,5 @@
 {
-  "resource_version": 498,
+  "resource_version": 520,
   "metadata": {
     "version": 3,
     "sources": [
@@ -983,18 +983,6 @@
                     }
                   }
                 }
-              },
-              {
-                "name": "metric_responses",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "cohort_id",
-                    "table": {
-                      "schema": "assessments",
-                      "name": "metric_responses"
-                    }
-                  }
-                }
               }
             ],
             "insert_permissions": [
@@ -1124,6 +1112,146 @@
           {
             "table": {
               "schema": "assessments",
+              "name": "assessment_result"
+            },
+            "object_relationships": [
+              {
+                "name": "assessment",
+                "using": {
+                  "foreign_key_constraint_on": "assessment_id"
+                }
+              },
+              {
+                "name": "assessment_result_status",
+                "using": {
+                  "foreign_key_constraint_on": "status_id"
+                }
+              },
+              {
+                "name": "fencer",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "dbo",
+                      "name": "Students"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {
+                      "fencer_id": "StudentId"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "metric_question",
+                "using": {
+                  "foreign_key_constraint_on": "metric_question_id"
+                }
+              }
+            ],
+            "array_relationships": [
+              {
+                "name": "metric_results",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "result_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_result"
+                    }
+                  }
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "assessment_id",
+                    "fencer_id",
+                    "metric_question_id",
+                    "status_id"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "created_at",
+                    "updated_at",
+                    "id",
+                    "fencer_id",
+                    "created_by",
+                    "assessment_id",
+                    "status_id",
+                    "metric_question_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "status_id"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
+              "name": "assessment_result_statuses"
+            },
+            "array_relationships": [
+              {
+                "name": "assessment_results",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "status_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "assessment_result"
+                    }
+                  }
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "name"
+                  ],
+                  "filter": {}
+                }
+              }
+            ]
+          },
+          {
+            "table": {
+              "schema": "assessments",
               "name": "assessments"
             },
             "object_relationships": [
@@ -1164,6 +1292,18 @@
                     "table": {
                       "schema": "assessments",
                       "name": "assessment_metrics"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "assessment_results",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "assessment_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "assessment_result"
                     }
                   }
                 }
@@ -1365,9 +1505,37 @@
             },
             "object_relationships": [
               {
+                "name": "Student",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "dbo",
+                      "name": "Students"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {}
+                  }
+                }
+              },
+              {
                 "name": "assessment_cohort",
                 "using": {
                   "foreign_key_constraint_on": "cohort_id"
+                }
+              },
+              {
+                "name": "fencer",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "dbo",
+                      "name": "Students"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {
+                      "fencer_id": "StudentId"
+                    }
+                  }
                 }
               }
             ],
@@ -1434,13 +1602,13 @@
                 }
               },
               {
-                "name": "metric_responses",
+                "name": "assessment_results",
                 "using": {
                   "foreign_key_constraint_on": {
-                    "column": "metric_id",
+                    "column": "metric_question_id",
                     "table": {
                       "schema": "assessments",
-                      "name": "metric_responses"
+                      "name": "assessment_result"
                     }
                   }
                 }
@@ -1503,72 +1671,13 @@
           {
             "table": {
               "schema": "assessments",
-              "name": "metric_responses"
+              "name": "metric_result"
             },
             "object_relationships": [
               {
-                "name": "assessment_cohort",
+                "name": "assessment_result",
                 "using": {
-                  "foreign_key_constraint_on": "cohort_id"
-                }
-              },
-              {
-                "name": "metric_question",
-                "using": {
-                  "foreign_key_constraint_on": "metric_id"
-                }
-              }
-            ],
-            "insert_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "check": {},
-                  "columns": [
-                    "cohort_id",
-                    "fencer_id",
-                    "metric_id",
-                    "value"
-                  ],
-                  "backend_only": false
-                }
-              }
-            ],
-            "select_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "columns": [
-                    "id",
-                    "created_at",
-                    "updated_at",
-                    "metric_id",
-                    "value",
-                    "created_by",
-                    "cohort_id",
-                    "fencer_id"
-                  ],
-                  "filter": {}
-                }
-              }
-            ],
-            "update_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "columns": [
-                    "value"
-                  ],
-                  "filter": {},
-                  "check": null
-                }
-              }
-            ],
-            "delete_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "filter": {}
+                  "foreign_key_constraint_on": "result_id"
                 }
               }
             ]
