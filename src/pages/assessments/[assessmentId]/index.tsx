@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import { Body, Text } from "@fluentui/react-components"
+import { Body, Button, Text } from "@fluentui/react-components"
 
 import { AssessmentResponseList, PageTitle } from "$components"
 import { useTitle } from "$hooks"
@@ -30,12 +30,22 @@ export const ViewAssessment: NextPage = () => {
     return <Body>No assessment found.</Body>
   }
 
+  // TODO: Create fencer selector
+
   return (
     <>
       <PageTitle>
         {data?.assessments_assessments_by_pk?.title || "View assessment"}
       </PageTitle>
       <Body block>{assessment?.description}</Body>
+      <Button
+        appearance="primary"
+        onClick={() => {
+          console.log("New assessment")
+        }}
+      >
+        Start assessment
+      </Button>
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>

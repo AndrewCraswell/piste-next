@@ -18,6 +18,9 @@ import {
 import { Card, Input } from "@fluentui/react-components/unstable"
 import { SearchRegular } from "@fluentui/react-icons"
 
+// TODO: Clean up component and seaprate into subcomponents
+// TODO: Query the actual responses for the assessmentId
+
 export interface IAssessmentResponseListProps {
   isLoadingResponses: boolean
 }
@@ -90,11 +93,6 @@ export const AssessmentResponseList: React.FunctionComponent<
                                         data.value.toLocaleLowerCase()
                                       ) ||
                                     r.proctor
-                                      .toLocaleLowerCase()
-                                      .includes(
-                                        data.value.toLocaleLowerCase()
-                                      ) ||
-                                    r.status
                                       .toLocaleLowerCase()
                                       .includes(data.value.toLocaleLowerCase())
                                   )
