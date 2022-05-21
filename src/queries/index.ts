@@ -2663,10 +2663,6 @@ export type Assessments_Assessment_Cohorts = {
   created_by?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   id: Scalars['uniqueidentifier'];
-  /** An array relationship */
-  metric_responses: Array<Assessments_Metric_Responses>;
-  /** An aggregate relationship */
-  metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
   title: Scalars['String'];
   updated_at: Scalars['datetime2'];
 };
@@ -2687,24 +2683,6 @@ export type Assessments_Assessment_CohortsCohort_Fencers_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
   where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.assessment_cohorts" */
-export type Assessments_Assessment_CohortsMetric_ResponsesArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.assessment_cohorts" */
-export type Assessments_Assessment_CohortsMetric_Responses_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
 };
 
 /** aggregated selection of "assessments.assessment_cohorts" */
@@ -2748,7 +2726,6 @@ export type Assessments_Assessment_Cohorts_Bool_Exp = {
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  metric_responses?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
   title?: InputMaybe<String_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
 };
@@ -2843,7 +2820,6 @@ export type Assessments_Assessment_Cohorts_Order_By = {
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  metric_responses_aggregate?: InputMaybe<Assessments_Metric_Responses_Aggregate_Order_By>;
   title?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -3204,6 +3180,393 @@ export type Assessments_Assessment_Metrics_Variance_Order_By = {
   order_number?: InputMaybe<Order_By>;
 };
 
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_Result = {
+  __typename?: 'assessments_assessment_result';
+  /** An object relationship */
+  assessment: Assessments_Assessments;
+  assessment_id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  assessment_result_status: Assessments_Assessment_Result_Statuses;
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  fencer?: Maybe<Students>;
+  fencer_id: Scalars['uniqueidentifier'];
+  id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  metric_question: Assessments_Metric_Questions;
+  metric_question_id: Scalars['uniqueidentifier'];
+  /** An array relationship */
+  metric_results: Array<Assessments_Metric_Result>;
+  /** An aggregate relationship */
+  metric_results_aggregate: Assessments_Metric_Result_Aggregate;
+  status_id: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_ResultMetric_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_ResultMetric_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate = {
+  __typename?: 'assessments_assessment_result_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Result_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Result>;
+};
+
+/** aggregate fields of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_result_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Result_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Result_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Result_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessment_Result_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessment_Result_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_result". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Result_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Result_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Result_Bool_Exp>>;
+  assessment?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+  assessment_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  assessment_result_status?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  fencer?: InputMaybe<Students_Bool_Exp>;
+  fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  metric_question_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  status_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Result_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Result_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Insert_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  status_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Insert_Match_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Result_Max_Fields = {
+  __typename?: 'assessments_assessment_result_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  status_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Result_Min_Fields = {
+  __typename?: 'assessments_assessment_result_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  status_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Mutation_Response = {
+  __typename?: 'assessments_assessment_result_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Result>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_result". */
+export type Assessments_Assessment_Result_Order_By = {
+  assessment?: InputMaybe<Assessments_Assessments_Order_By>;
+  assessment_id?: InputMaybe<Order_By>;
+  assessment_result_status?: InputMaybe<Assessments_Assessment_Result_Statuses_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  fencer?: InputMaybe<Students_Order_By>;
+  fencer_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
+  metric_question_id?: InputMaybe<Order_By>;
+  metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_result */
+export type Assessments_Assessment_Result_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Select_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Set_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  status_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses = {
+  __typename?: 'assessments_assessment_result_statuses';
+  /** An array relationship */
+  assessment_results: Array<Assessments_Assessment_Result>;
+  /** An aggregate relationship */
+  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
+  id: Scalars['String'];
+  name: Scalars['String'];
+};
+
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_StatusesAssessment_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_StatusesAssessment_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate = {
+  __typename?: 'assessments_assessment_result_statuses_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Result_Statuses_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Result_Statuses>;
+};
+
+/** aggregate fields of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Result_Statuses_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Result_Statuses_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Result_Statuses_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_result_statuses". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Result_Statuses_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Bool_Exp>>;
+  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  name?: InputMaybe<String_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Result_Statuses_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Result_Statuses_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Insert_Input = {
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** select match_columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Insert_Match_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Result_Statuses_Max_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_max_fields';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Result_Statuses_Min_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_min_fields';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Mutation_Response = {
+  __typename?: 'assessments_assessment_result_statuses_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Result_Statuses>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_result_statuses". */
+export type Assessments_Assessment_Result_Statuses_Order_By = {
+  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_result_statuses */
+export type Assessments_Assessment_Result_Statuses_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** input type for updating data in table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Set_Input = {
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** update columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Update_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
 /** columns and relationships of "assessments.assessments" */
 export type Assessments_Assessments = {
   __typename?: 'assessments_assessments';
@@ -3217,7 +3580,11 @@ export type Assessments_Assessments = {
   assessment_metrics: Array<Assessments_Assessment_Metrics>;
   /** An aggregate relationship */
   assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
-  created_at?: Maybe<Scalars['datetime2']>;
+  /** An array relationship */
+  assessment_results: Array<Assessments_Assessment_Result>;
+  /** An aggregate relationship */
+  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
+  created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['uniqueidentifier'];
@@ -3261,6 +3628,24 @@ export type Assessments_AssessmentsAssessment_Metrics_AggregateArgs = {
   where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
 };
 
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
 /** aggregated selection of "assessments.assessments" */
 export type Assessments_Assessments_Aggregate = {
   __typename?: 'assessments_assessments_aggregate';
@@ -3298,6 +3683,7 @@ export type Assessments_Assessments_Bool_Exp = {
   account?: InputMaybe<Accounts_Bool_Exp>;
   assessment_cohorts?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
   assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -3389,6 +3775,7 @@ export type Assessments_Assessments_Order_By = {
   account?: InputMaybe<Accounts_Order_By>;
   assessment_cohorts_aggregate?: InputMaybe<Assessments_Assessment_Cohorts_Aggregate_Order_By>;
   assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
+  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
@@ -3454,6 +3841,8 @@ export type Assessments_Cohort_Fencers = {
   cohort_id: Scalars['uniqueidentifier'];
   created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  fencer?: Maybe<Students>;
   fencer_id: Scalars['uniqueidentifier'];
 };
 
@@ -3496,6 +3885,7 @@ export type Assessments_Cohort_Fencers_Bool_Exp = {
   cohort_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  fencer?: InputMaybe<Students_Bool_Exp>;
   fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
 };
 
@@ -3568,6 +3958,7 @@ export type Assessments_Cohort_Fencers_Order_By = {
   cohort_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
+  fencer?: InputMaybe<Students_Order_By>;
   fencer_id?: InputMaybe<Order_By>;
 };
 
@@ -3616,14 +4007,14 @@ export type Assessments_Metric_Questions = {
   assessment_metrics: Array<Assessments_Assessment_Metrics>;
   /** An aggregate relationship */
   assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
+  /** An array relationship */
+  assessment_results: Array<Assessments_Assessment_Result>;
+  /** An aggregate relationship */
+  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
   created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['uniqueidentifier'];
-  /** An array relationship */
-  metric_responses: Array<Assessments_Metric_Responses>;
-  /** An aggregate relationship */
-  metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
   /** An object relationship */
   metric_type: Assessments_Metric_Types;
   metric_type_id: Scalars['String'];
@@ -3651,20 +4042,20 @@ export type Assessments_Metric_QuestionsAssessment_Metrics_AggregateArgs = {
 
 
 /** columns and relationships of "assessments.metric_questions" */
-export type Assessments_Metric_QuestionsMetric_ResponsesArgs = {
+export type Assessments_Metric_QuestionsAssessment_ResultsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
 };
 
 
 /** columns and relationships of "assessments.metric_questions" */
-export type Assessments_Metric_QuestionsMetric_Responses_AggregateArgs = {
+export type Assessments_Metric_QuestionsAssessment_Results_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
 };
 
 /** aggregated selection of "assessments.metric_questions" */
@@ -3702,11 +4093,11 @@ export type Assessments_Metric_Questions_Bool_Exp = {
   _not?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Metric_Questions_Bool_Exp>>;
   assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  metric_responses?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
   metric_type?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
   metric_type_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   title?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -3801,11 +4192,11 @@ export type Assessments_Metric_Questions_Mutation_Response = {
 /** Ordering options when selecting data from "assessments.metric_questions". */
 export type Assessments_Metric_Questions_Order_By = {
   assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
+  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  metric_responses_aggregate?: InputMaybe<Assessments_Metric_Responses_Aggregate_Order_By>;
   metric_type?: InputMaybe<Assessments_Metric_Types_Order_By>;
   metric_type_id?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -3864,105 +4255,87 @@ export enum Assessments_Metric_Questions_Update_Column {
   UpdatedAt = 'updated_at'
 }
 
-/** columns and relationships of "assessments.metric_responses" */
-export type Assessments_Metric_Responses = {
-  __typename?: 'assessments_metric_responses';
+/** columns and relationships of "assessments.metric_result" */
+export type Assessments_Metric_Result = {
+  __typename?: 'assessments_metric_result';
   /** An object relationship */
-  Student?: Maybe<Students>;
-  /** An object relationship */
-  assessment_cohort: Assessments_Assessment_Cohorts;
-  cohort_id: Scalars['uniqueidentifier'];
+  assessment_result: Assessments_Assessment_Result;
   created_at: Scalars['datetime2'];
-  created_by?: Maybe<Scalars['String']>;
-  fencer_id: Scalars['uniqueidentifier'];
   id: Scalars['uniqueidentifier'];
-  metric_id: Scalars['uniqueidentifier'];
-  /** An object relationship */
-  metric_question: Assessments_Metric_Questions;
+  notes?: Maybe<Scalars['String']>;
+  result_id: Scalars['uniqueidentifier'];
   updated_at: Scalars['datetime2'];
-  value?: Maybe<Scalars['String']>;
+  value: Scalars['String'];
 };
 
-/** aggregated selection of "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Aggregate = {
-  __typename?: 'assessments_metric_responses_aggregate';
-  aggregate?: Maybe<Assessments_Metric_Responses_Aggregate_Fields>;
-  nodes: Array<Assessments_Metric_Responses>;
+/** aggregated selection of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate = {
+  __typename?: 'assessments_metric_result_aggregate';
+  aggregate?: Maybe<Assessments_Metric_Result_Aggregate_Fields>;
+  nodes: Array<Assessments_Metric_Result>;
 };
 
-/** aggregate fields of "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Aggregate_Fields = {
-  __typename?: 'assessments_metric_responses_aggregate_fields';
+/** aggregate fields of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_Fields = {
+  __typename?: 'assessments_metric_result_aggregate_fields';
   count: Scalars['Int'];
-  max?: Maybe<Assessments_Metric_Responses_Max_Fields>;
-  min?: Maybe<Assessments_Metric_Responses_Min_Fields>;
+  max?: Maybe<Assessments_Metric_Result_Max_Fields>;
+  min?: Maybe<Assessments_Metric_Result_Min_Fields>;
 };
 
 
-/** aggregate fields of "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Aggregate_FieldsCountArgs = {
-  column?: InputMaybe<Assessments_Metric_Responses_Select_Column>;
+/** aggregate fields of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Metric_Result_Select_Column>;
   distinct?: InputMaybe<Scalars['Boolean']>;
 };
 
-/** order by aggregate values of table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Aggregate_Order_By = {
+/** order by aggregate values of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_Order_By = {
   count?: InputMaybe<Order_By>;
-  max?: InputMaybe<Assessments_Metric_Responses_Max_Order_By>;
-  min?: InputMaybe<Assessments_Metric_Responses_Min_Order_By>;
+  max?: InputMaybe<Assessments_Metric_Result_Max_Order_By>;
+  min?: InputMaybe<Assessments_Metric_Result_Min_Order_By>;
 };
 
-/** Boolean expression to filter rows from the table "assessments.metric_responses". All fields are combined with a logical 'AND'. */
-export type Assessments_Metric_Responses_Bool_Exp = {
-  Student?: InputMaybe<Students_Bool_Exp>;
-  _and?: InputMaybe<Array<Assessments_Metric_Responses_Bool_Exp>>;
-  _not?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
-  _or?: InputMaybe<Array<Assessments_Metric_Responses_Bool_Exp>>;
-  assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
-  cohort_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+/** Boolean expression to filter rows from the table "assessments.metric_result". All fields are combined with a logical 'AND'. */
+export type Assessments_Metric_Result_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Metric_Result_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Metric_Result_Bool_Exp>>;
+  assessment_result?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
-  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
-  fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  metric_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  notes?: InputMaybe<String_Mssql_Comparison_Exp>;
+  result_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   value?: InputMaybe<String_Mssql_Comparison_Exp>;
 };
 
-/** upsert condition type for table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_If_Matched = {
-  match_columns?: Array<Assessments_Metric_Responses_Insert_Match_Column>;
-  update_columns?: Array<Assessments_Metric_Responses_Update_Column>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+/** upsert condition type for table "assessments.metric_result" */
+export type Assessments_Metric_Result_If_Matched = {
+  match_columns?: Array<Assessments_Metric_Result_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Metric_Result_Update_Column>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
-/** input type for inserting data into table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Insert_Input = {
-  cohort_id?: InputMaybe<Scalars['uniqueidentifier']>;
+/** input type for inserting data into table "assessments.metric_result" */
+export type Assessments_Metric_Result_Insert_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
-  created_by?: InputMaybe<Scalars['String']>;
-  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  notes?: InputMaybe<Scalars['String']>;
+  result_id?: InputMaybe<Scalars['uniqueidentifier']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** select match_columns of table "assessments.metric_responses" */
-export enum Assessments_Metric_Responses_Insert_Match_Column {
-  /** column name */
-  CohortId = 'cohort_id',
+/** select match_columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Insert_Match_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  FencerId = 'fencer_id',
-  /** column name */
   Id = 'id',
   /** column name */
-  MetricId = 'metric_id',
+  ResultId = 'result_id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -3970,114 +4343,100 @@ export enum Assessments_Metric_Responses_Insert_Match_Column {
 }
 
 /** aggregate max on columns */
-export type Assessments_Metric_Responses_Max_Fields = {
-  __typename?: 'assessments_metric_responses_max_fields';
+export type Assessments_Metric_Result_Max_Fields = {
+  __typename?: 'assessments_metric_result_max_fields';
   created_at?: Maybe<Scalars['datetime2']>;
-  created_by?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
   value?: Maybe<Scalars['String']>;
 };
 
-/** order by max() on columns of table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Max_Order_By = {
+/** order by max() on columns of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Max_Order_By = {
   created_at?: InputMaybe<Order_By>;
-  created_by?: InputMaybe<Order_By>;
+  notes?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
 /** aggregate min on columns */
-export type Assessments_Metric_Responses_Min_Fields = {
-  __typename?: 'assessments_metric_responses_min_fields';
+export type Assessments_Metric_Result_Min_Fields = {
+  __typename?: 'assessments_metric_result_min_fields';
   created_at?: Maybe<Scalars['datetime2']>;
-  created_by?: Maybe<Scalars['String']>;
+  notes?: Maybe<Scalars['String']>;
   updated_at?: Maybe<Scalars['datetime2']>;
   value?: Maybe<Scalars['String']>;
 };
 
-/** order by min() on columns of table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Min_Order_By = {
+/** order by min() on columns of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Min_Order_By = {
   created_at?: InputMaybe<Order_By>;
-  created_by?: InputMaybe<Order_By>;
+  notes?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
-/** response of any mutation on the table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Mutation_Response = {
-  __typename?: 'assessments_metric_responses_mutation_response';
+/** response of any mutation on the table "assessments.metric_result" */
+export type Assessments_Metric_Result_Mutation_Response = {
+  __typename?: 'assessments_metric_result_mutation_response';
   /** number of rows affected by the mutation */
   affected_rows: Scalars['Int'];
   /** data from the rows affected by the mutation */
-  returning: Array<Assessments_Metric_Responses>;
+  returning: Array<Assessments_Metric_Result>;
 };
 
-/** Ordering options when selecting data from "assessments.metric_responses". */
-export type Assessments_Metric_Responses_Order_By = {
-  Student?: InputMaybe<Students_Order_By>;
-  assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Order_By>;
-  cohort_id?: InputMaybe<Order_By>;
+/** Ordering options when selecting data from "assessments.metric_result". */
+export type Assessments_Metric_Result_Order_By = {
+  assessment_result?: InputMaybe<Assessments_Assessment_Result_Order_By>;
   created_at?: InputMaybe<Order_By>;
-  created_by?: InputMaybe<Order_By>;
-  fencer_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  metric_id?: InputMaybe<Order_By>;
-  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
+  notes?: InputMaybe<Order_By>;
+  result_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
   value?: InputMaybe<Order_By>;
 };
 
-/** primary key columns input for table: assessments_metric_responses */
-export type Assessments_Metric_Responses_Pk_Columns_Input = {
+/** primary key columns input for table: assessments_metric_result */
+export type Assessments_Metric_Result_Pk_Columns_Input = {
   id: Scalars['uniqueidentifier'];
 };
 
-/** select columns of table "assessments.metric_responses" */
-export enum Assessments_Metric_Responses_Select_Column {
-  /** column name */
-  CohortId = 'cohort_id',
+/** select columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Select_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  FencerId = 'fencer_id',
-  /** column name */
   Id = 'id',
   /** column name */
-  MetricId = 'metric_id',
+  Notes = 'notes',
+  /** column name */
+  ResultId = 'result_id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
   Value = 'value'
 }
 
-/** input type for updating data in table "assessments.metric_responses" */
-export type Assessments_Metric_Responses_Set_Input = {
-  cohort_id?: InputMaybe<Scalars['uniqueidentifier']>;
+/** input type for updating data in table "assessments.metric_result" */
+export type Assessments_Metric_Result_Set_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
-  created_by?: InputMaybe<Scalars['String']>;
-  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  notes?: InputMaybe<Scalars['String']>;
+  result_id?: InputMaybe<Scalars['uniqueidentifier']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
   value?: InputMaybe<Scalars['String']>;
 };
 
-/** update columns of table "assessments.metric_responses" */
-export enum Assessments_Metric_Responses_Update_Column {
-  /** column name */
-  CohortId = 'cohort_id',
+/** update columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Update_Column {
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
-  CreatedBy = 'created_by',
-  /** column name */
-  FencerId = 'fencer_id',
-  /** column name */
   Id = 'id',
   /** column name */
-  MetricId = 'metric_id',
+  Notes = 'notes',
+  /** column name */
+  ResultId = 'result_id',
   /** column name */
   UpdatedAt = 'updated_at',
   /** column name */
@@ -4666,6 +5025,14 @@ export type Mutation_Root = {
   delete_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
   /** delete single row from the table: "assessments.assessment_metrics" */
   delete_assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** delete data from the table: "assessments.assessment_result" */
+  delete_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_result" */
+  delete_assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** delete data from the table: "assessments.assessment_result_statuses" */
+  delete_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_result_statuses" */
+  delete_assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
   /** delete data from the table: "assessments.assessments" */
   delete_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
   /** delete single row from the table: "assessments.assessments" */
@@ -4678,10 +5045,10 @@ export type Mutation_Root = {
   delete_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** delete single row from the table: "assessments.metric_questions" */
   delete_assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
-  /** delete data from the table: "assessments.metric_responses" */
-  delete_assessments_metric_responses?: Maybe<Assessments_Metric_Responses_Mutation_Response>;
-  /** delete single row from the table: "assessments.metric_responses" */
-  delete_assessments_metric_responses_by_pk?: Maybe<Assessments_Metric_Responses>;
+  /** delete data from the table: "assessments.metric_result" */
+  delete_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** delete single row from the table: "assessments.metric_result" */
+  delete_assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
   /** delete data from the table: "assessments.metric_types" */
   delete_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
   /** delete single row from the table: "assessments.metric_types" */
@@ -4742,6 +5109,14 @@ export type Mutation_Root = {
   insert_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
   /** insert a single row into the table: "assessments.assessment_metrics" */
   insert_assessments_assessment_metrics_one?: Maybe<Assessments_Assessment_Metrics>;
+  /** insert data into the table: "assessments.assessment_result" */
+  insert_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_result" */
+  insert_assessments_assessment_result_one?: Maybe<Assessments_Assessment_Result>;
+  /** insert data into the table: "assessments.assessment_result_statuses" */
+  insert_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_result_statuses" */
+  insert_assessments_assessment_result_statuses_one?: Maybe<Assessments_Assessment_Result_Statuses>;
   /** insert data into the table: "assessments.assessments" */
   insert_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
   /** insert a single row into the table: "assessments.assessments" */
@@ -4754,10 +5129,10 @@ export type Mutation_Root = {
   insert_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** insert a single row into the table: "assessments.metric_questions" */
   insert_assessments_metric_questions_one?: Maybe<Assessments_Metric_Questions>;
-  /** insert data into the table: "assessments.metric_responses" */
-  insert_assessments_metric_responses?: Maybe<Assessments_Metric_Responses_Mutation_Response>;
-  /** insert a single row into the table: "assessments.metric_responses" */
-  insert_assessments_metric_responses_one?: Maybe<Assessments_Metric_Responses>;
+  /** insert data into the table: "assessments.metric_result" */
+  insert_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** insert a single row into the table: "assessments.metric_result" */
+  insert_assessments_metric_result_one?: Maybe<Assessments_Metric_Result>;
   /** insert data into the table: "assessments.metric_types" */
   insert_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
   /** insert a single row into the table: "assessments.metric_types" */
@@ -4818,6 +5193,14 @@ export type Mutation_Root = {
   update_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
   /** update single row of the table: "assessments.assessment_metrics" */
   update_assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** update data of the table: "assessments.assessment_result" */
+  update_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_result" */
+  update_assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** update data of the table: "assessments.assessment_result_statuses" */
+  update_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_result_statuses" */
+  update_assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
   /** update data of the table: "assessments.assessments" */
   update_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
   /** update single row of the table: "assessments.assessments" */
@@ -4830,10 +5213,10 @@ export type Mutation_Root = {
   update_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
   /** update single row of the table: "assessments.metric_questions" */
   update_assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
-  /** update data of the table: "assessments.metric_responses" */
-  update_assessments_metric_responses?: Maybe<Assessments_Metric_Responses_Mutation_Response>;
-  /** update single row of the table: "assessments.metric_responses" */
-  update_assessments_metric_responses_by_pk?: Maybe<Assessments_Metric_Responses>;
+  /** update data of the table: "assessments.metric_result" */
+  update_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** update single row of the table: "assessments.metric_result" */
+  update_assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
   /** update data of the table: "assessments.metric_types" */
   update_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
   /** update single row of the table: "assessments.metric_types" */
@@ -4998,6 +5381,30 @@ export type Mutation_RootDelete_Assessments_Assessment_Metrics_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_ResultArgs = {
+  where: Assessments_Assessment_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_StatusesArgs = {
+  where: Assessments_Assessment_Result_Statuses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_Assessments_AssessmentsArgs = {
   where: Assessments_Assessments_Bool_Exp;
 };
@@ -5035,13 +5442,13 @@ export type Mutation_RootDelete_Assessments_Metric_Questions_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootDelete_Assessments_Metric_ResponsesArgs = {
-  where: Assessments_Metric_Responses_Bool_Exp;
+export type Mutation_RootDelete_Assessments_Metric_ResultArgs = {
+  where: Assessments_Metric_Result_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootDelete_Assessments_Metric_Responses_By_PkArgs = {
+export type Mutation_RootDelete_Assessments_Metric_Result_By_PkArgs = {
   id: Scalars['uniqueidentifier'];
 };
 
@@ -5252,6 +5659,34 @@ export type Mutation_RootInsert_Assessments_Assessment_Metrics_OneArgs = {
 
 
 /** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_ResultArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_If_Matched>;
+  objects: Array<Assessments_Assessment_Result_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_If_Matched>;
+  object: Assessments_Assessment_Result_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_StatusesArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_Statuses_If_Matched>;
+  objects: Array<Assessments_Assessment_Result_Statuses_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_Statuses_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_Statuses_If_Matched>;
+  object: Assessments_Assessment_Result_Statuses_Insert_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootInsert_Assessments_AssessmentsArgs = {
   if_matched?: InputMaybe<Assessments_Assessments_If_Matched>;
   objects: Array<Assessments_Assessments_Insert_Input>;
@@ -5294,16 +5729,16 @@ export type Mutation_RootInsert_Assessments_Metric_Questions_OneArgs = {
 
 
 /** mutation root */
-export type Mutation_RootInsert_Assessments_Metric_ResponsesArgs = {
-  if_matched?: InputMaybe<Assessments_Metric_Responses_If_Matched>;
-  objects: Array<Assessments_Metric_Responses_Insert_Input>;
+export type Mutation_RootInsert_Assessments_Metric_ResultArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Result_If_Matched>;
+  objects: Array<Assessments_Metric_Result_Insert_Input>;
 };
 
 
 /** mutation root */
-export type Mutation_RootInsert_Assessments_Metric_Responses_OneArgs = {
-  if_matched?: InputMaybe<Assessments_Metric_Responses_If_Matched>;
-  object: Assessments_Metric_Responses_Insert_Input;
+export type Mutation_RootInsert_Assessments_Metric_Result_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Result_If_Matched>;
+  object: Assessments_Metric_Result_Insert_Input;
 };
 
 
@@ -5524,6 +5959,34 @@ export type Mutation_RootUpdate_Assessments_Assessment_Metrics_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_ResultArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Set_Input>;
+  where: Assessments_Assessment_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Set_Input>;
+  pk_columns: Assessments_Assessment_Result_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_StatusesArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Statuses_Set_Input>;
+  where: Assessments_Assessment_Result_Statuses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_Statuses_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Statuses_Set_Input>;
+  pk_columns: Assessments_Assessment_Result_Statuses_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_Assessments_AssessmentsArgs = {
   _set?: InputMaybe<Assessments_Assessments_Set_Input>;
   where: Assessments_Assessments_Bool_Exp;
@@ -5566,16 +6029,16 @@ export type Mutation_RootUpdate_Assessments_Metric_Questions_By_PkArgs = {
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Assessments_Metric_ResponsesArgs = {
-  _set?: InputMaybe<Assessments_Metric_Responses_Set_Input>;
-  where: Assessments_Metric_Responses_Bool_Exp;
+export type Mutation_RootUpdate_Assessments_Metric_ResultArgs = {
+  _set?: InputMaybe<Assessments_Metric_Result_Set_Input>;
+  where: Assessments_Metric_Result_Bool_Exp;
 };
 
 
 /** mutation root */
-export type Mutation_RootUpdate_Assessments_Metric_Responses_By_PkArgs = {
-  _set?: InputMaybe<Assessments_Metric_Responses_Set_Input>;
-  pk_columns: Assessments_Metric_Responses_Pk_Columns_Input;
+export type Mutation_RootUpdate_Assessments_Metric_Result_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Metric_Result_Set_Input>;
+  pk_columns: Assessments_Metric_Result_Pk_Columns_Input;
 };
 
 
@@ -5710,6 +6173,18 @@ export type Query_Root = {
   assessments_assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
   /** fetch data from the table: "assessments.assessment_metrics" using primary key columns */
   assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** fetch data from the table: "assessments.assessment_result" */
+  assessments_assessment_result: Array<Assessments_Assessment_Result>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result" */
+  assessments_assessment_result_aggregate: Assessments_Assessment_Result_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result" using primary key columns */
+  assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** fetch data from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses: Array<Assessments_Assessment_Result_Statuses>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses_aggregate: Assessments_Assessment_Result_Statuses_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result_statuses" using primary key columns */
+  assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
   /** fetch data from the table: "assessments.assessments" */
   assessments_assessments: Array<Assessments_Assessments>;
   /** fetch aggregated fields from the table: "assessments.assessments" */
@@ -5728,12 +6203,12 @@ export type Query_Root = {
   assessments_metric_questions_aggregate: Assessments_Metric_Questions_Aggregate;
   /** fetch data from the table: "assessments.metric_questions" using primary key columns */
   assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
-  /** fetch data from the table: "assessments.metric_responses" */
-  assessments_metric_responses: Array<Assessments_Metric_Responses>;
-  /** fetch aggregated fields from the table: "assessments.metric_responses" */
-  assessments_metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
-  /** fetch data from the table: "assessments.metric_responses" using primary key columns */
-  assessments_metric_responses_by_pk?: Maybe<Assessments_Metric_Responses>;
+  /** fetch data from the table: "assessments.metric_result" */
+  assessments_metric_result: Array<Assessments_Metric_Result>;
+  /** fetch aggregated fields from the table: "assessments.metric_result" */
+  assessments_metric_result_aggregate: Assessments_Metric_Result_Aggregate;
+  /** fetch data from the table: "assessments.metric_result" using primary key columns */
+  assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
   /** fetch data from the table: "assessments.metric_types" */
   assessments_metric_types: Array<Assessments_Metric_Types>;
   /** fetch aggregated fields from the table: "assessments.metric_types" */
@@ -6011,6 +6486,48 @@ export type Query_RootAssessments_Assessment_Metrics_By_PkArgs = {
 };
 
 
+export type Query_RootAssessments_Assessment_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Assessment_Result_StatusesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_Statuses_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
 export type Query_RootAssessments_AssessmentsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -6075,23 +6592,23 @@ export type Query_RootAssessments_Metric_Questions_By_PkArgs = {
 };
 
 
-export type Query_RootAssessments_Metric_ResponsesArgs = {
+export type Query_RootAssessments_Metric_ResultArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
 
-export type Query_RootAssessments_Metric_Responses_AggregateArgs = {
+export type Query_RootAssessments_Metric_Result_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
 
-export type Query_RootAssessments_Metric_Responses_By_PkArgs = {
+export type Query_RootAssessments_Metric_Result_By_PkArgs = {
   id: Scalars['uniqueidentifier'];
 };
 
@@ -6233,6 +6750,18 @@ export type Subscription_Root = {
   assessments_assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
   /** fetch data from the table: "assessments.assessment_metrics" using primary key columns */
   assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** fetch data from the table: "assessments.assessment_result" */
+  assessments_assessment_result: Array<Assessments_Assessment_Result>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result" */
+  assessments_assessment_result_aggregate: Assessments_Assessment_Result_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result" using primary key columns */
+  assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** fetch data from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses: Array<Assessments_Assessment_Result_Statuses>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses_aggregate: Assessments_Assessment_Result_Statuses_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result_statuses" using primary key columns */
+  assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
   /** fetch data from the table: "assessments.assessments" */
   assessments_assessments: Array<Assessments_Assessments>;
   /** fetch aggregated fields from the table: "assessments.assessments" */
@@ -6251,12 +6780,12 @@ export type Subscription_Root = {
   assessments_metric_questions_aggregate: Assessments_Metric_Questions_Aggregate;
   /** fetch data from the table: "assessments.metric_questions" using primary key columns */
   assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
-  /** fetch data from the table: "assessments.metric_responses" */
-  assessments_metric_responses: Array<Assessments_Metric_Responses>;
-  /** fetch aggregated fields from the table: "assessments.metric_responses" */
-  assessments_metric_responses_aggregate: Assessments_Metric_Responses_Aggregate;
-  /** fetch data from the table: "assessments.metric_responses" using primary key columns */
-  assessments_metric_responses_by_pk?: Maybe<Assessments_Metric_Responses>;
+  /** fetch data from the table: "assessments.metric_result" */
+  assessments_metric_result: Array<Assessments_Metric_Result>;
+  /** fetch aggregated fields from the table: "assessments.metric_result" */
+  assessments_metric_result_aggregate: Assessments_Metric_Result_Aggregate;
+  /** fetch data from the table: "assessments.metric_result" using primary key columns */
+  assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
   /** fetch data from the table: "assessments.metric_types" */
   assessments_metric_types: Array<Assessments_Metric_Types>;
   /** fetch aggregated fields from the table: "assessments.metric_types" */
@@ -6534,6 +7063,48 @@ export type Subscription_RootAssessments_Assessment_Metrics_By_PkArgs = {
 };
 
 
+export type Subscription_RootAssessments_Assessment_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_StatusesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_Statuses_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
 export type Subscription_RootAssessments_AssessmentsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -6598,23 +7169,23 @@ export type Subscription_RootAssessments_Metric_Questions_By_PkArgs = {
 };
 
 
-export type Subscription_RootAssessments_Metric_ResponsesArgs = {
+export type Subscription_RootAssessments_Metric_ResultArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
 
-export type Subscription_RootAssessments_Metric_Responses_AggregateArgs = {
+export type Subscription_RootAssessments_Metric_Result_AggregateArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Metric_Responses_Order_By>>;
-  where?: InputMaybe<Assessments_Metric_Responses_Bool_Exp>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
 
-export type Subscription_RootAssessments_Metric_Responses_By_PkArgs = {
+export type Subscription_RootAssessments_Metric_Result_By_PkArgs = {
   id: Scalars['uniqueidentifier'];
 };
 
@@ -6733,7 +7304,7 @@ export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_as
 export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at?: any | null, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string, metric_responses: Array<{ __typename?: 'assessments_metric_responses', id: any, value?: string | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null }> }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
+export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at: any, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
 
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -7034,15 +7605,6 @@ export const GetAssessmentsDocument = gql`
       id
       title
       description
-      metric_responses {
-        id
-        Student {
-          StudentId
-          FirstName
-          LastName
-        }
-        value
-      }
     }
     assessment_metrics {
       metric_question {

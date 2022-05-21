@@ -16,15 +16,6 @@ query GetAssessments {
       id
       title
       description
-      metric_responses {
-        id
-        Student {
-          StudentId
-          FirstName
-          LastName
-        }
-        value
-      }
     }
     assessment_metrics {
       metric_question {
