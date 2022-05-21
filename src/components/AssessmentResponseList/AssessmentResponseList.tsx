@@ -66,18 +66,6 @@ export const AssessmentResponseList: React.FunctionComponent<
               items={responseActions}
               farItems={[
                 {
-                  key: "edit",
-                  text: "Edit",
-                  iconProps: { iconName: "Edit" },
-                  disabled: !selectedResponse,
-                },
-                {
-                  key: "delete",
-                  text: "Delete",
-                  iconProps: { iconName: "Delete" },
-                  disabled: !selectedResponse,
-                },
-                {
                   key: "search",
                   onRender: () => {
                     return (
