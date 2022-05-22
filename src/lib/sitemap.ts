@@ -59,7 +59,7 @@ export const sitemap: IPageItem[] = [
         },
         children: [
           {
-            name: "Assessment [assessmentId]",
+            name: "View assessment",
             url: "[assessmentId]/",
             tags: {
               breadcrumb: {},
