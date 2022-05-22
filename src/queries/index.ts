@@ -3190,9 +3190,6 @@ export type Assessments_Assessment_Result = {
   fencer?: Maybe<Students>;
   fencer_id: Scalars['uniqueidentifier'];
   id: Scalars['uniqueidentifier'];
-  /** An object relationship */
-  metric_question: Assessments_Metric_Questions;
-  metric_question_id: Scalars['uniqueidentifier'];
   /** An array relationship */
   metric_results: Array<Assessments_Metric_Result>;
   /** An aggregate relationship */
@@ -3261,8 +3258,6 @@ export type Assessments_Assessment_Result_Bool_Exp = {
   fencer?: InputMaybe<Students_Bool_Exp>;
   fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
-  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
-  metric_question_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
   status_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
@@ -3282,7 +3277,6 @@ export type Assessments_Assessment_Result_Insert_Input = {
   created_by?: InputMaybe<Scalars['String']>;
   fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
   status_id?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
@@ -3299,8 +3293,6 @@ export enum Assessments_Assessment_Result_Insert_Match_Column {
   FencerId = 'fencer_id',
   /** column name */
   Id = 'id',
-  /** column name */
-  MetricQuestionId = 'metric_question_id',
   /** column name */
   StatusId = 'status_id',
   /** column name */
@@ -3360,8 +3352,6 @@ export type Assessments_Assessment_Result_Order_By = {
   fencer?: InputMaybe<Students_Order_By>;
   fencer_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
-  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
-  metric_question_id?: InputMaybe<Order_By>;
   metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
   status_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -3385,8 +3375,6 @@ export enum Assessments_Assessment_Result_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
-  MetricQuestionId = 'metric_question_id',
-  /** column name */
   StatusId = 'status_id',
   /** column name */
   UpdatedAt = 'updated_at'
@@ -3399,7 +3387,6 @@ export type Assessments_Assessment_Result_Set_Input = {
   created_by?: InputMaybe<Scalars['String']>;
   fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
-  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
   status_id?: InputMaybe<Scalars['String']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
 };
@@ -3555,8 +3542,6 @@ export enum Assessments_Assessment_Result_Update_Column {
   FencerId = 'fencer_id',
   /** column name */
   Id = 'id',
-  /** column name */
-  MetricQuestionId = 'metric_question_id',
   /** column name */
   StatusId = 'status_id',
   /** column name */
@@ -4003,10 +3988,6 @@ export type Assessments_Metric_Questions = {
   assessment_metrics: Array<Assessments_Assessment_Metrics>;
   /** An aggregate relationship */
   assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
-  /** An array relationship */
-  assessment_results: Array<Assessments_Assessment_Result>;
-  /** An aggregate relationship */
-  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
   created_at: Scalars['datetime2'];
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -4034,24 +4015,6 @@ export type Assessments_Metric_QuestionsAssessment_Metrics_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
   where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.metric_questions" */
-export type Assessments_Metric_QuestionsAssessment_ResultsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
-  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
-};
-
-
-/** columns and relationships of "assessments.metric_questions" */
-export type Assessments_Metric_QuestionsAssessment_Results_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
-  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
 };
 
 /** aggregated selection of "assessments.metric_questions" */
@@ -4089,7 +4052,6 @@ export type Assessments_Metric_Questions_Bool_Exp = {
   _not?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
   _or?: InputMaybe<Array<Assessments_Metric_Questions_Bool_Exp>>;
   assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
-  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -4188,7 +4150,6 @@ export type Assessments_Metric_Questions_Mutation_Response = {
 /** Ordering options when selecting data from "assessments.metric_questions". */
 export type Assessments_Metric_Questions_Order_By = {
   assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
-  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
@@ -4258,6 +4219,7 @@ export type Assessments_Metric_Result = {
   assessment_result: Assessments_Assessment_Result;
   created_at: Scalars['datetime2'];
   id: Scalars['uniqueidentifier'];
+  metric_question_id: Scalars['uniqueidentifier'];
   notes?: Maybe<Scalars['String']>;
   result_id: Scalars['uniqueidentifier'];
   updated_at: Scalars['datetime2'];
@@ -4301,6 +4263,7 @@ export type Assessments_Metric_Result_Bool_Exp = {
   assessment_result?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_question_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   notes?: InputMaybe<String_Mssql_Comparison_Exp>;
   result_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
@@ -4318,6 +4281,7 @@ export type Assessments_Metric_Result_If_Matched = {
 export type Assessments_Metric_Result_Insert_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
   notes?: InputMaybe<Scalars['String']>;
   result_id?: InputMaybe<Scalars['uniqueidentifier']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
@@ -4330,6 +4294,8 @@ export enum Assessments_Metric_Result_Insert_Match_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
   /** column name */
   ResultId = 'result_id',
   /** column name */
@@ -4386,6 +4352,7 @@ export type Assessments_Metric_Result_Order_By = {
   assessment_result?: InputMaybe<Assessments_Assessment_Result_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  metric_question_id?: InputMaybe<Order_By>;
   notes?: InputMaybe<Order_By>;
   result_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
@@ -4404,6 +4371,8 @@ export enum Assessments_Metric_Result_Select_Column {
   /** column name */
   Id = 'id',
   /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
   Notes = 'notes',
   /** column name */
   ResultId = 'result_id',
@@ -4417,6 +4386,7 @@ export enum Assessments_Metric_Result_Select_Column {
 export type Assessments_Metric_Result_Set_Input = {
   created_at?: InputMaybe<Scalars['datetime2']>;
   id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
   notes?: InputMaybe<Scalars['String']>;
   result_id?: InputMaybe<Scalars['uniqueidentifier']>;
   updated_at?: InputMaybe<Scalars['datetime2']>;
@@ -4429,6 +4399,8 @@ export enum Assessments_Metric_Result_Update_Column {
   CreatedAt = 'created_at',
   /** column name */
   Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
   /** column name */
   Notes = 'notes',
   /** column name */
@@ -7283,6 +7255,13 @@ export type AddFencerToAccountMutationVariables = Exact<{
 
 export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid?: string | null, StudentId: any, FirstName: string, LastName: string, Nickname?: string | null, Gender?: string | null, Birthdate?: any | null, Email?: string | null, Phone?: string | null, AssociationMemberId?: string | null, AvatarUrl?: string | null } | null };
 
+export type AddMetricAnswersMutationVariables = Exact<{
+  answers: Array<Assessments_Metric_Result_Insert_Input> | Assessments_Metric_Result_Insert_Input;
+}>;
+
+
+export type AddMetricAnswersMutation = { __typename?: 'mutation_root', insert_assessments_metric_result?: { __typename?: 'assessments_metric_result_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'assessments_metric_result', id: any, value: string, metric_question_id: any, result_id: any, notes?: string | null }> } | null };
+
 export type DeleteFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
 }>;
@@ -7507,6 +7486,46 @@ export function useAddFencerToAccountMutation(baseOptions?: ApolloReactHooks.Mut
 export type AddFencerToAccountMutationHookResult = ReturnType<typeof useAddFencerToAccountMutation>;
 export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerToAccountMutation>;
 export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
+export const AddMetricAnswersDocument = gql`
+    mutation AddMetricAnswers($answers: [assessments_metric_result_insert_input!]!) {
+  insert_assessments_metric_result(objects: $answers) {
+    returning {
+      id
+      value
+      metric_question_id
+      result_id
+      notes
+    }
+    affected_rows
+  }
+}
+    `;
+export type AddMetricAnswersMutationFn = Apollo.MutationFunction<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>;
+
+/**
+ * __useAddMetricAnswersMutation__
+ *
+ * To run a mutation, you first call `useAddMetricAnswersMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddMetricAnswersMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addMetricAnswersMutation, { data, loading, error }] = useAddMetricAnswersMutation({
+ *   variables: {
+ *      answers: // value for 'answers'
+ *   },
+ * });
+ */
+export function useAddMetricAnswersMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>(AddMetricAnswersDocument, options);
+      }
+export type AddMetricAnswersMutationHookResult = ReturnType<typeof useAddMetricAnswersMutation>;
+export type AddMetricAnswersMutationResult = Apollo.MutationResult<AddMetricAnswersMutation>;
+export type AddMetricAnswersMutationOptions = Apollo.BaseMutationOptions<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>;
 export const DeleteFencerByIdDocument = gql`
     mutation DeleteFencerById($fencerId: uniqueidentifier!) {
   delete_Students_by_pk(StudentId: $fencerId) {
