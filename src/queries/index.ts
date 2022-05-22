@@ -2348,8 +2348,6 @@ export type Students = {
   Phone?: Maybe<Scalars['String']>;
   StudentId: Scalars['uniqueidentifier'];
   UpdatedAt: Scalars['datetime2'];
-  /** An object relationship */
-  account?: Maybe<Accounts>;
 };
 
 /** aggregated selection of "Students" */
@@ -2402,7 +2400,6 @@ export type Students_Bool_Exp = {
   _and?: InputMaybe<Array<Students_Bool_Exp>>;
   _not?: InputMaybe<Students_Bool_Exp>;
   _or?: InputMaybe<Array<Students_Bool_Exp>>;
-  account?: InputMaybe<Accounts_Bool_Exp>;
 };
 
 /** upsert condition type for table "Students" */
@@ -2559,7 +2556,6 @@ export type Students_Order_By = {
   Phone?: InputMaybe<Order_By>;
   StudentId?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
-  account?: InputMaybe<Accounts_Order_By>;
 };
 
 /** primary key columns input for table: Students */
@@ -7306,6 +7302,11 @@ export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at: any, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
 
+export type GetFencersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, Oid?: string | null, FirstName: string, LastName: string, Nickname?: string | null, Gender?: string | null, Birthdate?: any | null, Email?: string | null, Phone?: string | null, AssociationMemberId?: string | null, AvatarUrl?: string | null, CreatedBy?: string | null, CreatedAt: any, Account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, Email?: string | null, Phone?: string | null } | null } | null }> };
+
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
   lastName: Scalars['String'];
@@ -7648,6 +7649,60 @@ export function useGetAssessmentsLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type GetAssessmentsQueryHookResult = ReturnType<typeof useGetAssessmentsQuery>;
 export type GetAssessmentsLazyQueryHookResult = ReturnType<typeof useGetAssessmentsLazyQuery>;
 export type GetAssessmentsQueryResult = Apollo.QueryResult<GetAssessmentsQuery, GetAssessmentsQueryVariables>;
+export const GetFencersDocument = gql`
+    query GetFencers {
+  Students {
+    StudentId
+    Oid
+    FirstName
+    LastName
+    Nickname
+    Gender
+    Birthdate
+    Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
+    CreatedBy
+    CreatedAt
+    Account {
+      Oid
+      Student {
+        StudentId
+        Email
+        Phone
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetFencersQuery__
+ *
+ * To run a query within a React component, call `useGetFencersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFencersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFencersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetFencersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetFencersQuery, GetFencersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetFencersQuery, GetFencersQueryVariables>(GetFencersDocument, options);
+      }
+export function useGetFencersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetFencersQuery, GetFencersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetFencersQuery, GetFencersQueryVariables>(GetFencersDocument, options);
+        }
+export type GetFencersQueryHookResult = ReturnType<typeof useGetFencersQuery>;
+export type GetFencersLazyQueryHookResult = ReturnType<typeof useGetFencersLazyQuery>;
+export type GetFencersQueryResult = Apollo.QueryResult<GetFencersQuery, GetFencersQueryVariables>;
 export const GetMemberDetailsByNameDocument = gql`
     query GetMemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
   AssociationMembers(

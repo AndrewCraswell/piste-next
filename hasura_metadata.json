@@ -1,5 +1,5 @@
 {
-  "resource_version": 520,
+  "resource_version": 525,
   "metadata": {
     "version": 3,
     "sources": [
@@ -867,18 +867,6 @@
                 "using": {
                   "foreign_key_constraint_on": "AssociationMemberId"
                 }
-              },
-              {
-                "name": "account",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "PrimaryStudentId",
-                    "table": {
-                      "schema": "dbo",
-                      "name": "Accounts"
-                    }
-                  }
-                }
               }
             ],
             "insert_permissions": [
@@ -887,18 +875,16 @@
                 "permission": {
                   "check": {},
                   "columns": [
-                    "StudentId",
-                    "UpdatedAt",
-                    "CreatedAt",
+                    "AssociationMemberId",
                     "AvatarUrl",
-                    "FirstName",
-                    "Phone",
-                    "Email",
-                    "CreatedBy",
-                    "LastName",
                     "Birthdate",
+                    "Email",
+                    "FirstName",
+                    "Gender",
+                    "LastName",
+                    "Nickname",
                     "Oid",
-                    "AssociationMemberId"
+                    "Phone"
                   ],
                   "backend_only": false
                 }
@@ -909,18 +895,20 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "StudentId",
-                    "UpdatedAt",
-                    "CreatedAt",
+                    "AssociationMemberId",
                     "AvatarUrl",
-                    "FirstName",
-                    "Phone",
-                    "Email",
-                    "CreatedBy",
-                    "LastName",
                     "Birthdate",
+                    "CreatedAt",
+                    "CreatedBy",
+                    "Email",
+                    "FirstName",
+                    "Gender",
+                    "LastName",
+                    "Nickname",
                     "Oid",
-                    "AssociationMemberId"
+                    "Phone",
+                    "StudentId",
+                    "UpdatedAt"
                   ],
                   "filter": {}
                 }
@@ -931,18 +919,16 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "StudentId",
-                    "UpdatedAt",
-                    "CreatedAt",
+                    "AssociationMemberId",
                     "AvatarUrl",
-                    "FirstName",
-                    "Phone",
-                    "Email",
-                    "CreatedBy",
-                    "LastName",
                     "Birthdate",
+                    "Email",
+                    "FirstName",
+                    "Gender",
+                    "LastName",
+                    "Nickname",
                     "Oid",
-                    "AssociationMemberId"
+                    "Phone"
                   ],
                   "filter": {},
                   "check": null
