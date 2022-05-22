@@ -4,7 +4,7 @@ import { RadioGroup, Radio, Body, Text } from "@fluentui/react-components"
 import { Label, Card, CardHeader } from "@fluentui/react-components/unstable"
 
 import ReactMarkdown from "react-markdown"
-import { ClipboardTaskRegular } from "@fluentui/react-icons"
+import { ClipboardTaskRegular, ClipboardRegular } from "@fluentui/react-icons"
 
 interface IMetricFormProps {
   id: string
@@ -27,7 +27,13 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
   return (
     <Card appearance={selectedValue ? "filled-alternative" : "outline"}>
       <CardHeader
-        image={<ClipboardTaskRegular fontSize={"32px"} />}
+        image={
+          selectedValue ? (
+            <ClipboardTaskRegular fontSize={"32px"} />
+          ) : (
+            <ClipboardRegular fontSize={"32px"} />
+          )
+        }
         header={
           <Text as="h2" size={300} weight="semibold">
             {title}
@@ -58,6 +64,7 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
               setValue(data.value)
               field.onChange(event)
             }}
+            required
           >
             <Radio label="0" value="0" />
             <Radio label="1" value="1" />

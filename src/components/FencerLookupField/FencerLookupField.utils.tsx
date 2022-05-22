@@ -1,5 +1,6 @@
+import { Fencer } from "$types"
 import { PersonaSize } from "@fluentui/react"
-import { Fencer, IFencerPersona } from "./FencerLookupField.types"
+import { IFencerPersona } from "./FencerLookupField.types"
 
 export function fencerSearchFactory(filter: RegExp) {
   return (persona: IFencerPersona) => {
@@ -31,7 +32,10 @@ export function sortFencerPersonaByName(
   return fencerA.text!.localeCompare(fencerB.text!)
 }
 
-export function mapFencerToPersona(fencer: Fencer): IFencerPersona {
+export function mapFencerToPersona(
+  fencer: Fencer,
+  size: PersonaSize = PersonaSize.size24
+): IFencerPersona {
   const name =
     `${fencer.FirstName} ${fencer.LastName}` +
     (fencer.Nickname ? ` (${fencer.Nickname})` : "")
@@ -42,7 +46,7 @@ export function mapFencerToPersona(fencer: Fencer): IFencerPersona {
 
   return {
     text: name,
-    size: PersonaSize.size32,
+    size,
     secondaryText: email || phone || "Unknown",
     fencer,
   }

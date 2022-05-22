@@ -137,11 +137,7 @@ export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
         </CardHeader>
 
         <DetailsStack tokens={{ childrenGap: "0.75rem" }}>
-          <DetailsItem
-            iconName="ContactInfo"
-            iconLabel="Full name"
-            title={fullName}
-          >
+          <DetailsItem iconName="ContactInfo" iconLabel="Name" title={fullName}>
             {fullName}
           </DetailsItem>
 

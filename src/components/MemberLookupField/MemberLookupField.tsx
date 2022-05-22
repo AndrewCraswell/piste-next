@@ -3,6 +3,7 @@ import {
   NormalPeoplePicker,
   IPersonaProps,
   IPeoplePickerProps,
+  PersonaSize,
 } from "@fluentui/react"
 import { useCallback } from "react"
 
@@ -18,11 +19,12 @@ export interface IMemberLookupFieldProps
   extends Partial<Omit<IPeoplePickerProps, "onChange">> {
   onChange?: (items: IAssociationMemberPersona[]) => void
   defaultFilter?: string
+  size?: PersonaSize
 }
 
 export const MemberLookupField: React.FunctionComponent<
   IMemberLookupFieldProps
-> = ({ defaultFilter = "%", ...pickerProps }) => {
+> = ({ size, defaultFilter = "%", ...pickerProps }) => {
   const client = useApolloClient()
 
   // TODO: Enable "show more" suggestions
@@ -39,18 +41,18 @@ export const MemberLookupField: React.FunctionComponent<
       })
 
       const suggestions: IPersonaProps[] = data!.AssociationMembers.map(
-        associationMemberToPersona
+        (member) => associationMemberToPersona(member, size)
       )
 
       return suggestions
     },
-    [client, defaultFilter]
+    [client, defaultFilter, size]
   )
 
   return (
     <NormalPeoplePicker
       inputProps={{
-        placeholder: "Full name",
+        placeholder: "Fencer name",
       }}
       onResolveSuggestions={resolveSuggestions}
       onEmptyResolveSuggestions={() => {

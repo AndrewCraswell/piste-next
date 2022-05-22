@@ -1,5 +1,5 @@
 {
-  "resource_version": 525,
+  "resource_version": 534,
   "metadata": {
     "version": 3,
     "sources": [
@@ -1127,12 +1127,6 @@
                     }
                   }
                 }
-              },
-              {
-                "name": "metric_question",
-                "using": {
-                  "foreign_key_constraint_on": "metric_question_id"
-                }
               }
             ],
             "array_relationships": [
@@ -1154,10 +1148,13 @@
                 "role": "user",
                 "permission": {
                   "check": {},
+                  "set": {
+                    "created_by": "x-hasura-User-Id"
+                  },
                   "columns": [
                     "assessment_id",
+                    "created_by",
                     "fencer_id",
-                    "metric_question_id",
                     "status_id"
                   ],
                   "backend_only": false
@@ -1169,14 +1166,13 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "created_at",
-                    "updated_at",
                     "id",
                     "fencer_id",
-                    "created_by",
                     "assessment_id",
                     "status_id",
-                    "metric_question_id"
+                    "created_by",
+                    "created_at",
+                    "updated_at"
                   ],
                   "filter": {}
                 }
@@ -1586,18 +1582,6 @@
                     }
                   }
                 }
-              },
-              {
-                "name": "assessment_results",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "metric_question_id",
-                    "table": {
-                      "schema": "assessments",
-                      "name": "assessment_result"
-                    }
-                  }
-                }
               }
             ],
             "insert_permissions": [
@@ -1664,6 +1648,59 @@
                 "name": "assessment_result",
                 "using": {
                   "foreign_key_constraint_on": "result_id"
+                }
+              }
+            ],
+            "insert_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "check": {},
+                  "columns": [
+                    "metric_question_id",
+                    "notes",
+                    "result_id",
+                    "value"
+                  ],
+                  "backend_only": false
+                }
+              }
+            ],
+            "select_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "id",
+                    "created_at",
+                    "updated_at",
+                    "metric_question_id",
+                    "notes",
+                    "value",
+                    "result_id"
+                  ],
+                  "filter": {}
+                }
+              }
+            ],
+            "update_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "columns": [
+                    "notes",
+                    "value"
+                  ],
+                  "filter": {},
+                  "check": null
+                }
+              }
+            ],
+            "delete_permissions": [
+              {
+                "role": "user",
+                "permission": {
+                  "filter": {}
                 }
               }
             ]

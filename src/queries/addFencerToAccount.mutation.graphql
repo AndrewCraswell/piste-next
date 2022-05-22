@@ -4,8 +4,12 @@ mutation AddFencerToAccount($fencer: Students_insert_input!) {
     StudentId
     FirstName
     LastName
+    Nickname
+    Gender
     Birthdate
-    Phone
     Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
   }
 }

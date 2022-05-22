@@ -2,6 +2,7 @@ import {
   NormalPeoplePicker,
   IPersonaProps,
   IPeoplePickerProps,
+  PersonaSize,
 } from "@fluentui/react"
 import { useCallback } from "react"
 import { useApolloClient } from "@apollo/client"
@@ -21,11 +22,12 @@ import { IFencerPersona } from "./FencerLookupField.types"
 export interface IFencerLookupFieldProps
   extends Partial<Omit<IPeoplePickerProps, "onChange">> {
   onChange?: (items: IFencerPersona[]) => void
+  size?: PersonaSize
 }
 
 export const FencerLookupField: React.FunctionComponent<
   IFencerLookupFieldProps
-> = ({ ...pickerProps }) => {
+> = ({ size, ...pickerProps }) => {
   const client = useApolloClient()
 
   const resolveSuggestions = useCallback(
@@ -40,15 +42,15 @@ export const FencerLookupField: React.FunctionComponent<
       const filterExpression = new RegExp(filter, "i")
       const filterFunc = fencerSearchFactory(filterExpression)
 
-      const suggestions: IPersonaProps[] = data!.Students.map(
-        mapFencerToPersona
+      const suggestions: IPersonaProps[] = data!.Students.map((fencer) =>
+        mapFencerToPersona(fencer, size)
       )
         .filter(filterFunc)
         .sort(sortFencerPersonaByName)
 
       return suggestions
     },
-    [client]
+    [client, size]
   )
 
   const onEmptyResolveSuggestions = useCallback(() => {
@@ -58,7 +60,7 @@ export const FencerLookupField: React.FunctionComponent<
   return (
     <NormalPeoplePicker
       inputProps={{
-        placeholder: "Full name",
+        placeholder: "Fencer name",
       }}
       onResolveSuggestions={resolveSuggestions}
       onEmptyResolveSuggestions={onEmptyResolveSuggestions}
