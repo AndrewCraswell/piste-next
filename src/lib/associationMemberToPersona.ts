@@ -8,7 +8,6 @@ export function associationMemberToPersona(
   return {
     text: member.FullName,
     size: PersonaSize.size24,
-    optionalText: member.AssociationMemberId,
     secondaryText:
       member.Club1Name ||
       member.Club2Name ||

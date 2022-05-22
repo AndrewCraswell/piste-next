@@ -2,9 +2,15 @@ import type { NextPage } from "next"
 import { useRouter } from "next/router"
 import { Body, Button, Text } from "@fluentui/react-components"
 
-import { AssessmentResponseList, PageTitle } from "$components"
+import {
+  AssessmentResponseList,
+  FencerLookupField,
+  FormSection,
+  PageTitle,
+} from "$components"
 import { useTitle } from "$hooks"
 import { useGetAssessmentByIdQuery } from "$queries"
+import { Stack } from "@fluentui/react"
 
 export const ViewAssessment: NextPage = () => {
   const pageTitle = "View assessment"
@@ -38,14 +44,15 @@ export const ViewAssessment: NextPage = () => {
         {data?.assessments_assessments_by_pk?.title || "View assessment"}
       </PageTitle>
       <Body block>{assessment?.description}</Body>
-      <Button
-        appearance="primary"
-        onClick={() => {
-          console.log("New assessment")
-        }}
+
+      <Stack
+        horizontal
+        tokens={{ childrenGap: "0.5rem" }}
+        style={{ marginTop: "2rem" }}
       >
-        Start assessment
-      </Button>
+        <FencerLookupField itemLimit={1} />
+        <Button appearance="primary">Start assessment</Button>
+      </Stack>
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
