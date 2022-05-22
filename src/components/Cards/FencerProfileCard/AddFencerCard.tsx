@@ -4,7 +4,7 @@ import { useDisclosure } from "$hooks"
 import styled from "@emotion/styled"
 import { Stack } from "@fluentui/react"
 import { Button } from "@fluentui/react-components"
-import { EmbedDialog } from "./FencerCard.styles"
+import { EmbedDialog } from "./FencerProfileCard.styles"
 
 const Card = styled(VerticalCard)`
   border: 4px dashed ${({ theme }) => theme.palette.neutralLight};

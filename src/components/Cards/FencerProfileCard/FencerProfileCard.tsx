@@ -13,18 +13,18 @@ import {
   DetailsStack,
   EmbedDialog,
   SemiboldText,
-} from "./FencerCard.styles"
+} from "./FencerProfileCard.styles"
 import { AccountFencer } from "$types"
 import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
 import { cacheEvicter } from "$lib"
-import { formatPhoneNumber } from "./FencerCard.utils"
+import { formatPhoneNumber } from "./FencerProfileCard.utils"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
   primaryFencerId?: string
 }
 
-export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
+export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
   fencer,
   primaryFencerId,
 }) => {
