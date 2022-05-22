@@ -46,14 +46,14 @@ export const ViewAssessment: NextPage = () => {
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
-          Assessment cohorts
+          Fencer cohorts
         </Text>
         TODO: Render cohort cards
       </PageSection>
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
-          Assessment submissions
+          Evaluations history
         </Text>
         <AssessmentResponseList isLoadingResponses={isAssessmentLoading} />
       </PageSection>

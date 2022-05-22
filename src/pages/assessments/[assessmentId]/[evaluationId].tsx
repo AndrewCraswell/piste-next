@@ -3,15 +3,15 @@ import type { NextPage } from "next"
 import { PageTitle } from "$components"
 import { useTitle } from "$hooks"
 
-export const EditAssessment: NextPage = () => {
-  const pageTitle = "Edit assessment"
+export const EditEvaluation: NextPage = () => {
+  const pageTitle = "Edit evaluation"
   useTitle(pageTitle)
 
   return (
     <>
-      <PageTitle>Edit assessment</PageTitle>
+      <PageTitle>Edit evaluation</PageTitle>
     </>
   )
 }
 
-export default EditAssessment
+export default EditEvaluation

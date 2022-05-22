@@ -13,7 +13,7 @@ import {
 import { useAccountProfile, useTitle } from "$hooks"
 import {
   AddMetricAnswersMutationVariables,
-  useAddAssessmentSubmissionMutation,
+  useAddAssessmentEvaluationMutation,
   useAddMetricAnswersMutation,
   useGetAssessmentByIdQuery,
 } from "$queries"
@@ -33,6 +33,7 @@ export const SubmitAssessment: NextPage = () => {
   const { query } = useRouter()
   const { account } = useAccountProfile()
   const form = useForm()
+  const router = useRouter()
 
   const assessmentId = query.assessmentId as string
   const { data: assessmentData, loading: isAssessmentLoading } =
@@ -52,8 +53,8 @@ export const SubmitAssessment: NextPage = () => {
   const [addAnswers, { loading: isAddingAnswers }] =
     useAddMetricAnswersMutation()
 
-  const [addSubmission, { loading: isAddingSubmission }] =
-    useAddAssessmentSubmissionMutation()
+  const [addEvaluation, { loading: isAddingEvaluation }] =
+    useAddAssessmentEvaluationMutation()
 
   const onSubmit = useCallback(
     (values: Dictionary<any>) => {
@@ -72,21 +73,21 @@ export const SubmitAssessment: NextPage = () => {
         status = "in-progress"
       }
 
-      addSubmission({
+      addEvaluation({
         variables: {
-          submission: {
+          evaluation: {
             assessment_id: assessmentId,
             fencer_id: fencerId,
             status_id: status,
           },
         },
-        onCompleted: (submission) => {
-          const submissionId =
-            submission.insert_assessments_assessment_result_one?.id
+        onCompleted: (evaluation) => {
+          const evaluationId =
+            evaluation.insert_assessments_assessment_result_one?.id
 
           const answers: AddMetricAnswersMutationVariables["answers"] =
             Object.keys(values).map((key) => ({
-              result_id: submissionId,
+              result_id: evaluationId,
               metric_question_id: key,
               value: values[key],
             }))
@@ -101,19 +102,22 @@ export const SubmitAssessment: NextPage = () => {
               })
 
               form.reset(answers)
+
+              //TODO: This function should only redirect the page
+              router.push("")
             },
           })
         },
       })
     },
-    [addAnswers, addSubmission, assessmentId, form, metrics.length]
+    [addAnswers, addEvaluation, assessmentId, form, metrics.length, router]
   )
 
   if (!isAssessmentLoading && !assessment) {
     return <Body>No assessment found.</Body>
   }
 
-  const isLoading = isAddingSubmission || isAddingAnswers
+  const isLoading = isAddingEvaluation || isAddingAnswers
 
   return (
     <>

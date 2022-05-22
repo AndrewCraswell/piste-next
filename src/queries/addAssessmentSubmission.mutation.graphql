@@ -1,7 +1,0 @@
-mutation AddAssessmentSubmission(
-  $submission: assessments_assessment_result_insert_input!
-) {
-  insert_assessments_assessment_result_one(object: $submission) {
-    id
-  }
-}
