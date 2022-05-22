@@ -6,7 +6,7 @@ import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
 import {
   AssessmentMetricsForm,
-  FencerLookupField,
+  FormFencerLookupField,
   FormSection,
   PageTitle,
 } from "$components"
@@ -32,7 +32,6 @@ export const SubmitAssessment: NextPage = () => {
   useTitle(pageTitle)
   const { query } = useRouter()
   const { account } = useAccountProfile()
-  const [fencer, setFencer] = useState<Fencer | undefined>(undefined)
   const form = useForm()
 
   const assessmentId = query.assessmentId as string
@@ -57,14 +56,19 @@ export const SubmitAssessment: NextPage = () => {
     useAddAssessmentSubmissionMutation()
 
   const onSubmit = useCallback(
-    (values: Dictionary<string>) => {
-      const answersCount = Object.keys(form.formState.dirtyFields).length
+    (values: Dictionary<any>) => {
+      const fencerId = values.fencers[0].fencer.StudentId
+      delete values.fencers
+
+      const completedAnswersCount = Object.keys(values).filter(
+        (key) => !!values[key]
+      ).length
       const metricCount = metrics.length
 
       let status = "not-started"
-      if (answersCount === metricCount) {
+      if (completedAnswersCount === metricCount) {
         status = "completed"
-      } else {
+      } else if (completedAnswersCount > 0) {
         status = "in-progress"
       }
 
@@ -72,7 +76,7 @@ export const SubmitAssessment: NextPage = () => {
         variables: {
           submission: {
             assessment_id: assessmentId,
-            fencer_id: fencer?.StudentId,
+            fencer_id: fencerId,
             status_id: status,
           },
         },
@@ -102,14 +106,7 @@ export const SubmitAssessment: NextPage = () => {
         },
       })
     },
-    [
-      addAnswers,
-      addSubmission,
-      assessmentId,
-      fencer?.StudentId,
-      form,
-      metrics.length,
-    ]
+    [addAnswers, addSubmission, assessmentId, form, metrics.length]
   )
 
   if (!isAssessmentLoading && !assessment) {
@@ -140,20 +137,15 @@ export const SubmitAssessment: NextPage = () => {
                     <Text size={100}>Choose an athlete to evaluate</Text>
                   }
                 />
-                <FencerLookupField
+                <FormFencerLookupField
+                  name="fencers"
                   itemLimit={1}
                   inputProps={{
                     placeholder: "Fencer name",
                     required: true,
                   }}
                   size={PersonaSize.size40}
-                  onChange={(personas) => {
-                    if (personas.length) {
-                      setFencer(personas[0].fencer)
-                    } else {
-                      setFencer(undefined)
-                    }
-                  }}
+                  control={form.control}
                 />
               </Card>
             </Stack.Item>
