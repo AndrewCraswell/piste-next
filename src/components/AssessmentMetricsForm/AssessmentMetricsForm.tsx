@@ -16,11 +16,13 @@ interface IAssessmentMetricsFormProps {
     GetAssessmentByIdQuery["assessments_assessments_by_pk"]
   >["assessment_metrics"]
   form: UseFormReturn<FieldValues, any>
+  disabled?: boolean
+  required?: boolean
 }
 
 export const AssessmentMetricsForm: React.FunctionComponent<
   IAssessmentMetricsFormProps
-> = ({ metrics, form }) => {
+> = ({ metrics, form, disabled, required }) => {
   const { control } = form
 
   return (
@@ -35,6 +37,8 @@ export const AssessmentMetricsForm: React.FunctionComponent<
           metricNumber={order_number}
           totalMetrics={metrics.length}
           control={control}
+          disabled={disabled}
+          required={required}
         />
       ))}
     </FormSection>

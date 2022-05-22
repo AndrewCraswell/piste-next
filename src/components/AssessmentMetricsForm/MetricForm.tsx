@@ -14,13 +14,24 @@ interface IMetricFormProps {
   metricNumber: number
   totalMetrics: number
   control: Control<FieldValues, any>
+  disabled?: boolean
+  required?: boolean
 }
 
 export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
   props
 ) => {
-  const { id, title, description, type, metricNumber, totalMetrics, control } =
-    props
+  const {
+    id,
+    title,
+    description,
+    type,
+    metricNumber,
+    totalMetrics,
+    control,
+    disabled,
+    required,
+  } = props
 
   const [selectedValue, setValue] = useState<string | undefined>(undefined)
 
@@ -64,7 +75,8 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
               setValue(data.value)
               field.onChange(event)
             }}
-            required
+            required={required}
+            disabled={disabled}
           >
             <Radio label="0" value="0" />
             <Radio label="1" value="1" />

@@ -1,16 +1,11 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import { Body, Button, Text } from "@fluentui/react-components"
+import { Body, Text } from "@fluentui/react-components"
 
-import {
-  AssessmentResponseList,
-  FencerLookupField,
-  FormSection,
-  PageTitle,
-} from "$components"
+import { AssessmentResponseList, LinkButton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
 import { useGetAssessmentByIdQuery } from "$queries"
-import { Stack } from "@fluentui/react"
+import Link from "next/link"
 
 export const ViewAssessment: NextPage = () => {
   const pageTitle = "View assessment"
@@ -36,8 +31,6 @@ export const ViewAssessment: NextPage = () => {
     return <Body>No assessment found.</Body>
   }
 
-  // TODO: Create fencer selector
-
   return (
     <>
       <PageTitle>
@@ -45,14 +38,11 @@ export const ViewAssessment: NextPage = () => {
       </PageTitle>
       <Body block>{assessment?.description}</Body>
 
-      <Stack
-        horizontal
-        tokens={{ childrenGap: "0.5rem" }}
-        style={{ marginTop: "2rem" }}
-      >
-        <FencerLookupField itemLimit={1} />
-        <Button appearance="primary">Start assessment</Button>
-      </Stack>
+      <Link href={`/assessments/${assessmentId}/submit/`} passHref>
+        <LinkButton appearance="primary" href="">
+          Start assessment
+        </LinkButton>
+      </Link>
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
@@ -63,7 +53,7 @@ export const ViewAssessment: NextPage = () => {
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
-          Assessment results
+          Assessment submissions
         </Text>
         <AssessmentResponseList isLoadingResponses={isAssessmentLoading} />
       </PageSection>

@@ -7241,12 +7241,12 @@ export type AccountProfileQueryVariables = Exact<{
 
 export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
-export type AddAssessmentResultMutationVariables = Exact<{
-  result: Assessments_Assessment_Result_Insert_Input;
+export type AddAssessmentSubmissionMutationVariables = Exact<{
+  submission: Assessments_Assessment_Result_Insert_Input;
 }>;
 
 
-export type AddAssessmentResultMutation = { __typename?: 'mutation_root', insert_assessments_assessment_result_one?: { __typename?: 'assessments_assessment_result', id: any } | null };
+export type AddAssessmentSubmissionMutation = { __typename?: 'mutation_root', insert_assessments_assessment_result_one?: { __typename?: 'assessments_assessment_result', id: any } | null };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
@@ -7410,39 +7410,39 @@ export function useAccountProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type AccountProfileQueryHookResult = ReturnType<typeof useAccountProfileQuery>;
 export type AccountProfileLazyQueryHookResult = ReturnType<typeof useAccountProfileLazyQuery>;
 export type AccountProfileQueryResult = Apollo.QueryResult<AccountProfileQuery, AccountProfileQueryVariables>;
-export const AddAssessmentResultDocument = gql`
-    mutation AddAssessmentResult($result: assessments_assessment_result_insert_input!) {
-  insert_assessments_assessment_result_one(object: $result) {
+export const AddAssessmentSubmissionDocument = gql`
+    mutation AddAssessmentSubmission($submission: assessments_assessment_result_insert_input!) {
+  insert_assessments_assessment_result_one(object: $submission) {
     id
   }
 }
     `;
-export type AddAssessmentResultMutationFn = Apollo.MutationFunction<AddAssessmentResultMutation, AddAssessmentResultMutationVariables>;
+export type AddAssessmentSubmissionMutationFn = Apollo.MutationFunction<AddAssessmentSubmissionMutation, AddAssessmentSubmissionMutationVariables>;
 
 /**
- * __useAddAssessmentResultMutation__
+ * __useAddAssessmentSubmissionMutation__
  *
- * To run a mutation, you first call `useAddAssessmentResultMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddAssessmentResultMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useAddAssessmentSubmissionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddAssessmentSubmissionMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [addAssessmentResultMutation, { data, loading, error }] = useAddAssessmentResultMutation({
+ * const [addAssessmentSubmissionMutation, { data, loading, error }] = useAddAssessmentSubmissionMutation({
  *   variables: {
- *      result: // value for 'result'
+ *      submission: // value for 'submission'
  *   },
  * });
  */
-export function useAddAssessmentResultMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddAssessmentResultMutation, AddAssessmentResultMutationVariables>) {
+export function useAddAssessmentSubmissionMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddAssessmentSubmissionMutation, AddAssessmentSubmissionMutationVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<AddAssessmentResultMutation, AddAssessmentResultMutationVariables>(AddAssessmentResultDocument, options);
+        return ApolloReactHooks.useMutation<AddAssessmentSubmissionMutation, AddAssessmentSubmissionMutationVariables>(AddAssessmentSubmissionDocument, options);
       }
-export type AddAssessmentResultMutationHookResult = ReturnType<typeof useAddAssessmentResultMutation>;
-export type AddAssessmentResultMutationResult = Apollo.MutationResult<AddAssessmentResultMutation>;
-export type AddAssessmentResultMutationOptions = Apollo.BaseMutationOptions<AddAssessmentResultMutation, AddAssessmentResultMutationVariables>;
+export type AddAssessmentSubmissionMutationHookResult = ReturnType<typeof useAddAssessmentSubmissionMutation>;
+export type AddAssessmentSubmissionMutationResult = Apollo.MutationResult<AddAssessmentSubmissionMutation>;
+export type AddAssessmentSubmissionMutationOptions = Apollo.BaseMutationOptions<AddAssessmentSubmissionMutation, AddAssessmentSubmissionMutationVariables>;
 export const AddFencerToAccountDocument = gql`
     mutation AddFencerToAccount($fencer: Students_insert_input!) {
   insert_Students_one(object: $fencer) {
