@@ -7266,13 +7266,6 @@ export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uniqueidentifier']>>;
 };
 
-export type AccountProfileQueryVariables = Exact<{
-  oid: Scalars['String'];
-}>;
-
-
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
-
 export type AddAssessmentEvaluationMutationVariables = Exact<{
   evaluation: Assessments_Assessment_Result_Insert_Input;
 }>;
@@ -7300,6 +7293,29 @@ export type DeleteFencerByIdMutationVariables = Exact<{
 
 
 export type DeleteFencerByIdMutation = { __typename?: 'mutation_root', delete_Students_by_pk?: { __typename?: 'Students', StudentId: any } | null };
+
+export type UpdateStudentByIdMutationVariables = Exact<{
+  id: Scalars['String'];
+  changes: Accounts_Set_Input;
+}>;
+
+
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
+
+export type UpdateFencerByIdMutationVariables = Exact<{
+  fencerId: Scalars['uniqueidentifier'];
+  changes: Students_Set_Input;
+}>;
+
+
+export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate?: any | null, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid?: string | null } | null };
+
+export type AccountProfileQueryVariables = Exact<{
+  oid: Scalars['String'];
+}>;
+
+
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
 export type GetAccountFencersQueryVariables = Exact<{
   oid: Scalars['String'];
@@ -7356,99 +7372,7 @@ export type SearchMembersQueryVariables = Exact<{
 
 export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid?: string | null }> }> };
 
-export type UpdateStudentByIdMutationVariables = Exact<{
-  id: Scalars['String'];
-  changes: Accounts_Set_Input;
-}>;
 
-
-export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
-
-export type UpdateFencerByIdMutationVariables = Exact<{
-  fencerId: Scalars['uniqueidentifier'];
-  changes: Students_Set_Input;
-}>;
-
-
-export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate?: any | null, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid?: string | null } | null };
-
-
-export const AccountProfileDocument = gql`
-    query AccountProfile($oid: String!) {
-  Accounts(where: {Oid: {_eq: $oid}}) {
-    Oid
-    PrimaryStudentId
-    Student {
-      StudentId
-      FirstName
-      LastName
-      Email
-      Phone
-      Birthdate
-      AssociationMemberId
-      AssociationMember {
-        FullName
-        FirstName
-        LastName
-        FullName
-        Birthdate
-        Club1Name
-        Club2Name
-        Division
-        AssociationMemberId
-        MemberType
-        Expiration
-        Foil
-        Epee
-        Saber
-      }
-    }
-    Address {
-      AddressId
-      Address
-      Address2
-      City
-      Postal
-      State
-    }
-    calendar {
-      id
-      account_id
-      access_token
-      provider
-      created_at
-    }
-  }
-}
-    `;
-
-/**
- * __useAccountProfileQuery__
- *
- * To run a query within a React component, call `useAccountProfileQuery` and pass it any options that fit your needs.
- * When your component renders, `useAccountProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAccountProfileQuery({
- *   variables: {
- *      oid: // value for 'oid'
- *   },
- * });
- */
-export function useAccountProfileQuery(baseOptions: ApolloReactHooks.QueryHookOptions<AccountProfileQuery, AccountProfileQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useQuery<AccountProfileQuery, AccountProfileQueryVariables>(AccountProfileDocument, options);
-      }
-export function useAccountProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AccountProfileQuery, AccountProfileQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return ApolloReactHooks.useLazyQuery<AccountProfileQuery, AccountProfileQueryVariables>(AccountProfileDocument, options);
-        }
-export type AccountProfileQueryHookResult = ReturnType<typeof useAccountProfileQuery>;
-export type AccountProfileLazyQueryHookResult = ReturnType<typeof useAccountProfileLazyQuery>;
-export type AccountProfileQueryResult = Apollo.QueryResult<AccountProfileQuery, AccountProfileQueryVariables>;
 export const AddAssessmentEvaluationDocument = gql`
     mutation AddAssessmentEvaluation($evaluation: assessments_assessment_result_insert_input!) {
   insert_assessments_assessment_result_one(object: $evaluation) {
@@ -7598,6 +7522,176 @@ export function useDeleteFencerByIdMutation(baseOptions?: ApolloReactHooks.Mutat
 export type DeleteFencerByIdMutationHookResult = ReturnType<typeof useDeleteFencerByIdMutation>;
 export type DeleteFencerByIdMutationResult = Apollo.MutationResult<DeleteFencerByIdMutation>;
 export type DeleteFencerByIdMutationOptions = Apollo.BaseMutationOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
+export const UpdateStudentByIdDocument = gql`
+    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
+    Oid
+    PrimaryStudentId
+    Student {
+      StudentId
+      FirstName
+      LastName
+      Email
+      Phone
+      Birthdate
+      AssociationMemberId
+    }
+    Address {
+      AddressId
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+  }
+}
+    `;
+export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+
+/**
+ * __useUpdateStudentByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
+      }
+export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+export const UpdateFencerByIdDocument = gql`
+    mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
+  update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {
+    FirstName
+    LastName
+    Birthdate
+    Phone
+    Email
+    AvatarUrl
+    AssociationMemberId
+    StudentId
+    Oid
+  }
+}
+    `;
+export type UpdateFencerByIdMutationFn = Apollo.MutationFunction<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
+
+/**
+ * __useUpdateFencerByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateFencerByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateFencerByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateFencerByIdMutation, { data, loading, error }] = useUpdateFencerByIdMutation({
+ *   variables: {
+ *      fencerId: // value for 'fencerId'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>(UpdateFencerByIdDocument, options);
+      }
+export type UpdateFencerByIdMutationHookResult = ReturnType<typeof useUpdateFencerByIdMutation>;
+export type UpdateFencerByIdMutationResult = Apollo.MutationResult<UpdateFencerByIdMutation>;
+export type UpdateFencerByIdMutationOptions = Apollo.BaseMutationOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
+export const AccountProfileDocument = gql`
+    query AccountProfile($oid: String!) {
+  Accounts(where: {Oid: {_eq: $oid}}) {
+    Oid
+    PrimaryStudentId
+    Student {
+      StudentId
+      FirstName
+      LastName
+      Email
+      Phone
+      Birthdate
+      AssociationMemberId
+      AssociationMember {
+        FullName
+        FirstName
+        LastName
+        FullName
+        Birthdate
+        Club1Name
+        Club2Name
+        Division
+        AssociationMemberId
+        MemberType
+        Expiration
+        Foil
+        Epee
+        Saber
+      }
+    }
+    Address {
+      AddressId
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+    calendar {
+      id
+      account_id
+      access_token
+      provider
+      created_at
+    }
+  }
+}
+    `;
+
+/**
+ * __useAccountProfileQuery__
+ *
+ * To run a query within a React component, call `useAccountProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAccountProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAccountProfileQuery({
+ *   variables: {
+ *      oid: // value for 'oid'
+ *   },
+ * });
+ */
+export function useAccountProfileQuery(baseOptions: ApolloReactHooks.QueryHookOptions<AccountProfileQuery, AccountProfileQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<AccountProfileQuery, AccountProfileQueryVariables>(AccountProfileDocument, options);
+      }
+export function useAccountProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<AccountProfileQuery, AccountProfileQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<AccountProfileQuery, AccountProfileQueryVariables>(AccountProfileDocument, options);
+        }
+export type AccountProfileQueryHookResult = ReturnType<typeof useAccountProfileQuery>;
+export type AccountProfileLazyQueryHookResult = ReturnType<typeof useAccountProfileLazyQuery>;
+export type AccountProfileQueryResult = Apollo.QueryResult<AccountProfileQuery, AccountProfileQueryVariables>;
 export const GetAccountFencersDocument = gql`
     query GetAccountFencers($oid: String!) {
   Students(where: {Oid: {_eq: $oid}}, order_by: {FirstName: asc}) {
@@ -8036,97 +8130,3 @@ export function useSearchMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
 export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQuery>;
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
-export const UpdateStudentByIdDocument = gql`
-    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
-  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
-    Oid
-    PrimaryStudentId
-    Student {
-      StudentId
-      FirstName
-      LastName
-      Email
-      Phone
-      Birthdate
-      AssociationMemberId
-    }
-    Address {
-      AddressId
-      Address
-      Address2
-      City
-      Postal
-      State
-    }
-  }
-}
-    `;
-export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
-
-/**
- * __useUpdateStudentByIdMutation__
- *
- * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
- *   variables: {
- *      id: // value for 'id'
- *      changes: // value for 'changes'
- *   },
- * });
- */
-export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
-      }
-export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
-export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
-export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
-export const UpdateFencerByIdDocument = gql`
-    mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
-  update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {
-    FirstName
-    LastName
-    Birthdate
-    Phone
-    Email
-    AvatarUrl
-    AssociationMemberId
-    StudentId
-    Oid
-  }
-}
-    `;
-export type UpdateFencerByIdMutationFn = Apollo.MutationFunction<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
-
-/**
- * __useUpdateFencerByIdMutation__
- *
- * To run a mutation, you first call `useUpdateFencerByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateFencerByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateFencerByIdMutation, { data, loading, error }] = useUpdateFencerByIdMutation({
- *   variables: {
- *      fencerId: // value for 'fencerId'
- *      changes: // value for 'changes'
- *   },
- * });
- */
-export function useUpdateFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>(UpdateFencerByIdDocument, options);
-      }
-export type UpdateFencerByIdMutationHookResult = ReturnType<typeof useUpdateFencerByIdMutation>;
-export type UpdateFencerByIdMutationResult = Apollo.MutationResult<UpdateFencerByIdMutation>;
-export type UpdateFencerByIdMutationOptions = Apollo.BaseMutationOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
