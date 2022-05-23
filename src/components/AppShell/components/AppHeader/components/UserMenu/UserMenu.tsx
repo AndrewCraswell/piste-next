@@ -1,4 +1,5 @@
 import { useDisclosure, useLinkShims } from "$hooks"
+import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { ActionButton, Persona, PersonaSize } from "@fluentui/react"
 import {
@@ -74,7 +75,7 @@ export interface IUserMenuProps {
   avatarUrl?: string
   fullName?: string
   email?: string
-  logout?: () => void
+  logout?: (options?: LogoutOptions | undefined) => void
 }
 
 export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
@@ -94,6 +95,12 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
     },
     [linkShims, onClose]
   )
+
+  const loginRedirect = useCallback(() => {
+    if (logout) {
+      logout({ returnTo: window.location.origin })
+    }
+  }, [logout])
 
   return (
     <>
@@ -144,7 +151,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 
                 {logout ? (
                   <LogoutButton
-                    onClick={logout}
+                    onClick={loginRedirect}
                     iconProps={{
                       iconName: "SignOut",
                     }}
