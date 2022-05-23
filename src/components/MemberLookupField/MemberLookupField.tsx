@@ -49,15 +49,17 @@ export const MemberLookupField: React.FunctionComponent<
     [client, defaultFilter, size]
   )
 
+  const onEmptyResolveSuggestions = useCallback(() => {
+    return resolveSuggestions()
+  }, [resolveSuggestions])
+
   return (
     <NormalPeoplePicker
       inputProps={{
         placeholder: "Fencer name",
       }}
       onResolveSuggestions={resolveSuggestions}
-      onEmptyResolveSuggestions={() => {
-        return resolveSuggestions()
-      }}
+      onEmptyResolveSuggestions={onEmptyResolveSuggestions}
       resolveDelay={350}
       {...pickerProps}
       onChange={(items) => {

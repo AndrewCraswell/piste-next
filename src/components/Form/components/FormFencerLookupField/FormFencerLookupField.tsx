@@ -12,34 +12,30 @@ export const FormFencerLookupField: React.FunctionComponent<
     props
 
   return (
-    <>
-      <Controller
-        defaultValue={inputProps.defaultSelectedItems}
-        {...controllerProps}
-        render={({ field, fieldState: { error } }) => (
-          <FencerLookupField
-            {...inputProps}
-            {...field}
-            selectedItems={field.value}
-            onChange={(value) => {
-              if (onChange) {
-                onChange(value)
-              }
-              field.onChange(value)
-            }}
-            onBlur={(event) => {
-              if (onBlur) {
-                onBlur(event)
-              }
-              field.onBlur()
-            }}
-          />
-        )}
-        name={name}
-        control={control}
-      />
-    </>
+    <Controller
+      defaultValue={inputProps.defaultSelectedItems}
+      {...controllerProps}
+      render={({ field, fieldState: { error } }) => (
+        <FencerLookupField
+          {...inputProps}
+          {...field}
+          selectedItems={field.value}
+          onChange={(value) => {
+            if (onChange) {
+              onChange(value)
+            }
+            field.onChange(value)
+          }}
+          onBlur={(event) => {
+            if (onBlur) {
+              onBlur(event)
+            }
+            field.onBlur()
+          }}
+        />
+      )}
+      name={name}
+      control={control}
+    />
   )
-
-  //
 }
