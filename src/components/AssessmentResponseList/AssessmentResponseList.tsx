@@ -10,26 +10,51 @@ import {
   AssessmentResponseActions,
   NoImageCardHeader,
 } from "./AssessmentResponseList.styles"
-import { useMemo, useState } from "react"
+import { ChangeEvent, useCallback, useMemo, useState } from "react"
+import { submissionColumns } from "./AssessmentResponseList.data"
 import {
-  metricResponseColumns,
-  metricResponses,
-} from "./AssessmentResponseList.data"
-import { Card, Input } from "@fluentui/react-components/unstable"
+  Card,
+  Input,
+  InputOnChangeData,
+} from "@fluentui/react-components/unstable"
 import { SearchRegular } from "@fluentui/react-icons"
+import {
+  GetMetricAnswersByAssessmentIdQuery,
+  useGetMetricAnswersByAssessmentIdQuery,
+} from "$queries"
+import { formatFullName } from "$lib"
 
-// TODO: Clean up component and seaprate into subcomponents
-// TODO: Query the actual responses for the assessmentId
+// TODO: Clean up component and separate into subcomponents
 
 export interface IAssessmentResponseListProps {
-  isLoadingResponses: boolean
+  assessmentId: string
 }
 
 export const AssessmentResponseList: React.FunctionComponent<
   IAssessmentResponseListProps
-> = ({ isLoadingResponses }) => {
-  const [selectedResponse, setSelectedResponse] = useState<any>(undefined)
-  const [responses, setResponses] = useState(metricResponses)
+> = ({ assessmentId }) => {
+  const [selectedSubmission, setSelectedSubmission] = useState<any>(undefined)
+  let [submissions, setSubmissions] = useState<AssessmentSubmission[]>([])
+  const [filteredSubmissions, setFilteredSubmissions] = useState<
+    AssessmentSubmission[]
+  >([])
+
+  const { loading: isSubmissionsLoading } =
+    useGetMetricAnswersByAssessmentIdQuery({
+      variables: {
+        assessmentId,
+      },
+      skip: !assessmentId,
+      onCompleted: (data) => {
+        const submissions = mapAssessmentSubmissionsToTable(
+          data.assessments_assessment_result
+        ).sort(sortSubmissionsByDate)
+
+        setSubmissions(submissions)
+        setFilteredSubmissions(submissions)
+      },
+      fetchPolicy: "cache-and-network",
+    })
 
   const responseActions = useMemo(
     (): ICommandBarItemProps[] => [
@@ -37,28 +62,50 @@ export const AssessmentResponseList: React.FunctionComponent<
         key: "edit",
         text: "Edit",
         iconProps: { iconName: "Edit" },
-        disabled: !selectedResponse,
+        disabled: !selectedSubmission,
       },
       {
         key: "delete",
         text: "Delete",
         iconProps: { iconName: "Delete" },
-        disabled: !selectedResponse,
+        disabled: !selectedSubmission,
       },
     ],
-    [selectedResponse]
+    [selectedSubmission]
   )
 
-  const selection = new Selection({
-    onSelectionChanged: () => {
-      setSelectedResponse(getSelectedItem())
-    },
-  })
+  const selection = useMemo(() => {
+    const selection = new Selection({
+      onSelectionChanged: () => {
+        setSelectedSubmission(getSelectedItem())
+      },
+    })
 
-  function getSelectedItem() {
-    const items = selection.getSelection()
-    return items.length ? items[0] : undefined
-  }
+    function getSelectedItem() {
+      const items = selection.getSelection()
+      return items.length ? items[0] : undefined
+    }
+
+    return selection
+  }, [])
+
+  const resetFilteredSubmissions = useCallback(() => {
+    setFilteredSubmissions(submissions)
+  }, [submissions])
+
+  const filterSubmissions = useCallback(
+    (event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
+      if (data.value) {
+        const filterFunc = submissionSearchFactory(data.value)
+        const filteredItems = submissions.filter(filterFunc)
+
+        setFilteredSubmissions(filteredItems)
+      } else {
+        resetFilteredSubmissions()
+      }
+    },
+    [resetFilteredSubmissions, submissions]
+  )
 
   return (
     <>
@@ -81,51 +128,92 @@ export const AssessmentResponseList: React.FunctionComponent<
                       >
                         <Input
                           contentBefore={<SearchRegular />}
-                          onChange={(e, data) => {
-                            console.log(data.value)
-                            if (data.value) {
-                              const filteredItems = metricResponses.filter(
-                                (r) => {
-                                  return (
-                                    r.name
-                                      .toLocaleLowerCase()
-                                      .includes(
-                                        data.value.toLocaleLowerCase()
-                                      ) ||
-                                    r.proctor
-                                      .toLocaleLowerCase()
-                                      .includes(data.value.toLocaleLowerCase())
-                                  )
-                                }
-                              )
-                              setResponses(filteredItems)
-                            } else {
-                              // Reset the responses
-                              setResponses(metricResponses)
-                            }
-                          }}
+                          placeholder="Filter by name"
+                          onChange={filterSubmissions}
                         />
                       </div>
                     )
                   },
                 },
               ]}
-              ariaLabel="Assessment response actions"
+              ariaLabel="Evaluation actions"
             />
           }
         />
         <ShimmeredDetailsList
-          items={responses}
-          columns={metricResponseColumns}
+          items={filteredSubmissions}
+          columns={submissionColumns}
           selectionMode={SelectionMode.single}
           layoutMode={DetailsListLayoutMode.justified}
           isHeaderVisible={true}
           checkboxVisibility={CheckboxVisibility.always}
-          enableShimmer={isLoadingResponses}
+          enableShimmer={isSubmissionsLoading}
           shimmerLines={5}
           selection={selection}
         />
       </Card>
     </>
   )
+}
+
+function mapAssessmentSubmissionsToTable(
+  submissions: MetricAnswer[]
+): AssessmentSubmission[] {
+  return submissions.map((s) => ({
+    fencerId: s.fencer?.StudentId,
+    fencerName: formatFullName({
+      firstName: s.fencer?.FirstName,
+      lastName: s.fencer?.LastName,
+      nickname: s.fencer?.Nickname,
+    }),
+    metricsCount: s.metric_results.length,
+    proctorName: formatFullName({
+      firstName: s.proctor?.Student?.FirstName,
+      lastName: s.proctor?.Student?.LastName,
+      nickname: s.proctor?.Student?.Nickname,
+    }),
+    proctorAccountId: s.proctor?.Oid!,
+    submissionId: s.id,
+    completedAnswers: [], // TODO: Map these
+    status: s.status_id,
+    score: "???",
+    createdAt: s.created_at,
+  }))
+}
+
+function sortSubmissionsByDate(
+  a: AssessmentSubmission,
+  b: AssessmentSubmission
+) {
+  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+}
+
+export function submissionSearchFactory(searchText: string) {
+  const filter = new RegExp(searchText, "i")
+
+  return (submission: AssessmentSubmission) =>
+    submission.fencerName?.search(filter) > -1 ||
+    submission.proctorName?.search(filter) > -1
+}
+
+export type MetricAnswer = NonNullable<
+  GetMetricAnswersByAssessmentIdQuery["assessments_assessment_result"]
+>[0]
+
+export type AssessmentSubmissionAnswer = {
+  value: string
+  notes: string
+}
+
+export type AssessmentSubmission = {
+  submissionId: string
+  fencerName: string
+  fencerId: string
+  completedAnswers: AssessmentSubmissionAnswer[]
+  metricsCount: number
+  proctorName: string
+  proctorAccountId: string
+  status: string
+  score: string
+  createdAt: string
 }

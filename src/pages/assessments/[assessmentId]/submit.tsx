@@ -17,6 +17,7 @@ import {
   useAddAssessmentEvaluationMutation,
   useAddMetricAnswersMutation,
   useGetAssessmentByIdQuery,
+  useGetMetricAnswersByAssessmentIdLazyQuery,
 } from "$queries"
 import { DialogFooter, Persona, PersonaSize, Stack } from "@fluentui/react"
 import { useCallback, useMemo } from "react"
@@ -47,6 +48,9 @@ export const SubmitEvaluation: NextPage = () => {
       },
       skip: !assessmentId,
     })
+
+  const [getAssessmentSubmissions] =
+    useGetMetricAnswersByAssessmentIdLazyQuery()
 
   const assessment = assessmentData?.assessments_assessments_by_pk
   const hasAssessment = !!assessment
@@ -106,6 +110,12 @@ export const SubmitEvaluation: NextPage = () => {
                 answers[a.metric_question_id] = a.value
               })
 
+              getAssessmentSubmissions({
+                variables: {
+                  assessmentId,
+                },
+              })
+
               form.reset(answers)
 
               const redirectUrl = `/assessments/${assessmentId}/${evaluationId}/`
@@ -115,7 +125,15 @@ export const SubmitEvaluation: NextPage = () => {
         },
       })
     },
-    [addAnswers, addEvaluation, assessmentId, form, metrics.length, router]
+    [
+      addAnswers,
+      addEvaluation,
+      assessmentId,
+      form,
+      getAssessmentSubmissions,
+      metrics.length,
+      router,
+    ]
   )
 
   const redirectToAssessments = useCallback(() => {

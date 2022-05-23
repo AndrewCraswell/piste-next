@@ -6,6 +6,11 @@ import { AssessmentResponseList, LinkButton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
 import { useGetAssessmentByIdQuery } from "$queries"
 import Link from "next/link"
+import styled from "@emotion/styled"
+
+const PageSection = styled.div`
+  margin-top: 3em;
+`
 
 export const ViewAssessment: NextPage = () => {
   const pageTitle = "View assessment"
@@ -14,18 +19,19 @@ export const ViewAssessment: NextPage = () => {
 
   const assessmentId = query.assessmentId as string
 
-  const { data, loading: isAssessmentLoading } = useGetAssessmentByIdQuery({
-    variables: {
-      id: assessmentId,
-    },
-    skip: !assessmentId,
-  })
+  const { data: assessmentData, loading: isAssessmentLoading } =
+    useGetAssessmentByIdQuery({
+      variables: {
+        id: assessmentId,
+      },
+      skip: !assessmentId,
+    })
 
-  const assessment = data?.assessments_assessments_by_pk
-  const hasAssessment = !!assessment
-  const metrics = hasAssessment
-    ? data.assessments_assessments_by_pk?.assessment_metrics!
-    : []
+  const assessment = assessmentData?.assessments_assessments_by_pk
+  // const hasAssessment = !!assessment
+  // const metrics = hasAssessment
+  //   ? assessmentData.assessments_assessments_by_pk?.assessment_metrics!
+  //   : []
 
   if (!isAssessmentLoading && !assessment) {
     return <Body>No assessment found.</Body>
@@ -33,16 +39,16 @@ export const ViewAssessment: NextPage = () => {
 
   return (
     <>
-      <PageTitle>
-        {data?.assessments_assessments_by_pk?.title || "View assessment"}
-      </PageTitle>
+      <PageTitle>{assessment?.title || "View assessment"}</PageTitle>
       <Body block>{assessment?.description}</Body>
 
-      <Link href={`/assessments/${assessmentId}/submit/`} passHref>
-        <LinkButton appearance="primary" href="">
-          Start assessment
-        </LinkButton>
-      </Link>
+      <PageSection>
+        <Link href={`/assessments/${assessmentId}/submit/`} passHref>
+          <LinkButton appearance="primary" href="">
+            Start assessment
+          </LinkButton>
+        </Link>
+      </PageSection>
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
@@ -55,14 +61,10 @@ export const ViewAssessment: NextPage = () => {
         <Text as="h2" size={400} weight="semibold" block>
           Evaluations history
         </Text>
-        <AssessmentResponseList isLoadingResponses={isAssessmentLoading} />
+        <AssessmentResponseList assessmentId={assessmentId} />
       </PageSection>
     </>
   )
 }
 
 export default ViewAssessment
-
-const PageSection: React.FunctionComponent = ({ children }) => {
-  return <div style={{ marginTop: "3rem" }}>{children}</div>
-}

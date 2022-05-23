@@ -3,7 +3,9 @@ import { Fencer } from "$types"
 import { PersonaSize } from "@fluentui/react"
 import { IFencerPersona } from "./FencerLookupField.types"
 
-export function fencerSearchFactory(filter: RegExp) {
+export function fencerSearchFactory(searchText: string) {
+  const filter = new RegExp(searchText, "i")
+
   return (persona: IFencerPersona) => {
     const fencer = persona.fencer
     const name = formatFullName({
@@ -16,15 +18,11 @@ export function fencerSearchFactory(filter: RegExp) {
     const email = fencer.Email || account?.Email || ""
     const phone = formatPhoneNumber(fencer.Phone || account?.Phone || "")
 
-    if (filter) {
-      return (
-        name?.search(filter) > -1 ||
-        email?.search(filter) > -1 ||
-        phone?.search(filter) > -1
-      )
-    } else {
-      return true
-    }
+    return (
+      name?.search(filter) > -1 ||
+      email?.search(filter) > -1 ||
+      phone?.search(filter) > -1
+    )
   }
 }
 

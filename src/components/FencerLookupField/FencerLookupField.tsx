@@ -39,8 +39,7 @@ export const FencerLookupField: React.FunctionComponent<
         query: GetFencersDocument,
       })
 
-      const filterExpression = new RegExp(filter, "i")
-      const filterFunc = fencerSearchFactory(filterExpression)
+      const filterFunc = fencerSearchFactory(filter)
 
       const suggestions: IPersonaProps[] = data!.Students.map((fencer) =>
         mapFencerToPersona(fencer, size)
