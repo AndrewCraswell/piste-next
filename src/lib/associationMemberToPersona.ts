@@ -3,12 +3,12 @@ import { PersonaSize } from "@fluentui/react"
 import { AssociationMember, IAssociationMemberPersona } from "$types"
 
 export function associationMemberToPersona(
-  member: AssociationMember
+  member: AssociationMember,
+  size: PersonaSize = PersonaSize.size24
 ): IAssociationMemberPersona {
   return {
     text: member.FullName,
-    size: PersonaSize.size24,
-    optionalText: member.AssociationMemberId,
+    size,
     secondaryText:
       member.Club1Name ||
       member.Club2Name ||

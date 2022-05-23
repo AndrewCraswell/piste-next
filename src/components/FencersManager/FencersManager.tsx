@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 
-import { AddFencerCard, FencerCard } from "$components"
+import { AddFencerCard, FencerProfileCard } from "$components"
 import { useAccountProfile } from "$hooks"
 import { useGetAccountFencersLazyQuery } from "$queries"
 import { useEffect } from "react"
@@ -35,7 +35,7 @@ export const FencersManager: React.FunctionComponent = () => {
         {accountFencers?.Students?.filter(
           (f) => f.StudentId !== account.PrimaryStudentId
         ).map((fencer) => (
-          <FencerCard key={fencer.StudentId} fencer={fencer} />
+          <FencerProfileCard key={fencer.StudentId} fencer={fencer} />
         ))}
         <AddFencerCard />
       </FencersGrid>

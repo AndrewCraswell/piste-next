@@ -11,6 +11,8 @@ import { Shimmer, ShimmerElementType } from "@fluentui/react"
 import { useGetAssessmentsQuery } from "$queries"
 import { AssessmentCard, AssessmentCardSkeleton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
+import { IAssessmentMetadata } from "$types"
+import { formatFullName } from "$lib"
 
 const AssessmentsGrid = styled.div`
   display: grid;
@@ -27,7 +29,7 @@ export const Assessments: NextPage = () => {
   const hasAssessments =
     data?.assessments_assessments && data.assessments_assessments.length > 0
 
-  const assessments =
+  const assessments: IAssessmentMetadata[] =
     data?.assessments_assessments.map((a) => ({
       id: a.id,
       title: a.title,
@@ -35,6 +37,11 @@ export const Assessments: NextPage = () => {
       createdAt: a.created_at,
       metricsCount: a.assessment_metrics.length,
       cohortsCount: a.assessment_cohorts.length,
+      authorName: formatFullName({
+        firstName: a.account?.Student?.FirstName,
+        lastName: a.account?.Student?.LastName,
+        nickname: a.account?.Student?.Nickname,
+      }),
     })) || []
 
   return (

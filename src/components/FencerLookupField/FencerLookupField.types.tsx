@@ -1,7 +1,8 @@
-import { AssociationMember } from "$types"
 import { IPersonaProps } from "@fluentui/react"
 
-export interface IAssociationMemberPersona
+import { Fencer } from "$types"
+
+export interface IFencerPersona
   extends Pick<IPersonaProps, "text" | "size" | "secondaryText"> {
-  member: AssociationMember
+  fencer: Fencer
 }

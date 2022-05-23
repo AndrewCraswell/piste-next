@@ -1,12 +1,12 @@
 import { Controller } from "react-hook-form"
 
-import { IMemberLookupFieldProps, MemberLookupField } from "$components"
 import { FormFieldProps } from "$components/Form/Form.types"
+import { FencerLookupField, IFencerLookupFieldProps } from "$components"
 
-export type FormMemberLookupFieldProps = FormFieldProps<IMemberLookupFieldProps>
+export type FormFencerLookupFieldProps = FormFieldProps<IFencerLookupFieldProps>
 
-export const FormMemberLookupField: React.FunctionComponent<
-  FormMemberLookupFieldProps
+export const FormFencerLookupField: React.FunctionComponent<
+  FormFencerLookupFieldProps
 > = (props) => {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
@@ -16,7 +16,7 @@ export const FormMemberLookupField: React.FunctionComponent<
       defaultValue={inputProps.defaultSelectedItems}
       {...controllerProps}
       render={({ field, fieldState: { error } }) => (
-        <MemberLookupField
+        <FencerLookupField
           {...inputProps}
           {...field}
           selectedItems={field.value}

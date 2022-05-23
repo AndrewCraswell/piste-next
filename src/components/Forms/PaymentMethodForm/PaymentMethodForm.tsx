@@ -33,7 +33,7 @@ export const PaymentMethodForm: React.FunctionComponent<
 
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
+      // form evaluation until Stripe.js has loaded.
       return null
     }
 

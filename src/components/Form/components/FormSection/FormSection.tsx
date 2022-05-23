@@ -3,7 +3,7 @@ import { Stack, IStackProps } from "@fluentui/react"
 const maxWidthStyles = { maxWidth: 600 }
 
 const formTokens: Partial<IStackProps> = {
-  tokens: { childrenGap: 15 },
+  tokens: { childrenGap: 16 },
 }
 
 export const FormSection: React.FunctionComponent = ({ children }) => {

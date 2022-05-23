@@ -3,7 +3,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { useCallback, useMemo } from "react"
 
 import { FencerForm, IProfileFormFields, IFencerFormFields } from "$components"
-import { useFormHelpers } from "$hooks"
+import { useAccountProfile, useFormHelpers } from "$hooks"
 import {
   GetAccountFencersDocument,
   useAddFencerToAccountMutation,
@@ -23,6 +23,9 @@ export interface IEditFencerDialogProps {
 export const EditFencerDialog: React.FunctionComponent<
   IEditFencerDialogProps
 > = ({ isOpen, onClose, onSaved, fencer }) => {
+  const {
+    account: { UserId },
+  } = useAccountProfile()
   const defaultFormValues = useMemo(
     () => ({
       ...fencer,
@@ -32,6 +35,8 @@ export const EditFencerDialog: React.FunctionComponent<
     }),
     [fencer]
   )
+
+  console.log(UserId)
 
   const form = useForm<IProfileFormFields>({ defaultValues: defaultFormValues })
   const { handleSubmit, formState, reset, getValues } = form
@@ -66,6 +71,7 @@ export const EditFencerDialog: React.FunctionComponent<
   const onFencerSaved: SubmitHandler<IFencerFormFields> = useCallback(
     ({ FirstName, LastName, Birthdate, Phone, Email }) => {
       const newFencer = {
+        Oid: UserId,
         FirstName,
         LastName,
         Birthdate: sanitizeDate(Birthdate),
@@ -92,6 +98,7 @@ export const EditFencerDialog: React.FunctionComponent<
       }
     },
     [
+      UserId,
       addFencerToAccount,
       editFencer,
       fencer?.StudentId,

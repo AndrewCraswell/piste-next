@@ -13,18 +13,17 @@ import {
   DetailsStack,
   EmbedDialog,
   SemiboldText,
-} from "./FencerCard.styles"
+} from "./FencerProfileCard.styles"
 import { AccountFencer } from "$types"
 import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
-import { cacheEvicter } from "$lib"
-import { formatPhoneNumber } from "./FencerCard.utils"
+import { cacheEvicter, formatFullName, formatPhoneNumber } from "$lib"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
   primaryFencerId?: string
 }
 
-export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
+export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
   fencer,
   primaryFencerId,
 }) => {
@@ -34,6 +33,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
     Birthdate,
     FirstName,
     LastName,
+    Nickname,
     Phone,
     AvatarUrl,
     StudentId,
@@ -68,7 +68,11 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
       onCompleted: onDeleteDialogClose,
     })
 
-  const fullName = `${FirstName} ${LastName}`
+  const fullName = formatFullName({
+    firstName: FirstName,
+    lastName: LastName,
+    nickname: Nickname,
+  })
   const formattedBirthDate = dayjs(Birthdate).format("MMM D, YYYY")
   const age = new Date().getFullYear() - dayjs(Birthdate).year()
   const formattedEmail = Email || "N/A"
@@ -137,11 +141,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         </CardHeader>
 
         <DetailsStack tokens={{ childrenGap: "0.75rem" }}>
-          <DetailsItem
-            iconName="ContactInfo"
-            iconLabel="Full name"
-            title={fullName}
-          >
+          <DetailsItem iconName="ContactInfo" iconLabel="Name" title={fullName}>
             {fullName}
           </DetailsItem>
 
@@ -201,7 +201,7 @@ export const FencerCard: React.FunctionComponent<IFencerCardProps> = ({
         >
           <>
             Are you sure you want to permanently delete{" "}
-            <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
+            <SemiboldText>{fullName}</SemiboldText>?
           </>
         </ConfirmDialog>
 

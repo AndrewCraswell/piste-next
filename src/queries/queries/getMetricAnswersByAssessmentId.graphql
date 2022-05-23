@@ -1,0 +1,37 @@
+query GetMetricAnswersByAssessmentId($assessmentId: uniqueidentifier!) {
+  assessments_assessment_result(
+    order_by: { created_at: desc }
+    where: { assessment_id: { _eq: $assessmentId } }
+  ) {
+    id
+    status_id
+    created_at
+    fencer {
+      StudentId
+      FirstName
+      LastName
+      Nickname
+    }
+    proctor {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
+    metric_results {
+      id
+      result_id
+      metric_question {
+        id
+        metric_type_id
+      }
+      value
+      notes
+      created_at
+      updated_at
+    }
+  }
+}

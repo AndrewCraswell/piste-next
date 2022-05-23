@@ -66,18 +66,19 @@ export const LinkAssociationPanel: React.FunctionComponent<
   })
 
   const onLinkClicked = useCallback(() => {
-    const member = getValues("personas")[0].member
+    const member = getValues("personas")[0]?.member
+    const associationId = member?.AssociationMemberId
 
     linkAccount({
       variables: {
         fencerId,
         changes: {
-          AssociationMemberId: member?.AssociationMemberId || null,
+          AssociationMemberId: associationId || null,
         },
       },
       onCompleted: () => {
         if (onSaved) {
-          onSaved(member?.AssociationMemberId)
+          onSaved(associationId)
         }
         onClose()
       },
@@ -125,7 +126,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
         (f) => f?.StudentId !== fencerId
       )
 
-      if (otherAccount) {
+      if (otherAccount?.Oid) {
         setAlreadyLinkedTo(otherAccount.Oid)
         return
       }

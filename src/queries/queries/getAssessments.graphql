@@ -4,19 +4,19 @@ query GetAssessments {
     title
     description
     created_at
+    account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
     assessment_cohorts {
       id
       title
       description
-      metric_responses {
-        id
-        fencer {
-          id
-          first_name
-          last_name
-        }
-        value
-      }
     }
     assessment_metrics {
       metric_question {
