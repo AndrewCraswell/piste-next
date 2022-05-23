@@ -28,11 +28,11 @@ import {
   sortEvaluationsByDate,
   evaluationSearchFactory,
   mapAssessmentEvaluationsToTable,
-  AssessmentEvaluation,
 } from "./AssessmentResponseList.utils"
 import { cacheEvicter, formatLocalLocalizedTime } from "$lib"
 import { ConfirmDialog } from "$internal"
 import { useDisclosure } from "$hooks"
+import { AssessmentEvaluation } from "./AssessmentResponseList.types"
 
 // TODO: Clean up component and separate into subcomponents
 

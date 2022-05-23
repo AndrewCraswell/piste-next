@@ -50,6 +50,11 @@ export const evaluationColumns = [
     isResizable: true,
     isCollapsible: true,
     isPadded: true,
+    onRender: (item: AssessmentEvaluation) => (
+      <Caption>
+        {item.completedAnswers.length}/{item.metricsCount}
+      </Caption>
+    ),
   },
   {
     fieldName: "score",
@@ -60,6 +65,9 @@ export const evaluationColumns = [
     isResizable: true,
     isCollapsible: true,
     isPadded: true,
+    onRender: (item: AssessmentEvaluation) => (
+      <Caption>{Math.round(item.score * 100)}%</Caption>
+    ),
   },
   {
     fieldName: "status",

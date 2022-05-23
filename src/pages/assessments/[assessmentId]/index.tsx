@@ -50,7 +50,7 @@ export const ViewAssessment: NextPage = () => {
         </Link>
       </PageSection>
 
-      <PageSection>
+      {/* <PageSection>
         <Text as="h2" size={400} weight="semibold" block>
           Assessment metrics
         </Text>
@@ -62,7 +62,7 @@ export const ViewAssessment: NextPage = () => {
           Fencer cohorts
         </Text>
         TODO: Render cohort cards
-      </PageSection>
+      </PageSection> */}
 
       <PageSection>
         <Text as="h2" size={400} weight="semibold" block>

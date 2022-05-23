@@ -1,6 +1,6 @@
 export type AssessmentEvaluationAnswer = {
   value: string
-  notes: string
+  notes?: string
 }
 
 export type AssessmentEvaluation = {
@@ -12,6 +12,6 @@ export type AssessmentEvaluation = {
   proctorName: string
   proctorAccountId: string
   status: string
-  score: string
+  score: number
   createdAt: string
 }

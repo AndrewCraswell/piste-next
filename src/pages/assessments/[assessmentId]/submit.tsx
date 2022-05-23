@@ -201,7 +201,7 @@ export const SubmitEvaluation: NextPage = () => {
                 />
               </Card>
             </Stack.Item>
-            <Stack.Item>
+            <Stack.Item style={{ minWidth: 256 }}>
               <Card appearance="outline">
                 <CardHeader
                   image={<GuestRegular fontSize={"32px"} />}
