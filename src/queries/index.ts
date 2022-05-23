@@ -4219,6 +4219,8 @@ export type Assessments_Metric_Result = {
   assessment_result: Assessments_Assessment_Result;
   created_at: Scalars['datetime2'];
   id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  metric_question: Assessments_Metric_Questions;
   metric_question_id: Scalars['uniqueidentifier'];
   notes?: Maybe<Scalars['String']>;
   result_id: Scalars['uniqueidentifier'];
@@ -4263,6 +4265,7 @@ export type Assessments_Metric_Result_Bool_Exp = {
   assessment_result?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
   metric_question_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   notes?: InputMaybe<String_Mssql_Comparison_Exp>;
   result_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
@@ -4352,6 +4355,7 @@ export type Assessments_Metric_Result_Order_By = {
   assessment_result?: InputMaybe<Assessments_Assessment_Result_Order_By>;
   created_at?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
   metric_question_id?: InputMaybe<Order_By>;
   notes?: InputMaybe<Order_By>;
   result_id?: InputMaybe<Order_By>;

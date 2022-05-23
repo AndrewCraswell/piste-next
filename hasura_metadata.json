@@ -1,5 +1,5 @@
 {
-  "resource_version": 534,
+  "resource_version": 536,
   "metadata": {
     "version": 3,
     "sources": [
@@ -1582,6 +1582,18 @@
                     }
                   }
                 }
+              },
+              {
+                "name": "metric_results",
+                "using": {
+                  "foreign_key_constraint_on": {
+                    "column": "metric_question_id",
+                    "table": {
+                      "schema": "assessments",
+                      "name": "metric_result"
+                    }
+                  }
+                }
               }
             ],
             "insert_permissions": [
@@ -1648,6 +1660,12 @@
                 "name": "assessment_result",
                 "using": {
                   "foreign_key_constraint_on": "result_id"
+                }
+              },
+              {
+                "name": "metric_question",
+                "using": {
+                  "foreign_key_constraint_on": "metric_question_id"
                 }
               }
             ],
