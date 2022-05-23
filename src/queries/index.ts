@@ -325,20 +325,24 @@ export type Accounts = {
   /** An aggregate relationship */
   AccountClubRoles_aggregate: AccountClubRoles_Aggregate;
   /** An object relationship */
-  Address: Addresses;
-  AddressId: Scalars['uniqueidentifier'];
-  CreatedAt?: Maybe<Scalars['datetime2']>;
+  Address?: Maybe<Addresses>;
+  AddressId?: Maybe<Scalars['uniqueidentifier']>;
+  CreatedAt: Scalars['datetime2'];
   CreatedBy?: Maybe<Scalars['String']>;
   LanguageId: Scalars['String'];
   Oid: Scalars['String'];
-  PrimaryStudentId: Scalars['uniqueidentifier'];
+  PrimaryStudentId?: Maybe<Scalars['uniqueidentifier']>;
   /** An object relationship */
-  Student: Students;
+  Student?: Maybe<Students>;
   /** An array relationship */
   Students: Array<Students>;
   /** An aggregate relationship */
   Students_aggregate: Students_Aggregate;
-  UpdatedAt?: Maybe<Scalars['datetime2']>;
+  UpdatedAt: Scalars['datetime2'];
+  /** An array relationship */
+  assessments: Array<Assessments_Assessments>;
+  /** An aggregate relationship */
+  assessments_aggregate: Assessments_Assessments_Aggregate;
   /** An object relationship */
   calendar?: Maybe<Calendars>;
   /** An array relationship */
@@ -399,6 +403,24 @@ export type AccountsStudents_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Students_Order_By>>;
   where?: InputMaybe<Students_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Accounts" */
+export type AccountsAssessmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+/** columns and relationships of "Accounts" */
+export type AccountsAssessments_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
 };
 
 
@@ -465,6 +487,7 @@ export type Accounts_Bool_Exp = {
   _and?: InputMaybe<Array<Accounts_Bool_Exp>>;
   _not?: InputMaybe<Accounts_Bool_Exp>;
   _or?: InputMaybe<Array<Accounts_Bool_Exp>>;
+  assessments?: InputMaybe<Assessments_Assessments_Bool_Exp>;
   calendar?: InputMaybe<Calendars_Bool_Exp>;
   club_accounts?: InputMaybe<Club_Accounts_Bool_Exp>;
 };
@@ -566,6 +589,7 @@ export type Accounts_Order_By = {
   Student?: InputMaybe<Students_Order_By>;
   Students_aggregate?: InputMaybe<Students_Aggregate_Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
+  assessments_aggregate?: InputMaybe<Assessments_Assessments_Aggregate_Order_By>;
   calendar?: InputMaybe<Calendars_Order_By>;
   club_accounts_aggregate?: InputMaybe<Club_Accounts_Aggregate_Order_By>;
 };
@@ -2307,43 +2331,23 @@ export type String_Mssql_Comparison_Exp = {
 export type Students = {
   __typename?: 'Students';
   /** An object relationship */
-  Account: Accounts;
-  /** An array relationship */
-  Accounts: Array<Accounts>;
-  /** An aggregate relationship */
-  Accounts_aggregate: Accounts_Aggregate;
+  Account?: Maybe<Accounts>;
   /** An object relationship */
   AssociationMember?: Maybe<AssociationMembers>;
   AssociationMemberId?: Maybe<Scalars['String']>;
   AvatarUrl?: Maybe<Scalars['String']>;
-  Birthdate: Scalars['date'];
-  CreatedAt?: Maybe<Scalars['datetime2']>;
+  Birthdate?: Maybe<Scalars['date']>;
+  CreatedAt: Scalars['datetime2'];
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName: Scalars['String'];
+  Gender?: Maybe<Scalars['String']>;
   LastName: Scalars['String'];
-  Oid: Scalars['String'];
+  Nickname?: Maybe<Scalars['String']>;
+  Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   StudentId: Scalars['uniqueidentifier'];
-  UpdatedAt?: Maybe<Scalars['datetime2']>;
-};
-
-
-/** columns and relationships of "Students" */
-export type StudentsAccountsArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Accounts_Order_By>>;
-  where?: InputMaybe<Accounts_Bool_Exp>;
-};
-
-
-/** columns and relationships of "Students" */
-export type StudentsAccounts_AggregateArgs = {
-  limit?: InputMaybe<Scalars['Int']>;
-  offset?: InputMaybe<Scalars['Int']>;
-  order_by?: InputMaybe<Array<Accounts_Order_By>>;
-  where?: InputMaybe<Accounts_Bool_Exp>;
+  UpdatedAt: Scalars['datetime2'];
 };
 
 /** aggregated selection of "Students" */
@@ -2378,7 +2382,6 @@ export type Students_Aggregate_Order_By = {
 /** Boolean expression to filter rows from the table "Students". All fields are combined with a logical 'AND'. */
 export type Students_Bool_Exp = {
   Account?: InputMaybe<Accounts_Bool_Exp>;
-  Accounts?: InputMaybe<Accounts_Bool_Exp>;
   AssociationMember?: InputMaybe<AssociationMembers_Bool_Exp>;
   AssociationMemberId?: InputMaybe<String_Mssql_Comparison_Exp>;
   AvatarUrl?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -2387,7 +2390,9 @@ export type Students_Bool_Exp = {
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>;
   Email?: InputMaybe<String_Mssql_Comparison_Exp>;
   FirstName?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Gender?: InputMaybe<String_Mssql_Comparison_Exp>;
   LastName?: InputMaybe<String_Mssql_Comparison_Exp>;
+  Nickname?: InputMaybe<String_Mssql_Comparison_Exp>;
   Oid?: InputMaybe<String_Mssql_Comparison_Exp>;
   Phone?: InputMaybe<String_Mssql_Comparison_Exp>;
   StudentId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
@@ -2413,7 +2418,9 @@ export type Students_Insert_Input = {
   CreatedBy?: InputMaybe<Scalars['String']>;
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
+  Gender?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
+  Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   Phone?: InputMaybe<Scalars['String']>;
   StudentId?: InputMaybe<Scalars['uniqueidentifier']>;
@@ -2437,7 +2444,11 @@ export enum Students_Insert_Match_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
+  /** column name */
+  Nickname = 'Nickname',
   /** column name */
   Oid = 'Oid',
   /** column name */
@@ -2458,7 +2469,9 @@ export type Students_Max_Fields = {
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
+  Gender?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
+  Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
@@ -2473,7 +2486,9 @@ export type Students_Max_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
@@ -2489,7 +2504,9 @@ export type Students_Min_Fields = {
   CreatedBy?: Maybe<Scalars['String']>;
   Email?: Maybe<Scalars['String']>;
   FirstName?: Maybe<Scalars['String']>;
+  Gender?: Maybe<Scalars['String']>;
   LastName?: Maybe<Scalars['String']>;
+  Nickname?: Maybe<Scalars['String']>;
   Oid?: Maybe<Scalars['String']>;
   Phone?: Maybe<Scalars['String']>;
   UpdatedAt?: Maybe<Scalars['datetime2']>;
@@ -2504,7 +2521,9 @@ export type Students_Min_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   UpdatedAt?: InputMaybe<Order_By>;
@@ -2522,7 +2541,6 @@ export type Students_Mutation_Response = {
 /** Ordering options when selecting data from "Students". */
 export type Students_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
-  Accounts_aggregate?: InputMaybe<Accounts_Aggregate_Order_By>;
   AssociationMember?: InputMaybe<AssociationMembers_Order_By>;
   AssociationMemberId?: InputMaybe<Order_By>;
   AvatarUrl?: InputMaybe<Order_By>;
@@ -2531,7 +2549,9 @@ export type Students_Order_By = {
   CreatedBy?: InputMaybe<Order_By>;
   Email?: InputMaybe<Order_By>;
   FirstName?: InputMaybe<Order_By>;
+  Gender?: InputMaybe<Order_By>;
   LastName?: InputMaybe<Order_By>;
+  Nickname?: InputMaybe<Order_By>;
   Oid?: InputMaybe<Order_By>;
   Phone?: InputMaybe<Order_By>;
   StudentId?: InputMaybe<Order_By>;
@@ -2560,7 +2580,11 @@ export enum Students_Select_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
+  /** column name */
+  Nickname = 'Nickname',
   /** column name */
   Oid = 'Oid',
   /** column name */
@@ -2580,7 +2604,9 @@ export type Students_Set_Input = {
   CreatedBy?: InputMaybe<Scalars['String']>;
   Email?: InputMaybe<Scalars['String']>;
   FirstName?: InputMaybe<Scalars['String']>;
+  Gender?: InputMaybe<Scalars['String']>;
   LastName?: InputMaybe<Scalars['String']>;
+  Nickname?: InputMaybe<Scalars['String']>;
   Oid?: InputMaybe<Scalars['String']>;
   Phone?: InputMaybe<Scalars['String']>;
   StudentId?: InputMaybe<Scalars['uniqueidentifier']>;
@@ -2604,7 +2630,11 @@ export enum Students_Update_Column {
   /** column name */
   FirstName = 'FirstName',
   /** column name */
+  Gender = 'Gender',
+  /** column name */
   LastName = 'LastName',
+  /** column name */
+  Nickname = 'Nickname',
   /** column name */
   Oid = 'Oid',
   /** column name */
@@ -2615,6 +2645,1956 @@ export enum Students_Update_Column {
   UpdatedAt = 'UpdatedAt'
 }
 
+/** columns and relationships of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts = {
+  __typename?: 'assessments_assessment_cohorts';
+  /** An object relationship */
+  assessment: Assessments_Assessments;
+  assessment_id: Scalars['uniqueidentifier'];
+  /** An array relationship */
+  cohort_fencers: Array<Assessments_Cohort_Fencers>;
+  /** An aggregate relationship */
+  cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  description: Scalars['String'];
+  id: Scalars['uniqueidentifier'];
+  title: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+
+/** columns and relationships of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_CohortsCohort_FencersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_CohortsCohort_Fencers_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Aggregate = {
+  __typename?: 'assessments_assessment_cohorts_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Cohorts_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Cohorts>;
+};
+
+/** aggregate fields of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_cohorts_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Cohorts_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Cohorts_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Cohorts_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessment_Cohorts_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessment_Cohorts_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_cohorts". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Cohorts_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Cohorts_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Cohorts_Bool_Exp>>;
+  assessment?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+  assessment_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  cohort_fencers?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  description?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  title?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Cohorts_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Cohorts_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Insert_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.assessment_cohorts" */
+export enum Assessments_Assessment_Cohorts_Insert_Match_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Cohorts_Max_Fields = {
+  __typename?: 'assessments_assessment_cohorts_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Cohorts_Min_Fields = {
+  __typename?: 'assessments_assessment_cohorts_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Mutation_Response = {
+  __typename?: 'assessments_assessment_cohorts_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Cohorts>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_cohorts". */
+export type Assessments_Assessment_Cohorts_Order_By = {
+  assessment?: InputMaybe<Assessments_Assessments_Order_By>;
+  assessment_id?: InputMaybe<Order_By>;
+  cohort_fencers_aggregate?: InputMaybe<Assessments_Cohort_Fencers_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_cohorts */
+export type Assessments_Assessment_Cohorts_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.assessment_cohorts" */
+export enum Assessments_Assessment_Cohorts_Select_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.assessment_cohorts" */
+export type Assessments_Assessment_Cohorts_Set_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** update columns of table "assessments.assessment_cohorts" */
+export enum Assessments_Assessment_Cohorts_Update_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics = {
+  __typename?: 'assessments_assessment_metrics';
+  /** An object relationship */
+  assessment: Assessments_Assessments;
+  assessment_id: Scalars['uniqueidentifier'];
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  metric_id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  metric_question: Assessments_Metric_Questions;
+  order_number: Scalars['Int'];
+  updated_at: Scalars['datetime2'];
+};
+
+/** aggregated selection of "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Aggregate = {
+  __typename?: 'assessments_assessment_metrics_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Metrics_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Metrics>;
+};
+
+/** aggregate fields of "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_metrics_aggregate_fields';
+  avg?: Maybe<Assessments_Assessment_Metrics_Avg_Fields>;
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Metrics_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Metrics_Min_Fields>;
+  stddev?: Maybe<Assessments_Assessment_Metrics_Stddev_Fields>;
+  stddev_pop?: Maybe<Assessments_Assessment_Metrics_Stddev_Pop_Fields>;
+  stddev_samp?: Maybe<Assessments_Assessment_Metrics_Stddev_Samp_Fields>;
+  sum?: Maybe<Assessments_Assessment_Metrics_Sum_Fields>;
+  var_pop?: Maybe<Assessments_Assessment_Metrics_Var_Pop_Fields>;
+  var_samp?: Maybe<Assessments_Assessment_Metrics_Var_Samp_Fields>;
+  variance?: Maybe<Assessments_Assessment_Metrics_Variance_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Metrics_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Aggregate_Order_By = {
+  avg?: InputMaybe<Assessments_Assessment_Metrics_Avg_Order_By>;
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessment_Metrics_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessment_Metrics_Min_Order_By>;
+  stddev?: InputMaybe<Assessments_Assessment_Metrics_Stddev_Order_By>;
+  stddev_pop?: InputMaybe<Assessments_Assessment_Metrics_Stddev_Pop_Order_By>;
+  stddev_samp?: InputMaybe<Assessments_Assessment_Metrics_Stddev_Samp_Order_By>;
+  sum?: InputMaybe<Assessments_Assessment_Metrics_Sum_Order_By>;
+  var_pop?: InputMaybe<Assessments_Assessment_Metrics_Var_Pop_Order_By>;
+  var_samp?: InputMaybe<Assessments_Assessment_Metrics_Var_Samp_Order_By>;
+  variance?: InputMaybe<Assessments_Assessment_Metrics_Variance_Order_By>;
+};
+
+/** aggregate avg on columns */
+export type Assessments_Assessment_Metrics_Avg_Fields = {
+  __typename?: 'assessments_assessment_metrics_avg_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by avg() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Avg_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_metrics". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Metrics_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Metrics_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Metrics_Bool_Exp>>;
+  assessment?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+  assessment_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  metric_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  order_number?: InputMaybe<Int_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Metrics_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Metrics_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+/** input type for incrementing numeric columns in table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Inc_Input = {
+  order_number?: InputMaybe<Scalars['Int']>;
+};
+
+/** input type for inserting data into table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Insert_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  metric_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  order_number?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.assessment_metrics" */
+export enum Assessments_Assessment_Metrics_Insert_Match_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  MetricId = 'metric_id',
+  /** column name */
+  OrderNumber = 'order_number',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Metrics_Max_Fields = {
+  __typename?: 'assessments_assessment_metrics_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  order_number?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  order_number?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Metrics_Min_Fields = {
+  __typename?: 'assessments_assessment_metrics_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  order_number?: Maybe<Scalars['Int']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  order_number?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Mutation_Response = {
+  __typename?: 'assessments_assessment_metrics_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Metrics>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_metrics". */
+export type Assessments_Assessment_Metrics_Order_By = {
+  assessment?: InputMaybe<Assessments_Assessments_Order_By>;
+  assessment_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  metric_id?: InputMaybe<Order_By>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
+  order_number?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_metrics */
+export type Assessments_Assessment_Metrics_Pk_Columns_Input = {
+  assessment_id: Scalars['uniqueidentifier'];
+  metric_id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.assessment_metrics" */
+export enum Assessments_Assessment_Metrics_Select_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  MetricId = 'metric_id',
+  /** column name */
+  OrderNumber = 'order_number',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Set_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  metric_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  order_number?: InputMaybe<Scalars['Int']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** aggregate stddev on columns */
+export type Assessments_Assessment_Metrics_Stddev_Fields = {
+  __typename?: 'assessments_assessment_metrics_stddev_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Stddev_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_pop on columns */
+export type Assessments_Assessment_Metrics_Stddev_Pop_Fields = {
+  __typename?: 'assessments_assessment_metrics_stddev_pop_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_pop() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Stddev_Pop_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate stddev_samp on columns */
+export type Assessments_Assessment_Metrics_Stddev_Samp_Fields = {
+  __typename?: 'assessments_assessment_metrics_stddev_samp_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by stddev_samp() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Stddev_Samp_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate sum on columns */
+export type Assessments_Assessment_Metrics_Sum_Fields = {
+  __typename?: 'assessments_assessment_metrics_sum_fields';
+  order_number?: Maybe<Scalars['Int']>;
+};
+
+/** order by sum() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Sum_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** update columns of table "assessments.assessment_metrics" */
+export enum Assessments_Assessment_Metrics_Update_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  MetricId = 'metric_id',
+  /** column name */
+  OrderNumber = 'order_number',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate var_pop on columns */
+export type Assessments_Assessment_Metrics_Var_Pop_Fields = {
+  __typename?: 'assessments_assessment_metrics_var_pop_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_pop() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Var_Pop_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate var_samp on columns */
+export type Assessments_Assessment_Metrics_Var_Samp_Fields = {
+  __typename?: 'assessments_assessment_metrics_var_samp_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by var_samp() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Var_Samp_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** aggregate variance on columns */
+export type Assessments_Assessment_Metrics_Variance_Fields = {
+  __typename?: 'assessments_assessment_metrics_variance_fields';
+  order_number?: Maybe<Scalars['Float']>;
+};
+
+/** order by variance() on columns of table "assessments.assessment_metrics" */
+export type Assessments_Assessment_Metrics_Variance_Order_By = {
+  order_number?: InputMaybe<Order_By>;
+};
+
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_Result = {
+  __typename?: 'assessments_assessment_result';
+  /** An object relationship */
+  assessment: Assessments_Assessments;
+  assessment_id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  assessment_result_status: Assessments_Assessment_Result_Statuses;
+  created_at: Scalars['datetime2'];
+  created_by: Scalars['String'];
+  /** An object relationship */
+  fencer?: Maybe<Students>;
+  fencer_id: Scalars['uniqueidentifier'];
+  id: Scalars['uniqueidentifier'];
+  /** An array relationship */
+  metric_results: Array<Assessments_Metric_Result>;
+  /** An aggregate relationship */
+  metric_results_aggregate: Assessments_Metric_Result_Aggregate;
+  /** An object relationship */
+  proctor?: Maybe<Accounts>;
+  status_id: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_ResultMetric_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessment_result" */
+export type Assessments_Assessment_ResultMetric_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate = {
+  __typename?: 'assessments_assessment_result_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Result_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Result>;
+};
+
+/** aggregate fields of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_result_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Result_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Result_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Result_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessment_Result_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessment_Result_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_result". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Result_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Result_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Result_Bool_Exp>>;
+  assessment?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+  assessment_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  assessment_result_status?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  fencer?: InputMaybe<Students_Bool_Exp>;
+  fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  proctor?: InputMaybe<Accounts_Bool_Exp>;
+  status_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Result_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Result_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Insert_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  status_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Insert_Match_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Result_Max_Fields = {
+  __typename?: 'assessments_assessment_result_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  status_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Result_Min_Fields = {
+  __typename?: 'assessments_assessment_result_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  status_id?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Mutation_Response = {
+  __typename?: 'assessments_assessment_result_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Result>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_result". */
+export type Assessments_Assessment_Result_Order_By = {
+  assessment?: InputMaybe<Assessments_Assessments_Order_By>;
+  assessment_id?: InputMaybe<Order_By>;
+  assessment_result_status?: InputMaybe<Assessments_Assessment_Result_Statuses_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  fencer?: InputMaybe<Students_Order_By>;
+  fencer_id?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
+  proctor?: InputMaybe<Accounts_Order_By>;
+  status_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_result */
+export type Assessments_Assessment_Result_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Select_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.assessment_result" */
+export type Assessments_Assessment_Result_Set_Input = {
+  assessment_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  status_id?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses = {
+  __typename?: 'assessments_assessment_result_statuses';
+  /** An array relationship */
+  assessment_results: Array<Assessments_Assessment_Result>;
+  /** An aggregate relationship */
+  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
+  id: Scalars['String'];
+  name: Scalars['String'];
+};
+
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_StatusesAssessment_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_StatusesAssessment_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate = {
+  __typename?: 'assessments_assessment_result_statuses_aggregate';
+  aggregate?: Maybe<Assessments_Assessment_Result_Statuses_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessment_Result_Statuses>;
+};
+
+/** aggregate fields of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessment_Result_Statuses_Max_Fields>;
+  min?: Maybe<Assessments_Assessment_Result_Statuses_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessment_Result_Statuses_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessment_result_statuses". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessment_Result_Statuses_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Bool_Exp>>;
+  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  name?: InputMaybe<String_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_If_Matched = {
+  match_columns?: Array<Assessments_Assessment_Result_Statuses_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessment_Result_Statuses_Update_Column>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Insert_Input = {
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** select match_columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Insert_Match_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessment_Result_Statuses_Max_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_max_fields';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessment_Result_Statuses_Min_Fields = {
+  __typename?: 'assessments_assessment_result_statuses_min_fields';
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Mutation_Response = {
+  __typename?: 'assessments_assessment_result_statuses_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessment_Result_Statuses>;
+};
+
+/** Ordering options when selecting data from "assessments.assessment_result_statuses". */
+export type Assessments_Assessment_Result_Statuses_Order_By = {
+  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
+  id?: InputMaybe<Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessment_result_statuses */
+export type Assessments_Assessment_Result_Statuses_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Select_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** input type for updating data in table "assessments.assessment_result_statuses" */
+export type Assessments_Assessment_Result_Statuses_Set_Input = {
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "assessments.assessment_result_statuses" */
+export enum Assessments_Assessment_Result_Statuses_Update_Column {
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** update columns of table "assessments.assessment_result" */
+export enum Assessments_Assessment_Result_Update_Column {
+  /** column name */
+  AssessmentId = 'assessment_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  StatusId = 'status_id',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_Assessments = {
+  __typename?: 'assessments_assessments';
+  /** An object relationship */
+  account?: Maybe<Accounts>;
+  /** An array relationship */
+  assessment_cohorts: Array<Assessments_Assessment_Cohorts>;
+  /** An aggregate relationship */
+  assessment_cohorts_aggregate: Assessments_Assessment_Cohorts_Aggregate;
+  /** An array relationship */
+  assessment_metrics: Array<Assessments_Assessment_Metrics>;
+  /** An aggregate relationship */
+  assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
+  /** An array relationship */
+  assessment_results: Array<Assessments_Assessment_Result>;
+  /** An aggregate relationship */
+  assessment_results_aggregate: Assessments_Assessment_Result_Aggregate;
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['uniqueidentifier'];
+  title: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_CohortsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_Cohorts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_MetricsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_Metrics_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.assessments" */
+export type Assessments_AssessmentsAssessment_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.assessments" */
+export type Assessments_Assessments_Aggregate = {
+  __typename?: 'assessments_assessments_aggregate';
+  aggregate?: Maybe<Assessments_Assessments_Aggregate_Fields>;
+  nodes: Array<Assessments_Assessments>;
+};
+
+/** aggregate fields of "assessments.assessments" */
+export type Assessments_Assessments_Aggregate_Fields = {
+  __typename?: 'assessments_assessments_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Assessments_Max_Fields>;
+  min?: Maybe<Assessments_Assessments_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.assessments" */
+export type Assessments_Assessments_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Assessments_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.assessments" */
+export type Assessments_Assessments_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Assessments_Max_Order_By>;
+  min?: InputMaybe<Assessments_Assessments_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.assessments". All fields are combined with a logical 'AND'. */
+export type Assessments_Assessments_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Assessments_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Assessments_Bool_Exp>>;
+  account?: InputMaybe<Accounts_Bool_Exp>;
+  assessment_cohorts?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+  assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+  assessment_results?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  description?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  title?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.assessments" */
+export type Assessments_Assessments_If_Matched = {
+  match_columns?: Array<Assessments_Assessments_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Assessments_Update_Column>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.assessments" */
+export type Assessments_Assessments_Insert_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.assessments" */
+export enum Assessments_Assessments_Insert_Match_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Assessments_Max_Fields = {
+  __typename?: 'assessments_assessments_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.assessments" */
+export type Assessments_Assessments_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Assessments_Min_Fields = {
+  __typename?: 'assessments_assessments_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.assessments" */
+export type Assessments_Assessments_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.assessments" */
+export type Assessments_Assessments_Mutation_Response = {
+  __typename?: 'assessments_assessments_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Assessments>;
+};
+
+/** Ordering options when selecting data from "assessments.assessments". */
+export type Assessments_Assessments_Order_By = {
+  account?: InputMaybe<Accounts_Order_By>;
+  assessment_cohorts_aggregate?: InputMaybe<Assessments_Assessment_Cohorts_Aggregate_Order_By>;
+  assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
+  assessment_results_aggregate?: InputMaybe<Assessments_Assessment_Result_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_assessments */
+export type Assessments_Assessments_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.assessments" */
+export enum Assessments_Assessments_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.assessments" */
+export type Assessments_Assessments_Set_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** update columns of table "assessments.assessments" */
+export enum Assessments_Assessments_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers = {
+  __typename?: 'assessments_cohort_fencers';
+  /** An object relationship */
+  Student?: Maybe<Students>;
+  /** An object relationship */
+  assessment_cohort: Assessments_Assessment_Cohorts;
+  cohort_id: Scalars['uniqueidentifier'];
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  /** An object relationship */
+  fencer?: Maybe<Students>;
+  fencer_id: Scalars['uniqueidentifier'];
+};
+
+/** aggregated selection of "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Aggregate = {
+  __typename?: 'assessments_cohort_fencers_aggregate';
+  aggregate?: Maybe<Assessments_Cohort_Fencers_Aggregate_Fields>;
+  nodes: Array<Assessments_Cohort_Fencers>;
+};
+
+/** aggregate fields of "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Aggregate_Fields = {
+  __typename?: 'assessments_cohort_fencers_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Cohort_Fencers_Max_Fields>;
+  min?: Maybe<Assessments_Cohort_Fencers_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Cohort_Fencers_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Cohort_Fencers_Max_Order_By>;
+  min?: InputMaybe<Assessments_Cohort_Fencers_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.cohort_fencers". All fields are combined with a logical 'AND'. */
+export type Assessments_Cohort_Fencers_Bool_Exp = {
+  Student?: InputMaybe<Students_Bool_Exp>;
+  _and?: InputMaybe<Array<Assessments_Cohort_Fencers_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Cohort_Fencers_Bool_Exp>>;
+  assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+  cohort_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  fencer?: InputMaybe<Students_Bool_Exp>;
+  fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_If_Matched = {
+  match_columns?: Array<Assessments_Cohort_Fencers_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Cohort_Fencers_Update_Column>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Insert_Input = {
+  cohort_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+};
+
+/** select match_columns of table "assessments.cohort_fencers" */
+export enum Assessments_Cohort_Fencers_Insert_Match_Column {
+  /** column name */
+  CohortId = 'cohort_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id'
+}
+
+/** aggregate max on columns */
+export type Assessments_Cohort_Fencers_Max_Fields = {
+  __typename?: 'assessments_cohort_fencers_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Cohort_Fencers_Min_Fields = {
+  __typename?: 'assessments_cohort_fencers_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Mutation_Response = {
+  __typename?: 'assessments_cohort_fencers_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Cohort_Fencers>;
+};
+
+/** Ordering options when selecting data from "assessments.cohort_fencers". */
+export type Assessments_Cohort_Fencers_Order_By = {
+  Student?: InputMaybe<Students_Order_By>;
+  assessment_cohort?: InputMaybe<Assessments_Assessment_Cohorts_Order_By>;
+  cohort_id?: InputMaybe<Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  fencer?: InputMaybe<Students_Order_By>;
+  fencer_id?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_cohort_fencers */
+export type Assessments_Cohort_Fencers_Pk_Columns_Input = {
+  cohort_id: Scalars['uniqueidentifier'];
+  fencer_id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.cohort_fencers" */
+export enum Assessments_Cohort_Fencers_Select_Column {
+  /** column name */
+  CohortId = 'cohort_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id'
+}
+
+/** input type for updating data in table "assessments.cohort_fencers" */
+export type Assessments_Cohort_Fencers_Set_Input = {
+  cohort_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  fencer_id?: InputMaybe<Scalars['uniqueidentifier']>;
+};
+
+/** update columns of table "assessments.cohort_fencers" */
+export enum Assessments_Cohort_Fencers_Update_Column {
+  /** column name */
+  CohortId = 'cohort_id',
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  FencerId = 'fencer_id'
+}
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_Questions = {
+  __typename?: 'assessments_metric_questions';
+  /** An array relationship */
+  assessment_metrics: Array<Assessments_Assessment_Metrics>;
+  /** An aggregate relationship */
+  assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
+  created_at: Scalars['datetime2'];
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['uniqueidentifier'];
+  /** An array relationship */
+  metric_results: Array<Assessments_Metric_Result>;
+  /** An aggregate relationship */
+  metric_results_aggregate: Assessments_Metric_Result_Aggregate;
+  /** An object relationship */
+  metric_type: Assessments_Metric_Types;
+  metric_type_id: Scalars['String'];
+  title: Scalars['String'];
+  updated_at: Scalars['datetime2'];
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsAssessment_MetricsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsAssessment_Metrics_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsMetric_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsMetric_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Aggregate = {
+  __typename?: 'assessments_metric_questions_aggregate';
+  aggregate?: Maybe<Assessments_Metric_Questions_Aggregate_Fields>;
+  nodes: Array<Assessments_Metric_Questions>;
+};
+
+/** aggregate fields of "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Aggregate_Fields = {
+  __typename?: 'assessments_metric_questions_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Metric_Questions_Max_Fields>;
+  min?: Maybe<Assessments_Metric_Questions_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Metric_Questions_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Metric_Questions_Max_Order_By>;
+  min?: InputMaybe<Assessments_Metric_Questions_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.metric_questions". All fields are combined with a logical 'AND'. */
+export type Assessments_Metric_Questions_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Metric_Questions_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Metric_Questions_Bool_Exp>>;
+  assessment_metrics?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
+  description?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  metric_type?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+  metric_type_id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  title?: InputMaybe<String_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_If_Matched = {
+  match_columns?: Array<Assessments_Metric_Questions_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Metric_Questions_Update_Column>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Insert_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_type_id?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** select match_columns of table "assessments.metric_questions" */
+export enum Assessments_Metric_Questions_Insert_Match_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricTypeId = 'metric_type_id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** aggregate max on columns */
+export type Assessments_Metric_Questions_Max_Fields = {
+  __typename?: 'assessments_metric_questions_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  metric_type_id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by max() on columns of table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  metric_type_id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Metric_Questions_Min_Fields = {
+  __typename?: 'assessments_metric_questions_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  created_by?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  metric_type_id?: Maybe<Scalars['String']>;
+  title?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+};
+
+/** order by min() on columns of table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  metric_type_id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Mutation_Response = {
+  __typename?: 'assessments_metric_questions_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Metric_Questions>;
+};
+
+/** Ordering options when selecting data from "assessments.metric_questions". */
+export type Assessments_Metric_Questions_Order_By = {
+  assessment_metrics_aggregate?: InputMaybe<Assessments_Assessment_Metrics_Aggregate_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  created_by?: InputMaybe<Order_By>;
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
+  metric_type?: InputMaybe<Assessments_Metric_Types_Order_By>;
+  metric_type_id?: InputMaybe<Order_By>;
+  title?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_metric_questions */
+export type Assessments_Metric_Questions_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.metric_questions" */
+export enum Assessments_Metric_Questions_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricTypeId = 'metric_type_id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** input type for updating data in table "assessments.metric_questions" */
+export type Assessments_Metric_Questions_Set_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  created_by?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_type_id?: InputMaybe<Scalars['String']>;
+  title?: InputMaybe<Scalars['String']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+};
+
+/** update columns of table "assessments.metric_questions" */
+export enum Assessments_Metric_Questions_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  CreatedBy = 'created_by',
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricTypeId = 'metric_type_id',
+  /** column name */
+  Title = 'title',
+  /** column name */
+  UpdatedAt = 'updated_at'
+}
+
+/** columns and relationships of "assessments.metric_result" */
+export type Assessments_Metric_Result = {
+  __typename?: 'assessments_metric_result';
+  /** An object relationship */
+  assessment_result: Assessments_Assessment_Result;
+  created_at: Scalars['datetime2'];
+  id: Scalars['uniqueidentifier'];
+  /** An object relationship */
+  metric_question: Assessments_Metric_Questions;
+  metric_question_id: Scalars['uniqueidentifier'];
+  notes?: Maybe<Scalars['String']>;
+  result_id: Scalars['uniqueidentifier'];
+  updated_at: Scalars['datetime2'];
+  value: Scalars['String'];
+};
+
+/** aggregated selection of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate = {
+  __typename?: 'assessments_metric_result_aggregate';
+  aggregate?: Maybe<Assessments_Metric_Result_Aggregate_Fields>;
+  nodes: Array<Assessments_Metric_Result>;
+};
+
+/** aggregate fields of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_Fields = {
+  __typename?: 'assessments_metric_result_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Metric_Result_Max_Fields>;
+  min?: Maybe<Assessments_Metric_Result_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Metric_Result_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** order by aggregate values of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Aggregate_Order_By = {
+  count?: InputMaybe<Order_By>;
+  max?: InputMaybe<Assessments_Metric_Result_Max_Order_By>;
+  min?: InputMaybe<Assessments_Metric_Result_Min_Order_By>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.metric_result". All fields are combined with a logical 'AND'. */
+export type Assessments_Metric_Result_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Metric_Result_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Metric_Result_Bool_Exp>>;
+  assessment_result?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+  created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  metric_question_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  notes?: InputMaybe<String_Mssql_Comparison_Exp>;
+  result_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
+  value?: InputMaybe<String_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.metric_result" */
+export type Assessments_Metric_Result_If_Matched = {
+  match_columns?: Array<Assessments_Metric_Result_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Metric_Result_Update_Column>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.metric_result" */
+export type Assessments_Metric_Result_Insert_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  notes?: InputMaybe<Scalars['String']>;
+  result_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** select match_columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Insert_Match_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  ResultId = 'result_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Value = 'value'
+}
+
+/** aggregate max on columns */
+export type Assessments_Metric_Result_Max_Fields = {
+  __typename?: 'assessments_metric_result_max_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  notes?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** order by max() on columns of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Max_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  notes?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Metric_Result_Min_Fields = {
+  __typename?: 'assessments_metric_result_min_fields';
+  created_at?: Maybe<Scalars['datetime2']>;
+  notes?: Maybe<Scalars['String']>;
+  updated_at?: Maybe<Scalars['datetime2']>;
+  value?: Maybe<Scalars['String']>;
+};
+
+/** order by min() on columns of table "assessments.metric_result" */
+export type Assessments_Metric_Result_Min_Order_By = {
+  created_at?: InputMaybe<Order_By>;
+  notes?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** response of any mutation on the table "assessments.metric_result" */
+export type Assessments_Metric_Result_Mutation_Response = {
+  __typename?: 'assessments_metric_result_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Metric_Result>;
+};
+
+/** Ordering options when selecting data from "assessments.metric_result". */
+export type Assessments_Metric_Result_Order_By = {
+  assessment_result?: InputMaybe<Assessments_Assessment_Result_Order_By>;
+  created_at?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  metric_question?: InputMaybe<Assessments_Metric_Questions_Order_By>;
+  metric_question_id?: InputMaybe<Order_By>;
+  notes?: InputMaybe<Order_By>;
+  result_id?: InputMaybe<Order_By>;
+  updated_at?: InputMaybe<Order_By>;
+  value?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_metric_result */
+export type Assessments_Metric_Result_Pk_Columns_Input = {
+  id: Scalars['uniqueidentifier'];
+};
+
+/** select columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Select_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  Notes = 'notes',
+  /** column name */
+  ResultId = 'result_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Value = 'value'
+}
+
+/** input type for updating data in table "assessments.metric_result" */
+export type Assessments_Metric_Result_Set_Input = {
+  created_at?: InputMaybe<Scalars['datetime2']>;
+  id?: InputMaybe<Scalars['uniqueidentifier']>;
+  metric_question_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  notes?: InputMaybe<Scalars['String']>;
+  result_id?: InputMaybe<Scalars['uniqueidentifier']>;
+  updated_at?: InputMaybe<Scalars['datetime2']>;
+  value?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "assessments.metric_result" */
+export enum Assessments_Metric_Result_Update_Column {
+  /** column name */
+  CreatedAt = 'created_at',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  MetricQuestionId = 'metric_question_id',
+  /** column name */
+  Notes = 'notes',
+  /** column name */
+  ResultId = 'result_id',
+  /** column name */
+  UpdatedAt = 'updated_at',
+  /** column name */
+  Value = 'value'
+}
+
+/** columns and relationships of "assessments.metric_types" */
+export type Assessments_Metric_Types = {
+  __typename?: 'assessments_metric_types';
+  description?: Maybe<Scalars['String']>;
+  id: Scalars['String'];
+  /** An array relationship */
+  metric_questions: Array<Assessments_Metric_Questions>;
+  /** An aggregate relationship */
+  metric_questions_aggregate: Assessments_Metric_Questions_Aggregate;
+  name: Scalars['String'];
+};
+
+
+/** columns and relationships of "assessments.metric_types" */
+export type Assessments_Metric_TypesMetric_QuestionsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_types" */
+export type Assessments_Metric_TypesMetric_Questions_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+/** aggregated selection of "assessments.metric_types" */
+export type Assessments_Metric_Types_Aggregate = {
+  __typename?: 'assessments_metric_types_aggregate';
+  aggregate?: Maybe<Assessments_Metric_Types_Aggregate_Fields>;
+  nodes: Array<Assessments_Metric_Types>;
+};
+
+/** aggregate fields of "assessments.metric_types" */
+export type Assessments_Metric_Types_Aggregate_Fields = {
+  __typename?: 'assessments_metric_types_aggregate_fields';
+  count: Scalars['Int'];
+  max?: Maybe<Assessments_Metric_Types_Max_Fields>;
+  min?: Maybe<Assessments_Metric_Types_Min_Fields>;
+};
+
+
+/** aggregate fields of "assessments.metric_types" */
+export type Assessments_Metric_Types_Aggregate_FieldsCountArgs = {
+  column?: InputMaybe<Assessments_Metric_Types_Select_Column>;
+  distinct?: InputMaybe<Scalars['Boolean']>;
+};
+
+/** Boolean expression to filter rows from the table "assessments.metric_types". All fields are combined with a logical 'AND'. */
+export type Assessments_Metric_Types_Bool_Exp = {
+  _and?: InputMaybe<Array<Assessments_Metric_Types_Bool_Exp>>;
+  _not?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+  _or?: InputMaybe<Array<Assessments_Metric_Types_Bool_Exp>>;
+  description?: InputMaybe<String_Mssql_Comparison_Exp>;
+  id?: InputMaybe<String_Mssql_Comparison_Exp>;
+  metric_questions?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+  name?: InputMaybe<String_Mssql_Comparison_Exp>;
+};
+
+/** upsert condition type for table "assessments.metric_types" */
+export type Assessments_Metric_Types_If_Matched = {
+  match_columns?: Array<Assessments_Metric_Types_Insert_Match_Column>;
+  update_columns?: Array<Assessments_Metric_Types_Update_Column>;
+  where?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+};
+
+/** input type for inserting data into table "assessments.metric_types" */
+export type Assessments_Metric_Types_Insert_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** select match_columns of table "assessments.metric_types" */
+export enum Assessments_Metric_Types_Insert_Match_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** aggregate max on columns */
+export type Assessments_Metric_Types_Max_Fields = {
+  __typename?: 'assessments_metric_types_max_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** aggregate min on columns */
+export type Assessments_Metric_Types_Min_Fields = {
+  __typename?: 'assessments_metric_types_min_fields';
+  description?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
+};
+
+/** response of any mutation on the table "assessments.metric_types" */
+export type Assessments_Metric_Types_Mutation_Response = {
+  __typename?: 'assessments_metric_types_mutation_response';
+  /** number of rows affected by the mutation */
+  affected_rows: Scalars['Int'];
+  /** data from the rows affected by the mutation */
+  returning: Array<Assessments_Metric_Types>;
+};
+
+/** Ordering options when selecting data from "assessments.metric_types". */
+export type Assessments_Metric_Types_Order_By = {
+  description?: InputMaybe<Order_By>;
+  id?: InputMaybe<Order_By>;
+  metric_questions_aggregate?: InputMaybe<Assessments_Metric_Questions_Aggregate_Order_By>;
+  name?: InputMaybe<Order_By>;
+};
+
+/** primary key columns input for table: assessments_metric_types */
+export type Assessments_Metric_Types_Pk_Columns_Input = {
+  id: Scalars['String'];
+};
+
+/** select columns of table "assessments.metric_types" */
+export enum Assessments_Metric_Types_Select_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
+/** input type for updating data in table "assessments.metric_types" */
+export type Assessments_Metric_Types_Set_Input = {
+  description?: InputMaybe<Scalars['String']>;
+  id?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
+};
+
+/** update columns of table "assessments.metric_types" */
+export enum Assessments_Metric_Types_Update_Column {
+  /** column name */
+  Description = 'description',
+  /** column name */
+  Id = 'id',
+  /** column name */
+  Name = 'name'
+}
+
 /** columns and relationships of "calendars" */
 export type Calendars = {
   __typename?: 'calendars';
@@ -2622,7 +4602,6 @@ export type Calendars = {
   Account: Accounts;
   access_token: Scalars['String'];
   account_id: Scalars['String'];
-  calendar_id?: Maybe<Scalars['String']>;
   created_at: Scalars['datetime2'];
   created_by: Scalars['String'];
   id: Scalars['String'];
@@ -2660,7 +4639,6 @@ export type Calendars_Bool_Exp = {
   _or?: InputMaybe<Array<Calendars_Bool_Exp>>;
   access_token?: InputMaybe<String_Mssql_Comparison_Exp>;
   account_id?: InputMaybe<String_Mssql_Comparison_Exp>;
-  calendar_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   created_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -2679,7 +4657,6 @@ export type Calendars_If_Matched = {
 export type Calendars_Insert_Input = {
   access_token?: InputMaybe<Scalars['String']>;
   account_id?: InputMaybe<Scalars['String']>;
-  calendar_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -2693,8 +4670,6 @@ export enum Calendars_Insert_Match_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2712,7 +4687,6 @@ export type Calendars_Max_Fields = {
   __typename?: 'calendars_max_fields';
   access_token?: Maybe<Scalars['String']>;
   account_id?: Maybe<Scalars['String']>;
-  calendar_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
@@ -2725,7 +4699,6 @@ export type Calendars_Min_Fields = {
   __typename?: 'calendars_min_fields';
   access_token?: Maybe<Scalars['String']>;
   account_id?: Maybe<Scalars['String']>;
-  calendar_id?: Maybe<Scalars['String']>;
   created_at?: Maybe<Scalars['datetime2']>;
   created_by?: Maybe<Scalars['String']>;
   id?: Maybe<Scalars['String']>;
@@ -2747,7 +4720,6 @@ export type Calendars_Order_By = {
   Account?: InputMaybe<Accounts_Order_By>;
   access_token?: InputMaybe<Order_By>;
   account_id?: InputMaybe<Order_By>;
-  calendar_id?: InputMaybe<Order_By>;
   created_at?: InputMaybe<Order_By>;
   created_by?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
@@ -2757,7 +4729,7 @@ export type Calendars_Order_By = {
 
 /** primary key columns input for table: calendars */
 export type Calendars_Pk_Columns_Input = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 /** select columns of table "calendars" */
@@ -2766,8 +4738,6 @@ export enum Calendars_Select_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -2784,7 +4754,6 @@ export enum Calendars_Select_Column {
 export type Calendars_Set_Input = {
   access_token?: InputMaybe<Scalars['String']>;
   account_id?: InputMaybe<Scalars['String']>;
-  calendar_id?: InputMaybe<Scalars['String']>;
   created_at?: InputMaybe<Scalars['datetime2']>;
   created_by?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['String']>;
@@ -2798,8 +4767,6 @@ export enum Calendars_Update_Column {
   AccessToken = 'access_token',
   /** column name */
   AccountId = 'account_id',
-  /** column name */
-  CalendarId = 'calendar_id',
   /** column name */
   CreatedAt = 'created_at',
   /** column name */
@@ -3050,6 +5017,42 @@ export type Mutation_Root = {
   delete_Students?: Maybe<Students_Mutation_Response>;
   /** delete single row from the table: "Students" */
   delete_Students_by_pk?: Maybe<Students>;
+  /** delete data from the table: "assessments.assessment_cohorts" */
+  delete_assessments_assessment_cohorts?: Maybe<Assessments_Assessment_Cohorts_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_cohorts" */
+  delete_assessments_assessment_cohorts_by_pk?: Maybe<Assessments_Assessment_Cohorts>;
+  /** delete data from the table: "assessments.assessment_metrics" */
+  delete_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_metrics" */
+  delete_assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** delete data from the table: "assessments.assessment_result" */
+  delete_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_result" */
+  delete_assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** delete data from the table: "assessments.assessment_result_statuses" */
+  delete_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessment_result_statuses" */
+  delete_assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
+  /** delete data from the table: "assessments.assessments" */
+  delete_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
+  /** delete single row from the table: "assessments.assessments" */
+  delete_assessments_assessments_by_pk?: Maybe<Assessments_Assessments>;
+  /** delete data from the table: "assessments.cohort_fencers" */
+  delete_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
+  /** delete single row from the table: "assessments.cohort_fencers" */
+  delete_assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
+  /** delete data from the table: "assessments.metric_questions" */
+  delete_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
+  /** delete single row from the table: "assessments.metric_questions" */
+  delete_assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
+  /** delete data from the table: "assessments.metric_result" */
+  delete_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** delete single row from the table: "assessments.metric_result" */
+  delete_assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
+  /** delete data from the table: "assessments.metric_types" */
+  delete_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
+  /** delete single row from the table: "assessments.metric_types" */
+  delete_assessments_metric_types_by_pk?: Maybe<Assessments_Metric_Types>;
   /** delete data from the table: "calendars" */
   delete_calendars?: Maybe<Calendars_Mutation_Response>;
   /** delete single row from the table: "calendars" */
@@ -3098,6 +5101,42 @@ export type Mutation_Root = {
   insert_Students?: Maybe<Students_Mutation_Response>;
   /** insert a single row into the table: "Students" */
   insert_Students_one?: Maybe<Students>;
+  /** insert data into the table: "assessments.assessment_cohorts" */
+  insert_assessments_assessment_cohorts?: Maybe<Assessments_Assessment_Cohorts_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_cohorts" */
+  insert_assessments_assessment_cohorts_one?: Maybe<Assessments_Assessment_Cohorts>;
+  /** insert data into the table: "assessments.assessment_metrics" */
+  insert_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_metrics" */
+  insert_assessments_assessment_metrics_one?: Maybe<Assessments_Assessment_Metrics>;
+  /** insert data into the table: "assessments.assessment_result" */
+  insert_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_result" */
+  insert_assessments_assessment_result_one?: Maybe<Assessments_Assessment_Result>;
+  /** insert data into the table: "assessments.assessment_result_statuses" */
+  insert_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessment_result_statuses" */
+  insert_assessments_assessment_result_statuses_one?: Maybe<Assessments_Assessment_Result_Statuses>;
+  /** insert data into the table: "assessments.assessments" */
+  insert_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
+  /** insert a single row into the table: "assessments.assessments" */
+  insert_assessments_assessments_one?: Maybe<Assessments_Assessments>;
+  /** insert data into the table: "assessments.cohort_fencers" */
+  insert_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
+  /** insert a single row into the table: "assessments.cohort_fencers" */
+  insert_assessments_cohort_fencers_one?: Maybe<Assessments_Cohort_Fencers>;
+  /** insert data into the table: "assessments.metric_questions" */
+  insert_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
+  /** insert a single row into the table: "assessments.metric_questions" */
+  insert_assessments_metric_questions_one?: Maybe<Assessments_Metric_Questions>;
+  /** insert data into the table: "assessments.metric_result" */
+  insert_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** insert a single row into the table: "assessments.metric_result" */
+  insert_assessments_metric_result_one?: Maybe<Assessments_Metric_Result>;
+  /** insert data into the table: "assessments.metric_types" */
+  insert_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
+  /** insert a single row into the table: "assessments.metric_types" */
+  insert_assessments_metric_types_one?: Maybe<Assessments_Metric_Types>;
   /** insert data into the table: "calendars" */
   insert_calendars?: Maybe<Calendars_Mutation_Response>;
   /** insert a single row into the table: "calendars" */
@@ -3146,6 +5185,42 @@ export type Mutation_Root = {
   update_Students?: Maybe<Students_Mutation_Response>;
   /** update single row of the table: "Students" */
   update_Students_by_pk?: Maybe<Students>;
+  /** update data of the table: "assessments.assessment_cohorts" */
+  update_assessments_assessment_cohorts?: Maybe<Assessments_Assessment_Cohorts_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_cohorts" */
+  update_assessments_assessment_cohorts_by_pk?: Maybe<Assessments_Assessment_Cohorts>;
+  /** update data of the table: "assessments.assessment_metrics" */
+  update_assessments_assessment_metrics?: Maybe<Assessments_Assessment_Metrics_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_metrics" */
+  update_assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** update data of the table: "assessments.assessment_result" */
+  update_assessments_assessment_result?: Maybe<Assessments_Assessment_Result_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_result" */
+  update_assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** update data of the table: "assessments.assessment_result_statuses" */
+  update_assessments_assessment_result_statuses?: Maybe<Assessments_Assessment_Result_Statuses_Mutation_Response>;
+  /** update single row of the table: "assessments.assessment_result_statuses" */
+  update_assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
+  /** update data of the table: "assessments.assessments" */
+  update_assessments_assessments?: Maybe<Assessments_Assessments_Mutation_Response>;
+  /** update single row of the table: "assessments.assessments" */
+  update_assessments_assessments_by_pk?: Maybe<Assessments_Assessments>;
+  /** update data of the table: "assessments.cohort_fencers" */
+  update_assessments_cohort_fencers?: Maybe<Assessments_Cohort_Fencers_Mutation_Response>;
+  /** update single row of the table: "assessments.cohort_fencers" */
+  update_assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
+  /** update data of the table: "assessments.metric_questions" */
+  update_assessments_metric_questions?: Maybe<Assessments_Metric_Questions_Mutation_Response>;
+  /** update single row of the table: "assessments.metric_questions" */
+  update_assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
+  /** update data of the table: "assessments.metric_result" */
+  update_assessments_metric_result?: Maybe<Assessments_Metric_Result_Mutation_Response>;
+  /** update single row of the table: "assessments.metric_result" */
+  update_assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
+  /** update data of the table: "assessments.metric_types" */
+  update_assessments_metric_types?: Maybe<Assessments_Metric_Types_Mutation_Response>;
+  /** update single row of the table: "assessments.metric_types" */
+  update_assessments_metric_types_by_pk?: Maybe<Assessments_Metric_Types>;
   /** update data of the table: "calendars" */
   update_calendars?: Maybe<Calendars_Mutation_Response>;
   /** update single row of the table: "calendars" */
@@ -3281,6 +5356,116 @@ export type Mutation_RootDelete_Students_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_CohortsArgs = {
+  where: Assessments_Assessment_Cohorts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Cohorts_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_MetricsArgs = {
+  where: Assessments_Assessment_Metrics_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Metrics_By_PkArgs = {
+  assessment_id: Scalars['uniqueidentifier'];
+  metric_id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_ResultArgs = {
+  where: Assessments_Assessment_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_StatusesArgs = {
+  where: Assessments_Assessment_Result_Statuses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_AssessmentsArgs = {
+  where: Assessments_Assessments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Assessments_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Cohort_FencersArgs = {
+  where: Assessments_Cohort_Fencers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Cohort_Fencers_By_PkArgs = {
+  cohort_id: Scalars['uniqueidentifier'];
+  fencer_id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_QuestionsArgs = {
+  where: Assessments_Metric_Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_Questions_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_ResultArgs = {
+  where: Assessments_Metric_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_TypesArgs = {
+  where: Assessments_Metric_Types_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootDelete_Assessments_Metric_Types_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+/** mutation root */
 export type Mutation_RootDelete_CalendarsArgs = {
   where: Calendars_Bool_Exp;
 };
@@ -3288,7 +5473,7 @@ export type Mutation_RootDelete_CalendarsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_Calendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -3442,6 +5627,132 @@ export type Mutation_RootInsert_StudentsArgs = {
 export type Mutation_RootInsert_Students_OneArgs = {
   if_matched?: InputMaybe<Students_If_Matched>;
   object: Students_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_CohortsArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Cohorts_If_Matched>;
+  objects: Array<Assessments_Assessment_Cohorts_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Cohorts_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Cohorts_If_Matched>;
+  object: Assessments_Assessment_Cohorts_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_MetricsArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Metrics_If_Matched>;
+  objects: Array<Assessments_Assessment_Metrics_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Metrics_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Metrics_If_Matched>;
+  object: Assessments_Assessment_Metrics_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_ResultArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_If_Matched>;
+  objects: Array<Assessments_Assessment_Result_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_If_Matched>;
+  object: Assessments_Assessment_Result_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_StatusesArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_Statuses_If_Matched>;
+  objects: Array<Assessments_Assessment_Result_Statuses_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessment_Result_Statuses_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessment_Result_Statuses_If_Matched>;
+  object: Assessments_Assessment_Result_Statuses_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_AssessmentsArgs = {
+  if_matched?: InputMaybe<Assessments_Assessments_If_Matched>;
+  objects: Array<Assessments_Assessments_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Assessments_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Assessments_If_Matched>;
+  object: Assessments_Assessments_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Cohort_FencersArgs = {
+  if_matched?: InputMaybe<Assessments_Cohort_Fencers_If_Matched>;
+  objects: Array<Assessments_Cohort_Fencers_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Cohort_Fencers_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Cohort_Fencers_If_Matched>;
+  object: Assessments_Cohort_Fencers_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_QuestionsArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Questions_If_Matched>;
+  objects: Array<Assessments_Metric_Questions_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_Questions_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Questions_If_Matched>;
+  object: Assessments_Metric_Questions_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_ResultArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Result_If_Matched>;
+  objects: Array<Assessments_Metric_Result_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_Result_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Result_If_Matched>;
+  object: Assessments_Metric_Result_Insert_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_TypesArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Types_If_Matched>;
+  objects: Array<Assessments_Metric_Types_Insert_Input>;
+};
+
+
+/** mutation root */
+export type Mutation_RootInsert_Assessments_Metric_Types_OneArgs = {
+  if_matched?: InputMaybe<Assessments_Metric_Types_If_Matched>;
+  object: Assessments_Metric_Types_Insert_Input;
 };
 
 
@@ -3618,6 +5929,134 @@ export type Mutation_RootUpdate_Students_By_PkArgs = {
 
 
 /** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_CohortsArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Cohorts_Set_Input>;
+  where: Assessments_Assessment_Cohorts_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Cohorts_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Cohorts_Set_Input>;
+  pk_columns: Assessments_Assessment_Cohorts_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_MetricsArgs = {
+  _inc?: InputMaybe<Assessments_Assessment_Metrics_Inc_Input>;
+  _set?: InputMaybe<Assessments_Assessment_Metrics_Set_Input>;
+  where: Assessments_Assessment_Metrics_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Metrics_By_PkArgs = {
+  _inc?: InputMaybe<Assessments_Assessment_Metrics_Inc_Input>;
+  _set?: InputMaybe<Assessments_Assessment_Metrics_Set_Input>;
+  pk_columns: Assessments_Assessment_Metrics_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_ResultArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Set_Input>;
+  where: Assessments_Assessment_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Set_Input>;
+  pk_columns: Assessments_Assessment_Result_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_StatusesArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Statuses_Set_Input>;
+  where: Assessments_Assessment_Result_Statuses_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessment_Result_Statuses_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessment_Result_Statuses_Set_Input>;
+  pk_columns: Assessments_Assessment_Result_Statuses_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_AssessmentsArgs = {
+  _set?: InputMaybe<Assessments_Assessments_Set_Input>;
+  where: Assessments_Assessments_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Assessments_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Assessments_Set_Input>;
+  pk_columns: Assessments_Assessments_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Cohort_FencersArgs = {
+  _set?: InputMaybe<Assessments_Cohort_Fencers_Set_Input>;
+  where: Assessments_Cohort_Fencers_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Cohort_Fencers_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Cohort_Fencers_Set_Input>;
+  pk_columns: Assessments_Cohort_Fencers_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_QuestionsArgs = {
+  _set?: InputMaybe<Assessments_Metric_Questions_Set_Input>;
+  where: Assessments_Metric_Questions_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_Questions_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Metric_Questions_Set_Input>;
+  pk_columns: Assessments_Metric_Questions_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_ResultArgs = {
+  _set?: InputMaybe<Assessments_Metric_Result_Set_Input>;
+  where: Assessments_Metric_Result_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_Result_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Metric_Result_Set_Input>;
+  pk_columns: Assessments_Metric_Result_Pk_Columns_Input;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_TypesArgs = {
+  _set?: InputMaybe<Assessments_Metric_Types_Set_Input>;
+  where: Assessments_Metric_Types_Bool_Exp;
+};
+
+
+/** mutation root */
+export type Mutation_RootUpdate_Assessments_Metric_Types_By_PkArgs = {
+  _set?: InputMaybe<Assessments_Metric_Types_Set_Input>;
+  pk_columns: Assessments_Metric_Types_Pk_Columns_Input;
+};
+
+
+/** mutation root */
 export type Mutation_RootUpdate_CalendarsArgs = {
   _set?: InputMaybe<Calendars_Set_Input>;
   where: Calendars_Bool_Exp;
@@ -3722,6 +6161,60 @@ export type Query_Root = {
   Students_aggregate: Students_Aggregate;
   /** fetch data from the table: "Students" using primary key columns */
   Students_by_pk?: Maybe<Students>;
+  /** fetch data from the table: "assessments.assessment_cohorts" */
+  assessments_assessment_cohorts: Array<Assessments_Assessment_Cohorts>;
+  /** fetch aggregated fields from the table: "assessments.assessment_cohorts" */
+  assessments_assessment_cohorts_aggregate: Assessments_Assessment_Cohorts_Aggregate;
+  /** fetch data from the table: "assessments.assessment_cohorts" using primary key columns */
+  assessments_assessment_cohorts_by_pk?: Maybe<Assessments_Assessment_Cohorts>;
+  /** fetch data from the table: "assessments.assessment_metrics" */
+  assessments_assessment_metrics: Array<Assessments_Assessment_Metrics>;
+  /** fetch aggregated fields from the table: "assessments.assessment_metrics" */
+  assessments_assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
+  /** fetch data from the table: "assessments.assessment_metrics" using primary key columns */
+  assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** fetch data from the table: "assessments.assessment_result" */
+  assessments_assessment_result: Array<Assessments_Assessment_Result>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result" */
+  assessments_assessment_result_aggregate: Assessments_Assessment_Result_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result" using primary key columns */
+  assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** fetch data from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses: Array<Assessments_Assessment_Result_Statuses>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses_aggregate: Assessments_Assessment_Result_Statuses_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result_statuses" using primary key columns */
+  assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
+  /** fetch data from the table: "assessments.assessments" */
+  assessments_assessments: Array<Assessments_Assessments>;
+  /** fetch aggregated fields from the table: "assessments.assessments" */
+  assessments_assessments_aggregate: Assessments_Assessments_Aggregate;
+  /** fetch data from the table: "assessments.assessments" using primary key columns */
+  assessments_assessments_by_pk?: Maybe<Assessments_Assessments>;
+  /** fetch data from the table: "assessments.cohort_fencers" */
+  assessments_cohort_fencers: Array<Assessments_Cohort_Fencers>;
+  /** fetch aggregated fields from the table: "assessments.cohort_fencers" */
+  assessments_cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
+  /** fetch data from the table: "assessments.cohort_fencers" using primary key columns */
+  assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
+  /** fetch data from the table: "assessments.metric_questions" */
+  assessments_metric_questions: Array<Assessments_Metric_Questions>;
+  /** fetch aggregated fields from the table: "assessments.metric_questions" */
+  assessments_metric_questions_aggregate: Assessments_Metric_Questions_Aggregate;
+  /** fetch data from the table: "assessments.metric_questions" using primary key columns */
+  assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
+  /** fetch data from the table: "assessments.metric_result" */
+  assessments_metric_result: Array<Assessments_Metric_Result>;
+  /** fetch aggregated fields from the table: "assessments.metric_result" */
+  assessments_metric_result_aggregate: Assessments_Metric_Result_Aggregate;
+  /** fetch data from the table: "assessments.metric_result" using primary key columns */
+  assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
+  /** fetch data from the table: "assessments.metric_types" */
+  assessments_metric_types: Array<Assessments_Metric_Types>;
+  /** fetch aggregated fields from the table: "assessments.metric_types" */
+  assessments_metric_types_aggregate: Assessments_Metric_Types_Aggregate;
+  /** fetch data from the table: "assessments.metric_types" using primary key columns */
+  assessments_metric_types_by_pk?: Maybe<Assessments_Metric_Types>;
   /** fetch data from the table: "calendars" */
   calendars: Array<Calendars>;
   /** fetch aggregated fields from the table: "calendars" */
@@ -3950,6 +6443,197 @@ export type Query_RootStudents_By_PkArgs = {
 };
 
 
+export type Query_RootAssessments_Assessment_CohortsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Cohorts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Cohorts_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Assessment_MetricsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Metrics_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Metrics_By_PkArgs = {
+  assessment_id: Scalars['uniqueidentifier'];
+  metric_id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Assessment_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Assessment_Result_StatusesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_Statuses_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+export type Query_RootAssessments_AssessmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessments_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Assessments_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Cohort_FencersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Cohort_Fencers_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Cohort_Fencers_By_PkArgs = {
+  cohort_id: Scalars['uniqueidentifier'];
+  fencer_id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Metric_QuestionsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Questions_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Questions_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Metric_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Query_RootAssessments_Metric_TypesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Types_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Types_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Types_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+};
+
+
+export type Query_RootAssessments_Metric_Types_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
 export type Query_RootCalendarsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -3967,7 +6651,7 @@ export type Query_RootCalendars_AggregateArgs = {
 
 
 export type Query_RootCalendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -4054,6 +6738,60 @@ export type Subscription_Root = {
   Students_aggregate: Students_Aggregate;
   /** fetch data from the table: "Students" using primary key columns */
   Students_by_pk?: Maybe<Students>;
+  /** fetch data from the table: "assessments.assessment_cohorts" */
+  assessments_assessment_cohorts: Array<Assessments_Assessment_Cohorts>;
+  /** fetch aggregated fields from the table: "assessments.assessment_cohorts" */
+  assessments_assessment_cohorts_aggregate: Assessments_Assessment_Cohorts_Aggregate;
+  /** fetch data from the table: "assessments.assessment_cohorts" using primary key columns */
+  assessments_assessment_cohorts_by_pk?: Maybe<Assessments_Assessment_Cohorts>;
+  /** fetch data from the table: "assessments.assessment_metrics" */
+  assessments_assessment_metrics: Array<Assessments_Assessment_Metrics>;
+  /** fetch aggregated fields from the table: "assessments.assessment_metrics" */
+  assessments_assessment_metrics_aggregate: Assessments_Assessment_Metrics_Aggregate;
+  /** fetch data from the table: "assessments.assessment_metrics" using primary key columns */
+  assessments_assessment_metrics_by_pk?: Maybe<Assessments_Assessment_Metrics>;
+  /** fetch data from the table: "assessments.assessment_result" */
+  assessments_assessment_result: Array<Assessments_Assessment_Result>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result" */
+  assessments_assessment_result_aggregate: Assessments_Assessment_Result_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result" using primary key columns */
+  assessments_assessment_result_by_pk?: Maybe<Assessments_Assessment_Result>;
+  /** fetch data from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses: Array<Assessments_Assessment_Result_Statuses>;
+  /** fetch aggregated fields from the table: "assessments.assessment_result_statuses" */
+  assessments_assessment_result_statuses_aggregate: Assessments_Assessment_Result_Statuses_Aggregate;
+  /** fetch data from the table: "assessments.assessment_result_statuses" using primary key columns */
+  assessments_assessment_result_statuses_by_pk?: Maybe<Assessments_Assessment_Result_Statuses>;
+  /** fetch data from the table: "assessments.assessments" */
+  assessments_assessments: Array<Assessments_Assessments>;
+  /** fetch aggregated fields from the table: "assessments.assessments" */
+  assessments_assessments_aggregate: Assessments_Assessments_Aggregate;
+  /** fetch data from the table: "assessments.assessments" using primary key columns */
+  assessments_assessments_by_pk?: Maybe<Assessments_Assessments>;
+  /** fetch data from the table: "assessments.cohort_fencers" */
+  assessments_cohort_fencers: Array<Assessments_Cohort_Fencers>;
+  /** fetch aggregated fields from the table: "assessments.cohort_fencers" */
+  assessments_cohort_fencers_aggregate: Assessments_Cohort_Fencers_Aggregate;
+  /** fetch data from the table: "assessments.cohort_fencers" using primary key columns */
+  assessments_cohort_fencers_by_pk?: Maybe<Assessments_Cohort_Fencers>;
+  /** fetch data from the table: "assessments.metric_questions" */
+  assessments_metric_questions: Array<Assessments_Metric_Questions>;
+  /** fetch aggregated fields from the table: "assessments.metric_questions" */
+  assessments_metric_questions_aggregate: Assessments_Metric_Questions_Aggregate;
+  /** fetch data from the table: "assessments.metric_questions" using primary key columns */
+  assessments_metric_questions_by_pk?: Maybe<Assessments_Metric_Questions>;
+  /** fetch data from the table: "assessments.metric_result" */
+  assessments_metric_result: Array<Assessments_Metric_Result>;
+  /** fetch aggregated fields from the table: "assessments.metric_result" */
+  assessments_metric_result_aggregate: Assessments_Metric_Result_Aggregate;
+  /** fetch data from the table: "assessments.metric_result" using primary key columns */
+  assessments_metric_result_by_pk?: Maybe<Assessments_Metric_Result>;
+  /** fetch data from the table: "assessments.metric_types" */
+  assessments_metric_types: Array<Assessments_Metric_Types>;
+  /** fetch aggregated fields from the table: "assessments.metric_types" */
+  assessments_metric_types_aggregate: Assessments_Metric_Types_Aggregate;
+  /** fetch data from the table: "assessments.metric_types" using primary key columns */
+  assessments_metric_types_by_pk?: Maybe<Assessments_Metric_Types>;
   /** fetch data from the table: "calendars" */
   calendars: Array<Calendars>;
   /** fetch aggregated fields from the table: "calendars" */
@@ -4282,6 +7020,197 @@ export type Subscription_RootStudents_By_PkArgs = {
 };
 
 
+export type Subscription_RootAssessments_Assessment_CohortsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Cohorts_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Cohorts_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Cohorts_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Cohorts_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Assessment_MetricsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Metrics_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Metrics_By_PkArgs = {
+  assessment_id: Scalars['uniqueidentifier'];
+  metric_id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Assessment_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_StatusesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_Statuses_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessment_Result_Statuses_Order_By>>;
+  where?: InputMaybe<Assessments_Assessment_Result_Statuses_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessment_Result_Statuses_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
+export type Subscription_RootAssessments_AssessmentsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessments_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Assessments_Order_By>>;
+  where?: InputMaybe<Assessments_Assessments_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Assessments_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Cohort_FencersArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Cohort_Fencers_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Cohort_Fencers_Order_By>>;
+  where?: InputMaybe<Assessments_Cohort_Fencers_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Cohort_Fencers_By_PkArgs = {
+  cohort_id: Scalars['uniqueidentifier'];
+  fencer_id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Metric_QuestionsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Questions_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Questions_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Questions_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Questions_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Metric_ResultArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Result_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Result_By_PkArgs = {
+  id: Scalars['uniqueidentifier'];
+};
+
+
+export type Subscription_RootAssessments_Metric_TypesArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Types_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Types_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Types_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
+};
+
+
+export type Subscription_RootAssessments_Metric_Types_By_PkArgs = {
+  id: Scalars['String'];
+};
+
+
 export type Subscription_RootCalendarsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
   offset?: InputMaybe<Scalars['Int']>;
@@ -4299,7 +7228,7 @@ export type Subscription_RootCalendars_AggregateArgs = {
 
 
 export type Subscription_RootCalendars_By_PkArgs = {
-  account_id: Scalars['String'];
+  id: Scalars['String'];
 };
 
 
@@ -4337,19 +7266,33 @@ export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars['uniqueidentifier']>>;
 };
 
-export type AccountProfileQueryVariables = Exact<{
-  oid: Scalars['String'];
+export type AddAssessmentEvaluationMutationVariables = Exact<{
+  evaluation: Assessments_Assessment_Result_Insert_Input;
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string }, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
+export type AddAssessmentEvaluationMutation = { __typename?: 'mutation_root', insert_assessments_assessment_result_one?: { __typename?: 'assessments_assessment_result', id: any } | null };
 
 export type AddFencerToAccountMutationVariables = Exact<{
   fencer: Students_Insert_Input;
 }>;
 
 
-export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null } | null };
+export type AddFencerToAccountMutation = { __typename?: 'mutation_root', insert_Students_one?: { __typename?: 'Students', Oid?: string | null, StudentId: any, FirstName: string, LastName: string, Nickname?: string | null, Gender?: string | null, Birthdate?: any | null, Email?: string | null, Phone?: string | null, AssociationMemberId?: string | null, AvatarUrl?: string | null } | null };
+
+export type AddMetricAnswersMutationVariables = Exact<{
+  answers: Array<Assessments_Metric_Result_Insert_Input> | Assessments_Metric_Result_Insert_Input;
+}>;
+
+
+export type AddMetricAnswersMutation = { __typename?: 'mutation_root', insert_assessments_metric_result?: { __typename?: 'assessments_metric_result_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'assessments_metric_result', id: any, value: string, metric_question_id: any, result_id: any, notes?: string | null }> } | null };
+
+export type DeleteAssessmentEvaluationMutationVariables = Exact<{
+  id: Scalars['uniqueidentifier'];
+}>;
+
+
+export type DeleteAssessmentEvaluationMutation = { __typename?: 'mutation_root', delete_assessments_assessment_result_by_pk?: { __typename?: 'assessments_assessment_result', id: any } | null };
 
 export type DeleteFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
@@ -4358,12 +7301,52 @@ export type DeleteFencerByIdMutationVariables = Exact<{
 
 export type DeleteFencerByIdMutation = { __typename?: 'mutation_root', delete_Students_by_pk?: { __typename?: 'Students', StudentId: any } | null };
 
+export type UpdateStudentByIdMutationVariables = Exact<{
+  id: Scalars['String'];
+  changes: Accounts_Set_Input;
+}>;
+
+
+export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null } | null };
+
+export type UpdateFencerByIdMutationVariables = Exact<{
+  fencerId: Scalars['uniqueidentifier'];
+  changes: Students_Set_Input;
+}>;
+
+
+export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate?: any | null, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid?: string | null } | null };
+
+export type AccountProfileQueryVariables = Exact<{
+  oid: Scalars['String'];
+}>;
+
+
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null, Email?: string | null, Phone?: string | null, Gender?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Gender?: string | null, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
+
 export type GetAccountFencersQueryVariables = Exact<{
   oid: Scalars['String'];
 }>;
 
 
-export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any, FirstName: string, LastName: string, Birthdate: any, AssociationMemberId?: string | null, Email?: string | null, Phone?: string | null, AvatarUrl?: string | null }> };
+export type GetAccountFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', Oid?: string | null, StudentId: any, FirstName: string, LastName: string, Nickname?: string | null, Gender?: string | null, Birthdate?: any | null, Email?: string | null, Phone?: string | null, AssociationMemberId?: string | null, AvatarUrl?: string | null }> };
+
+export type GetAssessmentByIdQueryVariables = Exact<{
+  id: Scalars['uniqueidentifier'];
+}>;
+
+
+export type GetAssessmentByIdQuery = { __typename?: 'query_root', assessments_assessments_by_pk?: { __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', order_number: number, assessment_id: any, metric_id: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type_id: string } }> } | null };
+
+export type GetAssessmentsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAssessmentsQuery = { __typename?: 'query_root', assessments_assessments: Array<{ __typename?: 'assessments_assessments', id: any, title: string, description?: string | null, created_at: any, account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null } | null } | null, assessment_cohorts: Array<{ __typename?: 'assessments_assessment_cohorts', id: any, title: string, description: string }>, assessment_metrics: Array<{ __typename?: 'assessments_assessment_metrics', metric_question: { __typename?: 'assessments_metric_questions', id: any, title: string, description?: string | null, metric_type: { __typename?: 'assessments_metric_types', id: string, description?: string | null, name: string } } }> }> };
+
+export type GetFencersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetFencersQuery = { __typename?: 'query_root', Students: Array<{ __typename?: 'Students', StudentId: any, Oid?: string | null, FirstName: string, LastName: string, Nickname?: string | null, Gender?: string | null, Birthdate?: any | null, Email?: string | null, Phone?: string | null, AssociationMemberId?: string | null, AvatarUrl?: string | null, CreatedBy?: string | null, CreatedAt: any, Account?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, Email?: string | null, Phone?: string | null } | null } | null }> };
 
 export type GetMemberDetailsByNameQueryVariables = Exact<{
   firstName: Scalars['String'];
@@ -4378,7 +7361,14 @@ export type GetMembersByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid: string, StudentId: any }> } | null };
+export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid?: string | null, StudentId: any }> } | null };
+
+export type GetMetricAnswersByAssessmentIdQueryVariables = Exact<{
+  assessmentId: Scalars['uniqueidentifier'];
+}>;
+
+
+export type GetMetricAnswersByAssessmentIdQuery = { __typename?: 'query_root', assessments_assessment_result: Array<{ __typename?: 'assessments_assessment_result', id: any, status_id: string, created_at: any, fencer?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null } | null, proctor?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null } | null } | null, metric_results: Array<{ __typename?: 'assessments_metric_result', id: any, result_id: any, value: string, notes?: string | null, created_at: any, updated_at: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, metric_type_id: string } }> }> };
 
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
@@ -4387,28 +7377,194 @@ export type SearchMembersQueryVariables = Exact<{
 }>;
 
 
-export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid: string }> }> };
-
-export type UpdateStudentByIdMutationVariables = Exact<{
-  id: Scalars['String'];
-  changes: Accounts_Set_Input;
-}>;
+export type SearchMembersQuery = { __typename?: 'query_root', AssociationMembers: Array<{ __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', StudentId: any, Oid?: string | null }> }> };
 
 
-export type UpdateStudentByIdMutation = { __typename?: 'mutation_root', update_Accounts_by_pk?: { __typename?: 'Accounts', Oid: string, PrimaryStudentId: any, Student: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate: any, AssociationMemberId?: string | null }, Address: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } } | null };
+export const AddAssessmentEvaluationDocument = gql`
+    mutation AddAssessmentEvaluation($evaluation: assessments_assessment_result_insert_input!) {
+  insert_assessments_assessment_result_one(object: $evaluation) {
+    id
+  }
+}
+    `;
+export type AddAssessmentEvaluationMutationFn = Apollo.MutationFunction<AddAssessmentEvaluationMutation, AddAssessmentEvaluationMutationVariables>;
 
-export type UpdateFencerByIdMutationVariables = Exact<{
-  fencerId: Scalars['uniqueidentifier'];
-  changes: Students_Set_Input;
-}>;
+/**
+ * __useAddAssessmentEvaluationMutation__
+ *
+ * To run a mutation, you first call `useAddAssessmentEvaluationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddAssessmentEvaluationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addAssessmentEvaluationMutation, { data, loading, error }] = useAddAssessmentEvaluationMutation({
+ *   variables: {
+ *      evaluation: // value for 'evaluation'
+ *   },
+ * });
+ */
+export function useAddAssessmentEvaluationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddAssessmentEvaluationMutation, AddAssessmentEvaluationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<AddAssessmentEvaluationMutation, AddAssessmentEvaluationMutationVariables>(AddAssessmentEvaluationDocument, options);
+      }
+export type AddAssessmentEvaluationMutationHookResult = ReturnType<typeof useAddAssessmentEvaluationMutation>;
+export type AddAssessmentEvaluationMutationResult = Apollo.MutationResult<AddAssessmentEvaluationMutation>;
+export type AddAssessmentEvaluationMutationOptions = Apollo.BaseMutationOptions<AddAssessmentEvaluationMutation, AddAssessmentEvaluationMutationVariables>;
+export const AddFencerToAccountDocument = gql`
+    mutation AddFencerToAccount($fencer: Students_insert_input!) {
+  insert_Students_one(object: $fencer) {
+    Oid
+    StudentId
+    FirstName
+    LastName
+    Nickname
+    Gender
+    Birthdate
+    Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
+  }
+}
+    `;
+export type AddFencerToAccountMutationFn = Apollo.MutationFunction<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
 
+/**
+ * __useAddFencerToAccountMutation__
+ *
+ * To run a mutation, you first call `useAddFencerToAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddFencerToAccountMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addFencerToAccountMutation, { data, loading, error }] = useAddFencerToAccountMutation({
+ *   variables: {
+ *      fencer: // value for 'fencer'
+ *   },
+ * });
+ */
+export function useAddFencerToAccountMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>(AddFencerToAccountDocument, options);
+      }
+export type AddFencerToAccountMutationHookResult = ReturnType<typeof useAddFencerToAccountMutation>;
+export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerToAccountMutation>;
+export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
+export const AddMetricAnswersDocument = gql`
+    mutation AddMetricAnswers($answers: [assessments_metric_result_insert_input!]!) {
+  insert_assessments_metric_result(objects: $answers) {
+    returning {
+      id
+      value
+      metric_question_id
+      result_id
+      notes
+    }
+    affected_rows
+  }
+}
+    `;
+export type AddMetricAnswersMutationFn = Apollo.MutationFunction<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>;
 
-export type UpdateFencerByIdMutation = { __typename?: 'mutation_root', update_Students_by_pk?: { __typename?: 'Students', FirstName: string, LastName: string, Birthdate: any, Phone?: string | null, Email?: string | null, AvatarUrl?: string | null, AssociationMemberId?: string | null, StudentId: any, Oid: string } | null };
+/**
+ * __useAddMetricAnswersMutation__
+ *
+ * To run a mutation, you first call `useAddMetricAnswersMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddMetricAnswersMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addMetricAnswersMutation, { data, loading, error }] = useAddMetricAnswersMutation({
+ *   variables: {
+ *      answers: // value for 'answers'
+ *   },
+ * });
+ */
+export function useAddMetricAnswersMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>(AddMetricAnswersDocument, options);
+      }
+export type AddMetricAnswersMutationHookResult = ReturnType<typeof useAddMetricAnswersMutation>;
+export type AddMetricAnswersMutationResult = Apollo.MutationResult<AddMetricAnswersMutation>;
+export type AddMetricAnswersMutationOptions = Apollo.BaseMutationOptions<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>;
+export const DeleteAssessmentEvaluationDocument = gql`
+    mutation DeleteAssessmentEvaluation($id: uniqueidentifier!) {
+  delete_assessments_assessment_result_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteAssessmentEvaluationMutationFn = Apollo.MutationFunction<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>;
 
+/**
+ * __useDeleteAssessmentEvaluationMutation__
+ *
+ * To run a mutation, you first call `useDeleteAssessmentEvaluationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAssessmentEvaluationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteAssessmentEvaluationMutation, { data, loading, error }] = useDeleteAssessmentEvaluationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteAssessmentEvaluationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>(DeleteAssessmentEvaluationDocument, options);
+      }
+export type DeleteAssessmentEvaluationMutationHookResult = ReturnType<typeof useDeleteAssessmentEvaluationMutation>;
+export type DeleteAssessmentEvaluationMutationResult = Apollo.MutationResult<DeleteAssessmentEvaluationMutation>;
+export type DeleteAssessmentEvaluationMutationOptions = Apollo.BaseMutationOptions<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>;
+export const DeleteFencerByIdDocument = gql`
+    mutation DeleteFencerById($fencerId: uniqueidentifier!) {
+  delete_Students_by_pk(StudentId: $fencerId) {
+    StudentId
+  }
+}
+    `;
+export type DeleteFencerByIdMutationFn = Apollo.MutationFunction<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
 
-export const AccountProfileDocument = gql`
-    query AccountProfile($oid: String!) {
-  Accounts(where: {Oid: {_eq: $oid}}) {
+/**
+ * __useDeleteFencerByIdMutation__
+ *
+ * To run a mutation, you first call `useDeleteFencerByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteFencerByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteFencerByIdMutation, { data, loading, error }] = useDeleteFencerByIdMutation({
+ *   variables: {
+ *      fencerId: // value for 'fencerId'
+ *   },
+ * });
+ */
+export function useDeleteFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>(DeleteFencerByIdDocument, options);
+      }
+export type DeleteFencerByIdMutationHookResult = ReturnType<typeof useDeleteFencerByIdMutation>;
+export type DeleteFencerByIdMutationResult = Apollo.MutationResult<DeleteFencerByIdMutation>;
+export type DeleteFencerByIdMutationOptions = Apollo.BaseMutationOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
+export const UpdateStudentByIdDocument = gql`
+    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
     Oid
     PrimaryStudentId
     Student {
@@ -4419,11 +7575,108 @@ export const AccountProfileDocument = gql`
       Phone
       Birthdate
       AssociationMemberId
+    }
+    Address {
+      AddressId
+      Address
+      Address2
+      City
+      Postal
+      State
+    }
+  }
+}
+    `;
+export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+
+/**
+ * __useUpdateStudentByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
+      }
+export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
+export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
+export const UpdateFencerByIdDocument = gql`
+    mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
+  update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {
+    FirstName
+    LastName
+    Birthdate
+    Phone
+    Email
+    AvatarUrl
+    AssociationMemberId
+    StudentId
+    Oid
+  }
+}
+    `;
+export type UpdateFencerByIdMutationFn = Apollo.MutationFunction<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
+
+/**
+ * __useUpdateFencerByIdMutation__
+ *
+ * To run a mutation, you first call `useUpdateFencerByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateFencerByIdMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateFencerByIdMutation, { data, loading, error }] = useUpdateFencerByIdMutation({
+ *   variables: {
+ *      fencerId: // value for 'fencerId'
+ *      changes: // value for 'changes'
+ *   },
+ * });
+ */
+export function useUpdateFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>(UpdateFencerByIdDocument, options);
+      }
+export type UpdateFencerByIdMutationHookResult = ReturnType<typeof useUpdateFencerByIdMutation>;
+export type UpdateFencerByIdMutationResult = Apollo.MutationResult<UpdateFencerByIdMutation>;
+export type UpdateFencerByIdMutationOptions = Apollo.BaseMutationOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
+export const AccountProfileDocument = gql`
+    query AccountProfile($oid: String!) {
+  Accounts(where: {Oid: {_eq: $oid}}) {
+    Oid
+    PrimaryStudentId
+    Student {
+      StudentId
+      FirstName
+      LastName
+      Nickname
+      Email
+      Phone
+      Gender
+      Birthdate
+      AssociationMemberId
       AssociationMember {
         FullName
         FirstName
         LastName
         FullName
+        Gender
         Birthdate
         Club1Name
         Club2Name
@@ -4482,78 +7735,6 @@ export function useAccountProfileLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type AccountProfileQueryHookResult = ReturnType<typeof useAccountProfileQuery>;
 export type AccountProfileLazyQueryHookResult = ReturnType<typeof useAccountProfileLazyQuery>;
 export type AccountProfileQueryResult = Apollo.QueryResult<AccountProfileQuery, AccountProfileQueryVariables>;
-export const AddFencerToAccountDocument = gql`
-    mutation AddFencerToAccount($fencer: Students_insert_input!) {
-  insert_Students_one(object: $fencer) {
-    Oid
-    StudentId
-    FirstName
-    LastName
-    Birthdate
-    Phone
-    Email
-  }
-}
-    `;
-export type AddFencerToAccountMutationFn = Apollo.MutationFunction<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
-
-/**
- * __useAddFencerToAccountMutation__
- *
- * To run a mutation, you first call `useAddFencerToAccountMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAddFencerToAccountMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [addFencerToAccountMutation, { data, loading, error }] = useAddFencerToAccountMutation({
- *   variables: {
- *      fencer: // value for 'fencer'
- *   },
- * });
- */
-export function useAddFencerToAccountMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>(AddFencerToAccountDocument, options);
-      }
-export type AddFencerToAccountMutationHookResult = ReturnType<typeof useAddFencerToAccountMutation>;
-export type AddFencerToAccountMutationResult = Apollo.MutationResult<AddFencerToAccountMutation>;
-export type AddFencerToAccountMutationOptions = Apollo.BaseMutationOptions<AddFencerToAccountMutation, AddFencerToAccountMutationVariables>;
-export const DeleteFencerByIdDocument = gql`
-    mutation DeleteFencerById($fencerId: uniqueidentifier!) {
-  delete_Students_by_pk(StudentId: $fencerId) {
-    StudentId
-  }
-}
-    `;
-export type DeleteFencerByIdMutationFn = Apollo.MutationFunction<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
-
-/**
- * __useDeleteFencerByIdMutation__
- *
- * To run a mutation, you first call `useDeleteFencerByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteFencerByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteFencerByIdMutation, { data, loading, error }] = useDeleteFencerByIdMutation({
- *   variables: {
- *      fencerId: // value for 'fencerId'
- *   },
- * });
- */
-export function useDeleteFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>(DeleteFencerByIdDocument, options);
-      }
-export type DeleteFencerByIdMutationHookResult = ReturnType<typeof useDeleteFencerByIdMutation>;
-export type DeleteFencerByIdMutationResult = Apollo.MutationResult<DeleteFencerByIdMutation>;
-export type DeleteFencerByIdMutationOptions = Apollo.BaseMutationOptions<DeleteFencerByIdMutation, DeleteFencerByIdMutationVariables>;
 export const GetAccountFencersDocument = gql`
     query GetAccountFencers($oid: String!) {
   Students(where: {Oid: {_eq: $oid}}, order_by: {FirstName: asc}) {
@@ -4561,10 +7742,12 @@ export const GetAccountFencersDocument = gql`
     StudentId
     FirstName
     LastName
+    Nickname
+    Gender
     Birthdate
-    AssociationMemberId
     Email
     Phone
+    AssociationMemberId
     AvatarUrl
   }
 }
@@ -4597,6 +7780,171 @@ export function useGetAccountFencersLazyQuery(baseOptions?: ApolloReactHooks.Laz
 export type GetAccountFencersQueryHookResult = ReturnType<typeof useGetAccountFencersQuery>;
 export type GetAccountFencersLazyQueryHookResult = ReturnType<typeof useGetAccountFencersLazyQuery>;
 export type GetAccountFencersQueryResult = Apollo.QueryResult<GetAccountFencersQuery, GetAccountFencersQueryVariables>;
+export const GetAssessmentByIdDocument = gql`
+    query GetAssessmentById($id: uniqueidentifier!) {
+  assessments_assessments_by_pk(id: $id) {
+    id
+    title
+    description
+    assessment_metrics(order_by: {order_number: asc}) {
+      order_number
+      assessment_id
+      metric_id
+      metric_question {
+        id
+        title
+        description
+        metric_type_id
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAssessmentByIdQuery__
+ *
+ * To run a query within a React component, call `useGetAssessmentByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAssessmentByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAssessmentByIdQuery({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useGetAssessmentByIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>(GetAssessmentByIdDocument, options);
+      }
+export function useGetAssessmentByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>(GetAssessmentByIdDocument, options);
+        }
+export type GetAssessmentByIdQueryHookResult = ReturnType<typeof useGetAssessmentByIdQuery>;
+export type GetAssessmentByIdLazyQueryHookResult = ReturnType<typeof useGetAssessmentByIdLazyQuery>;
+export type GetAssessmentByIdQueryResult = Apollo.QueryResult<GetAssessmentByIdQuery, GetAssessmentByIdQueryVariables>;
+export const GetAssessmentsDocument = gql`
+    query GetAssessments {
+  assessments_assessments {
+    id
+    title
+    description
+    created_at
+    account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
+    assessment_cohorts {
+      id
+      title
+      description
+    }
+    assessment_metrics {
+      metric_question {
+        id
+        title
+        description
+        metric_type {
+          id
+          description
+          name
+        }
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAssessmentsQuery__
+ *
+ * To run a query within a React component, call `useGetAssessmentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAssessmentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAssessmentsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAssessmentsQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetAssessmentsQuery, GetAssessmentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetAssessmentsQuery, GetAssessmentsQueryVariables>(GetAssessmentsDocument, options);
+      }
+export function useGetAssessmentsLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetAssessmentsQuery, GetAssessmentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetAssessmentsQuery, GetAssessmentsQueryVariables>(GetAssessmentsDocument, options);
+        }
+export type GetAssessmentsQueryHookResult = ReturnType<typeof useGetAssessmentsQuery>;
+export type GetAssessmentsLazyQueryHookResult = ReturnType<typeof useGetAssessmentsLazyQuery>;
+export type GetAssessmentsQueryResult = Apollo.QueryResult<GetAssessmentsQuery, GetAssessmentsQueryVariables>;
+export const GetFencersDocument = gql`
+    query GetFencers {
+  Students {
+    StudentId
+    Oid
+    FirstName
+    LastName
+    Nickname
+    Gender
+    Birthdate
+    Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
+    CreatedBy
+    CreatedAt
+    Account {
+      Oid
+      Student {
+        StudentId
+        Email
+        Phone
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetFencersQuery__
+ *
+ * To run a query within a React component, call `useGetFencersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetFencersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetFencersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetFencersQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<GetFencersQuery, GetFencersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetFencersQuery, GetFencersQueryVariables>(GetFencersDocument, options);
+      }
+export function useGetFencersLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetFencersQuery, GetFencersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetFencersQuery, GetFencersQueryVariables>(GetFencersDocument, options);
+        }
+export type GetFencersQueryHookResult = ReturnType<typeof useGetFencersQuery>;
+export type GetFencersLazyQueryHookResult = ReturnType<typeof useGetFencersLazyQuery>;
+export type GetFencersQueryResult = Apollo.QueryResult<GetFencersQuery, GetFencersQueryVariables>;
 export const GetMemberDetailsByNameDocument = gql`
     query GetMemberDetailsByName($firstName: String!, $lastName: String!) @cached(ttl: 300) {
   AssociationMembers(
@@ -4700,6 +8048,73 @@ export function useGetMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type GetMembersByIdQueryHookResult = ReturnType<typeof useGetMembersByIdQuery>;
 export type GetMembersByIdLazyQueryHookResult = ReturnType<typeof useGetMembersByIdLazyQuery>;
 export type GetMembersByIdQueryResult = Apollo.QueryResult<GetMembersByIdQuery, GetMembersByIdQueryVariables>;
+export const GetMetricAnswersByAssessmentIdDocument = gql`
+    query GetMetricAnswersByAssessmentId($assessmentId: uniqueidentifier!) {
+  assessments_assessment_result(
+    order_by: {created_at: desc}
+    where: {assessment_id: {_eq: $assessmentId}}
+  ) {
+    id
+    status_id
+    created_at
+    fencer {
+      StudentId
+      FirstName
+      LastName
+      Nickname
+    }
+    proctor {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
+    metric_results {
+      id
+      result_id
+      metric_question {
+        id
+        metric_type_id
+      }
+      value
+      notes
+      created_at
+      updated_at
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMetricAnswersByAssessmentIdQuery__
+ *
+ * To run a query within a React component, call `useGetMetricAnswersByAssessmentIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMetricAnswersByAssessmentIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMetricAnswersByAssessmentIdQuery({
+ *   variables: {
+ *      assessmentId: // value for 'assessmentId'
+ *   },
+ * });
+ */
+export function useGetMetricAnswersByAssessmentIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>(GetMetricAnswersByAssessmentIdDocument, options);
+      }
+export function useGetMetricAnswersByAssessmentIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>(GetMetricAnswersByAssessmentIdDocument, options);
+        }
+export type GetMetricAnswersByAssessmentIdQueryHookResult = ReturnType<typeof useGetMetricAnswersByAssessmentIdQuery>;
+export type GetMetricAnswersByAssessmentIdLazyQueryHookResult = ReturnType<typeof useGetMetricAnswersByAssessmentIdLazyQuery>;
+export type GetMetricAnswersByAssessmentIdQueryResult = Apollo.QueryResult<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
   AssociationMembers(
@@ -4759,97 +8174,3 @@ export function useSearchMembersLazyQuery(baseOptions?: ApolloReactHooks.LazyQue
 export type SearchMembersQueryHookResult = ReturnType<typeof useSearchMembersQuery>;
 export type SearchMembersLazyQueryHookResult = ReturnType<typeof useSearchMembersLazyQuery>;
 export type SearchMembersQueryResult = Apollo.QueryResult<SearchMembersQuery, SearchMembersQueryVariables>;
-export const UpdateStudentByIdDocument = gql`
-    mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
-  update_Accounts_by_pk(pk_columns: {Oid: $id}, _set: $changes) {
-    Oid
-    PrimaryStudentId
-    Student {
-      StudentId
-      FirstName
-      LastName
-      Email
-      Phone
-      Birthdate
-      AssociationMemberId
-    }
-    Address {
-      AddressId
-      Address
-      Address2
-      City
-      Postal
-      State
-    }
-  }
-}
-    `;
-export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
-
-/**
- * __useUpdateStudentByIdMutation__
- *
- * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
- *   variables: {
- *      id: // value for 'id'
- *      changes: // value for 'changes'
- *   },
- * });
- */
-export function useUpdateStudentByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>(UpdateStudentByIdDocument, options);
-      }
-export type UpdateStudentByIdMutationHookResult = ReturnType<typeof useUpdateStudentByIdMutation>;
-export type UpdateStudentByIdMutationResult = Apollo.MutationResult<UpdateStudentByIdMutation>;
-export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<UpdateStudentByIdMutation, UpdateStudentByIdMutationVariables>;
-export const UpdateFencerByIdDocument = gql`
-    mutation UpdateFencerById($fencerId: uniqueidentifier!, $changes: Students_set_input!) {
-  update_Students_by_pk(pk_columns: {StudentId: $fencerId}, _set: $changes) {
-    FirstName
-    LastName
-    Birthdate
-    Phone
-    Email
-    AvatarUrl
-    AssociationMemberId
-    StudentId
-    Oid
-  }
-}
-    `;
-export type UpdateFencerByIdMutationFn = Apollo.MutationFunction<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;
-
-/**
- * __useUpdateFencerByIdMutation__
- *
- * To run a mutation, you first call `useUpdateFencerByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateFencerByIdMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateFencerByIdMutation, { data, loading, error }] = useUpdateFencerByIdMutation({
- *   variables: {
- *      fencerId: // value for 'fencerId'
- *      changes: // value for 'changes'
- *   },
- * });
- */
-export function useUpdateFencerByIdMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return ApolloReactHooks.useMutation<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>(UpdateFencerByIdDocument, options);
-      }
-export type UpdateFencerByIdMutationHookResult = ReturnType<typeof useUpdateFencerByIdMutation>;
-export type UpdateFencerByIdMutationResult = Apollo.MutationResult<UpdateFencerByIdMutation>;
-export type UpdateFencerByIdMutationOptions = Apollo.BaseMutationOptions<UpdateFencerByIdMutation, UpdateFencerByIdMutationVariables>;

@@ -30,7 +30,7 @@ export const sitemap: IPageItem[] = [
         name: "Calendar",
         url: "calendar/",
         tags: {
-          nav: { link: { icon: "Calendar" } },
+          nav: { link: { icon: "Calendar", disabled: true } },
           breadcrumb: {},
         },
       },
@@ -38,7 +38,7 @@ export const sitemap: IPageItem[] = [
         name: "Clubs",
         url: "clubs/",
         tags: {
-          nav: { link: { icon: "Teamwork" } },
+          nav: { link: { icon: "Teamwork", disabled: true } },
           breadcrumb: {},
         },
       },
@@ -46,9 +46,42 @@ export const sitemap: IPageItem[] = [
         name: "Billing",
         url: "billing/",
         tags: {
-          nav: { link: { icon: "PaymentCard" } },
+          nav: { link: { icon: "PaymentCard", disabled: true } },
           breadcrumb: {},
         },
+      },
+      {
+        name: "Assessments",
+        url: "assessments/",
+        tags: {
+          nav: { group: "Club", link: { icon: "TestPlan", disabled: false } },
+          breadcrumb: {},
+        },
+        children: [
+          {
+            name: "View assessment",
+            url: "[assessmentId]/",
+            tags: {
+              breadcrumb: {},
+            },
+            children: [
+              {
+                name: "Submit evaluation",
+                url: "submit/",
+                tags: {
+                  breadcrumb: {},
+                },
+              },
+              {
+                name: "Edit evaluation",
+                url: "[evaluationId]/",
+                tags: {
+                  breadcrumb: {},
+                },
+              },
+            ],
+          },
+        ],
       },
       {
         name: "Classes",

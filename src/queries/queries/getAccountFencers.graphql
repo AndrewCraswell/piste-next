@@ -4,10 +4,12 @@ query GetAccountFencers($oid: String!) {
     StudentId
     FirstName
     LastName
+    Nickname
+    Gender
     Birthdate
-    AssociationMemberId
     Email
     Phone
+    AssociationMemberId
     AvatarUrl
   }
 }

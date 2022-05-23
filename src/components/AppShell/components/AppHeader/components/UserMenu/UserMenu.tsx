@@ -1,6 +1,7 @@
 import { useDisclosure, useLinkShims } from "$hooks"
+import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
-import { ActionButton } from "@fluentui/react"
+import { ActionButton, Persona, PersonaSize } from "@fluentui/react"
 import {
   Avatar,
   Popover,
@@ -74,7 +75,7 @@ export interface IUserMenuProps {
   avatarUrl?: string
   fullName?: string
   email?: string
-  logout?: () => void
+  logout?: (options?: LogoutOptions | undefined) => void
 }
 
 export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
@@ -95,6 +96,12 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
     [linkShims, onClose]
   )
 
+  const loginRedirect = useCallback(() => {
+    if (logout) {
+      logout({ returnTo: window.location.origin })
+    }
+  }, [logout])
+
   return (
     <>
       <Popover
@@ -106,23 +113,24 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
         <PopoverTrigger>
           <AvatarContainer ref={avatarRef} onClick={onToggle}>
             <HeaderAvatar>
-              <TransparentAvatar
-                image={{
-                  src: avatarUrl,
-                  alt: `User menu for ${fullName}`,
-                }}
+              <Persona
+                text={fullName}
+                imageAlt={`User menu for ${fullName}`}
+                imageShouldFadeIn={false}
+                hidePersonaDetails={true}
+                size={PersonaSize.size40}
               />
             </HeaderAvatar>
           </AvatarContainer>
         </PopoverTrigger>
         <PopoverSurface style={{ borderRight: 0 }}>
           <MenuContent>
-            <Avatar
-              image={{
-                src: avatarUrl,
-                alt: "",
-              }}
-              size={96}
+            <Persona
+              text={fullName}
+              imageAlt=""
+              imageShouldFadeIn={false}
+              hidePersonaDetails={true}
+              size={PersonaSize.size100}
             />
 
             <MenuInner>
@@ -143,7 +151,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 
                 {logout ? (
                   <LogoutButton
-                    onClick={logout}
+                    onClick={loginRedirect}
                     iconProps={{
                       iconName: "SignOut",
                     }}

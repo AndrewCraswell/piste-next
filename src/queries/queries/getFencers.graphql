@@ -1,0 +1,25 @@
+query GetFencers {
+  Students {
+    StudentId
+    Oid
+    FirstName
+    LastName
+    Nickname
+    Gender
+    Birthdate
+    Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
+    CreatedBy
+    CreatedAt
+    Account {
+      Oid
+      Student {
+        StudentId
+        Email
+        Phone
+      }
+    }
+  }
+}

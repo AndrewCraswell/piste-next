@@ -1,0 +1,14 @@
+mutation AddMetricAnswers(
+  $answers: [assessments_metric_result_insert_input!]!
+) {
+  insert_assessments_metric_result(objects: $answers) {
+    returning {
+      id
+      value
+      metric_question_id
+      result_id
+      notes
+    }
+    affected_rows
+  }
+}

@@ -1,0 +1,34 @@
+query GetAssessments {
+  assessments_assessments {
+    id
+    title
+    description
+    created_at
+    account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
+    assessment_cohorts {
+      id
+      title
+      description
+    }
+    assessment_metrics {
+      metric_question {
+        id
+        title
+        description
+        metric_type {
+          id
+          description
+          name
+        }
+      }
+    }
+  }
+}
