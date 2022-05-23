@@ -10,6 +10,7 @@ query GetAssessments {
         StudentId
         FirstName
         LastName
+        Nickname
       }
     }
     assessment_cohorts {

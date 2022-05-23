@@ -16,8 +16,7 @@ import {
 } from "./FencerProfileCard.styles"
 import { AccountFencer } from "$types"
 import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
-import { cacheEvicter } from "$lib"
-import { formatPhoneNumber } from "./FencerProfileCard.utils"
+import { cacheEvicter, formatFullName, formatPhoneNumber } from "$lib"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
@@ -34,6 +33,7 @@ export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
     Birthdate,
     FirstName,
     LastName,
+    Nickname,
     Phone,
     AvatarUrl,
     StudentId,
@@ -68,7 +68,11 @@ export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
       onCompleted: onDeleteDialogClose,
     })
 
-  const fullName = `${FirstName} ${LastName}`
+  const fullName = formatFullName({
+    firstName: FirstName,
+    lastName: LastName,
+    nickname: Nickname,
+  })
   const formattedBirthDate = dayjs(Birthdate).format("MMM D, YYYY")
   const age = new Date().getFullYear() - dayjs(Birthdate).year()
   const formattedEmail = Email || "N/A"
@@ -197,7 +201,7 @@ export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
         >
           <>
             Are you sure you want to permanently delete{" "}
-            <SemiboldText>{`${FirstName} ${LastName}`}</SemiboldText>?
+            <SemiboldText>{fullName}</SemiboldText>?
           </>
         </ConfirmDialog>
 

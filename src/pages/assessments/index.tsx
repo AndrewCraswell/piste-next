@@ -12,6 +12,7 @@ import { useGetAssessmentsQuery } from "$queries"
 import { AssessmentCard, AssessmentCardSkeleton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
 import { IAssessmentMetadata } from "$types"
+import { formatFullName } from "$lib"
 
 const AssessmentsGrid = styled.div`
   display: grid;
@@ -36,8 +37,11 @@ export const Assessments: NextPage = () => {
       createdAt: a.created_at,
       metricsCount: a.assessment_metrics.length,
       cohortsCount: a.assessment_cohorts.length,
-      authorName:
-        `${a.account?.Student?.FirstName} ${a.account?.Student?.LastName}`.trim(),
+      authorName: formatFullName({
+        firstName: a.account?.Student?.FirstName,
+        lastName: a.account?.Student?.LastName,
+        nickname: a.account?.Student?.Nickname,
+      }),
     })) || []
 
   return (
