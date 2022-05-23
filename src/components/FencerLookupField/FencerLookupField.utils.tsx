@@ -1,4 +1,4 @@
-import { formatFullName } from "$lib"
+import { formatFullName, formatPhoneNumber } from "$lib"
 import { Fencer } from "$types"
 import { PersonaSize } from "@fluentui/react"
 import { IFencerPersona } from "./FencerLookupField.types"
@@ -14,7 +14,7 @@ export function fencerSearchFactory(filter: RegExp) {
 
     const account = fencer.Account?.Student
     const email = fencer.Email || account?.Email || ""
-    const phone = fencer.Phone || account?.Phone || ""
+    const phone = formatPhoneNumber(fencer.Phone || account?.Phone || "")
 
     if (filter) {
       return (
@@ -47,7 +47,7 @@ export function mapFencerToPersona(
 
   const account = fencer.Account?.Student
   const email = fencer.Email || account?.Email
-  const phone = fencer.Phone || account?.Phone
+  const phone = formatPhoneNumber(fencer.Phone || account?.Phone || "")
 
   return {
     text: name,
