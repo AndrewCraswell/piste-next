@@ -6,8 +6,10 @@ query AccountProfile($oid: String!) {
       StudentId
       FirstName
       LastName
+      Nickname
       Email
       Phone
+      Gender
       Birthdate
       AssociationMemberId
       AssociationMember {
@@ -15,9 +17,8 @@ query AccountProfile($oid: String!) {
         FirstName
         LastName
         FullName
-        Nickname
-        Birthdate
         Gender
+        Birthdate
         Club1Name
         Club2Name
         Division
