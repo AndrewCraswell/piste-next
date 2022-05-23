@@ -1,4 +1,5 @@
 import type { NextPage } from "next"
+import { Text } from "@fluentui/react-components"
 
 import { PageTitle } from "$components"
 import { useTitle } from "$hooks"
@@ -10,6 +11,7 @@ export const EditEvaluation: NextPage = () => {
   return (
     <>
       <PageTitle>Edit evaluation</PageTitle>
+      <Text>TODO: Add an edit page</Text>
     </>
   )
 }

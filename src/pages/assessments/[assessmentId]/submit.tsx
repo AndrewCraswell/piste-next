@@ -64,6 +64,11 @@ export const SubmitEvaluation: NextPage = () => {
   const [addEvaluation, { loading: isAddingEvaluation }] =
     useAddAssessmentEvaluationMutation()
 
+  const redirectToAssessment = useCallback(() => {
+    const redirectUrl = `/assessments/${assessmentId}/`
+    router.push(redirectUrl)
+  }, [assessmentId, router])
+
   const onSubmit = useCallback(
     (values: Dictionary<any>) => {
       const fencerId = values.fencers[0].fencer.StudentId
@@ -118,8 +123,10 @@ export const SubmitEvaluation: NextPage = () => {
 
               form.reset(answers)
 
-              const redirectUrl = `/assessments/${assessmentId}/${evaluationId}/`
-              router.push(redirectUrl)
+              // TODO: Enable this once the edit page is completed
+              //const redirectUrl = `/assessments/${assessmentId}/${evaluationId}/`
+              //router.push(redirectUrl)
+              redirectToAssessment()
             },
           })
         },
@@ -132,14 +139,9 @@ export const SubmitEvaluation: NextPage = () => {
       form,
       getAssessmentEvaluations,
       metrics.length,
-      router,
+      redirectToAssessment,
     ]
   )
-
-  const redirectToAssessments = useCallback(() => {
-    const redirectUrl = `/assessments/${assessmentId}/`
-    router.push(redirectUrl, redirectUrl)
-  }, [assessmentId, router])
 
   const isLoading = isAddingEvaluation || isAddingAnswers
   const fencerField = form.watch("fencers") as Array<any> | undefined
@@ -159,9 +161,9 @@ export const SubmitEvaluation: NextPage = () => {
     if (isDirty) {
       openConfirm()
     } else {
-      redirectToAssessments()
+      redirectToAssessment()
     }
-  }, [isDirty, openConfirm, redirectToAssessments])
+  }, [isDirty, openConfirm, redirectToAssessment])
 
   if (!isAssessmentLoading && !assessment) {
     return <Body>No assessment found.</Body>
@@ -245,7 +247,7 @@ export const SubmitEvaluation: NextPage = () => {
         title="Leave without saving?"
         onClose={closeConfirm}
         confirmLabel="Yes"
-        onConfirmed={redirectToAssessments}
+        onConfirmed={redirectToAssessment}
       >
         Are you sure you want to leave without saving? Any changes will be lost.
       </ConfirmDialog>
