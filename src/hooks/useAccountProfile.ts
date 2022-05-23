@@ -1,3 +1,4 @@
+import { formatFullName } from "$lib"
 import { useAccountProfileQuery } from "$queries"
 import { useAuth0 } from "@auth0/auth0-react"
 import { useMemo } from "react"
@@ -15,14 +16,19 @@ export const useAccountProfile = () => {
       data?.Accounts[0] || {}
 
     // Use a series of fallbacks to determine the best full name
-    const accountFullName = `${Student?.FirstName || ""} ${
-      Student?.LastName || ""
-    }`.trim()
+    const accountFullName = formatFullName({
+      firstName: Student?.FirstName,
+      lastName: Student?.LastName,
+      nickname: Student?.Nickname,
+    })
+
     const userFullName =
       user?.name ||
-      `${user?.given_name} ${user?.family_name}`.trim() ||
-      user?.name ||
-      user?.nickname
+      formatFullName({
+        firstName: user?.given_name,
+        lastName: user?.family_name,
+        nickname: user?.nickname,
+      })
 
     // Use fallbacks to determine the best email
     const email = Student?.Email || user?.email

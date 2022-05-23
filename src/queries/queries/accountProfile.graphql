@@ -15,7 +15,9 @@ query AccountProfile($oid: String!) {
         FirstName
         LastName
         FullName
+        Nickname
         Birthdate
+        Gender
         Club1Name
         Club2Name
         Division

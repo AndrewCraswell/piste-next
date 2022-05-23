@@ -7315,7 +7315,7 @@ export type AccountProfileQueryVariables = Exact<{
 }>;
 
 
-export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
+export type AccountProfileQuery = { __typename?: 'query_root', Accounts: Array<{ __typename?: 'Accounts', Oid: string, PrimaryStudentId?: any | null, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Email?: string | null, Phone?: string | null, Birthdate?: any | null, AssociationMemberId?: string | null, AssociationMember?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Nickname?: string | null, Birthdate: number, Gender?: string | null, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string } | null } | null, Address?: { __typename?: 'Addresses', AddressId: any, Address: string, Address2?: string | null, City: string, Postal: string, State: string } | null, calendar?: { __typename?: 'calendars', id: string, account_id: string, access_token: string, provider: string, created_at: any } | null }> };
 
 export type GetAccountFencersQueryVariables = Exact<{
   oid: Scalars['String'];
@@ -7634,7 +7634,9 @@ export const AccountProfileDocument = gql`
         FirstName
         LastName
         FullName
+        Nickname
         Birthdate
+        Gender
         Club1Name
         Club2Name
         Division
