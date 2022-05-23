@@ -6,11 +6,12 @@ import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
 import {
   AssessmentMetricsForm,
+  ConfirmDialog,
   FormFencerLookupField,
   FormSection,
   PageTitle,
 } from "$components"
-import { useAccountProfile, useTitle } from "$hooks"
+import { useAccountProfile, useDisclosure, useTitle } from "$hooks"
 import {
   AddMetricAnswersMutationVariables,
   useAddAssessmentEvaluationMutation,
@@ -18,22 +19,25 @@ import {
   useGetAssessmentByIdQuery,
 } from "$queries"
 import { DialogFooter, Persona, PersonaSize, Stack } from "@fluentui/react"
-import { useCallback, useState } from "react"
-import { Fencer } from "$types"
+import { useCallback, useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { Dictionary } from "@reduxjs/toolkit"
 
 // TODO: Add Notes field
-// TODO: allow cancelling of the form
-// TODO: Redirect to edit page when completed
 
-export const SubmitAssessment: NextPage = () => {
-  const pageTitle = "Submit assessment"
+export const SubmitEvaluation: NextPage = () => {
+  const pageTitle = "Submit evaluation"
   useTitle(pageTitle)
+
   const { query } = useRouter()
   const { account } = useAccountProfile()
   const form = useForm()
   const router = useRouter()
+  const {
+    isOpen: isConfirmOpen,
+    onOpen: openConfirm,
+    onClose: closeConfirm,
+  } = useDisclosure(false)
 
   const assessmentId = query.assessmentId as string
   const { data: assessmentData, loading: isAssessmentLoading } =
@@ -95,6 +99,7 @@ export const SubmitAssessment: NextPage = () => {
           addAnswers({
             variables: { answers },
             onCompleted: ({ insert_assessments_metric_result: results }) => {
+              //TODO: This function should only redirect the page
               const answers: Dictionary<string> = {}
 
               results?.returning.forEach((a) => {
@@ -103,8 +108,8 @@ export const SubmitAssessment: NextPage = () => {
 
               form.reset(answers)
 
-              //TODO: This function should only redirect the page
-              router.push("")
+              const redirectUrl = `/assessments/${assessmentId}/${evaluationId}/`
+              router.push(redirectUrl)
             },
           })
         },
@@ -113,11 +118,36 @@ export const SubmitAssessment: NextPage = () => {
     [addAnswers, addEvaluation, assessmentId, form, metrics.length, router]
   )
 
+  const redirectToAssessments = useCallback(() => {
+    const redirectUrl = `/assessments/${assessmentId}/`
+    router.push(redirectUrl, redirectUrl)
+  }, [assessmentId, router])
+
+  const isLoading = isAddingEvaluation || isAddingAnswers
+  const fencerField = form.watch("fencers") as Array<any> | undefined
+
+  const isDirty = useMemo(() => {
+    const dirtyCount = Object.keys(form.formState.dirtyFields).length
+    if (dirtyCount === 0) {
+      return false
+    } else if (dirtyCount === 1 && fencerField?.length === 0) {
+      return false
+    } else {
+      return true
+    }
+  }, [fencerField, form.formState.dirtyFields])
+
+  const cancelEvaluation = useCallback(() => {
+    if (isDirty) {
+      openConfirm()
+    } else {
+      redirectToAssessments()
+    }
+  }, [isDirty, openConfirm, redirectToAssessments])
+
   if (!isAssessmentLoading && !assessment) {
     return <Body>No assessment found.</Body>
   }
-
-  const isLoading = isAddingEvaluation || isAddingAnswers
 
   return (
     <>
@@ -184,16 +214,25 @@ export const SubmitAssessment: NextPage = () => {
             <Button
               type="submit"
               appearance="primary"
-              disabled={!form.formState.isDirty || isLoading}
+              disabled={!isDirty || isLoading}
             >
               Save
             </Button>
-            <Button>Cancel</Button>
+            <Button onClick={cancelEvaluation}>Cancel</Button>
           </DialogFooter>
         </FormSection>
       </form>
+      <ConfirmDialog
+        hidden={!isConfirmOpen}
+        title="Leave without saving?"
+        onClose={closeConfirm}
+        confirmLabel="Yes"
+        onConfirmed={redirectToAssessments}
+      >
+        Are you sure you want to leave without saving? Any changes will be lost.
+      </ConfirmDialog>
     </>
   )
 }
 
-export default SubmitAssessment
+export default SubmitEvaluation
