@@ -1,0 +1,5 @@
+mutation DeleteAssessmentEvaluation($id: uniqueidentifier!) {
+  delete_assessments_assessment_result_by_pk(id: $id) {
+    id
+  }
+}

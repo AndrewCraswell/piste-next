@@ -7287,6 +7287,13 @@ export type AddMetricAnswersMutationVariables = Exact<{
 
 export type AddMetricAnswersMutation = { __typename?: 'mutation_root', insert_assessments_metric_result?: { __typename?: 'assessments_metric_result_mutation_response', affected_rows: number, returning: Array<{ __typename?: 'assessments_metric_result', id: any, value: string, metric_question_id: any, result_id: any, notes?: string | null }> } | null };
 
+export type DeleteAssessmentEvaluationMutationVariables = Exact<{
+  id: Scalars['uniqueidentifier'];
+}>;
+
+
+export type DeleteAssessmentEvaluationMutation = { __typename?: 'mutation_root', delete_assessments_assessment_result_by_pk?: { __typename?: 'assessments_assessment_result', id: any } | null };
+
 export type DeleteFencerByIdMutationVariables = Exact<{
   fencerId: Scalars['uniqueidentifier'];
 }>;
@@ -7489,6 +7496,39 @@ export function useAddMetricAnswersMutation(baseOptions?: ApolloReactHooks.Mutat
 export type AddMetricAnswersMutationHookResult = ReturnType<typeof useAddMetricAnswersMutation>;
 export type AddMetricAnswersMutationResult = Apollo.MutationResult<AddMetricAnswersMutation>;
 export type AddMetricAnswersMutationOptions = Apollo.BaseMutationOptions<AddMetricAnswersMutation, AddMetricAnswersMutationVariables>;
+export const DeleteAssessmentEvaluationDocument = gql`
+    mutation DeleteAssessmentEvaluation($id: uniqueidentifier!) {
+  delete_assessments_assessment_result_by_pk(id: $id) {
+    id
+  }
+}
+    `;
+export type DeleteAssessmentEvaluationMutationFn = Apollo.MutationFunction<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>;
+
+/**
+ * __useDeleteAssessmentEvaluationMutation__
+ *
+ * To run a mutation, you first call `useDeleteAssessmentEvaluationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteAssessmentEvaluationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteAssessmentEvaluationMutation, { data, loading, error }] = useDeleteAssessmentEvaluationMutation({
+ *   variables: {
+ *      id: // value for 'id'
+ *   },
+ * });
+ */
+export function useDeleteAssessmentEvaluationMutation(baseOptions?: ApolloReactHooks.MutationHookOptions<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useMutation<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>(DeleteAssessmentEvaluationDocument, options);
+      }
+export type DeleteAssessmentEvaluationMutationHookResult = ReturnType<typeof useDeleteAssessmentEvaluationMutation>;
+export type DeleteAssessmentEvaluationMutationResult = Apollo.MutationResult<DeleteAssessmentEvaluationMutation>;
+export type DeleteAssessmentEvaluationMutationOptions = Apollo.BaseMutationOptions<DeleteAssessmentEvaluationMutation, DeleteAssessmentEvaluationMutationVariables>;
 export const DeleteFencerByIdDocument = gql`
     mutation DeleteFencerById($fencerId: uniqueidentifier!) {
   delete_Students_by_pk(StudentId: $fencerId) {

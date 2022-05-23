@@ -1,13 +1,13 @@
-export type AssessmentSubmissionAnswer = {
+export type AssessmentEvaluationAnswer = {
   value: string
   notes: string
 }
 
-export type AssessmentSubmission = {
-  submissionId: string
+export type AssessmentEvaluation = {
+  evaluationId: string
   fencerName: string
   fencerId: string
-  completedAnswers: AssessmentSubmissionAnswer[]
+  completedAnswers: AssessmentEvaluationAnswer[]
   metricsCount: number
   proctorName: string
   proctorAccountId: string

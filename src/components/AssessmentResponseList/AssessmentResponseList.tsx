@@ -11,23 +11,28 @@ import {
   NoImageCardHeader,
 } from "./AssessmentResponseList.styles"
 import { ChangeEvent, useCallback, useMemo, useState } from "react"
-import { submissionColumns } from "./AssessmentResponseList.data"
+import { evaluationColumns } from "./AssessmentResponseList.data"
 import {
   Card,
   Input,
   InputOnChangeData,
 } from "@fluentui/react-components/unstable"
+import { FluentProvider, Text } from "@fluentui/react-components"
 import { SearchRegular } from "@fluentui/react-icons"
 import {
-  GetMetricAnswersByAssessmentIdQuery,
+  useDeleteAssessmentEvaluationMutation,
   useGetMetricAnswersByAssessmentIdQuery,
 } from "$queries"
 import { useRouter } from "next/router"
 import {
-  sortSubmissionsByDate,
-  submissionSearchFactory,
-  mapAssessmentSubmissionsToTable,
+  sortEvaluationsByDate,
+  evaluationSearchFactory,
+  mapAssessmentEvaluationsToTable,
+  AssessmentEvaluation,
 } from "./AssessmentResponseList.utils"
+import { cacheEvicter, formatLocalLocalizedTime } from "$lib"
+import { ConfirmDialog } from "$internal"
+import { useDisclosure } from "$hooks"
 
 // TODO: Clean up component and separate into subcomponents
 
@@ -38,31 +43,39 @@ export interface IAssessmentResponseListProps {
 export const AssessmentResponseList: React.FunctionComponent<
   IAssessmentResponseListProps
 > = ({ assessmentId }) => {
-  const [selectedSubmission, setSelectedSubmission] = useState<
-    AssessmentSubmission | undefined
+  const [selectedEvaluation, setSelectedEvaluation] = useState<
+    AssessmentEvaluation | undefined
   >(undefined)
-  let [submissions, setSubmissions] = useState<AssessmentSubmission[]>([])
-  const [filteredSubmissions, setFilteredSubmissions] = useState<
-    AssessmentSubmission[]
+  const [evaluations, setEvaluations] = useState<AssessmentEvaluation[]>([])
+  const [filteredEvaluations, setFilteredEvaluations] = useState<
+    AssessmentEvaluation[]
   >([])
   const router = useRouter()
+  const {
+    isOpen: isConfirmDeleteOpen,
+    onOpen: openConfirmDelete,
+    onClose: closeConfirmDelete,
+  } = useDisclosure()
 
-  const { loading: isSubmissionsLoading } =
+  const { loading: isEvaluationsLoading } =
     useGetMetricAnswersByAssessmentIdQuery({
       variables: {
         assessmentId,
       },
       skip: !assessmentId,
       onCompleted: (data) => {
-        const submissions = mapAssessmentSubmissionsToTable(
+        const evaluations = mapAssessmentEvaluationsToTable(
           data.assessments_assessment_result
-        ).sort(sortSubmissionsByDate)
+        ).sort(sortEvaluationsByDate)
 
-        setSubmissions(submissions)
-        setFilteredSubmissions(submissions)
+        setEvaluations(evaluations)
+        setFilteredEvaluations(evaluations)
       },
       fetchPolicy: "cache-and-network",
     })
+
+  const [deleteEvaluation, { loading: isDeleteingEvaluation }] =
+    useDeleteAssessmentEvaluationMutation({ onCompleted: closeConfirmDelete })
 
   const responseActions = useMemo(
     (): ICommandBarItemProps[] => [
@@ -70,11 +83,11 @@ export const AssessmentResponseList: React.FunctionComponent<
         key: "edit",
         text: "Edit",
         iconProps: { iconName: "Edit" },
-        disabled: !selectedSubmission,
+        disabled: !selectedEvaluation,
         onClick: () => {
-          if (selectedSubmission) {
-            const submissionId = selectedSubmission.submissionId
-            router.push(`/assessments/${assessmentId}/${submissionId}`)
+          if (selectedEvaluation) {
+            const evaluationId = selectedEvaluation.evaluationId
+            router.push(`/assessments/${assessmentId}/${evaluationId}`)
           }
         },
       },
@@ -82,19 +95,20 @@ export const AssessmentResponseList: React.FunctionComponent<
         key: "delete",
         text: "Delete",
         iconProps: { iconName: "Delete" },
-        disabled: !selectedSubmission,
+        disabled: !selectedEvaluation,
+        onClick: openConfirmDelete,
       },
     ],
-    [assessmentId, router, selectedSubmission]
+    [assessmentId, openConfirmDelete, router, selectedEvaluation]
   )
 
   const selection = useMemo(() => {
-    const selection = new Selection<AssessmentSubmission>({
+    const selection = new Selection<AssessmentEvaluation>({
       onSelectionChanged: () => {
         const selectedItem = getSelectedItem()
-        setSelectedSubmission(selectedItem)
+        setSelectedEvaluation(selectedItem)
       },
-      getKey: (item) => item.submissionId,
+      getKey: (item) => item.evaluationId,
     })
 
     function getSelectedItem() {
@@ -105,23 +119,38 @@ export const AssessmentResponseList: React.FunctionComponent<
     return selection
   }, [])
 
-  const resetFilteredSubmissions = useCallback(() => {
-    setFilteredSubmissions(submissions)
-  }, [submissions])
+  const resetFilteredEvaluations = useCallback(() => {
+    setFilteredEvaluations(evaluations)
+  }, [evaluations])
 
-  const filterSubmissions = useCallback(
+  const filterEvaluations = useCallback(
     (event: ChangeEvent<HTMLInputElement>, data: InputOnChangeData) => {
       if (data.value) {
-        const filterFunc = submissionSearchFactory(data.value)
-        const filteredItems = submissions.filter(filterFunc)
+        const filterFunc = evaluationSearchFactory(data.value)
+        const filteredItems = evaluations.filter(filterFunc)
 
-        setFilteredSubmissions(filteredItems)
+        setFilteredEvaluations(filteredItems)
       } else {
-        resetFilteredSubmissions()
+        resetFilteredEvaluations()
       }
     },
-    [resetFilteredSubmissions, submissions]
+    [resetFilteredEvaluations, evaluations]
   )
+
+  const onDeleteConfirmed = useCallback(() => {
+    if (selectedEvaluation) {
+      const evaluationId = selectedEvaluation.evaluationId
+      deleteEvaluation({
+        variables: {
+          id: evaluationId,
+        },
+        update: cacheEvicter({
+          typeName: "assessments_assessment_result",
+          id: evaluationId,
+        }),
+      })
+    }
+  }, [deleteEvaluation, selectedEvaluation])
 
   return (
     <>
@@ -133,63 +162,59 @@ export const AssessmentResponseList: React.FunctionComponent<
               farItems={[
                 {
                   key: "search",
-                  onRender: () => {
-                    return (
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          paddingLeft: 8,
-                        }}
-                      >
-                        <Input
-                          contentBefore={<SearchRegular />}
-                          placeholder="Filter by name"
-                          onChange={filterSubmissions}
-                        />
-                      </div>
-                    )
-                  },
+                  onRender: () => (
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        paddingLeft: 8,
+                      }}
+                    >
+                      <Input
+                        contentBefore={<SearchRegular />}
+                        placeholder="Filter by name"
+                        onChange={filterEvaluations}
+                      />
+                    </div>
+                  ),
                 },
               ]}
               ariaLabel="Evaluation actions"
             />
           }
         />
+
         <ShimmeredDetailsList
-          items={filteredSubmissions}
-          columns={submissionColumns}
+          items={filteredEvaluations}
+          columns={evaluationColumns}
           selectionMode={SelectionMode.single}
           layoutMode={DetailsListLayoutMode.justified}
           isHeaderVisible={true}
           checkboxVisibility={CheckboxVisibility.always}
-          enableShimmer={isSubmissionsLoading}
+          enableShimmer={isEvaluationsLoading}
           shimmerLines={5}
           selection={selection as any}
         />
       </Card>
+
+      <ConfirmDialog
+        hidden={!isConfirmDeleteOpen}
+        onClose={closeConfirmDelete}
+        onConfirmed={onDeleteConfirmed}
+        title="Delete evaluation?"
+        confirmLabel="Delete"
+        isProcessing={isDeleteingEvaluation}
+      >
+        <FluentProvider>
+          Are you sure you want to permanently delete the evaluation for{" "}
+          <Text weight="semibold">{selectedEvaluation?.fencerName}</Text>{" "}
+          created on{" "}
+          <Text weight="semibold">
+            {formatLocalLocalizedTime(selectedEvaluation?.createdAt, "lll")}
+          </Text>
+          ?
+        </FluentProvider>
+      </ConfirmDialog>
     </>
   )
-}
-
-export type MetricAnswer = NonNullable<
-  GetMetricAnswersByAssessmentIdQuery["assessments_assessment_result"]
->[0]
-
-export type AssessmentSubmissionAnswer = {
-  value: string
-  notes: string
-}
-
-export type AssessmentSubmission = {
-  submissionId: string
-  fencerName: string
-  fencerId: string
-  completedAnswers: AssessmentSubmissionAnswer[]
-  metricsCount: number
-  proctorName: string
-  proctorAccountId: string
-  status: string
-  score: string
-  createdAt: string
 }

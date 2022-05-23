@@ -49,7 +49,7 @@ export const SubmitEvaluation: NextPage = () => {
       skip: !assessmentId,
     })
 
-  const [getAssessmentSubmissions] =
+  const [getAssessmentEvaluations] =
     useGetMetricAnswersByAssessmentIdLazyQuery()
 
   const assessment = assessmentData?.assessments_assessments_by_pk
@@ -110,7 +110,7 @@ export const SubmitEvaluation: NextPage = () => {
                 answers[a.metric_question_id] = a.value
               })
 
-              getAssessmentSubmissions({
+              getAssessmentEvaluations({
                 variables: {
                   assessmentId,
                 },
@@ -130,7 +130,7 @@ export const SubmitEvaluation: NextPage = () => {
       addEvaluation,
       assessmentId,
       form,
-      getAssessmentSubmissions,
+      getAssessmentEvaluations,
       metrics.length,
       router,
     ]

@@ -1,9 +1,9 @@
 import { Badge, BadgeProps, Caption } from "@fluentui/react-components"
 
-import { AssessmentSubmission } from "./AssessmentResponseList"
+import { AssessmentEvaluation } from "./AssessmentResponseList"
 import { formatLocalLocalizedTime } from "$lib"
 
-export const submissionColumns = [
+export const evaluationColumns = [
   {
     fieldName: "fencerName",
     key: "name",
@@ -35,7 +35,7 @@ export const submissionColumns = [
     isPadded: true,
     isSortedDescending: true,
     isSorted: true,
-    onRender: (item: AssessmentSubmission) => {
+    onRender: (item: AssessmentEvaluation) => {
       return (
         <Caption>{formatLocalLocalizedTime(item.createdAt, "lll")}</Caption>
       )
@@ -70,7 +70,7 @@ export const submissionColumns = [
     isResizable: true,
     isCollapsible: true,
     isPadded: true,
-    onRender: (item: AssessmentSubmission) => {
+    onRender: (item: AssessmentEvaluation) => {
       let color: BadgeProps["color"] = "informative"
       let label = item.status
 

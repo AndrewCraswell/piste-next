@@ -1,10 +1,10 @@
 import { GetMetricAnswersByAssessmentIdQuery } from "$queries"
 import { formatFullName } from "$lib"
 
-export function mapAssessmentSubmissionsToTable(
-  submissions: MetricAnswer[]
-): AssessmentSubmission[] {
-  return submissions.map((s) => ({
+export function mapAssessmentEvaluationsToTable(
+  evaluations: MetricAnswer[]
+): AssessmentEvaluation[] {
+  return evaluations.map((s) => ({
     fencerId: s.fencer?.StudentId,
     fencerName: formatFullName({
       firstName: s.fencer?.FirstName,
@@ -18,7 +18,7 @@ export function mapAssessmentSubmissionsToTable(
       nickname: s.proctor?.Student?.Nickname,
     }),
     proctorAccountId: s.proctor?.Oid!,
-    submissionId: s.id,
+    evaluationId: s.id,
     completedAnswers: [], // TODO: Map these
     status: s.status_id,
     score: "???",
@@ -26,35 +26,35 @@ export function mapAssessmentSubmissionsToTable(
   }))
 }
 
-export function sortSubmissionsByDate(
-  a: AssessmentSubmission,
-  b: AssessmentSubmission
+export function sortEvaluationsByDate(
+  a: AssessmentEvaluation,
+  b: AssessmentEvaluation
 ) {
   return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
 }
 
-export function submissionSearchFactory(searchText: string) {
+export function evaluationSearchFactory(searchText: string) {
   const filter = new RegExp(searchText, "i")
 
-  return (submission: AssessmentSubmission) =>
-    submission.fencerName?.search(filter) > -1 ||
-    submission.proctorName?.search(filter) > -1
+  return (evaluation: AssessmentEvaluation) =>
+    evaluation.fencerName?.search(filter) > -1 ||
+    evaluation.proctorName?.search(filter) > -1
 }
 
 export type MetricAnswer = NonNullable<
   GetMetricAnswersByAssessmentIdQuery["assessments_assessment_result"]
 >[0]
 
-export type AssessmentSubmissionAnswer = {
+export type AssessmentEvaluationAnswer = {
   value: string
   notes: string
 }
 
-export type AssessmentSubmission = {
-  submissionId: string
+export type AssessmentEvaluation = {
+  evaluationId: string
   fencerName: string
   fencerId: string
-  completedAnswers: AssessmentSubmissionAnswer[]
+  completedAnswers: AssessmentEvaluationAnswer[]
   metricsCount: number
   proctorName: string
   proctorAccountId: string
