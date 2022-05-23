@@ -1,5 +1,5 @@
 {
-  "resource_version": 536,
+  "resource_version": 538,
   "metadata": {
     "version": 3,
     "sources": [
@@ -1124,6 +1124,21 @@
                     "insertion_order": null,
                     "column_mapping": {
                       "fencer_id": "StudentId"
+                    }
+                  }
+                }
+              },
+              {
+                "name": "proctor",
+                "using": {
+                  "manual_configuration": {
+                    "remote_table": {
+                      "schema": "dbo",
+                      "name": "Accounts"
+                    },
+                    "insertion_order": null,
+                    "column_mapping": {
+                      "created_by": "Oid"
                     }
                   }
                 }

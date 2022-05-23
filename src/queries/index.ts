@@ -3185,7 +3185,7 @@ export type Assessments_Assessment_Result = {
   /** An object relationship */
   assessment_result_status: Assessments_Assessment_Result_Statuses;
   created_at: Scalars['datetime2'];
-  created_by?: Maybe<Scalars['String']>;
+  created_by: Scalars['String'];
   /** An object relationship */
   fencer?: Maybe<Students>;
   fencer_id: Scalars['uniqueidentifier'];
@@ -3194,6 +3194,8 @@ export type Assessments_Assessment_Result = {
   metric_results: Array<Assessments_Metric_Result>;
   /** An aggregate relationship */
   metric_results_aggregate: Assessments_Metric_Result_Aggregate;
+  /** An object relationship */
+  proctor?: Maybe<Accounts>;
   status_id: Scalars['String'];
   updated_at: Scalars['datetime2'];
 };
@@ -3259,6 +3261,7 @@ export type Assessments_Assessment_Result_Bool_Exp = {
   fencer_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
   metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+  proctor?: InputMaybe<Accounts_Bool_Exp>;
   status_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   updated_at?: InputMaybe<Datetime2_Mssql_Comparison_Exp>;
 };
@@ -3353,6 +3356,7 @@ export type Assessments_Assessment_Result_Order_By = {
   fencer_id?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
   metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
+  proctor?: InputMaybe<Accounts_Order_By>;
   status_id?: InputMaybe<Order_By>;
   updated_at?: InputMaybe<Order_By>;
 };
@@ -3992,6 +3996,10 @@ export type Assessments_Metric_Questions = {
   created_by?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['uniqueidentifier'];
+  /** An array relationship */
+  metric_results: Array<Assessments_Metric_Result>;
+  /** An aggregate relationship */
+  metric_results_aggregate: Assessments_Metric_Result_Aggregate;
   /** An object relationship */
   metric_type: Assessments_Metric_Types;
   metric_type_id: Scalars['String'];
@@ -4015,6 +4023,24 @@ export type Assessments_Metric_QuestionsAssessment_Metrics_AggregateArgs = {
   offset?: InputMaybe<Scalars['Int']>;
   order_by?: InputMaybe<Array<Assessments_Assessment_Metrics_Order_By>>;
   where?: InputMaybe<Assessments_Assessment_Metrics_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsMetric_ResultsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
+};
+
+
+/** columns and relationships of "assessments.metric_questions" */
+export type Assessments_Metric_QuestionsMetric_Results_AggregateArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
+  offset?: InputMaybe<Scalars['Int']>;
+  order_by?: InputMaybe<Array<Assessments_Metric_Result_Order_By>>;
+  where?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
 };
 
 /** aggregated selection of "assessments.metric_questions" */
@@ -4056,6 +4082,7 @@ export type Assessments_Metric_Questions_Bool_Exp = {
   created_by?: InputMaybe<String_Mssql_Comparison_Exp>;
   description?: InputMaybe<String_Mssql_Comparison_Exp>;
   id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>;
+  metric_results?: InputMaybe<Assessments_Metric_Result_Bool_Exp>;
   metric_type?: InputMaybe<Assessments_Metric_Types_Bool_Exp>;
   metric_type_id?: InputMaybe<String_Mssql_Comparison_Exp>;
   title?: InputMaybe<String_Mssql_Comparison_Exp>;
@@ -4154,6 +4181,7 @@ export type Assessments_Metric_Questions_Order_By = {
   created_by?: InputMaybe<Order_By>;
   description?: InputMaybe<Order_By>;
   id?: InputMaybe<Order_By>;
+  metric_results_aggregate?: InputMaybe<Assessments_Metric_Result_Aggregate_Order_By>;
   metric_type?: InputMaybe<Assessments_Metric_Types_Order_By>;
   metric_type_id?: InputMaybe<Order_By>;
   title?: InputMaybe<Order_By>;
@@ -7312,6 +7340,13 @@ export type GetMembersByIdQueryVariables = Exact<{
 
 export type GetMembersByIdQuery = { __typename?: 'query_root', AssociationMembers_by_pk?: { __typename?: 'AssociationMembers', FullName: string, FirstName: string, LastName: string, Birthdate: number, Club1Name?: string | null, Club2Name?: string | null, Division?: string | null, AssociationMemberId: string, MemberType: string, Expiration: any, Foil: string, Epee: string, Saber: string, Students: Array<{ __typename?: 'Students', Oid?: string | null, StudentId: any }> } | null };
 
+export type GetMetricAnswersByAssessmentIdQueryVariables = Exact<{
+  assessmentId: Scalars['uniqueidentifier'];
+}>;
+
+
+export type GetMetricAnswersByAssessmentIdQuery = { __typename?: 'query_root', assessments_assessment_result: Array<{ __typename?: 'assessments_assessment_result', id: any, status_id: string, created_at: any, fencer?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null } | null, proctor?: { __typename?: 'Accounts', Oid: string, Student?: { __typename?: 'Students', StudentId: any, FirstName: string, LastName: string, Nickname?: string | null } | null } | null, metric_results: Array<{ __typename?: 'assessments_metric_result', id: any, result_id: any, value: string, notes?: string | null, created_at: any, updated_at: any, metric_question: { __typename?: 'assessments_metric_questions', id: any, metric_type_id: string } }> }> };
+
 export type SearchMembersQueryVariables = Exact<{
   filter: Scalars['String'];
   offset?: InputMaybe<Scalars['Int']>;
@@ -7875,6 +7910,73 @@ export function useGetMembersByIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQu
 export type GetMembersByIdQueryHookResult = ReturnType<typeof useGetMembersByIdQuery>;
 export type GetMembersByIdLazyQueryHookResult = ReturnType<typeof useGetMembersByIdLazyQuery>;
 export type GetMembersByIdQueryResult = Apollo.QueryResult<GetMembersByIdQuery, GetMembersByIdQueryVariables>;
+export const GetMetricAnswersByAssessmentIdDocument = gql`
+    query GetMetricAnswersByAssessmentId($assessmentId: uniqueidentifier!) {
+  assessments_assessment_result(
+    order_by: {created_at: desc}
+    where: {assessment_id: {_eq: $assessmentId}}
+  ) {
+    id
+    status_id
+    created_at
+    fencer {
+      StudentId
+      FirstName
+      LastName
+      Nickname
+    }
+    proctor {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+      }
+    }
+    metric_results {
+      id
+      result_id
+      metric_question {
+        id
+        metric_type_id
+      }
+      value
+      notes
+      created_at
+      updated_at
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetMetricAnswersByAssessmentIdQuery__
+ *
+ * To run a query within a React component, call `useGetMetricAnswersByAssessmentIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetMetricAnswersByAssessmentIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetMetricAnswersByAssessmentIdQuery({
+ *   variables: {
+ *      assessmentId: // value for 'assessmentId'
+ *   },
+ * });
+ */
+export function useGetMetricAnswersByAssessmentIdQuery(baseOptions: ApolloReactHooks.QueryHookOptions<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return ApolloReactHooks.useQuery<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>(GetMetricAnswersByAssessmentIdDocument, options);
+      }
+export function useGetMetricAnswersByAssessmentIdLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return ApolloReactHooks.useLazyQuery<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>(GetMetricAnswersByAssessmentIdDocument, options);
+        }
+export type GetMetricAnswersByAssessmentIdQueryHookResult = ReturnType<typeof useGetMetricAnswersByAssessmentIdQuery>;
+export type GetMetricAnswersByAssessmentIdLazyQueryHookResult = ReturnType<typeof useGetMetricAnswersByAssessmentIdLazyQuery>;
+export type GetMetricAnswersByAssessmentIdQueryResult = Apollo.QueryResult<GetMetricAnswersByAssessmentIdQuery, GetMetricAnswersByAssessmentIdQueryVariables>;
 export const SearchMembersDocument = gql`
     query SearchMembers($filter: String!, $offset: Int = 0, $count: Int = 12) @cached(ttl: 300) {
   AssociationMembers(
