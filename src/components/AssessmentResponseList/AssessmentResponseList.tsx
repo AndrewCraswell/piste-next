@@ -22,7 +22,12 @@ import {
   GetMetricAnswersByAssessmentIdQuery,
   useGetMetricAnswersByAssessmentIdQuery,
 } from "$queries"
-import { formatFullName } from "$lib"
+import { useRouter } from "next/router"
+import {
+  sortSubmissionsByDate,
+  submissionSearchFactory,
+  mapAssessmentSubmissionsToTable,
+} from "./AssessmentResponseList.utils"
 
 // TODO: Clean up component and separate into subcomponents
 
@@ -33,11 +38,14 @@ export interface IAssessmentResponseListProps {
 export const AssessmentResponseList: React.FunctionComponent<
   IAssessmentResponseListProps
 > = ({ assessmentId }) => {
-  const [selectedSubmission, setSelectedSubmission] = useState<any>(undefined)
+  const [selectedSubmission, setSelectedSubmission] = useState<
+    AssessmentSubmission | undefined
+  >(undefined)
   let [submissions, setSubmissions] = useState<AssessmentSubmission[]>([])
   const [filteredSubmissions, setFilteredSubmissions] = useState<
     AssessmentSubmission[]
   >([])
+  const router = useRouter()
 
   const { loading: isSubmissionsLoading } =
     useGetMetricAnswersByAssessmentIdQuery({
@@ -63,6 +71,12 @@ export const AssessmentResponseList: React.FunctionComponent<
         text: "Edit",
         iconProps: { iconName: "Edit" },
         disabled: !selectedSubmission,
+        onClick: () => {
+          if (selectedSubmission) {
+            const submissionId = selectedSubmission.submissionId
+            router.push(`/assessments/${assessmentId}/${submissionId}`)
+          }
+        },
       },
       {
         key: "delete",
@@ -71,14 +85,16 @@ export const AssessmentResponseList: React.FunctionComponent<
         disabled: !selectedSubmission,
       },
     ],
-    [selectedSubmission]
+    [assessmentId, router, selectedSubmission]
   )
 
   const selection = useMemo(() => {
-    const selection = new Selection({
+    const selection = new Selection<AssessmentSubmission>({
       onSelectionChanged: () => {
-        setSelectedSubmission(getSelectedItem())
+        const selectedItem = getSelectedItem()
+        setSelectedSubmission(selectedItem)
       },
+      getKey: (item) => item.submissionId,
     })
 
     function getSelectedItem() {
@@ -149,51 +165,11 @@ export const AssessmentResponseList: React.FunctionComponent<
           checkboxVisibility={CheckboxVisibility.always}
           enableShimmer={isSubmissionsLoading}
           shimmerLines={5}
-          selection={selection}
+          selection={selection as any}
         />
       </Card>
     </>
   )
-}
-
-function mapAssessmentSubmissionsToTable(
-  submissions: MetricAnswer[]
-): AssessmentSubmission[] {
-  return submissions.map((s) => ({
-    fencerId: s.fencer?.StudentId,
-    fencerName: formatFullName({
-      firstName: s.fencer?.FirstName,
-      lastName: s.fencer?.LastName,
-      nickname: s.fencer?.Nickname,
-    }),
-    metricsCount: s.metric_results.length,
-    proctorName: formatFullName({
-      firstName: s.proctor?.Student?.FirstName,
-      lastName: s.proctor?.Student?.LastName,
-      nickname: s.proctor?.Student?.Nickname,
-    }),
-    proctorAccountId: s.proctor?.Oid!,
-    submissionId: s.id,
-    completedAnswers: [], // TODO: Map these
-    status: s.status_id,
-    score: "???",
-    createdAt: s.created_at,
-  }))
-}
-
-function sortSubmissionsByDate(
-  a: AssessmentSubmission,
-  b: AssessmentSubmission
-) {
-  return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-}
-
-export function submissionSearchFactory(searchText: string) {
-  const filter = new RegExp(searchText, "i")
-
-  return (submission: AssessmentSubmission) =>
-    submission.fencerName?.search(filter) > -1 ||
-    submission.proctorName?.search(filter) > -1
 }
 
 export type MetricAnswer = NonNullable<
