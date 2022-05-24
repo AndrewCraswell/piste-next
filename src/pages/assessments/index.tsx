@@ -1,12 +1,6 @@
 import type { NextPage } from "next"
-import { Body, Text } from "@fluentui/react-components"
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-} from "@fluentui/react-components/unstable"
+import { Body1, Text } from "@fluentui/react-components"
 import styled from "@emotion/styled"
-import { Shimmer, ShimmerElementType } from "@fluentui/react"
 
 import { useGetAssessmentsQuery } from "$queries"
 import { AssessmentCard, AssessmentCardSkeleton, PageTitle } from "$components"
@@ -47,11 +41,11 @@ export const Assessments: NextPage = () => {
   return (
     <>
       <PageTitle>{pageTitle}</PageTitle>
-      <Body block style={{ marginBottom: "1rem", maxWidth: 600 }}>
+      <Body1 block style={{ marginBottom: "1rem", maxWidth: 600 }}>
         Assessments allow coaches to evaluate students against a set of
         skill-based criteria. The results should help fencers understand their
         skills development and how it impacts their journey.
-      </Body>
+      </Body1>
 
       <AssessmentsGrid>
         {isLoadingAssessments ? (

@@ -1,4 +1,4 @@
-import { Body, Caption, Button, Text } from "@fluentui/react-components"
+import { Body1, Caption1, Button, Text } from "@fluentui/react-components"
 import {
   Card,
   CardHeader,
@@ -32,17 +32,17 @@ export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
       <CardHeader
         image={<ClipboardDataBar32Regular />}
         header={
-          <Body>
+          <Body1>
             <Text weight="semibold">{title}</Text>
-          </Body>
+          </Body1>
         }
         description={
-          <Caption>
+          <Caption1>
             {metricsCount} questions • {cohortsCount} cohorts
-          </Caption>
+          </Caption1>
         }
       />
-      <Body block>{description}</Body>
+      <Body1 block>{description}</Body1>
       <Text size={100} block>
         {authorName || "Authored"} on {dayjs(createdAt).format("MMMM D, YYYY")}
       </Text>

@@ -2,7 +2,7 @@ import {
   TabValue,
   SelectTabEvent,
   SelectTabData,
-} from "@fluentui/react-components/dist/unstable"
+} from "@fluentui/react-components"
 import { useState, useCallback, useMemo } from "react"
 
 export function useTabs(defaultTabName?: string) {

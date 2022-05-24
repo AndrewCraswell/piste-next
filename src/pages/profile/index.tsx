@@ -1,5 +1,5 @@
 import type { NextPage } from "next"
-import { TabList, Tab } from "@fluentui/react-components/unstable"
+import { TabList, Tab } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 import {

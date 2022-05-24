@@ -1,7 +1,13 @@
 import { Control, Controller, FieldValues } from "react-hook-form"
 import { useState } from "react"
-import { RadioGroup, Radio, Body, Text } from "@fluentui/react-components"
-import { Label, Card, CardHeader } from "@fluentui/react-components/unstable"
+import {
+  RadioGroup,
+  Radio,
+  Body1,
+  Text,
+  Label,
+} from "@fluentui/react-components"
+import { Card, CardHeader } from "@fluentui/react-components/unstable"
 
 import ReactMarkdown from "react-markdown"
 import { ClipboardTaskRegular, ClipboardRegular } from "@fluentui/react-icons"
@@ -57,9 +63,9 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
         }
       ></CardHeader>
 
-      <Body block>
+      <Body1 block>
         <ReactMarkdown linkTarget="_blank">{description || ""}</ReactMarkdown>
-      </Body>
+      </Body1>
 
       {/* TODO: use an adapter component to determine the proper type */}
       {/* TODO: Shift the RadioGroup into it's own Controller implementation */}
@@ -68,7 +74,7 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
       <Controller
         render={({ field }) => (
           <RadioGroup
-            layout="horizontalStacked"
+            layout="horizontal-stacked"
             aria-labelledby={id}
             {...field}
             onChange={(event, data) => {

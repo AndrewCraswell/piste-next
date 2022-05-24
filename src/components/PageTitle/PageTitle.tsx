@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
-import { Headline } from "@fluentui/react-components"
+import { Title2 } from "@fluentui/react-components"
 
-const Title = styled(Headline)`
+const Title = styled(Title2)`
   margin: 0 0 1rem 0;
 `
 

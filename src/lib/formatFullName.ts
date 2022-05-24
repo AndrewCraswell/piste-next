@@ -3,7 +3,9 @@ export function formatFullName(config: {
   lastName?: string | null
   nickname?: string | null
 }) {
-  const { firstName, lastName, nickname } = config
+  const { firstName = "", lastName = "", nickname = "" } = config
 
-  return `${firstName} ${lastName}` + (nickname ? ` (${nickname})` : "")
+  return (
+    `${firstName} ${lastName}` + (nickname ? ` (${nickname})` : "")
+  ).trim()
 }

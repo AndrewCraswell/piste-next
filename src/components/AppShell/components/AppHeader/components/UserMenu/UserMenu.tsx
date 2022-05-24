@@ -1,7 +1,8 @@
+import { PersonaAvatar } from "../../../../../PersonaAvatar"
 import { useDisclosure, useLinkShims } from "$hooks"
 import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
-import { ActionButton, Persona, PersonaSize } from "@fluentui/react"
+import { ActionButton } from "@fluentui/react"
 import {
   Avatar,
   Popover,
@@ -21,11 +22,6 @@ const HeaderAvatar = styled(HeaderButton)`
   align-items: center;
   display: flex;
   justify-content: center;
-`
-
-const TransparentAvatar = styled(Avatar)`
-  background-color: transparent;
-  color: ${({ theme }) => theme.palette.white};
 `
 
 const MenuContent = styled.div`
@@ -71,6 +67,12 @@ const ProfileButton = styled(ActionButton)`
   }
 `
 
+const OutlinedAvatar = styled(PersonaAvatar)`
+  .fui-Avatar {
+    border: 1px solid ${({ theme }) => theme.fluentV9.colorNeutralStrokeOnBrand};
+  }
+`
+
 export interface IUserMenuProps {
   avatarUrl?: string
   fullName?: string
@@ -113,24 +115,24 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
         <PopoverTrigger>
           <AvatarContainer ref={avatarRef} onClick={onToggle}>
             <HeaderAvatar>
-              <Persona
+              <OutlinedAvatar
                 text={fullName}
                 imageAlt={`User menu for ${fullName}`}
                 imageShouldFadeIn={false}
                 hidePersonaDetails={true}
-                size={PersonaSize.size40}
+                size={32}
               />
             </HeaderAvatar>
           </AvatarContainer>
         </PopoverTrigger>
         <PopoverSurface style={{ borderRight: 0 }}>
           <MenuContent>
-            <Persona
+            <PersonaAvatar
               text={fullName}
               imageAlt=""
               imageShouldFadeIn={false}
               hidePersonaDetails={true}
-              size={PersonaSize.size100}
+              size={96}
             />
 
             <MenuInner>
