@@ -10,6 +10,7 @@ import {
   FormFencerLookupField,
   FormSection,
   PageTitle,
+  PersonaAvatar,
 } from "$components"
 import { useAccountProfile, useDisclosure, useTitle } from "$hooks"
 import {
@@ -19,7 +20,7 @@ import {
   useGetAssessmentByIdQuery,
   useGetMetricAnswersByAssessmentIdLazyQuery,
 } from "$queries"
-import { DialogFooter, Persona, PersonaSize, Stack } from "@fluentui/react"
+import { DialogFooter, PersonaSize, Stack } from "@fluentui/react"
 import { useCallback, useMemo } from "react"
 import { useForm } from "react-hook-form"
 import { Dictionary } from "@reduxjs/toolkit"
@@ -216,9 +217,10 @@ export const SubmitEvaluation: NextPage = () => {
                     <Text size={100}>The staff providing the evaluation</Text>
                   }
                 />
-                <Persona
+                <PersonaAvatar
                   text={account.FullName}
                   secondaryText={account.Email}
+                  size={40}
                 />
               </Card>
             </Stack.Item>

@@ -1,9 +1,10 @@
 import { HorizontalCard } from "../HorizontalCard"
 import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
-import { IButtonProps, Persona } from "@fluentui/react"
+import { IButtonProps } from "@fluentui/react"
 import { Text } from "@fluentui/react-components"
 import dayjs from "dayjs"
+import { PersonaAvatar } from "../../PersonaAvatar"
 
 const MemberDetailsList = styled.ul`
   display: grid;
@@ -38,7 +39,7 @@ const ThinCard = styled(HorizontalCard)`
   width: 100%;
 `
 
-const MemberPersona = styled(Persona)`
+const MemberPersona = styled(PersonaAvatar)`
   max-width: 245px;
 `
 
