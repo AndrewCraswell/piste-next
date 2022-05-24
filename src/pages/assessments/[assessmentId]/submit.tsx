@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import { Body, Button, Text } from "@fluentui/react-components"
+import { Body1, Button, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
@@ -166,7 +166,7 @@ export const SubmitEvaluation: NextPage = () => {
   }, [isDirty, openConfirm, redirectToAssessment])
 
   if (!isAssessmentLoading && !assessment) {
-    return <Body>No assessment found.</Body>
+    return <Body1>No assessment found.</Body1>
   }
 
   return (

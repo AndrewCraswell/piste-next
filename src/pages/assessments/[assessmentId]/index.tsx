@@ -1,6 +1,6 @@
 import type { NextPage } from "next"
 import { useRouter } from "next/router"
-import { Body, Text } from "@fluentui/react-components"
+import { Body1, Text } from "@fluentui/react-components"
 
 import { AssessmentResponseList, LinkButton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
@@ -34,13 +34,13 @@ export const ViewAssessment: NextPage = () => {
   //   : []
 
   if (!isAssessmentLoading && !assessment) {
-    return <Body>No assessment found.</Body>
+    return <Body1>No assessment found.</Body1>
   }
 
   return (
     <>
       <PageTitle>{assessment?.title || "View assessment"}</PageTitle>
-      <Body block>{assessment?.description}</Body>
+      <Body1 block>{assessment?.description}</Body1>
 
       <PageSection>
         <Link href={`/assessments/${assessmentId}/submit/`} passHref>

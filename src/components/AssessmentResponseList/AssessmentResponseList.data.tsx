@@ -1,4 +1,4 @@
-import { Badge, BadgeProps, Caption } from "@fluentui/react-components"
+import { Badge, BadgeProps, Caption1 } from "@fluentui/react-components"
 
 import { AssessmentEvaluation } from "./AssessmentResponseList.types"
 import { formatLocalLocalizedTime } from "$lib"
@@ -37,7 +37,7 @@ export const evaluationColumns = [
     isSorted: true,
     onRender: (item: AssessmentEvaluation) => {
       return (
-        <Caption>{formatLocalLocalizedTime(item.createdAt, "lll")}</Caption>
+        <Caption1>{formatLocalLocalizedTime(item.createdAt, "lll")}</Caption1>
       )
     },
   },
@@ -51,9 +51,9 @@ export const evaluationColumns = [
     isCollapsible: true,
     isPadded: true,
     onRender: (item: AssessmentEvaluation) => (
-      <Caption>
+      <Caption1>
         {item.completedAnswers.length}/{item.metricsCount}
-      </Caption>
+      </Caption1>
     ),
   },
   {
@@ -66,7 +66,7 @@ export const evaluationColumns = [
     isCollapsible: true,
     isPadded: true,
     onRender: (item: AssessmentEvaluation) => (
-      <Caption>{Math.round(item.score * 100)}%</Caption>
+      <Caption1>{Math.round(item.score * 100)}%</Caption1>
     ),
   },
   {

@@ -1,5 +1,5 @@
 import { Shimmer, ShimmerElementType } from "@fluentui/react"
-import { Body, Text } from "@fluentui/react-components"
+import { Body1, Text } from "@fluentui/react-components"
 import {
   Card,
   CardHeader,
@@ -86,12 +86,12 @@ export const AssessmentCardSkeleton: React.FunctionComponent = () => {
           />
         }
       />
-      <Body block>
+      <Body1 block>
         <Shimmer style={{ marginTop: 5 }} width="75%"></Shimmer>
         <Shimmer style={{ marginTop: 5 }} width="90%"></Shimmer>
         <Shimmer style={{ marginTop: 5 }} width="65%"></Shimmer>
         <Shimmer style={{ marginTop: 5 }} width="45%"></Shimmer>
-      </Body>
+      </Body1>
       <Text size={100} block>
         <Shimmer
           style={{ marginTop: 15 }}
