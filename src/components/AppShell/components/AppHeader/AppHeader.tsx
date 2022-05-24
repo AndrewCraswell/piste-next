@@ -10,7 +10,6 @@ export const headerHeight = 48
 const Header = styled.header`
   background-color: ${({ theme }) => theme.palette.themePrimary};
   color: #fff;
-  height: ${headerHeight}px;
 `
 Header.defaultProps = {
   role: "banner",

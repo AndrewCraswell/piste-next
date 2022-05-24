@@ -10,7 +10,7 @@ const AppRoot = styled.div`
   grid-template-areas:
     "header"
     "main";
-  height: 100%;
+  height: 100vh;
   overflow-y: hidden;
 `
 
