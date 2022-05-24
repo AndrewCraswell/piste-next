@@ -821,7 +821,7 @@
     "@griffel/react" "1.0.5"
     tslib "^2.1.0"
 
-"@fluentui/react-components@^9.0.0-rc.11":
+"@fluentui/react-components@^9.0.0-rc.12":
   version "9.0.0-rc.12"
   resolved "https://registry.yarnpkg.com/@fluentui/react-components/-/react-components-9.0.0-rc.12.tgz#d1c62a2b62d0433b586ecf747cd14191531f1866"
   integrity sha512-0BWURQYwuaCJ6f/8uOOn6luJYCbf5YMJx3lPr2rwDmJiwJHy+gcPSkJFB2S0pDprw4PldWVzjqlu6kdgUkptSg==
