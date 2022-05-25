@@ -21,7 +21,7 @@
     "@fluentui/react-hooks": "^8.5.5",
     "@fluentui/react-icons": "^2.0.166-rc.3",
     "@fluentui/react-make-styles": "^9.0.0-beta.4",
-    "@fluentui/theme-samples": "^8.4.32",
+    "@fluentui/theme-samples": "^8.4.36",
     "@nylas/components-agenda": "^1.1.6",
     "@nylas/components-availability": "^1.1.4",
     "@nylas/components-booking": "^1.0.0-canary.1",
