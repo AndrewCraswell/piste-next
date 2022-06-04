@@ -18,7 +18,7 @@ export const FormAddressAutocomplete: React.FunctionComponent<
     props
 
   const { ref: autocompleteRef } = usePlacesWidget({
-    apiKey: process.env.NEXT_PUBLIC_GOOGLE_PLACES_API_KEY,
+    apiKey: import.meta.env.VITE_GOOGLE_PLACES_API_KEY,
     onPlaceSelected: (place, input) => {
       const address = new GoogleAddressResult(place)
       if (onPlaceSelected) {

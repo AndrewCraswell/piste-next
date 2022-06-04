@@ -1,0 +1,44 @@
+query GetAssessmentEvaluationById($id: uniqueidentifier!) {
+  assessments_assessment_result_by_pk(id: $id) {
+    id
+    assessment {
+      id
+      title
+      description
+    }
+    proctor {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+        Email
+        Phone
+      }
+    }
+    fencer {
+      StudentId
+      FirstName
+      LastName
+      Nickname
+      Email
+      Phone
+    }
+    metric_results {
+      id
+      value
+      notes
+      metric_question {
+        id
+        metric_type_id
+        title
+        description
+        assessment_metrics {
+          assessment_id
+          order_number
+        }
+      }
+    }
+  }
+}

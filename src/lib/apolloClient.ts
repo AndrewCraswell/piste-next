@@ -10,22 +10,15 @@ import { BatchHttpLink } from "@apollo/client/link/batch-http"
 import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react"
 import { setContext } from "@apollo/client/link/context"
 
-import { getBaseUrl } from "$lib"
-
-const APOLLO_STATE_PROP_NAME = "__APOLLO_STATE__"
-
 export function createApolloClient(
   tokenHandler?: Auth0ContextInterface["getAccessTokenSilently"]
 ) {
-  const isSsr = typeof window === "undefined"
-
   return new ApolloClient({
-    ssrMode: isSsr,
     link: ApolloLink.from([
       authMiddlewareFactory(tokenHandler),
       new RetryLink(),
       new BatchHttpLink({
-        uri: `${getBaseUrl()}/api/graphql/`,
+        uri: import.meta.env.VITE_GRAPHQL_API_URL,
         headers: {
           lang: "en",
         },
@@ -82,8 +75,6 @@ export function initializeApollo(
     _apolloClient.cache.restore({ ...existingCache, ...initialState })
   }
 
-  if (typeof window === "undefined") return _apolloClient
-
   if (!apolloClient) apolloClient = _apolloClient
   return _apolloClient
 }
@@ -92,7 +83,6 @@ export const authMiddlewareFactory = (
   tokenHandler?: Auth0ContextInterface["getAccessTokenSilently"]
 ) => {
   return setContext(async (_, { headers, ...context }) => {
-    const isSsr = typeof window === "undefined"
     const token = tokenHandler ? await tokenHandler() : undefined
 
     const allHeaders = {
@@ -101,11 +91,6 @@ export const authMiddlewareFactory = (
 
     if (token) {
       allHeaders.Authorization = `Bearer ${token}`
-    } else if (isSsr) {
-      const graphqlSecret = process.env.HASURA_GRAPHQL_ADMIN_SECRET
-      if (graphqlSecret) {
-        allHeaders["x-hasura-admin-secret"] = graphqlSecret
-      }
     }
 
     return {
@@ -115,26 +100,14 @@ export const authMiddlewareFactory = (
   })
 }
 
-export function addApolloState(
-  client: ApolloClient<any>,
-  pageProps: any = { props: {} }
-) {
-  if (pageProps?.props) {
-    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
-  }
-
-  return pageProps
-}
-
-export function useApollo(pageProps: any = {}) {
+export function useApollo() {
   const { getAccessTokenSilently } = useAuth0()
 
-  const state = pageProps[APOLLO_STATE_PROP_NAME]
-
   const store = useMemo(
-    () => initializeApollo(state, getAccessTokenSilently),
-    [state, getAccessTokenSilently]
+    () => initializeApollo({}, getAccessTokenSilently),
+    [getAccessTokenSilently]
   )
+
   return store
 }
 

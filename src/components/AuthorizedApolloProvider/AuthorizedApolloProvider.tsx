@@ -1,14 +1,10 @@
-import { useApollo } from "$lib"
+import { useApollo } from "$lib/apolloClient"
 import { ApolloProvider } from "@apollo/client"
 
-export interface IAuthorizedApolloProviderProps {
-  pageProps: any
-}
-
-export const AuthorizedApolloProvider: React.FunctionComponent<
-  IAuthorizedApolloProviderProps
-> = ({ children, pageProps }) => {
-  const client = useApollo(pageProps)
+export const AuthorizedApolloProvider: React.FunctionComponent = ({
+  children,
+}) => {
+  const client = useApollo()
 
   return <ApolloProvider client={client}>{children}</ApolloProvider>
 }

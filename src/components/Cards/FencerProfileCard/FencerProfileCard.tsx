@@ -3,7 +3,6 @@ import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
 import { useCallback, useMemo } from "react"
 
-import { EditFencerDialog, VerticalCard, ConfirmDialog } from "$components"
 import { useDeleteFencerByIdMutation } from "$queries"
 import { DetailsItem } from "./components"
 import { useDisclosure } from "$hooks"
@@ -16,7 +15,12 @@ import {
 } from "./FencerProfileCard.styles"
 import { AccountFencer } from "$types"
 import { LinkAssociationPanel } from "$components/LinkAssociationPanel"
-import { cacheEvicter, formatFullName, formatPhoneNumber } from "$lib"
+import { ConfirmDialog } from "$components/ConfirmDialog"
+import { EditFencerDialog } from "$components/EditFencerDialog"
+import { VerticalCard } from "../VerticalCard"
+import { cacheEvicter } from "$lib/apolloClient"
+import { formatFullName } from "$lib/formatFullName"
+import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 
 export interface IFencerCardProps {
   fencer: AccountFencer
@@ -37,7 +41,6 @@ export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
     Phone,
     AvatarUrl,
     StudentId,
-    Oid,
   } = fencer
 
   const {

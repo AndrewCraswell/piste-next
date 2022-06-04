@@ -1,18 +1,16 @@
 import { useCallback } from "react"
 import { UseFormReturn } from "react-hook-form"
 
-import {
-  FormAddressAutocomplete,
-  FormTextField,
-  StatesDropdown,
-  FormMaskedTextField,
-  FormRow,
-  FormSection,
-} from "$components"
 import { GoogleAddressResult } from "$types"
 import { IAddressFormFields } from "."
 import { useFormHelpers } from "$hooks"
 import { IProfileFormFields } from ".."
+import { StatesDropdown } from "$components/StatesDropdown"
+import { FormAddressAutocomplete } from "$components/Form/components/FormAddressAutocomplete"
+import { FormMaskedTextField } from "$components/Form/components/FormMaskedTextField"
+import { FormRow } from "$components/Form/components/FormRow"
+import { FormSection } from "$components/Form/components/FormSection"
+import { FormTextField } from "$components/Form/components/FormTextField"
 
 interface IAddressFormProps {
   form: UseFormReturn<IProfileFormFields, object>

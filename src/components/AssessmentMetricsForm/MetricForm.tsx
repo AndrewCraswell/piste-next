@@ -1,16 +1,15 @@
-import { Control, Controller, FieldValues } from "react-hook-form"
-import { useState } from "react"
 import {
-  RadioGroup,
-  Radio,
-  Body1,
-  Text,
-  Label,
-} from "@fluentui/react-components"
+  Control,
+  Controller,
+  FieldValues,
+  UseFormReturn,
+} from "react-hook-form"
+import { Body1, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 
 import ReactMarkdown from "react-markdown"
 import { ClipboardTaskRegular, ClipboardRegular } from "@fluentui/react-icons"
+import { MetricAdapter } from "$components/MetricAdapter"
 
 interface IMetricFormProps {
   id: string
@@ -22,6 +21,8 @@ interface IMetricFormProps {
   control: Control<FieldValues, any>
   disabled?: boolean
   required?: boolean
+  value?: string
+  form: UseFormReturn<FieldValues, any>
 }
 
 export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
@@ -31,21 +32,23 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
     id,
     title,
     description,
-    type,
     metricNumber,
     totalMetrics,
     control,
     disabled,
     required,
+    value,
+    form,
+    type,
   } = props
-
-  const [selectedValue, setValue] = useState<string | undefined>(undefined)
+  const { isDirty } = form.getFieldState(id)
+  const currentValue = form.watch(id)
 
   return (
-    <Card appearance={selectedValue ? "filled-alternative" : "outline"}>
+    <Card appearance={isDirty ? "filled-alternative" : "outline"}>
       <CardHeader
         image={
-          selectedValue ? (
+          currentValue ? (
             <ClipboardTaskRegular fontSize={"32px"} />
           ) : (
             <ClipboardRegular fontSize={"32px"} />
@@ -67,39 +70,18 @@ export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
         <ReactMarkdown linkTarget="_blank">{description || ""}</ReactMarkdown>
       </Body1>
 
-      {/* TODO: use an adapter component to determine the proper type */}
-      {/* TODO: Shift the RadioGroup into it's own Controller implementation */}
-      <Label id={id}>Rate the student's proficiency</Label>
-
       <Controller
         render={({ field }) => (
-          <RadioGroup
-            layout="horizontal-stacked"
-            aria-labelledby={id}
-            {...field}
-            onChange={(event, data) => {
-              setValue(data.value)
-              field.onChange(event)
-            }}
-            required={required}
+          <MetricAdapter
             disabled={disabled}
-          >
-            <Radio label="0" value="0" />
-            <Radio label="1" value="1" />
-            <Radio label="2" value="2" />
-            <Radio label="3" value="3" />
-            <Radio label="4" value="4" />
-            <Radio label="5" value="5" />
-            <Radio label="6" value="6" />
-            <Radio label="7" value="7" />
-            <Radio label="8" value="8" />
-            <Radio label="9" value="9" />
-            <Radio label="10" value="10" />
-          </RadioGroup>
+            required={required}
+            type={type}
+            field={field}
+          />
         )}
         name={id}
         control={control}
-        defaultValue=""
+        defaultValue={value}
       />
     </Card>
   )

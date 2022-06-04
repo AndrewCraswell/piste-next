@@ -1,5 +1,7 @@
-import { FormDropdown, FormDropdownProps } from "$components"
-import { Dropdown, IDropdownProps } from "@fluentui/react"
+import {
+  FormDropdown,
+  FormDropdownProps,
+} from "$components/Form/components/FormDropdown"
 
 import { states } from "./StatesDropdown.data"
 

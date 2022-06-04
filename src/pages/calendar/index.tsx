@@ -1,7 +1,6 @@
-import { PageTitle } from "$components"
+import { PageTitle } from "$components/PageTitle"
 import { useTitle } from "$hooks"
 import { useCreateComponentQuery } from "$store"
-import type { NextPage } from "next"
 import { DOMAttributes, useEffect } from "react"
 
 type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }> &
@@ -170,7 +169,7 @@ const NylasAvailability: React.FunctionComponent = () => {
   )
 }
 
-export const Calendar: NextPage = () => {
+const CalendarPage: React.FunctionComponent = () => {
   const pageTitle = "Calendar"
   useTitle(pageTitle)
 
@@ -262,4 +261,4 @@ export const Calendar: NextPage = () => {
   )
 }
 
-export default Calendar
+export default CalendarPage

@@ -1,4 +1,4 @@
-import { formatFullName } from "$lib"
+import { formatFullName } from "$lib/formatFullName"
 import { MetricAnswer } from "$types"
 import {
   AssessmentEvaluation,
@@ -20,7 +20,7 @@ export function mapAssessmentEvaluationsToTable(
 
     const score =
       completedAnswers.reduce(
-        (total, answer) => total + parseInt(answer.value),
+        (total, answer) => total + parseFloat(answer.value),
         0
       ) / 100
 

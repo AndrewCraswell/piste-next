@@ -12,7 +12,7 @@ import {
   SearchMembersQuery,
   SearchMembersQueryVariables,
 } from "$queries"
-import { associationMemberToPersona } from "$lib"
+import { associationMemberToPersona } from "$lib/associationMemberToPersona"
 import { IAssociationMemberPersona } from "$types"
 
 export interface IMemberLookupFieldProps

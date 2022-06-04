@@ -1,6 +1,9 @@
 import { Controller } from "react-hook-form"
 
-import { IMemberLookupFieldProps, MemberLookupField } from "$components"
+import {
+  IMemberLookupFieldProps,
+  MemberLookupField,
+} from "$components/MemberLookupField"
 import { FormFieldProps } from "$components/Form/Form.types"
 
 export type FormMemberLookupFieldProps = FormFieldProps<IMemberLookupFieldProps>

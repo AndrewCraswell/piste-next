@@ -1,6 +1,9 @@
 import styled from "@emotion/styled"
 
-import { AddFencerCard, FencerProfileCard } from "$components"
+import {
+  AddFencerCard,
+  FencerProfileCard,
+} from "$components/Cards/FencerProfileCard"
 import { useAccountProfile } from "$hooks"
 import { useGetAccountFencersLazyQuery } from "$queries"
 import { useEffect } from "react"
@@ -14,10 +17,8 @@ const FencersGrid = styled.div`
 export const FencersManager: React.FunctionComponent = () => {
   const { account } = useAccountProfile()
 
-  const [
-    getAccountFencers,
-    { data: accountFencers, loading: isLoadingFencers },
-  ] = useGetAccountFencersLazyQuery()
+  const [getAccountFencers, { data: accountFencers }] =
+    useGetAccountFencersLazyQuery()
 
   useEffect(() => {
     if (account.UserId) {

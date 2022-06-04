@@ -1,22 +1,18 @@
-import { MessageBar, MessageBarType, PersonaSize } from "@fluentui/react"
+import { MessageBar, MessageBarType } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { useForm } from "react-hook-form"
 
-import {
-  FormSection,
-  MemberDetailsCard,
-  PistePanel,
-  PanelFooter,
-  FormMemberLookupField,
-} from "$components"
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
-import {
-  getMemberDetailsFromAssociation,
-  associationMemberToPersona,
-} from "$lib"
+import { associationMemberToPersona } from "$lib/associationMemberToPersona"
+import { getMemberDetailsFromAssociation } from "$lib/getMemberDetailsFromAssociation"
 import { IAssociationMemberPersona } from "$types"
+import { MemberDetailsCard } from "$components/Cards/MemberDetailsCard"
+import { PanelFooter } from "$components/PanelFooter"
+import { PistePanel } from "$components/PistePanel"
+import { FormMemberLookupField } from "$components/Form/components/FormMemberLookupField"
+import { FormSection } from "$components/Form/components/FormSection"
 
 type AssociationMembershipForm = {
   personas: IAssociationMemberPersona[]
@@ -50,7 +46,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
   const watchedPersonas = watch("personas")
 
   const [linkAccount] = useUpdateFencerByIdMutation()
-  const { data } = useGetMembersByIdQuery({
+  useGetMembersByIdQuery({
     variables: {
       id: associationId!,
     },
@@ -149,7 +145,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
           <FormSection>
             <Text>
               You must link your membership in order to get access to all{" "}
-              {process.env.NEXT_PUBLIC_SITE_NAME} features.
+              {import.meta.env.VITE_SITE_NAME} features.
             </Text>
 
             <FormMemberLookupField

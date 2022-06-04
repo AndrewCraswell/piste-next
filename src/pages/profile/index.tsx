@@ -1,21 +1,18 @@
-import type { NextPage } from "next"
 import { TabList, Tab } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
-import {
-  PageTitle,
-  ProfileForm,
-  FencersManager,
-  ConnectionsManager,
-  PaymentMethodsManager,
-} from "$components"
 import { useTabs, useTitle } from "$hooks"
+import { ConnectionsManager } from "$components/ConnectionsManager"
+import { FencersManager } from "$components/FencersManager"
+import { ProfileForm } from "$components/Forms"
+import { PageTitle } from "$components/PageTitle"
+import { PaymentMethodsManager } from "$components/PaymentMethodsManager"
 
 const ProfileTabs = styled(TabList)`
   margin-bottom: 1rem;
 `
 
-export const Profile: NextPage = () => {
+export const ProfilePage: React.FunctionComponent = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
 
@@ -46,4 +43,4 @@ export const Profile: NextPage = () => {
   )
 }
 
-export default Profile
+export default ProfilePage

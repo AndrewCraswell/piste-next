@@ -1,4 +1,4 @@
-import { IPageItem, sitemap } from "$lib"
+import { IPageItem, sitemap } from "$lib/sitemap"
 import { INavLink, INavLinkGroup } from "@fluentui/react"
 import { useLinkShims } from "./useLinkShims"
 

@@ -3,11 +3,11 @@ import { IButtonProps } from "@fluentui/react"
 import { useCallback, useMemo } from "react"
 import styled from "@emotion/styled"
 
-import { LinkAssociationPanel } from "$components"
+import { LinkAssociationPanel } from "../../../LinkAssociationPanel"
 import { useAccountProfile, useDisclosure } from "$hooks"
-import { getMemberDetailsFromAssociation } from "$lib"
+import { getMemberDetailsFromAssociation } from "$lib/getMemberDetailsFromAssociation"
 import { AssociationMember } from "$types"
-import { MemberDetailsCard } from "$internal"
+import { MemberDetailsCard } from "$components/Cards/MemberDetailsCard"
 
 const MembershipCard = styled(MemberDetailsCard)`
   max-width: 330px;

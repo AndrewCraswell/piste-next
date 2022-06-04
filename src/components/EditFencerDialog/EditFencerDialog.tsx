@@ -2,7 +2,6 @@ import { Dialog, DialogFooter } from "@fluentui/react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useCallback, useMemo } from "react"
 
-import { FencerForm, IProfileFormFields, IFencerFormFields } from "$components"
 import { useAccountProfile, useFormHelpers } from "$hooks"
 import {
   GetAccountFencersDocument,
@@ -12,6 +11,11 @@ import {
 import { AccountFencer } from "$types"
 import dayjs from "dayjs"
 import { Button, FluentProvider } from "@fluentui/react-components"
+import {
+  IFencerFormFields,
+  IProfileFormFields,
+  FencerForm,
+} from "$components/Forms"
 
 export interface IEditFencerDialogProps {
   fencer?: AccountFencer
@@ -36,32 +40,27 @@ export const EditFencerDialog: React.FunctionComponent<
     [fencer]
   )
 
-  console.log(UserId)
-
   const form = useForm<IProfileFormFields>({ defaultValues: defaultFormValues })
   const { handleSubmit, formState, reset, getValues } = form
   const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
 
-  const [addFencerToAccount, { loading: isAddingFencer }] =
-    useAddFencerToAccountMutation({
-      refetchQueries: (result) => [
-        {
-          query: GetAccountFencersDocument,
-          variables: {
-            oid: result.data?.insert_Students_one?.Oid,
-          },
+  const [addFencerToAccount] = useAddFencerToAccountMutation({
+    refetchQueries: (result) => [
+      {
+        query: GetAccountFencersDocument,
+        variables: {
+          oid: result.data?.insert_Students_one?.Oid,
         },
-      ],
-    })
-
-  const [editFencer, { loading: isSavingFencer }] = useUpdateFencerByIdMutation(
-    {
-      onCompleted: () => {
-        onClose()
-        reset(getValues())
       },
-    }
-  )
+    ],
+  })
+
+  const [editFencer] = useUpdateFencerByIdMutation({
+    onCompleted: () => {
+      onClose()
+      reset(getValues())
+    },
+  })
 
   const onCancelClicked = useCallback(() => {
     onClose()

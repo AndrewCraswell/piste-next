@@ -4,7 +4,7 @@ import {
   AccordionItem,
 } from "@fluentui/react-components"
 
-import { IndentedAccordionPanel, TabText } from "$components"
+import { TabText, IndentedAccordionPanel } from "$components/Forms"
 import { CalendarLinker } from "./components"
 import { AssociationMembershipLinker } from "./components"
 

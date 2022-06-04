@@ -1,14 +1,11 @@
 import { Body1, Caption1, Button, Text } from "@fluentui/react-components"
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-} from "@fluentui/react-components/unstable"
+import { CardHeader, CardFooter } from "@fluentui/react-components/unstable"
 import { ClipboardDataBar32Regular } from "@fluentui/react-icons"
-import dayjs from "dayjs"
 
-import { LinkButton } from "$components"
+import { LinkButton } from "$components/LinkButton"
 import { IAssessmentMetadata } from "$types"
+import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
+import { AuthorAttribution, FlexCard } from "./AssessmentCard.styles"
 
 interface IAssessmentCardProps {
   assessment: IAssessmentMetadata
@@ -28,7 +25,7 @@ export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
   } = assessment
 
   return (
-    <Card>
+    <FlexCard>
       <CardHeader
         image={<ClipboardDataBar32Regular />}
         header={
@@ -42,16 +39,19 @@ export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
           </Caption1>
         }
       />
-      <Body1 block>{description}</Body1>
-      <Text size={100} block>
-        {authorName || "Authored"} on {dayjs(createdAt).format("MMMM D, YYYY")}
-      </Text>
+      <Body1 block style={{ flexGrow: 1, marginTop: 0 }}>
+        {description}
+      </Body1>
+      <AuthorAttribution size={100}>
+        {authorName || "Authored"} on{" "}
+        {formatLocalLocalizedTime(createdAt, "LL")}
+      </AuthorAttribution>
       <CardFooter>
         <LinkButton appearance="primary" href={`/assessments/${id}/`}>
           View
         </LinkButton>
         <Button disabled>Edit</Button>
       </CardFooter>
-    </Card>
+    </FlexCard>
   )
 }

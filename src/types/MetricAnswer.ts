@@ -1,5 +1,5 @@
-import { GetMetricAnswersByAssessmentIdQuery } from "$queries"
+import { GetAssessmentEvaluationsByIdQuery } from "$queries"
 
 export type MetricAnswer = NonNullable<
-  GetMetricAnswersByAssessmentIdQuery["assessments_assessment_result"]
+  GetAssessmentEvaluationsByIdQuery["assessments_assessment_result"]
 >[0]

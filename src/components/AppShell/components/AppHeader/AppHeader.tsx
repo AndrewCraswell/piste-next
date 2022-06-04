@@ -1,4 +1,4 @@
-import { PistePanel } from "$components"
+import { PistePanel } from "$components/PistePanel"
 import { useAccountProfile, useDisclosure } from "$hooks"
 import { IStyleableProps } from "$types"
 import { useAuth0 } from "@auth0/auth0-react"
@@ -58,7 +58,7 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
           {/* TODO: Parameterize this */}
           <HeaderButton icon="Waffle" variant="large" />
           <BrandingAnchor href="/">
-            {process.env.NEXT_PUBLIC_BRANDING_NAME}
+            {import.meta.env.VITE_BRANDING_NAME}
           </BrandingAnchor>
 
           <CenterRegion></CenterRegion>

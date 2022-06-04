@@ -1,12 +1,15 @@
-import type { NextPage } from "next"
 import { Body1, Text } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 import { useGetAssessmentsQuery } from "$queries"
-import { AssessmentCard, AssessmentCardSkeleton, PageTitle } from "$components"
 import { useTitle } from "$hooks"
 import { IAssessmentMetadata } from "$types"
-import { formatFullName } from "$lib"
+import { formatFullName } from "$lib/formatFullName"
+import {
+  AssessmentCardSkeleton,
+  AssessmentCard,
+} from "$components/AssessmentCard"
+import { PageTitle } from "$components/PageTitle"
 
 const AssessmentsGrid = styled.div`
   display: grid;
@@ -15,7 +18,7 @@ const AssessmentsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, 280px);
 `
 
-export const Assessments: NextPage = () => {
+const AssessmentsPage: React.FunctionComponent = () => {
   const pageTitle = "Assessments"
   useTitle(pageTitle)
 
@@ -68,4 +71,4 @@ export const Assessments: NextPage = () => {
   )
 }
 
-export default Assessments
+export default AssessmentsPage
