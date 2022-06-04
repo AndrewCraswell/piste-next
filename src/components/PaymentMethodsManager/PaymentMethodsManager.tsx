@@ -1,11 +1,8 @@
 import styled from "@emotion/styled"
 
-import {
-  ElementsProvider,
-  PaymentMethodForm,
-  PaymentMethodCard,
-} from "$components"
 import { useGetPaymentMethodsQuery } from "$store"
+import { PaymentMethodCard } from "$components/Cards/PaymentMethodCard"
+import { ElementsProvider, PaymentMethodForm } from "$components/Forms"
 
 const PaymentMethodsGrid = styled.div`
   display: grid;

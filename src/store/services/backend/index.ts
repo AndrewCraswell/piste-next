@@ -30,7 +30,7 @@ function getAuthorizationHeaders(
 
   for (let i = 0; i < localStorage.length; i++) {
     const key = localStorage.key(i)
-    if (key?.includes(process.env.NEXT_PUBLIC_AUTH0_HASURA_AUDIENCE || "")) {
+    if (key?.includes(import.meta.env.VITE_AUTH0_HASURA_AUDIENCE || "")) {
       accessToken = JSON.parse(localStorage.getItem(key)!)?.body?.access_token
       break
     }

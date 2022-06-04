@@ -1,8 +1,7 @@
-import { PageTitle } from "$components"
+import { PageTitle } from "$components/PageTitle"
 import { useTitle } from "$hooks"
-import type { NextPage } from "next"
 
-const Clubs: NextPage = () => {
+const ClubsPage: React.FunctionComponent = () => {
   const pageTitle = "Clubs"
   useTitle(pageTitle)
 
@@ -13,4 +12,4 @@ const Clubs: NextPage = () => {
   )
 }
 
-export default Clubs
+export default ClubsPage

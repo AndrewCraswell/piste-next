@@ -1,18 +1,25 @@
 {
+  "azureFunctions.deploySubpath": "api",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "npm prune (functions)",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "editor.insertSpaces": true,
   "editor.renderWhitespace": "all",
-  "editor.rulers": [
-    140
-  ],
+  "editor.rulers": [140],
   "files.trimTrailingWhitespace": true,
   "files.exclude": {
+    "**/.git": true,
+    "**/dist": true,
+    "**/node_modules": true,
     "**/build": true,
     "**/coverage": true,
-    "**/.next": true,
-    "**/node_modules": true,
+    "**/__*__": true,
+    "**/__*__.json": true
   },
   "typescript.tsdk": ".\\node_modules\\typescript\\lib",
   "[javascript]": {

@@ -1,4 +1,4 @@
-import { FontWeights, Spinner, SpinnerSize, Stack } from "@fluentui/react"
+import { FontWeights, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
 
 export const CardHeader = styled.div`

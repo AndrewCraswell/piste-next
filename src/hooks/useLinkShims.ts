@@ -1,5 +1,5 @@
-import { useRouter } from "next/router"
 import { useCallback, useMemo } from "react"
+import { useNavigate } from "react-router-dom"
 
 export interface IUseLinkShimsResult {
   onMouseOver: (event: any) => void
@@ -7,30 +7,41 @@ export interface IUseLinkShimsResult {
 }
 
 export function useLinkShims(): IUseLinkShimsResult {
-  const router = useRouter()
+  const navigate = useNavigate()
 
-  const onMouseOver = useCallback(
-    (event: any) => {
-      if (event.target instanceof HTMLAnchorElement) {
-        router.prefetch(event.target.href)
-      } else if (event.currentTarget instanceof HTMLAnchorElement) {
-        router.prefetch(event.currentTarget.href)
-      }
-    },
-    [router]
-  )
+  const onMouseOver = useCallback((event: any) => {
+    if (event.target instanceof HTMLAnchorElement) {
+      // TODO: Prefetch route
+      // router.prefetch(event.target.href)
+    } else if (event.currentTarget instanceof HTMLAnchorElement) {
+      // TODO: Prefetch route
+      // router.prefetch(event.currentTarget.href)
+    }
+  }, [])
 
   const onClick = useCallback(
     (event: any) => {
       if (event.target instanceof HTMLAnchorElement) {
         event.preventDefault()
-        router.push(event.target.href)
+
+        const url = (event.target.href as string).replace(
+          window.location.origin,
+          ""
+        )
+
+        navigate(url)
       } else if (event.currentTarget instanceof HTMLAnchorElement) {
         event.preventDefault()
-        router.push(event.currentTarget.href)
+
+        const url = (event.currentTarget.href as string).replace(
+          window.location.origin,
+          ""
+        )
+
+        navigate(url)
       }
     },
-    [router]
+    [navigate]
   )
 
   // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -22,18 +22,19 @@ import {
 import { SearchRegular } from "@fluentui/react-icons"
 import {
   useDeleteAssessmentEvaluationMutation,
-  useGetMetricAnswersByAssessmentIdQuery,
+  useGetAssessmentEvaluationsByIdQuery,
 } from "$queries"
-import { useRouter } from "next/router"
 import {
   sortEvaluationsByDate,
   evaluationSearchFactory,
   mapAssessmentEvaluationsToTable,
 } from "./AssessmentResponseList.utils"
-import { cacheEvicter, formatLocalLocalizedTime } from "$lib"
-import { ConfirmDialog } from "$internal"
+import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
+import { ConfirmDialog } from "$components/ConfirmDialog"
 import { useDisclosure } from "$hooks"
 import { AssessmentEvaluation } from "./AssessmentResponseList.types"
+import { useNavigate } from "react-router-dom"
+import { cacheEvicter } from "$lib/apolloClient"
 
 // TODO: Clean up component and separate into subcomponents
 
@@ -51,15 +52,15 @@ export const AssessmentResponseList: React.FunctionComponent<
   const [filteredEvaluations, setFilteredEvaluations] = useState<
     AssessmentEvaluation[]
   >([])
-  const router = useRouter()
   const {
     isOpen: isConfirmDeleteOpen,
     onOpen: openConfirmDelete,
     onClose: closeConfirmDelete,
   } = useDisclosure()
+  const navigate = useNavigate()
 
   const { loading: isEvaluationsLoading } =
-    useGetMetricAnswersByAssessmentIdQuery({
+    useGetAssessmentEvaluationsByIdQuery({
       variables: {
         assessmentId,
       },
@@ -88,7 +89,7 @@ export const AssessmentResponseList: React.FunctionComponent<
         onClick: () => {
           if (selectedEvaluation) {
             const evaluationId = selectedEvaluation.evaluationId
-            router.push(`/assessments/${assessmentId}/${evaluationId}`)
+            navigate(`/assessments/${assessmentId}/${evaluationId}`)
           }
         },
       },
@@ -100,7 +101,7 @@ export const AssessmentResponseList: React.FunctionComponent<
         onClick: openConfirmDelete,
       },
     ],
-    [assessmentId, openConfirmDelete, router, selectedEvaluation]
+    [assessmentId, openConfirmDelete, navigate, selectedEvaluation]
   )
 
   const selection = useMemo(() => {

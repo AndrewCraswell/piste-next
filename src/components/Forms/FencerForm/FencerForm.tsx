@@ -1,15 +1,12 @@
 import { UseFormReturn } from "react-hook-form"
 import dayjs from "dayjs"
 
-import {
-  FormTextField,
-  FormMaskedTextField,
-  FormDatePicker,
-  FormRow,
-  FormSection,
-  IProfileFormFields,
-} from "$components"
-import { useAccountProfile } from "$hooks"
+import { IProfileFormFields } from "$components/Forms/ProfileForm"
+import { FormDatePicker } from "$components/Form/components/FormDatePicker"
+import { FormMaskedTextField } from "$components/Form/components/FormMaskedTextField"
+import { FormRow } from "$components/Form/components/FormRow"
+import { FormSection } from "$components/Form/components/FormSection"
+import { FormTextField } from "$components/Form/components/FormTextField"
 
 interface IFencerFormProps {
   form: UseFormReturn<IProfileFormFields, object>

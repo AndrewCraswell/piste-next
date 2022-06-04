@@ -1,4 +1,5 @@
-import { formatFullName, formatPhoneNumber } from "$lib"
+import { formatFullName } from "$lib/formatFullName"
+import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { Fencer } from "$types"
 import { PersonaSize } from "@fluentui/react"
 import { IFencerPersona } from "./FencerLookupField.types"

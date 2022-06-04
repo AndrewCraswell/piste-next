@@ -4,7 +4,6 @@ import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { ActionButton } from "@fluentui/react"
 import {
-  Avatar,
   Popover,
   PopoverSurface,
   PopoverTrigger,
@@ -107,7 +106,6 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
   return (
     <>
       <Popover
-        noArrow
         mountNode={avatarRef.current || undefined}
         open={isOpen}
         onOpenChange={(e, { open }) => setIsOpen(open)}

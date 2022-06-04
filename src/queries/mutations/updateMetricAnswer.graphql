@@ -1,0 +1,20 @@
+mutation UpdateMetricAnswer(
+  $evaluationId: uniqueidentifier!
+  $questionId: uniqueidentifier!
+  $value: String
+  $notes: String
+) {
+  update_assessments_metric_result(
+    where: {
+      metric_question_id: { _eq: $questionId }
+      assessment_result: { id: { _eq: $evaluationId } }
+    }
+    _set: { notes: $notes, value: $value }
+  ) {
+    returning {
+      id
+      value
+      notes
+    }
+  }
+}

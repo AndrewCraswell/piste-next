@@ -1,0 +1,16 @@
+{
+  "azureFunctions.deploySubpath": ".",
+  "azureFunctions.postDeployTask": "npm install (functions)",
+  "azureFunctions.projectLanguage": "TypeScript",
+  "azureFunctions.projectRuntime": "~4",
+  "debug.internalConsoleOptions": "neverOpen",
+  "azureFunctions.preDeployTask": "npm prune (functions)",
+  "files.exclude": {
+    "**/node_modules": true,
+    "**/__*__": true,
+    "**/__*__.json": true,
+    "**/dist": true
+  },
+  "editor.tabSize": 2,
+  "prettier.tabWidth": 2
+}

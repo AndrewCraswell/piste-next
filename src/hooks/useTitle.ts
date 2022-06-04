@@ -18,16 +18,17 @@ export function useTitle(
 
   if (document.title !== title) {
     if (options.useSiteName)
-      document.title = `${process.env.NEXT_PUBLIC_SITE_NAME} | ${title}`
+      document.title = `${import.meta.env.VITE_SITE_NAME} | ${title}`
   }
 
   useEffect(() => {
     if (options && options.restoreOnUnmount) {
       return () => {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         document.title = prevTitleRef.current
       }
     } else {
       return
     }
-  }, [])
+  }, [options])
 }

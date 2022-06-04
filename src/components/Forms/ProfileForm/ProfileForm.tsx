@@ -14,7 +14,7 @@ import { IProfileFormFields } from "./ProfileForm.types"
 import { useAccountProfile, useFormHelpers } from "$hooks"
 import { AddressForm } from "../AddressForm"
 import { FencerForm } from "../FencerForm"
-import { PanelFooter } from "$components"
+import { PanelFooter } from "$components/PanelFooter"
 import styled from "@emotion/styled"
 
 export const IndentedAccordionPanel = styled(AccordionPanel)`

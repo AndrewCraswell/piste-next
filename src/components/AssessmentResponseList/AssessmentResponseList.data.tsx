@@ -1,7 +1,7 @@
 import { Badge, BadgeProps, Caption1 } from "@fluentui/react-components"
 
 import { AssessmentEvaluation } from "./AssessmentResponseList.types"
-import { formatLocalLocalizedTime } from "$lib"
+import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 
 export const evaluationColumns = [
   {

@@ -1,6 +1,7 @@
 import { useSitemapGroups } from "$hooks"
 import { useBreadcrumbs } from "$hooks/useBreadcrumbs"
 import styled from "@emotion/styled"
+import { Outlet } from "react-router-dom"
 import { AppHeader, AppNav, AppPage } from "./components"
 import { AppBreadcrumbs } from "./components/AppBreadcrumbs"
 
@@ -53,7 +54,9 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
       <AppMain>
         <Nav links={sitemap} />
         <AppBreadcrumbs crumbs={crumbs} />
-        <Page>{children}</Page>
+        <Page>
+          <Outlet />
+        </Page>
         {/* TODO: Add a footer inside the AppPage */}
       </AppMain>
     </AppRoot>

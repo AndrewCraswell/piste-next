@@ -1,7 +1,10 @@
 import { Controller } from "react-hook-form"
 
 import { FormFieldProps } from "$components/Form/Form.types"
-import { FencerLookupField, IFencerLookupFieldProps } from "$components"
+import {
+  FencerLookupField,
+  IFencerLookupFieldProps,
+} from "$components/FencerLookupField"
 
 export type FormFencerLookupFieldProps = FormFieldProps<IFencerLookupFieldProps>
 

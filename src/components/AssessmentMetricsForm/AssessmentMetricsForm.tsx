@@ -1,46 +1,75 @@
 import { MetricForm } from "./MetricForm"
 import { FieldValues, UseFormReturn } from "react-hook-form"
-import { GetAssessmentByIdQuery } from "$queries"
-import { ConfirmDialog } from "$components"
-import { FormSection } from "$components/Form"
+import { FormSection } from "$components/Form/components/FormSection"
+import { MetricFieldItem } from "./AssessmentMetricsForm.types"
+import { useMemo } from "react"
+import { DialogFooter } from "@fluentui/react"
+import { Button } from "@fluentui/react-components"
 
-// TODO: Allow form save
-
-// TODO: Build adapter for the Metric Type
 // TODO: Create stopwatch component
 
-// TODO: Confirm form cancel if dirty, before navigating back to Assessments page
+export const SUBMIT_BUTTON_ID = "assessmentSubmit"
 
 interface IAssessmentMetricsFormProps {
-  metrics: NonNullable<
-    GetAssessmentByIdQuery["assessments_assessments_by_pk"]
-  >["assessment_metrics"]
+  metrics: MetricFieldItem[]
   form: UseFormReturn<FieldValues, any>
   disabled?: boolean
   required?: boolean
+  onCancel?: () => void
+  isLoading?: boolean
 }
 
 export const AssessmentMetricsForm: React.FunctionComponent<
   IAssessmentMetricsFormProps
-> = ({ metrics, form, disabled, required }) => {
+> = ({ metrics, form, disabled, required, onCancel, isLoading }) => {
   const { control } = form
+
+  // Sort the metrics by the proper order number
+  const orderedMetrics = useMemo(
+    () =>
+      [...metrics]
+        .sort((a, b) => a.order_number - b.order_number)
+        .map((m) => ({
+          metric_id: m.metric_id,
+          order_number: m.order_number,
+          metric_question: m.metric_question,
+          value: m.value,
+        })),
+    [metrics]
+  )
 
   return (
     <FormSection>
-      {metrics.map(({ metric_id, order_number, metric_question: q }) => (
-        <MetricForm
-          key={metric_id}
-          id={q.id}
-          title={q.title}
-          description={q.description}
-          type={q.metric_type_id}
-          metricNumber={order_number}
-          totalMetrics={metrics.length}
-          control={control}
-          disabled={disabled}
-          required={required}
-        />
-      ))}
+      {orderedMetrics.map(
+        ({ metric_id, order_number, metric_question: q, value }) => (
+          <MetricForm
+            key={metric_id}
+            id={q.id}
+            title={q.title}
+            description={q.description}
+            type={q.metric_type_id}
+            metricNumber={order_number}
+            totalMetrics={metrics.length}
+            control={control}
+            disabled={disabled}
+            required={required}
+            value={value}
+            form={form}
+          />
+        )
+      )}
+
+      <DialogFooter>
+        <Button
+          type="submit"
+          id={SUBMIT_BUTTON_ID}
+          appearance="primary"
+          disabled={!form.formState.isDirty || isLoading}
+        >
+          Save
+        </Button>
+        {onCancel && <Button onClick={onCancel}>Cancel</Button>}
+      </DialogFooter>
     </FormSection>
   )
 }

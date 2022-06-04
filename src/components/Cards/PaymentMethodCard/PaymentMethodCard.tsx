@@ -1,9 +1,9 @@
-import { IPaymentMethodProps, PaymentMethod } from "$components"
+import { IPaymentMethodProps, PaymentMethod } from "$components/PaymentMethod"
 import styled from "@emotion/styled"
 import { IButtonProps } from "@fluentui/react"
 import { PaymentMethod as PM } from "@stripe/stripe-js"
 import { useMemo } from "react"
-import { HorizontalCard } from ".."
+import { HorizontalCard } from "../HorizontalCard"
 
 const PaymentContainer = styled(HorizontalCard)`
   padding: 0;

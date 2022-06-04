@@ -1,7 +1,7 @@
 module.exports = {
   schema: [
     {
-      [process.env.NEXT_PUBLIC_GRAPHQL_API_URL]: {
+      [process.env.VITE_GRAPHQL_API_URL]: {
         headers: {
           "X-Hasura-Admin-Secret": process.env.HASURA_GRAPHQL_ADMIN_SECRET,
         },

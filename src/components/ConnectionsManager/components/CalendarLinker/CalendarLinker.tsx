@@ -4,10 +4,11 @@ import { MessageBar, MessageBarButton, MessageBarType } from "@fluentui/react"
 import dayjs from "dayjs"
 import utc from "dayjs/plugin/utc"
 
-import { LinkButton, ConfirmDialog } from "$components"
 import { useAccountProfile, useDisclosure } from "$hooks"
 import { useLazyDeleteCalendarQuery, useGetCalendarsQuery } from "$store"
 import { titleCase } from "./CalendarLinker.utils"
+import { ConfirmDialog } from "$components/ConfirmDialog"
+import { LinkButton } from "$components/LinkButton"
 
 dayjs.extend(utc)
 

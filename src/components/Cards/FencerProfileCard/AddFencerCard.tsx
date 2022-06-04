@@ -1,4 +1,4 @@
-import { EditFencerDialog } from "$components"
+import { EditFencerDialog } from "$components/EditFencerDialog"
 import { VerticalCard } from "$components/Cards/VerticalCard"
 import { useDisclosure } from "$hooks"
 import styled from "@emotion/styled"
