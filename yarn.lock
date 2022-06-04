@@ -5552,10 +5552,10 @@ react-dom@^17.0.2:
     object-assign "^4.1.1"
     scheduler "^0.20.2"
 
-react-google-autocomplete@^2.6.1:
-  version "2.6.1"
-  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-2.6.1.tgz#84538cacd910ec2c47aac351b9866d3a6fe178b6"
-  integrity sha512-E5gVt2Z6deTpLRORSx+5Uvr5mDWAHCfc89pJfkiTmUz+mYr7CJEfig/9+HkkbGxo9ZDpyewBqqjbnER4LaofMA==
+react-google-autocomplete@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/react-google-autocomplete/-/react-google-autocomplete-2.7.0.tgz#cc3bc166b9e0a05326aff77e89154d4a2332efec"
+  integrity sha512-yYhPQC3TDiqhT3pBjslfkn7g6Y4/ihGv0Ch7YG4/PBrpOgA0n+rwJJrcpmPxeqK03sCwvGozTcBKqkJECo3bvA==
   dependencies:
     lodash.debounce "^4.0.8"
     prop-types "^15.5.0"
