@@ -74,7 +74,7 @@ jobs:
       url: https://fencing.club
     needs: staging_deployment
     runs-on: ubuntu-latest
-    name: Build and Deploy Job
+    name: Deploy to Production
     steps:
       - uses: actions/checkout@v2
         with:
