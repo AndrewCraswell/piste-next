@@ -24,7 +24,7 @@
     "@auth0/auth0-react": "^1.10.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
-    "@fluentui/react": "^8.67.4",
+    "@fluentui/react": "^8.72.1",
     "@fluentui/react-components": "^9.0.0-rc.13",
     "@fluentui/react-hooks": "^8.5.5",
     "@fluentui/react-icons": "^2.0.166-rc.3",
