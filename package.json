@@ -47,7 +47,7 @@
     "react-markdown": "^8.0.3",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
-    "stripe": "^9.1.0"
+    "stripe": "^9.6.0"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.0.1",
