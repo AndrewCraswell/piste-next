@@ -16,21 +16,8 @@ jobs:
         with:
           submodules: true
 
-      - name: Get Yarn Cache
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Cache Dependencies
-        id: deps-cache
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
-
-      - name: Install Dependencies
-        run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
+      - name: Install Frontend Dependencies
+        uses: ./.github/workflows/install_frontend_dependencies.yml
 
       - name: Build Frontend
         run: yarn build:web
