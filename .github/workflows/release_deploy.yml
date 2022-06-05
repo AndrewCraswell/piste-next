@@ -8,6 +8,8 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - "api/**"
 
 jobs:
   staging_deployment:
