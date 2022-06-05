@@ -35,7 +35,7 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
 
       - name: Build Frontend
-        run: yarn build:web
+        run: yarn build:web --mode preview
 
       - name: Deploy Frontend
         id: builddeploy

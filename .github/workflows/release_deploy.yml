@@ -40,9 +40,9 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
 
       - name: Build Frontend
-        run: yarn build:web
+        run: yarn build:web --mode staging
 
-      - name: Deploy Frontend (Staging)
+      - name: Deploy Frontend
         id: deploystaging
         uses: Azure/static-web-apps-deploy@v1
         with:
@@ -84,9 +84,9 @@ jobs:
         run: yarn install --frozen-lockfile --prefer-offline --ignore-scripts
 
       - name: Build Frontend
-        run: yarn build:web
+        run: yarn build:web --mode production
 
-      - name: Deploy Frontend (Production)
+      - name: Deploy Frontend
         id: deployproduction
         uses: Azure/static-web-apps-deploy@v1
         with:

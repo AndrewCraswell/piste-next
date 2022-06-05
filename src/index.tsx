@@ -20,8 +20,8 @@ initializeIcons()
 render(
   <React.StrictMode>
     <Auth0Provider
-      domain={import.meta.env.VITE_AUTH0_DOMAIN as string}
-      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID as string}
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
       redirectUri={getBaseUrl()}
       cacheLocation="localstorage"
       audience={import.meta.env.VITE_AUTH0_HASURA_AUDIENCE}
