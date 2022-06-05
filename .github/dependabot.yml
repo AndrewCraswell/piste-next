@@ -9,14 +9,8 @@ updates:
     directory: "/"
     schedule:
       interval: "daily"
-    labels:
-      - "npm dependencies"
-      - "frontend"
 
   - package-ecosystem: "npm"
     directory: "/api"
     schedule:
       interval: "daily"
-    labels:
-      - "npm dependencies"
-      - "api"
