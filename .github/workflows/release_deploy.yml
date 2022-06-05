@@ -1,3 +1,7 @@
+# TODO: Skip the local build by using skip_app_build. Use an artifact instead
+# TODO: yarn install --frozen-lockfile --ignore-scripts to skip postinstall
+# TODO: use app_build_command to create a custom build script
+
 name: Release Frontend
 
 on:
