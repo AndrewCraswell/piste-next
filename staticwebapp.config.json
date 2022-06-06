@@ -1,5 +1,19 @@
 {
   "trailingSlash": "auto",
+  "routes": [
+    {
+      "route": "/*.*.{css,scss,js}",
+      "headers": {
+        "cache-control": "public, max-age=15770000, immutable"
+      }
+    },
+    {
+      "route": "/*.{png,gif,ico,jpg,svg,eot,ttf,woff,woff2}",
+      "headers": {
+        "cache-control": "public, max-age=15770000, must-revalidate"
+      }
+    }
+  ],
   "navigationFallback": {
     "rewrite": "/index.html",
     "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg,eot,ttf,woff,woff2}"]
