@@ -10,14 +10,14 @@
     "dev:web": "vite",
     "dev:build": "yarn build && swa start ./dist --api-location ./api",
     "build": "yarn build:web && yarn build:api",
-    "build:api": "cd api && npm run build",
+    "build:api": "cd api && yarn build",
     "build:web": "yarn lint:ts && vite build",
     "lint": "eslint src",
     "lint:ts": "tsc --project tsconfig.json --pretty --noEmit",
     "gql": "cross-env DOTENV_CONFIG_PATH=.env.local graphql-codegen --config codegen.js -r dotenv/config",
     "gql:watch": "yarn gql --watch",
     "prepare": "husky install",
-    "postinstall": "cd api && npm install"
+    "postinstall": "cd api && yarn install"
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
