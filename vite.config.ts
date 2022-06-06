@@ -1,6 +1,7 @@
 import { defineConfig } from "vite"
 import react from "@vitejs/plugin-react"
 import { visualizer } from "rollup-plugin-visualizer"
+import { viteStaticCopy } from "vite-plugin-static-copy"
 import * as path from "path"
 
 // https://vitejs.dev/config/
@@ -12,6 +13,14 @@ export default defineConfig({
       brotliSize: true,
       open: false,
       filename: "dist/stats.html",
+    }),
+    viteStaticCopy({
+      targets: [
+        {
+          src: "staticwebapp.config.json",
+          dest: "",
+        },
+      ],
     }),
   ],
   resolve: {
