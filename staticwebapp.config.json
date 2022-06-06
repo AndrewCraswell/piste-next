@@ -2,7 +2,7 @@
   "trailingSlash": "auto",
   "routes": [
     {
-      "route": "/*.*.{css,scss,js}",
+      "route": "/*.{css,scss,js}",
       "headers": {
         "cache-control": "public, max-age=15770000, immutable"
       }
