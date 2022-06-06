@@ -6,7 +6,7 @@
   "scripts": {
     "preview": "vite preview",
     "dev": "yarn dev:web",
-    "dev:api": "yarn build:api && swa start http://localhost:3000 --api-location ./api --run \"yarn dev:api\"",
+    "dev:api": "yarn build:api && swa start http://localhost:3000 --api-location ./api --run \"yarn dev:api && yarn dev:web\"",
     "dev:web": "vite",
     "dev:build": "yarn build && swa start ./dist --api-location ./api",
     "build": "yarn build:web && yarn build:api",
