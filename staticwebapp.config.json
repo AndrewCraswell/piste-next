@@ -25,16 +25,5 @@
   },
   "networking": {
     "allowedIpRanges": ["AzureFrontDoor.Backend"]
-  },
-  "forwardingGateway": {
-    "requiredHeaders": {
-      "X-Azure-FDID": "9e932fab-c1d2-40c2-bd9c-02c76194011b"
-    },
-    "allowedForwardedHosts": [
-      "piste-f8a2azddbwbmbfd2.z01.azurefd.net",
-      "piste-staging-d4gcdcdye7hnf6bp.z01.azurefd.net",
-      "staging.fencing.club",
-      "fencing.club"
-    ]
   }
 }
