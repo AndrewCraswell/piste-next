@@ -22,8 +22,5 @@
   ],
   "navigationFallback": {
     "rewrite": "/index.html"
-  },
-  "networking": {
-    "allowedIpRanges": ["AzureFrontDoor.Backend"]
   }
 }
