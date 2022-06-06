@@ -1,18 +1,28 @@
 {
-  "trailingSlash": "auto",
-  "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg,eot,ttf,woff,woff2}"]
-  },
+  "trailingSlash": "always",
   "routes": [
     {
-      "route": "/index.html",
+      "route": "/*.!{css,scss,js,png,gif,ico,jpg,svg,eot,ttf,woff,woff2}",
+      "rewrite": "/index.html",
       "headers": {
         "cache-control": "no-store, must-revalidate, proxy-revalidate, no-cache, max-age=0"
       }
     },
     {
-      "route": "/*.{css,scss,js,png,gif,ico,jpg,svg,eot,ttf,woff,woff2}",
+      "route": "/!{assets}*",
+      "rewrite": "/index.html",
+      "headers": {
+        "cache-control": "no-store, must-revalidate, proxy-revalidate, no-cache, max-age=0"
+      }
+    },
+    {
+      "route": "/*.{css,scss,js}",
+      "headers": {
+        "cache-control": "max-age=15770000, immutable"
+      }
+    },
+    {
+      "route": "/*.{png,gif,ico,jpg,svg,eot,ttf,woff,woff2}",
       "headers": {
         "cache-control": "max-age=15770000, must-revalidate"
       }
