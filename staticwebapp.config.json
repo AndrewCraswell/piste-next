@@ -4,18 +4,23 @@
     {
       "route": "/*.{css,scss,js}",
       "headers": {
-        "cache-control": "public, max-age=15770000, immutable"
+        "cache-control": "public, max-age=31536000, immutable"
       }
     },
     {
       "route": "/*.{png,gif,ico,jpg,svg,eot,ttf,woff,woff2}",
       "headers": {
-        "cache-control": "public, max-age=15770000, must-revalidate"
+        "cache-control": "public, max-age=31536000, must-revalidate"
+      }
+    },
+    {
+      "route": "/index.html",
+      "headers": {
+        "cache-control": "no-store, must-revalidate, proxy-revalidate, no-cache, max-age=0"
       }
     }
   ],
   "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["*.{css,scss,js,png,gif,ico,jpg,svg,eot,ttf,woff,woff2}"]
+    "rewrite": "/index.html"
   }
 }
