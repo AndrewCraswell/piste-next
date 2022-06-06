@@ -10,6 +10,7 @@ interface ImportMetaEnv {
   readonly VITE_AUTH0_HASURA_AUDIENCE: string
   readonly VITE_NYLAS_CLIENT_ID: string
   readonly VITE_NYLAS_API_URL: string
+  readonly VITE_BACKEND_API_URL: string
 }
 
 interface ImportMeta {
