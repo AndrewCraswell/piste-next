@@ -19,7 +19,6 @@ export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
 
   if (user) {
     if (user.sub) {
-      console.log(user)
       appInsights.setAuthenticatedUserContext(
         user.sub.replace("|", ""),
         undefined,
