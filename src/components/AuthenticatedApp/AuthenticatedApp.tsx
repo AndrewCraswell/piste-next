@@ -1,3 +1,4 @@
+import { appInsights } from "$components/ApplicationInsightsProvider"
 import { useAuth0 } from "@auth0/auth0-react"
 import React from "react"
 
@@ -17,6 +18,15 @@ export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
   }
 
   if (user) {
+    if (user.sub) {
+      console.log(user)
+      appInsights.setAuthenticatedUserContext(
+        user.sub.replace("|", ""),
+        undefined,
+        true
+      )
+    }
+
     return <>{children}</>
   } else {
     loginWithRedirect({

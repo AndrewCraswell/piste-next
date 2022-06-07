@@ -19,6 +19,8 @@ export const appInsights = new ApplicationInsights({
     maxBatchInterval: 250,
     correlationHeaderExcludedDomains: [import.meta.env.VITE_AUTH0_DOMAIN],
     extensions: [reactPlugin],
+    enableAjaxPerfTracking: true,
+    enableDebug: import.meta.env.DEV,
   },
 })
 
