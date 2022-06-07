@@ -1,8 +1,10 @@
+import { appInsights } from "$components/ApplicationInsightsProvider"
 import { PistePanel } from "$components/PistePanel"
 import { useAccountProfile, useDisclosure } from "$hooks"
 import { IStyleableProps } from "$types"
-import { useAuth0 } from "@auth0/auth0-react"
+import { LogoutOptions, useAuth0 } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
+import { useCallback } from "react"
 import { HeaderButton, UserMenu } from "./components"
 
 export const headerHeight = 48
@@ -51,6 +53,14 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
   const { account } = useAccountProfile()
   const { logout } = useAuth0()
 
+  const handleLogout = useCallback(
+    (options?: LogoutOptions) => {
+      appInsights.clearAuthenticatedUserContext()
+      return logout(options)
+    },
+    [logout]
+  )
+
   return (
     <>
       <Header className={className}>
@@ -73,7 +83,7 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
             avatarUrl={account.Picture}
             fullName={account.FullName}
             email={account.Email}
-            logout={logout}
+            logout={handleLogout}
           />
         </HeaderInner>
       </Header>

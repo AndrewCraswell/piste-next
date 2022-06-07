@@ -23,10 +23,12 @@ import { ConfirmDialog } from "$components/ConfirmDialog"
 import { FormSection } from "$components/Form/components/FormSection"
 import { PageTitle } from "$components/PageTitle"
 import { PersonaAvatar } from "$components/PersonaAvatar"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 export const EditEvaluationPage: React.FunctionComponent = () => {
   const pageTitle = "Edit evaluation"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "EditEvaluationPage" })
 
   const params = useParams()
   const form = useForm()

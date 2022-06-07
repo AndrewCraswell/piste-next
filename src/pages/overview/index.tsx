@@ -7,6 +7,7 @@ import { useTitle } from "$hooks"
 import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard } from "$components/Cards/MemberDetailsCard"
 import { PageTitle } from "$components/PageTitle"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 const pageSize = 12
 
@@ -20,6 +21,7 @@ const GridContainer = styled.div`
 const OverviewPage: React.FunctionComponent = () => {
   const pageTitle = "Overview"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "OverviewPage" })
 
   const [fetch, { data: members, fetchMore, loading }] =
     useSearchMembersLazyQuery({

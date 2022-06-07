@@ -11,6 +11,7 @@ import {
 } from "@fluentui/react-components"
 import { useCallback, useRef } from "react"
 import { HeaderButton } from "../HeaderButton"
+import { appInsights } from "$components/ApplicationInsightsProvider"
 
 const AvatarContainer = styled.div`
   height: 100%;

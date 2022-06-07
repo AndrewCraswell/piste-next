@@ -7,14 +7,16 @@ import { useParams } from "react-router-dom"
 import { AssessmentResponseList } from "$components/AssessmentResponseList"
 import { LinkButton } from "$components/LinkButton"
 import { PageTitle } from "$components/PageTitle"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 const PageSection = styled.div`
   margin-top: 3em;
 `
 
-const ViewAssessment: React.FunctionComponent = () => {
+const ViewAssessmentPage: React.FunctionComponent = () => {
   const pageTitle = "View assessment"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "ViewAssessmentPage" })
   const params = useParams()
 
   const assessmentId = params.assessmentId as string
@@ -75,4 +77,4 @@ const ViewAssessment: React.FunctionComponent = () => {
   )
 }
 
-export default ViewAssessment
+export default ViewAssessmentPage
