@@ -1,3 +1,4 @@
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { PageTitle } from "$components/PageTitle"
 import { useTitle } from "$hooks"
 import { useCreateComponentQuery } from "$store"
@@ -172,6 +173,7 @@ const NylasAvailability: React.FunctionComponent = () => {
 const CalendarPage: React.FunctionComponent = () => {
   const pageTitle = "Calendar"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "CalendarPage" })
 
   // useEffect(() => {
   //   const component =

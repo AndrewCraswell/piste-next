@@ -25,12 +25,14 @@ import { PageTitle } from "$components/PageTitle"
 import { PersonaAvatar } from "$components/PersonaAvatar"
 import { FormFencerLookupField } from "$components/Form/components/FormFencerLookupField"
 import { FormSection } from "$components/Form/components/FormSection"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 // TODO: Add Notes field
 
-export const SubmitEvaluation: React.FunctionComponent = () => {
+export const SubmitEvaluationPage: React.FunctionComponent = () => {
   const pageTitle = "Submit evaluation"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "SubmitEvaluationPage" })
 
   const params = useParams()
   const { account } = useAccountProfile()
@@ -246,4 +248,4 @@ export const SubmitEvaluation: React.FunctionComponent = () => {
   )
 }
 
-export default SubmitEvaluation
+export default SubmitEvaluationPage

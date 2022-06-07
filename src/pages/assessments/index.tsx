@@ -10,6 +10,7 @@ import {
   AssessmentCard,
 } from "$components/AssessmentCard"
 import { PageTitle } from "$components/PageTitle"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 const AssessmentsGrid = styled.div`
   display: grid;
@@ -21,6 +22,7 @@ const AssessmentsGrid = styled.div`
 const AssessmentsPage: React.FunctionComponent = () => {
   const pageTitle = "Assessments"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "AssessmentsPage" })
 
   const { data, loading: isLoadingAssessments } = useGetAssessmentsQuery()
   const hasAssessments =

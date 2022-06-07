@@ -7,6 +7,7 @@ import { FencersManager } from "$components/FencersManager"
 import { ProfileForm } from "$components/Forms"
 import { PageTitle } from "$components/PageTitle"
 import { PaymentMethodsManager } from "$components/PaymentMethodsManager"
+import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 
 const ProfileTabs = styled(TabList)`
   margin-bottom: 1rem;
@@ -15,6 +16,7 @@ const ProfileTabs = styled(TabList)`
 export const ProfilePage: React.FunctionComponent = () => {
   const pageTitle = "Profile"
   useTitle(pageTitle)
+  useTrackPisteMetric({ componentName: "ProfilePage" })
 
   const urlSearchParams = new URLSearchParams(window.location.search)
   const params = Object.fromEntries(urlSearchParams.entries())
