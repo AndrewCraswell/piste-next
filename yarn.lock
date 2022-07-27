@@ -7274,10 +7274,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nylas@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.4.0.tgz#7683d40a1664c6821166b354f117f82cc683d531"
-  integrity sha512-zR7lxRL5bVZSW2r3iVTiOJAhezs2yTUXNRHfInFaAKwjWW5IBDRal4dU4FlwUgP71RY47opzIJjOa6yddyYdIA==
+nylas@^6.4.2:
+  version "6.4.2"
+  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.4.2.tgz#2fccbc85724bcd7e63a45a247d18b39c58423224"
+  integrity sha512-y5VO6pr/+QsHWY8XuHcXBv9InTq4yBQwIFOd/7et/UPk7jkG+uCL7pCInlfyT5Wl5gN5nbI1p1tHueccI0VTGQ==
   dependencies:
     JSONStream "^1.3.5"
     abort-controller "^3.0.0"
