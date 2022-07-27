@@ -72,7 +72,7 @@
     "gql": "^1.1.2",
     "graphql": "^16.5.0",
     "husky": "^8.0.1",
-    "lint-staged": "^13.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "rollup-plugin-visualizer": "^5.7.1",
     "typescript": "^4.7.4",
