@@ -3560,10 +3560,10 @@ axobject-query@^2.2.0:
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-2.2.0.tgz#943d47e10c0b704aa42275e20edf3722648989be"
   integrity sha512-Td525n+iPOOyUQIeBfcASuG6uJsDOITl7Mds5gFyerkWiX7qhUTdYUBlSgNMyVqtSJqwpt1kXGLdUt6SykLMRA==
 
-azure-functions-core-tools@^4.0.4544:
-  version "4.0.4544"
-  resolved "https://registry.yarnpkg.com/azure-functions-core-tools/-/azure-functions-core-tools-4.0.4544.tgz#67c3fd568126964d6772ef6411aea18ca5ffcff8"
-  integrity sha512-vuXgrpmqYPPEvsEPvN5q9ZpJavYt6Re+Fa/IJeRNa0kIyqyFwr6W9MGusHP9Zh8Gb3Shtb7h4YnvXuFuBdy/Zg==
+azure-functions-core-tools@^4.0.4653:
+  version "4.0.4653"
+  resolved "https://registry.yarnpkg.com/azure-functions-core-tools/-/azure-functions-core-tools-4.0.4653.tgz#9fadb8b7f1ed8ab2b348d3d9e88b36ed6030f08a"
+  integrity sha512-gef5cHyyDNaZCU7rJnE5dxMYAhnE1dM5eV0p937pkm2XU9Tsqbbh8eQtkAIttuhE7q7ZP5KOGowv4vJ3Kb9dbw==
   dependencies:
     chalk "3.0.0"
     command-exists "1.2.8"
