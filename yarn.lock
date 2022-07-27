@@ -1835,10 +1835,13 @@
     "@fluentui/utilities" "^8.10.0"
     tslib "^2.1.0"
 
-"@fluentui/react-icons@^2.0.166-rc.3":
-  version "2.0.166-rc.3"
-  resolved "https://registry.yarnpkg.com/@fluentui/react-icons/-/react-icons-2.0.166-rc.3.tgz#6a66d104a4809ca9da1982f895bc24abb624e342"
-  integrity sha512-mhTti5DcCvG/UxRD+/P5Qjdo/QDOE57eRcRBVooOpfO2N1Q+9sE44NYczOeOHpV2AufNqomX0QYf5iPYZ1lEtg==
+"@fluentui/react-icons@^2.0.166-rc.3", "@fluentui/react-icons@^2.0.177":
+  version "2.0.177"
+  resolved "https://registry.yarnpkg.com/@fluentui/react-icons/-/react-icons-2.0.177.tgz#e56efe400b4543f98212394d49444b3eb1b48dbb"
+  integrity sha512-u3pbAL2TaY02MGD+zeiVKyJKSdWev8FhqaV9rEBZupXF51SQ6LPe9bjri8nJ091euZXTvBk4ppNawWF0hssjkQ==
+  dependencies:
+    "@griffel/react" "^1.0.0"
+    tslib "^2.1.0"
 
 "@fluentui/react-image@9.0.0-rc.11":
   version "9.0.0-rc.11"
@@ -2616,12 +2619,31 @@
     stylis "^4.0.13"
     tslib "^2.1.0"
 
+"@griffel/core@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@griffel/core/-/core-1.5.0.tgz#7941f9c7cd20b9b91fee259addde7ecb291dec92"
+  integrity sha512-NC0J3k4qxQq7fLicrlbbPIC85Gw7LgTUm0c9SWGRv7dsj1tXE6y2+eHAhJwA5230KkUvACPgwJRCaBikFxv+4Q==
+  dependencies:
+    "@emotion/hash" "^0.8.0"
+    csstype "^3.0.10"
+    rtl-css-js "^1.15.0"
+    stylis "^4.0.13"
+    tslib "^2.1.0"
+
 "@griffel/react@1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@griffel/react/-/react-1.1.0.tgz#ce72fe255628cd2cd27d6af1722adafc6592ef50"
   integrity sha512-DxbDufQZrOPtGf/RiEeG6CKGHIdQb8Z6pJveeLioDQJe/lZar+u1NhOjILTih+saX/ZRGuhYX74uNWWUxmFb6w==
   dependencies:
     "@griffel/core" "^1.3.1"
+    tslib "^2.1.0"
+
+"@griffel/react@^1.0.0":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@griffel/react/-/react-1.2.2.tgz#07a68014c9313700d8c1d3d7d5809b239190cb98"
+  integrity sha512-UjfmcavnkNxP1rHTRbbKee63ZWq48+nh26dOP0V+KuJDAx/KTpxU6gHpsKBMWW5SwwhlYPzW8F24gFupGvmgGg==
+  dependencies:
+    "@griffel/core" "^1.5.0"
     tslib "^2.1.0"
 
 "@hapi/hoek@^9.0.0":
