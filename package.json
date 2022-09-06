@@ -65,7 +65,7 @@
     "@vitejs/plugin-react": "^2.0.0",
     "azure-functions-core-tools": "^4.0.4653",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
