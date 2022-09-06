@@ -1,7 +1,7 @@
 import { MessageBar, MessageBarType } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
-import { useForm } from "react-hook-form"
+import { FieldValues, useForm } from "react-hook-form"
 
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
@@ -14,7 +14,7 @@ import { PistePanel } from "$components/PistePanel"
 import { FormMemberLookupField } from "$components/Form/components/FormMemberLookupField"
 import { FormSection } from "$components/Form/components/FormSection"
 
-type AssociationMembershipForm = {
+interface IAssociationMembershipForm extends FieldValues {
   personas: IAssociationMemberPersona[]
 }
 
@@ -38,7 +38,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
     undefined
   )
   const { handleSubmit, control, reset, formState, getValues, watch } =
-    useForm<AssociationMembershipForm>({
+    useForm<IAssociationMembershipForm>({
       defaultValues: {
         personas: [],
       },
