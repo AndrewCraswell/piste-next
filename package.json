@@ -38,7 +38,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@stripe/react-stripe-js": "^1.10.0",
     "@stripe/stripe-js": "^1.35.0",
-    "dayjs": "^1.11.4",
+    "dayjs": "^1.11.5",
     "modern-normalize": "^1.1.0",
     "nylas": "^6.4.2",
     "polished": "^4.2.2",
