@@ -1,8 +1,9 @@
 import { FormFieldProps } from "$components/Form/Form.types"
 import { ITextFieldProps, TextField } from "@fluentui/react"
-import { Controller } from "react-hook-form"
+import { Controller, FieldValues } from "react-hook-form"
 
-export type FormTextFieldProps = FormFieldProps<ITextFieldProps>
+export type FormTextFieldProps<TForm extends FieldValues = any> =
+  FormFieldProps<ITextFieldProps, TForm>
 
 export const FormTextField: React.FunctionComponent<FormTextFieldProps> = (
   props

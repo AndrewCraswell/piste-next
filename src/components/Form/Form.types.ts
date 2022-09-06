@@ -1,7 +1,7 @@
-import { Control, ControllerProps } from "react-hook-form"
+import { Control, ControllerProps, FieldValues } from "react-hook-form"
 
-export type FormFieldProps<T> = T & {
+export type FormFieldProps<T, TForm extends FieldValues = any> = T & {
   name: string
-  control: Control<any, object>
+  control: Control<TForm, object>
   controllerProps?: Omit<ControllerProps, "render" | "name" | "control">
 }
