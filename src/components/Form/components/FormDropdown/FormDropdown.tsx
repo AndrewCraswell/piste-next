@@ -1,8 +1,11 @@
 import { FormFieldProps } from "$components/Form/Form.types"
 import { Dropdown, IDropdownProps } from "@fluentui/react"
-import { Controller } from "react-hook-form"
+import { Controller, FieldValues } from "react-hook-form"
 
-export type FormDropdownProps = FormFieldProps<IDropdownProps>
+export type FormDropdownProps<TForm extends FieldValues = any> = FormFieldProps<
+  IDropdownProps,
+  TForm
+>
 
 export const FormDropdown: React.FunctionComponent<FormDropdownProps> = (
   props
