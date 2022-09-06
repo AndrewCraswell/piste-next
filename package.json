@@ -35,7 +35,7 @@
     "@microsoft/applicationinsights-web": "^2.8.5",
     "@nylas/components-availability": "^1.1.4",
     "@nylas/components-schedule-editor": "^1.1.4-canary.0",
-    "@reduxjs/toolkit": "^1.8.3",
+    "@reduxjs/toolkit": "^1.8.5",
     "@stripe/react-stripe-js": "^1.10.0",
     "@stripe/stripe-js": "^1.35.0",
     "dayjs": "^1.11.4",
