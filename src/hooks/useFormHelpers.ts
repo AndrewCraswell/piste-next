@@ -1,8 +1,10 @@
 import dayjs from "dayjs"
 import { useMemo } from "react"
-import { UseFormReturn } from "react-hook-form"
+import { FieldValues, UseFormReturn } from "react-hook-form"
 
-export function useFormHelpers<T>(form: UseFormReturn<T, object>) {
+export function useFormHelpers<T extends FieldValues>(
+  form: UseFormReturn<T, object>
+) {
   const { setValue } = form
 
   return useMemo(
