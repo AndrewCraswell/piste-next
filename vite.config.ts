@@ -3,9 +3,18 @@ import react from "@vitejs/plugin-react"
 import { visualizer } from "rollup-plugin-visualizer"
 import { viteStaticCopy } from "vite-plugin-static-copy"
 import * as path from "path"
+import { setDefaultResultOrder } from "dns"
+
+setDefaultResultOrder("verbatim")
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  server: {
+    host: "localhost",
+    open: true,
+    port: 3000,
+    strictPort: true,
+  },
   plugins: [
     react(),
     visualizer({

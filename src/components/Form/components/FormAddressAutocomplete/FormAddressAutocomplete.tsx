@@ -3,13 +3,14 @@ import { usePlacesWidget } from "react-google-autocomplete"
 import { FormTextField, FormTextFieldProps } from "../FormTextField"
 import { GoogleAddressResult } from "$types"
 import { RefObject } from "react"
+import { IProfileFormFields } from "$components/Forms/ProfileForm/ProfileForm.types"
 
 export type FormAddressAutocompleteProps = {
   onPlaceSelected?: (
     address: GoogleAddressResult,
     input: RefObject<HTMLInputElement>
   ) => void
-} & Omit<FormTextFieldProps, "elementRef">
+} & Omit<FormTextFieldProps<IProfileFormFields>, "elementRef">
 
 export const FormAddressAutocomplete: React.FunctionComponent<
   FormAddressAutocompleteProps
@@ -40,7 +41,7 @@ export const FormAddressAutocomplete: React.FunctionComponent<
       control={control}
       controllerProps={controllerProps}
       {...inputProps}
-      elementRef={(c) => {
+      elementRef={(c: any) => {
         // @ts-ignore
         autocompleteRef.current = c?.querySelector("input")
       }}
