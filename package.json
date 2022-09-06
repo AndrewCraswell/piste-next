@@ -77,6 +77,6 @@
     "rollup-plugin-visualizer": "^5.7.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.3",
-    "vite-plugin-static-copy": "^0.7.0"
+    "vite-plugin-static-copy": "^0.9.0"
   }
 }
