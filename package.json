@@ -49,7 +49,7 @@
     "react-markdown": "^8.0.3",
     "react-redux": "^8.0.1",
     "react-router-dom": "^6.3.0",
-    "stripe": "^9.16.0"
+    "stripe": "^10.7.0"
   },
   "devDependencies": {
     "@azure/static-web-apps-cli": "^1.0.2",
@@ -65,7 +65,7 @@
     "@vitejs/plugin-react": "^2.0.0",
     "azure-functions-core-tools": "^4.0.4653",
     "cross-env": "^7.0.3",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.2",
     "eslint": "^8.20.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-config-react-app": "^7.0.1",
@@ -74,7 +74,7 @@
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
-    "rollup-plugin-visualizer": "^5.7.1",
+    "rollup-plugin-visualizer": "^5.8.1",
     "typescript": "^4.7.4",
     "vite": "^3.0.3",
     "vite-plugin-static-copy": "^0.7.0"
