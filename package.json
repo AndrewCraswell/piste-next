@@ -27,7 +27,7 @@
     "@fluentui/react": "^8.85.0",
     "@fluentui/react-components": "^9.0.0-rc.15",
     "@fluentui/react-hooks": "^8.6.11",
-    "@fluentui/react-icons": "^2.0.177",
+    "@fluentui/react-icons": "^2.0.179",
     "@fluentui/react-make-styles": "^9.0.0-beta.4",
     "@fluentui/theme-samples": "^8.6.32",
     "@loadable/component": "^5.15.2",
