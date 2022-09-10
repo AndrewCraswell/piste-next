@@ -18,6 +18,7 @@ const SubmitEvaluationPage = loadable(
 const EditEvaluationPage = loadable(
   () => import("./pages/assessments/assessment/edit")
 )
+const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
 export const Routes: React.FunctionComponent = () => {
   return (
@@ -46,6 +47,8 @@ export const Routes: React.FunctionComponent = () => {
         />
 
         <Route path="profile" element={<ProfilePage />} />
+
+        <Route path="tournaments" element={<TournamentsPage />} />
 
         <Route path="*" element={<Body1>Page not found.</Body1>} />
       </Route>

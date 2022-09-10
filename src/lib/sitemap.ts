@@ -144,7 +144,7 @@ export const sitemap: IPageItem[] = [
         name: "Tournaments",
         url: "tournaments/",
         tags: {
-          nav: { group: "Events", link: { icon: "Trophy2", disabled: true } },
+          nav: { group: "Events", link: { icon: "Trophy2", disabled: false } },
           breadcrumb: {},
         },
       },
