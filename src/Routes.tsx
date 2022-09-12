@@ -19,6 +19,7 @@ const EditEvaluationPage = loadable(
   () => import("./pages/assessments/assessment/edit")
 )
 const TournamentsPage = loadable(() => import("./pages/tournaments"))
+const OnboardingPage = loadable(() => import("./pages/onboarding"))
 
 export const Routes: React.FunctionComponent = () => {
   return (
@@ -49,6 +50,17 @@ export const Routes: React.FunctionComponent = () => {
         <Route path="profile" element={<ProfilePage />} />
 
         <Route path="tournaments" element={<TournamentsPage />} />
+
+        <Route path="onboarding" element={<OnboardingPage />} />
+        <Route
+          path="onboarding/athlete"
+          element={<p>Athelete onboarding page</p>}
+        />
+        <Route
+          path="onboarding/family"
+          element={<p>Family onboarding page</p>}
+        />
+        <Route path="onboarding/club" element={<p>Club onboarding page</p>} />
 
         <Route path="*" element={<Body1>Page not found.</Body1>} />
       </Route>

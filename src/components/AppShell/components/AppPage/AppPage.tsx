@@ -11,6 +11,7 @@ const PageContainer = styled.div`
 const PageContent = styled.main`
   max-width: 1200px;
   width: 100%;
+  height: 100%;
 `
 
 export interface IAppPageProps

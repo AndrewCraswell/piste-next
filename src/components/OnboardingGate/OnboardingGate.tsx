@@ -1,29 +1,36 @@
-import { useAccountProfile } from "$hooks"
 import styled from "@emotion/styled"
-import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
+import { AnimationStyles, Stack } from "@fluentui/react"
+import { Spinner } from "@fluentui/react-components"
+import { useLocation, useNavigate } from "react-router-dom"
+
+import { useAccountProfile } from "$hooks"
+import { useEffect } from "react"
 
 const AnimatedStack = styled(Stack)`
   ${AnimationStyles.slideUpIn20 as unknown as string}
-  height: 85vh;
-  width: 100vw;
+  height: 60%;
 `
 
 export const OnboardingGate: React.FunctionComponent = ({ children }) => {
-  const { loading, account } = useAccountProfile()
+  const { loading, account, previousData } = useAccountProfile()
+  const { pathname } = useLocation()
+  const navigate = useNavigate()
 
-  if (loading) {
+  useEffect(() => {
+    if (!pathname.startsWith("/onboarding") && !account.PrimaryStudentId) {
+      navigate("/onboarding", {
+        replace: true,
+      })
+    }
+  }, [account.PrimaryStudentId, navigate, pathname])
+
+  if (!previousData && loading) {
     return (
       <AnimatedStack verticalAlign={"center"} horizontalAlign={"center"}>
-        <Spinner size={SpinnerSize.large} />
+        <Spinner labelPosition="below" label="Loading your account..." />
       </AnimatedStack>
     )
   } else {
-    // If profile already exists
-    if (account.UserId) {
-      return <>{children}</>
-    } else {
-      // If profile does not exist, guide user to create it
-      return <>Profile does not exist.</>
-    }
+    return <>{children}</>
   }
 }

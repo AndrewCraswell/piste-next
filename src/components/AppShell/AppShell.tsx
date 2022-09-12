@@ -1,3 +1,4 @@
+import { OnboardingGate } from "$components/OnboardingGate"
 import { useSitemapGroups } from "$hooks"
 import { useBreadcrumbs } from "$hooks/useBreadcrumbs"
 import styled from "@emotion/styled"
@@ -55,7 +56,9 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
         <Nav links={sitemap} />
         <AppBreadcrumbs crumbs={crumbs} />
         <Page>
-          <Outlet />
+          <OnboardingGate>
+            <Outlet />
+          </OnboardingGate>
         </Page>
         {/* TODO: Add a footer inside the AppPage */}
       </AppMain>

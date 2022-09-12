@@ -155,6 +155,36 @@ export const sitemap: IPageItem[] = [
           breadcrumb: {},
         },
       },
+      {
+        name: "Onboarding",
+        url: "onboarding/",
+        tags: {
+          breadcrumb: {},
+        },
+        children: [
+          {
+            name: "Athlete",
+            url: "athlete/",
+            tags: {
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Family",
+            url: "family/",
+            tags: {
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Club",
+            url: "club/",
+            tags: {
+              breadcrumb: {},
+            },
+          },
+        ],
+      },
     ],
   },
 ]
