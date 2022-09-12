@@ -49,7 +49,7 @@ export const OnboardingPage: React.FunctionComponent = () => {
           Welcome to Piste!
         </Title1>
         <Subtitle2 align="center" block>
-          Choose which type of experience you would like to start with.
+          Choose which type of experience you would like to start with
         </Subtitle2>
       </HeroSection>
 
