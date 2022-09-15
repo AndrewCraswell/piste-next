@@ -32,7 +32,7 @@ const CardContent = styled(Text)`
 const HeroSection = styled.div`
   margin: ${({ theme }) => theme.fluentV9.spacingVerticalXXXL} 0;
 
-  & > span:first-child {
+  & > span:first-of-type {
     margin-bottom: ${({ theme }) => theme.fluentV9.spacingVerticalS};
   }
 `
@@ -46,7 +46,7 @@ export const OnboardingPage: React.FunctionComponent = () => {
     <>
       <HeroSection>
         <Title1 align="center" block>
-          Welcome to Piste!
+          Welcome to {import.meta.env.VITE_SITE_NAME}!
         </Title1>
         <Subtitle2 align="center" block>
           Choose which type of experience you would like to start with

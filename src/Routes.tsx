@@ -20,6 +20,9 @@ const EditEvaluationPage = loadable(
 )
 const TournamentsPage = loadable(() => import("./pages/tournaments"))
 const OnboardingPage = loadable(() => import("./pages/onboarding"))
+const AthleteOnboardingPage = loadable(
+  () => import("./pages/onboarding/athlete")
+)
 
 export const Routes: React.FunctionComponent = () => {
   return (
@@ -51,16 +54,17 @@ export const Routes: React.FunctionComponent = () => {
 
         <Route path="tournaments" element={<TournamentsPage />} />
 
+        {/* Onboarding routes */}
         <Route path="onboarding" element={<OnboardingPage />} />
-        <Route
-          path="onboarding/athlete"
-          element={<p>Athelete onboarding page</p>}
-        />
-        <Route
-          path="onboarding/family"
-          element={<p>Family onboarding page</p>}
-        />
-        <Route path="onboarding/club" element={<p>Club onboarding page</p>} />
+        <Route path="onboarding/athlete" element={<AthleteOnboardingPage />}>
+          <Route path=":stepId" element={<AthleteOnboardingPage />}></Route>
+        </Route>
+        <Route path="onboarding/family" element={<p>Family onboarding page</p>}>
+          <Route path=":stepId" element={<p>Family onboarding page</p>} />
+        </Route>
+        <Route path="onboarding/club" element={<p>Club onboarding page</p>}>
+          <Route path=":stepId" element={<p>Club onboarding page</p>} />
+        </Route>
 
         <Route path="*" element={<Body1>Page not found.</Body1>} />
       </Route>
