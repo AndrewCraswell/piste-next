@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { PageTitle } from "$components/PageTitle"
 import { useTitle } from "$hooks"

@@ -15,10 +15,11 @@ function configureAppStore(preloadedState: any = {}) {
     preloadedState,
   })
 
-  //@ts-ignore
   if (import.meta.env.NODE_ENV !== "production" && import.meta.hot) {
-    //@ts-ignore
-    import.meta.hot.accept("./reducers", () => store.replaceReducer(reducer))
+    import.meta.hot.accept("./reducers", () => {
+      const nextReducer = require("./reducers").default
+      store.replaceReducer(nextReducer)
+    })
   }
 
   return store
