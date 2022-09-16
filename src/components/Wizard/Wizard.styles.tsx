@@ -21,10 +21,12 @@ export const Connector = styled.div`
   }
 `
 
-export const Step = styled.div`
+export const Step = styled.a`
   padding: 0 ${({ theme }) => theme.fluentV9.spacingHorizontalS};
   display: flex;
   align-items: center;
+  text-decoration: none;
+  color: inherit;
 
   &.active {
     & > .icon {

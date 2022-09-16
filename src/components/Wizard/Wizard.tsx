@@ -14,10 +14,10 @@ import { contextDefault, WizardContext } from "./WizardContext"
 import { useWizard } from "./useWizard"
 import styled from "@emotion/styled"
 import { useNavigate, useParams } from "react-router-dom"
+import { useLinkShims } from "$hooks"
 
 export interface IWizardProps {}
 
-// TODO: Make the step marker a link
 // TODO: Implement the WizardFooter which has useWizard()
 
 // TODO: Add success status for steps
@@ -151,6 +151,7 @@ export const Stepper = styled.div`
 
 export const WizardStepper: React.FunctionComponent = () => {
   const { steps, currentStepId } = useWizard()
+  const { onClick } = useLinkShims()
 
   return (
     <Stepper>
@@ -160,7 +161,11 @@ export const WizardStepper: React.FunctionComponent = () => {
 
         return (
           <React.Fragment key={id}>
-            <Step className={`${currentStepId === id ? "active" : ""}`}>
+            <Step
+              href={`${id}`}
+              className={`${currentStepId === id ? "active" : ""}`}
+              onClick={onClick}
+            >
               <StepIcon className="icon">{stepNum}</StepIcon>
               <div className="label">
                 <Text>{label}</Text>
