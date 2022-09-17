@@ -1,7 +1,7 @@
 import React, { ComponentProps } from "react"
 
 import { filterChildrenByNodeType } from "$components/DecisionTree/DecisionTree.utils"
-import { IWizardStepProps, WizardStep } from "./Wizard"
+import { IWizardStepProps, WizardStep } from "./WizardStep"
 
 export const getStepsDictionary = (children: React.ReactNode) => {
   const steps: Record<string, ComponentProps<typeof WizardStep>> = {}

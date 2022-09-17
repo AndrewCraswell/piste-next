@@ -1,3 +1,5 @@
 export * from "./Wizard"
 export * from "./WizardContext"
+export * from "./WizardStep"
+export * from "./WizardFooter"
 export * from "./useWizard"

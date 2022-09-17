@@ -1,30 +1,23 @@
 import React, { ComponentProps, useCallback, useEffect, useMemo } from "react"
 
-import { Button, Text } from "@fluentui/react-components"
 import { isNodeComponentType } from "$components/DecisionTree/DecisionTree.utils"
 import { getStepsArray, getStepsDictionary } from "./Wizard.utils"
-import {
-  Step,
-  StepIcon,
-  StepCaption,
-  Connector,
-  WizardContent,
-} from "./Wizard.styles"
+import { WizardContent } from "./Wizard.styles"
 import { contextDefault, WizardContext } from "./WizardContext"
-import { useWizard } from "./useWizard"
-import styled from "@emotion/styled"
 import { useNavigate, useParams } from "react-router-dom"
-import { useLinkShims } from "$hooks"
+import { WizardStepper } from "./WizardStepper"
+import { WizardStep } from "./WizardStep"
+import { IWizardContext } from "."
+import { WizardFooter } from "./WizardFooter"
 
 export interface IWizardProps {}
-
-// TODO: Implement the WizardFooter which has useWizard()
 
 // TODO: Add success status for steps
 // TODO: Add error status for steps
 // TODO: Add skipped status for steps
 
 // TODO: Architect individual step status changing
+// TODO: Implement the WizardFooter which has useWizard()
 
 export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
   const steps = useMemo(() => getStepsArray(children), [children])
@@ -75,7 +68,7 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
     }
   }, [goToStep, hasPrevious])
 
-  const contextValue = useMemo(
+  const contextValue: IWizardContext = useMemo(
     () => ({
       ...contextDefault,
       steps,
@@ -118,65 +111,7 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
           })
         }
       </WizardContent>
-
-      <div style={{ marginTop: "15em" }}>
-        <Button disabled={!hasPrevious()} onClick={previous}>
-          Back
-        </Button>
-
-        <Button appearance="transparent">Skip</Button>
-        <Button disabled={!hasNext()} appearance="primary" onClick={next}>
-          Save and continue
-        </Button>
-      </div>
+      <WizardFooter />
     </WizardContext.Provider>
-  )
-}
-
-export interface IWizardStepProps {
-  id: string
-  label: string
-  optional?: boolean
-}
-
-export const WizardStep: React.FunctionComponent<IWizardStepProps> = ({
-  children,
-}) => {
-  return <>{children}</>
-}
-
-export const Stepper = styled.div`
-  display: flex;
-`
-
-export const WizardStepper: React.FunctionComponent = () => {
-  const { steps, currentStepId } = useWizard()
-  const { onClick } = useLinkShims()
-
-  return (
-    <Stepper>
-      {steps.map((step, i) => {
-        const { id, label, optional } = step
-        const stepNum = i + 1
-
-        return (
-          <React.Fragment key={id}>
-            <Step
-              href={`${id}`}
-              className={`${currentStepId === id ? "active" : ""}`}
-              onClick={onClick}
-            >
-              <StepIcon className="icon">{stepNum}</StepIcon>
-              <div className="label">
-                <Text>{label}</Text>
-                {optional && <StepCaption block>Optional</StepCaption>}
-              </div>
-            </Step>
-
-            {stepNum < steps.length && <Connector />}
-          </React.Fragment>
-        )
-      })}
-    </Stepper>
   )
 }

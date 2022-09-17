@@ -1,7 +1,6 @@
-import { ComponentProps } from "react"
-import { createContext } from "react"
+import { ComponentProps, createContext } from "react"
 
-import { WizardStep } from "./Wizard"
+import { WizardStep } from "./WizardStep"
 
 // Get/set step status
 
@@ -11,7 +10,7 @@ export interface IWizardContext {
   hasNext: () => string | undefined
   hasPrevious: () => string | undefined
   next: () => void
-  back: () => void
+  previous: () => void
   reset: () => void
   goTo: (stepId: string, skipHistory?: boolean) => void
 }
@@ -22,7 +21,7 @@ export const contextDefault: IWizardContext = {
   hasNext: () => undefined,
   hasPrevious: () => undefined,
   next: () => {},
-  back: () => {},
+  previous: () => {},
   reset: () => {},
   goTo: (stepId: string) => {},
   currentStepId: undefined,
