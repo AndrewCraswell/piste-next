@@ -25,19 +25,29 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
           </LeftSlideAnimation>
         </WizardStep>
 
-        <WizardStep id="association" label="Fencing association" optional>
+        <WizardStep
+          id="association"
+          label="Fencing association"
+          optional
+          status="skipped"
+        >
           <LeftSlideAnimation>
             <Text>Todo Association</Text>
           </LeftSlideAnimation>
         </WizardStep>
 
-        <WizardStep id="profile" label="Fencer profile">
+        <WizardStep id="profile" label="Fencer profile" status="completed">
           <LeftSlideAnimation>
             <Text>Todo Fencer</Text>
           </LeftSlideAnimation>
         </WizardStep>
 
-        <WizardStep id="membership" label="Club membership" optional>
+        <WizardStep
+          id="membership"
+          label="Club membership"
+          optional
+          status="error"
+        >
           <LeftSlideAnimation>
             <Text>Todo Membership</Text>
           </LeftSlideAnimation>

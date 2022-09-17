@@ -27,29 +27,42 @@ export const StepLink = styled.a`
   text-decoration: none;
   color: inherit;
 
-  &.active {
+  &.skipped {
     & > .icon {
-      background-color: ${({ theme }) =>
-        theme.fluentV9.colorBrandBackgroundStatic};
-      color: white;
-    }
-
-    & > .label > span {
-      font-weight: ${({ theme }) => theme.fluentV9.fontWeightSemibold};
+      color: ${({ theme }) => theme.fluentV9.colorNeutralForeground1};
     }
   }
 
   &.completed {
     & > .icon {
-      background-color: green;
-      color: white;
+      background-color: ${({ theme }) =>
+        theme.fluentV9.colorPaletteGreenBackground3};
+      border-color: ${({ theme }) =>
+        theme.fluentV9.colorPaletteGreenBackground3};
+      color: ${({ theme }) => theme.fluentV9.colorNeutralForegroundInverted};
     }
   }
 
   &.error {
+    & > .icon {
+      background-color: ${({ theme }) =>
+        theme.fluentV9.colorPaletteRedBackground3};
+      border-color: ${({ theme }) => theme.fluentV9.colorPaletteRedBackground3};
+      color: ${({ theme }) => theme.fluentV9.colorNeutralForegroundInverted};
+    }
   }
 
-  &.skipped {
+  &.active {
+    & > .icon {
+      background-color: ${({ theme }) =>
+        theme.fluentV9.colorBrandBackgroundStatic};
+      border-color: ${({ theme }) => theme.fluentV9.colorBrandBackgroundStatic};
+      color: ${({ theme }) => theme.fluentV9.colorNeutralForegroundInverted};
+    }
+
+    & > .label > span {
+      font-weight: ${({ theme }) => theme.fluentV9.fontWeightSemibold};
+    }
   }
 `
 
@@ -61,7 +74,7 @@ export const StepIcon = styled.div`
   align-items: center;
   display: flex;
   margin-right: ${({ theme }) => theme.fluentV9.spacingHorizontalS};
-  border: 1px solid #bdbdbd;
+  border: 1px solid ${({ theme }) => theme.fluentV9.colorNeutralForeground1};
 `
 
 export const StepCaption = styled(Caption2)`
