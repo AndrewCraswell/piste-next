@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@auth0/auth0-react": "^1.10.2",
+    "@auth0/auth0-react": "^1.11.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fluentui/react": "^8.85.0",
@@ -48,7 +48,7 @@
     "react-hook-form": "^7.35.0",
     "react-markdown": "^8.0.3",
     "react-redux": "^8.0.1",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^6.4.0",
     "stripe": "^10.8.0"
   },
   "devDependencies": {
