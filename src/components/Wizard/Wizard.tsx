@@ -1,29 +1,27 @@
-import React, { ComponentProps, useCallback, useEffect, useMemo } from "react"
+import React, {
+  ComponentProps,
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+} from "react"
 
 import { isNodeComponentType } from "$components/DecisionTree/DecisionTree.utils"
-import { getStepsArray, getStepsDictionary } from "./Wizard.utils"
+import { getInitialStepsState, stepsReducer } from "./Wizard.utils"
 import { WizardContent } from "./Wizard.styles"
-import { contextDefault, WizardContext } from "./WizardContext"
+import { WizardContext } from "./WizardContext"
 import { useNavigate, useParams } from "react-router-dom"
 import { WizardStepper } from "./WizardStepper"
 import { WizardStep } from "./WizardStep"
 import { IWizardContext } from "."
-import { WizardFooter } from "./WizardFooter"
+import { WizardStepStatus } from "./WizardContext.types"
 
-export interface IWizardProps {}
+// TODO: Add loading visual
 
-// TODO: Add success status for steps
-// TODO: Add error status for steps
-// TODO: Add skipped status for steps
-
-// TODO: Architect individual step status changing
-// TODO: Implement the WizardFooter which has useWizard()
-
-export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
-  const steps = useMemo(() => getStepsArray(children), [children])
-  const stepsDictionary = useMemo(
-    () => getStepsDictionary(children),
-    [children]
+export const Wizard: React.FunctionComponent = ({ children }) => {
+  const [{ steps, map }, dispatch] = useReducer(
+    stepsReducer,
+    getInitialStepsState(children)
   )
 
   const navigate = useNavigate()
@@ -43,7 +41,7 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
 
   const goToStep = useCallback(
     (stepId: string) => {
-      if (stepsDictionary[stepId]) {
+      if (map[stepId]) {
         navigate(stepId)
       } else {
         throw new Error(
@@ -51,7 +49,7 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
         )
       }
     },
-    [navigate, stepsDictionary]
+    [map, navigate]
   )
 
   const next = useCallback(() => {
@@ -68,25 +66,68 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
     }
   }, [goToStep, hasPrevious])
 
+  const getStep = useCallback((stepId: string) => map[stepId], [map])
+
+  const setStepStatus = useCallback(
+    (stepId: string, status: WizardStepStatus) => {
+      dispatch({
+        type: "status",
+        payload: {
+          id: stepId,
+          status,
+        },
+      })
+    },
+    []
+  )
+
+  const skip = useCallback(() => {
+    if (currentStepId) {
+      const currentStep = map[currentStepId]
+      if (currentStep) {
+        setStepStatus(currentStep.id, "skipped")
+      }
+
+      if (hasNext()) {
+        next()
+      }
+    }
+  }, [currentStepId, hasNext, map, next, setStepStatus])
+
   const contextValue: IWizardContext = useMemo(
     () => ({
-      ...contextDefault,
       steps,
       currentStepId,
+      currentStep: currentStepId ? map[currentStepId] : undefined,
       hasNext,
       hasPrevious,
       next,
       previous,
+      skip,
       goToStep,
+      getStep,
+      setStepStatus,
     }),
-    [currentStepId, goToStep, hasNext, hasPrevious, next, previous, steps]
+    [
+      currentStepId,
+      getStep,
+      goToStep,
+      hasNext,
+      hasPrevious,
+      map,
+      next,
+      previous,
+      setStepStatus,
+      skip,
+      steps,
+    ]
   )
 
   // If no stepId is specified in the route parameters, redirect
   //  to the first step route. Similarly, if the parameter specifies
   //  a non-existent route, redirect to the first step instead
   useEffect(() => {
-    if (!currentStepId || !stepsDictionary[currentStepId]) {
+    if (!currentStepId || !map[currentStepId]) {
       const defaultStepId = steps[0].id
       goToStep(defaultStepId)
     }
@@ -95,7 +136,6 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
   return (
     <WizardContext.Provider value={contextValue}>
       <WizardStepper />
-
       <WizardContent>
         {
           // Filter out any steps that aren't the current active step
@@ -111,7 +151,6 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({ children }) => {
           })
         }
       </WizardContent>
-      <WizardFooter />
     </WizardContext.Provider>
   )
 }

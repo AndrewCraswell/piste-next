@@ -1,30 +1,33 @@
-import { ComponentProps, createContext } from "react"
+import { createContext } from "react"
 
-import { WizardStep } from "./WizardStep"
-
-// Get/set step status
+import { WizardStepData, WizardStepStatus } from "./WizardContext.types"
 
 export interface IWizardContext {
   currentStepId?: string
-  steps: ComponentProps<typeof WizardStep>[]
+  currentStep?: WizardStepData
+  steps: WizardStepData[]
   hasNext: () => string | undefined
   hasPrevious: () => string | undefined
   next: () => void
   previous: () => void
-  reset: () => void
-  goTo: (stepId: string, skipHistory?: boolean) => void
+  skip: () => void
+  goToStep: (stepId: string) => void
+  getStep: (stepId: string) => WizardStepData | null
+  setStepStatus: (stepId: string, status: WizardStepStatus) => void
 }
 
-// TODO: Don't export this
-export const contextDefault: IWizardContext = {
+const contextDefault: IWizardContext = {
+  currentStepId: undefined,
+  currentStep: undefined,
   steps: [],
   hasNext: () => undefined,
   hasPrevious: () => undefined,
   next: () => {},
   previous: () => {},
-  reset: () => {},
-  goTo: (stepId: string) => {},
-  currentStepId: undefined,
+  skip: () => {},
+  goToStep: (stepId: string) => {},
+  getStep: (stepId: string) => null,
+  setStepStatus: (stepId: string, status: WizardStepStatus) => {},
 }
 
 export const WizardContext = createContext<IWizardContext>(contextDefault)

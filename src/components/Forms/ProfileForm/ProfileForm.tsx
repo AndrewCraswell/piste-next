@@ -60,9 +60,9 @@ export const ProfileForm: React.FunctionComponent = () => {
   return (
     <>
       <TabText block>
-        The profile is used for the primary fencer on the account. It also
-        serves as the default contact information for any additional fencers
-        added.
+        The profile is used for the primary user on the account. It also serves
+        as the default contact information for any additional fencers added
+        later.
       </TabText>
 
       <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">

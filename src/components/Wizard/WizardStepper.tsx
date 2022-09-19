@@ -13,7 +13,7 @@ import { useLinkShims } from "$hooks"
 import { Checkmark16Regular, Dismiss16Regular } from "@fluentui/react-icons"
 
 export const WizardStepper: React.FunctionComponent = () => {
-  const { steps, currentStepId } = useWizard()
+  const { steps, currentStep } = useWizard()
   const { onClick } = useLinkShims()
 
   return (
@@ -26,14 +26,14 @@ export const WizardStepper: React.FunctionComponent = () => {
           <React.Fragment key={id}>
             <StepLink
               href={`${id}`}
-              className={`${currentStepId === id ? "active" : ""} ${status}`}
+              className={`${currentStep?.id === id ? "active" : ""} ${status}`}
               onClick={onClick}
             >
               <StepIcon className="icon">
                 {(!status || status === "none") && stepNum}
                 {status === "skipped" && <Dismiss16Regular />}
                 {status === "completed" && <Checkmark16Regular />}
-                {status === "error" && "!"}
+                {status === "error" && <span>!</span>}
               </StepIcon>
               <div className="label">
                 <Text>{label}</Text>
