@@ -18,7 +18,15 @@ import { WizardStepStatus } from "./WizardContext.types"
 
 // TODO: Add loading visual
 
-export const Wizard: React.FunctionComponent = ({ children }) => {
+export interface IWizardProps {
+  // Used when persisting form state into cache
+  name?: string
+}
+
+export const Wizard: React.FunctionComponent<IWizardProps> = ({
+  name,
+  children,
+}) => {
   const [{ steps, map }, dispatch] = useReducer(
     stepsReducer,
     getInitialStepsState(children)
@@ -96,6 +104,7 @@ export const Wizard: React.FunctionComponent = ({ children }) => {
 
   const contextValue: IWizardContext = useMemo(
     () => ({
+      name,
       steps,
       currentStepId,
       currentStep: currentStepId ? map[currentStepId] : undefined,
@@ -115,6 +124,7 @@ export const Wizard: React.FunctionComponent = ({ children }) => {
       hasNext,
       hasPrevious,
       map,
+      name,
       next,
       previous,
       setStepStatus,

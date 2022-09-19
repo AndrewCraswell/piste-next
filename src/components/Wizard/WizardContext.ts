@@ -3,6 +3,7 @@ import { createContext } from "react"
 import { WizardStepData, WizardStepStatus } from "./WizardContext.types"
 
 export interface IWizardContext {
+  name?: string
   currentStepId?: string
   currentStep?: WizardStepData
   steps: WizardStepData[]
@@ -17,6 +18,7 @@ export interface IWizardContext {
 }
 
 const contextDefault: IWizardContext = {
+  name: undefined,
   currentStepId: undefined,
   currentStep: undefined,
   steps: [],

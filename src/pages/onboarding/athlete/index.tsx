@@ -1,12 +1,13 @@
 import { Button, Text } from "@fluentui/react-components"
 import { AnimationStyles, MotionDurations, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
+import { useMount } from "@fluentui/react-hooks"
 
 import { useFormHelpers, useTitle } from "$hooks"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { useWizard, Wizard, WizardStep } from "$components/Wizard"
 import { IProfileFormFields, FencerForm, AddressForm } from "$components/Forms"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormRow } from "$components/Form/components/FormRow"
@@ -23,7 +24,7 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
 
   return (
     <LeftSlideAnimation>
-      <Wizard>
+      <Wizard name="athlete">
         <WizardStep id="account" label="Account details">
           <LeftSlideAnimation>
             <AccountProfileRegistration />
@@ -54,18 +55,33 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
 
 export default AthleteOnboardingPage
 
+// TODO: Save onboarding step state into localStorage
+// TODO: Restore form from profile data on backend
+// TODO: Push save/load form state into the Wizard
+//  TODO: Add a Wizard prop for name, used by the localStorage
+
 // TODO: Write GraphQL query for account registration
 // TODO: Add isOnboardingCompleted row on account
 
+// TODO: Break this into a new component file
 const AccountProfileRegistration: React.FunctionComponent = () => {
-  const { hasNext, hasPrevious, next, previous, setStepStatus, currentStep } =
-    useWizard()
+  useTrackPisteMetric({ componentName: "AthleteOnboardingAccountPage" })
   const form = useForm<IProfileFormFields>()
+  const { handleSubmit } = form
   const { sanitizePhone, sanitizePostal } = useFormHelpers(form)
 
-  useTrackPisteMetric({ componentName: "AthleteOnboardingAccountPage" })
-
-  const { handleSubmit } = form
+  const {
+    hasNext,
+    hasPrevious,
+    next,
+    previous,
+    setStepStatus,
+    skip,
+    currentStep,
+  } = useWizard({
+    form,
+    storage: "localStorage",
+  })
 
   const onSubmit: SubmitHandler<IProfileFormFields> = useCallback(
     (values, event) => {
@@ -101,22 +117,15 @@ const AccountProfileRegistration: React.FunctionComponent = () => {
           </Button>
           <Stack grow horizontal />
 
-          {
+          {currentStep?.optional && (
             <Button
               disabled={!hasNext()}
-              onClick={() => {
-                // TODO: Set this to skipped
-                if (currentStep) {
-                  setStepStatus(currentStep.id, "completed")
-                }
-
-                next()
-              }}
+              onClick={skip}
               appearance="transparent"
             >
               Skip
             </Button>
-          }
+          )}
 
           <Button type="submit" disabled={!hasNext()} appearance="primary">
             Save and continue
