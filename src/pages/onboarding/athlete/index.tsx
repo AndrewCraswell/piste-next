@@ -55,10 +55,8 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
 
 export default AthleteOnboardingPage
 
-// TODO: Save onboarding step state into localStorage
 // TODO: Restore form from profile data on backend
-// TODO: Push save/load form state into the Wizard
-//  TODO: Add a Wizard prop for name, used by the localStorage
+//  TODO: Restore the step status after a page refresh
 
 // TODO: Write GraphQL query for account registration
 // TODO: Add isOnboardingCompleted row on account
