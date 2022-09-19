@@ -1,13 +1,12 @@
 import { Button, Text } from "@fluentui/react-components"
 import { AnimationStyles, MotionDurations, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
-import { useMount } from "@fluentui/react-hooks"
 
 import { useFormHelpers, useTitle } from "$hooks"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { useWizard, Wizard, WizardStep } from "$components/Wizard"
 import { IProfileFormFields, FencerForm, AddressForm } from "$components/Forms"
-import { useCallback, useEffect } from "react"
+import { useCallback } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormRow } from "$components/Form/components/FormRow"
@@ -57,6 +56,8 @@ export default AthleteOnboardingPage
 
 // TODO: Restore form from profile data on backend
 //  TODO: Restore the step status after a page refresh
+
+// TODO: Fix State field not persisting
 
 // TODO: Write GraphQL query for account registration
 // TODO: Add isOnboardingCompleted row on account
