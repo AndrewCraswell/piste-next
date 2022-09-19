@@ -2339,10 +2339,10 @@
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
 
-"@fluentui/react@^8.94.4", "@fluentui/react@^8.95.1":
-  version "8.95.1"
-  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.95.1.tgz#a6c0acfaae7f79f2f78c282e84435cd59397d58c"
-  integrity sha512-ptz/jB5GkGqsr3Mq90kqgQsxG+M9n+NChnKpVdLJcHYOkbCuOb9va9YnhiuNXy6G7MXUNTNyk6BIkLuMdfCmgQ==
+"@fluentui/react@^8.95.1", "@fluentui/react@^8.96.0":
+  version "8.96.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.96.0.tgz#f5d8ed5b5bd3b83955e4fb83d65de5bc43f57a4c"
+  integrity sha512-YwK9HuITVbGXT5e10u9nJ1BwxVKTBgU0dQPo/L6nuxyIPpYBqWhhXdn6R5b8LII7ZYjpz+8WaMY3v+5KpzR3eA==
   dependencies:
     "@fluentui/date-time-utilities" "^8.5.2"
     "@fluentui/font-icons-mdl2" "^8.4.13"
@@ -2387,12 +2387,12 @@
     "@microsoft/load-themed-styles" "^1.10.26"
     tslib "^2.1.0"
 
-"@fluentui/theme-samples@^8.6.35":
-  version "8.6.35"
-  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.6.35.tgz#3c7e938a491df660a30dee6f765b1d3f4609ebf5"
-  integrity sha512-AcbKDsPco0d09nlg8/OQVxM1VN8PY6gfE/OrcfhChnkaBP2WTJhpWtBsfAQqbj9fKPUYl3rTo8uaJJ8MrWNvLA==
+"@fluentui/theme-samples@^8.7.2":
+  version "8.7.2"
+  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.7.2.tgz#3a5b72257c8baff6efbea6d10c36067c4647fb3e"
+  integrity sha512-mccZi0cuUpmujDzyNLi6hl2MqJYQTwWssiuOhX9nXpoGz0MwAEWQW1RkC7jSXsWjs4rzpDdAZ79bgBiGK0nSzQ==
   dependencies:
-    "@fluentui/react" "^8.94.4"
+    "@fluentui/react" "^8.96.0"
     "@fluentui/scheme-utilities" "^8.3.17"
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
