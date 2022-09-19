@@ -39,6 +39,7 @@
     "@stripe/react-stripe-js": "^1.10.0",
     "@stripe/stripe-js": "^1.35.0",
     "dayjs": "^1.11.5",
+    "launchdarkly-react-client-sdk": "^2.27.0",
     "modern-normalize": "^1.1.0",
     "nylas": "^6.5.0",
     "polished": "^4.2.2",

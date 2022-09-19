@@ -5,6 +5,7 @@ import styled from "@emotion/styled"
 import { Outlet } from "react-router-dom"
 import { AppHeader, AppNav, AppPage } from "./components"
 import { AppBreadcrumbs } from "./components/AppBreadcrumbs"
+import { useFlags } from "launchdarkly-react-client-sdk"
 
 const AppRoot = styled.div`
   display: grid;
@@ -49,6 +50,8 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
     injectLinkShims: true,
   })
 
+  const { onboarding: isOnboardingEnabled } = useFlags()
+
   return (
     <AppRoot>
       <Header />
@@ -56,9 +59,13 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
         <Nav links={sitemap} />
         <AppBreadcrumbs crumbs={crumbs} />
         <Page>
-          <OnboardingGate>
+          {isOnboardingEnabled ? (
+            <OnboardingGate>
+              <Outlet />
+            </OnboardingGate>
+          ) : (
             <Outlet />
-          </OnboardingGate>
+          )}
         </Page>
         {/* TODO: Add a footer inside the AppPage */}
       </AppMain>
