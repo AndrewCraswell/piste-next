@@ -58,22 +58,22 @@
   dependencies:
     node-fetch "^2.6.1"
 
-"@auth0/auth0-react@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@auth0/auth0-react/-/auth0-react-1.10.2.tgz#036d2d73ea65a8f7096a30087b6bc44e34b66de3"
-  integrity sha512-s622ac/gLZ9pUX7d5dOhRggF4VI3MaLLCPVBFR5CKOGcPtPG80/4w2jMoBQtRRn6uKS6IVMWAUAFKWB7yATAoQ==
+"@auth0/auth0-react@^1.11.0":
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-react/-/auth0-react-1.11.0.tgz#718ea99b52cc7cffb354dda2af1991fb104b6a75"
+  integrity sha512-zt8Q4XRj+rwWPRAseXrBQY9P+MXy1S6rbznLsbsiU12DY47AUtDh4psSUyt4f5AzD9SScEGkf22iB0rGXNDDDw==
   dependencies:
-    "@auth0/auth0-spa-js" "^1.22.0"
+    "@auth0/auth0-spa-js" "^1.22.2"
 
-"@auth0/auth0-spa-js@^1.22.0":
-  version "1.22.2"
-  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.22.2.tgz#8394fb1351eb66f9a7750552b68412f69a3605cc"
-  integrity sha512-gKZx6p2stRBMx7cajJ50qpf88q0nkjL/18ut5yan0WGMlaL83zFqIOLz7AKVgDphG0kR3FHLzY6Ky+zpT9IYig==
+"@auth0/auth0-spa-js@^1.22.2":
+  version "1.22.4"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-1.22.4.tgz#0054b13b27155cbd1d92da82306749e156ee837e"
+  integrity sha512-iOboSV+aUsExV1onKvGKEqi626sjJt+61c3EvA4mkn9RM7RV9RMjPI+cInNFHWjwAd2Sdi3LqBj6/MfcHh69dg==
   dependencies:
     abortcontroller-polyfill "^1.7.3"
     browser-tabs-lock "^1.2.15"
-    core-js "^3.23.2"
-    es-cookie "^1.3.2"
+    core-js "^3.24.0"
+    es-cookie "~1.3.2"
     fast-text-encoding "^1.0.4"
     promise-polyfill "^8.2.3"
     unfetch "^4.2.0"
@@ -2339,10 +2339,10 @@
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
 
-"@fluentui/react@^8.94.4", "@fluentui/react@^8.95.1":
-  version "8.95.1"
-  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.95.1.tgz#a6c0acfaae7f79f2f78c282e84435cd59397d58c"
-  integrity sha512-ptz/jB5GkGqsr3Mq90kqgQsxG+M9n+NChnKpVdLJcHYOkbCuOb9va9YnhiuNXy6G7MXUNTNyk6BIkLuMdfCmgQ==
+"@fluentui/react@^8.95.1", "@fluentui/react@^8.96.0":
+  version "8.96.0"
+  resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.96.0.tgz#f5d8ed5b5bd3b83955e4fb83d65de5bc43f57a4c"
+  integrity sha512-YwK9HuITVbGXT5e10u9nJ1BwxVKTBgU0dQPo/L6nuxyIPpYBqWhhXdn6R5b8LII7ZYjpz+8WaMY3v+5KpzR3eA==
   dependencies:
     "@fluentui/date-time-utilities" "^8.5.2"
     "@fluentui/font-icons-mdl2" "^8.4.13"
@@ -2387,12 +2387,12 @@
     "@microsoft/load-themed-styles" "^1.10.26"
     tslib "^2.1.0"
 
-"@fluentui/theme-samples@^8.6.35":
-  version "8.6.35"
-  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.6.35.tgz#3c7e938a491df660a30dee6f765b1d3f4609ebf5"
-  integrity sha512-AcbKDsPco0d09nlg8/OQVxM1VN8PY6gfE/OrcfhChnkaBP2WTJhpWtBsfAQqbj9fKPUYl3rTo8uaJJ8MrWNvLA==
+"@fluentui/theme-samples@^8.7.2":
+  version "8.7.2"
+  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.7.2.tgz#3a5b72257c8baff6efbea6d10c36067c4647fb3e"
+  integrity sha512-mccZi0cuUpmujDzyNLi6hl2MqJYQTwWssiuOhX9nXpoGz0MwAEWQW1RkC7jSXsWjs4rzpDdAZ79bgBiGK0nSzQ==
   dependencies:
-    "@fluentui/react" "^8.94.4"
+    "@fluentui/react" "^8.96.0"
     "@fluentui/scheme-utilities" "^8.3.17"
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
@@ -4451,10 +4451,10 @@ core-js-pure@^3.20.2:
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.22.7.tgz#f58489d9b309fa7b26486a0f70d4ec19a418084e"
   integrity sha512-wTriFxiZI+C8msGeh7fJcbC/a0V8fdInN1oS2eK79DMBGs8iIJiXhtFJCiT3rBa8w6zroHWW3p8ArlujZ/Mz+w==
 
-core-js@^3.23.2:
-  version "3.24.0"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.24.0.tgz#4928d4e99c593a234eb1a1f9abd3122b04d3ac57"
-  integrity sha512-IeOyT8A6iK37Ep4kZDD423mpi6JfPRoPUdQwEWYiGolvn4o6j2diaRzNfDfpTdu3a5qMbrGUzKUpYpRY8jXCkQ==
+core-js@^3.24.0:
+  version "3.25.1"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.25.1.tgz#5818e09de0db8956e16bf10e2a7141e931b7c69c"
+  integrity sha512-sr0FY4lnO1hkQ4gLDr24K0DGnweGO1QwSj5BpfQjpSJPdqWalja4cTps29Y/PJVG/P7FYlPDkH3hO+Tr0CvDgQ==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -4928,7 +4928,7 @@ es-abstract@^1.19.0, es-abstract@^1.19.1, es-abstract@^1.19.2, es-abstract@^1.19
     string.prototype.trimstart "^1.0.5"
     unbox-primitive "^1.0.2"
 
-es-cookie@^1.3.2:
+es-cookie@~1.3.2:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/es-cookie/-/es-cookie-1.3.2.tgz#80e831597f72a25721701bdcb21d990319acd831"
   integrity sha512-UTlYYhXGLOy05P/vKVT2Ui7WtC7NiRzGtJyAKKn32g5Gvcjn7KAClLPWlipCtxIus934dFg9o9jXiBL0nP+t9Q==
@@ -7418,10 +7418,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nylas@^6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.5.0.tgz#df6e36480abc673b40f97f8fbac401d515b93d90"
-  integrity sha512-jo+xXtYcjrlMB8bAnAwPSqs+8jAIVv6DeO9SPT3CXdYnOiG4i40Z0i7EkBemm7YZC4g7ACiCFWqwNZDmij+Ytg==
+nylas@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.5.1.tgz#7e2e57ad261304467f160f6ad2676e8379cd8caf"
+  integrity sha512-qozkCVy5hhI9ibBJ8QpNp8cWppuqf/BobNbvT1qmBi3Aa46QWtm8+sfxPSJg5E9sILJLZN7xOVkYTVsWHqjrRg==
   dependencies:
     JSONStream "^1.3.5"
     abort-controller "^3.0.0"
@@ -9328,10 +9328,10 @@ vite-plugin-static-copy@^0.9.0:
     fs-extra "^10.1.0"
     picocolors "^1.0.0"
 
-vite@^3.1.1:
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/vite/-/vite-3.1.1.tgz#fcfe12c3fe7e4c6def1fc52e4dc9cb0ccb2b1a59"
-  integrity sha512-hgxQWev/AL7nWYrqByYo8nfcH9n97v6oFsta9+JX8h6cEkni7nHKP2kJleNYV2kcGhE8jsbaY1aStwPZXzPbgA==
+vite@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/vite/-/vite-3.1.3.tgz#b2a0821c11aae124bb7618f8036913c689afcc59"
+  integrity sha512-/3XWiktaopByM5bd8dqvHxRt5EEgRikevnnrpND0gRfNkrMrPaGGexhtLCzv15RcCMtV2CLw+BPas8YFeSG0KA==
   dependencies:
     esbuild "^0.15.6"
     postcss "^8.4.16"
