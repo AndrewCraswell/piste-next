@@ -1,5 +1,5 @@
 import { useAuth0 } from "@auth0/auth0-react"
-import { LDProvider, useFlags } from "launchdarkly-react-client-sdk"
+import { LDProvider } from "launchdarkly-react-client-sdk"
 
 export interface IAppConfigurationProviderProps {
   code: string
