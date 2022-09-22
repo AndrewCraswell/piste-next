@@ -7418,10 +7418,10 @@ number-is-nan@^1.0.0:
   resolved "https://registry.yarnpkg.com/number-is-nan/-/number-is-nan-1.0.1.tgz#097b602b53422a522c1afb8790318336941a011d"
   integrity sha1-CXtgK1NCKlIsGvuHkDGDNpQaAR0=
 
-nylas@^6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.5.0.tgz#df6e36480abc673b40f97f8fbac401d515b93d90"
-  integrity sha512-jo+xXtYcjrlMB8bAnAwPSqs+8jAIVv6DeO9SPT3CXdYnOiG4i40Z0i7EkBemm7YZC4g7ACiCFWqwNZDmij+Ytg==
+nylas@^6.5.1:
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/nylas/-/nylas-6.5.1.tgz#7e2e57ad261304467f160f6ad2676e8379cd8caf"
+  integrity sha512-qozkCVy5hhI9ibBJ8QpNp8cWppuqf/BobNbvT1qmBi3Aa46QWtm8+sfxPSJg5E9sILJLZN7xOVkYTVsWHqjrRg==
   dependencies:
     JSONStream "^1.3.5"
     abort-controller "^3.0.0"
