@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@auth0/auth0-react": "^1.10.2",
+    "@auth0/auth0-react": "^1.11.0",
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fluentui/react": "^8.95.1",
@@ -29,7 +29,7 @@
     "@fluentui/react-hooks": "^8.6.11",
     "@fluentui/react-icons": "^2.0.179",
     "@fluentui/react-make-styles": "^9.0.0-beta.4",
-    "@fluentui/theme-samples": "^8.6.35",
+    "@fluentui/theme-samples": "^8.7.2",
     "@loadable/component": "^5.15.2",
     "@microsoft/applicationinsights-react-js": "^3.3.5",
     "@microsoft/applicationinsights-web": "^2.8.7",
@@ -40,7 +40,7 @@
     "@stripe/stripe-js": "^1.35.0",
     "dayjs": "^1.11.5",
     "modern-normalize": "^1.1.0",
-    "nylas": "^6.5.0",
+    "nylas": "^6.5.1",
     "polished": "^4.2.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -48,7 +48,7 @@
     "react-hook-form": "^7.35.0",
     "react-markdown": "^8.0.3",
     "react-redux": "^8.0.1",
-    "react-router-dom": "^6.4.0",
+    "react-router-dom": "^6.4.1",
     "stripe": "^10.8.0"
   },
   "devDependencies": {
