@@ -5,12 +5,12 @@ import { GoogleAddressResult } from "$types"
 import { IAddressFormFields } from "."
 import { useFormHelpers } from "$hooks"
 import { IProfileFormFields } from ".."
-import { StatesDropdown } from "$components/StatesDropdown"
+import { StatesDropdown } from "$components/Form/components/StatesDropdown"
 import { FormAddressAutocomplete } from "$components/Form/components/FormAddressAutocomplete"
 import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTextField"
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
-import { FormTextField } from "$components/Form/components/v8/FormTextField"
+import { FormInputField } from "$components/Form/components/v9/FormInputField"
 
 interface IAddressFormProps {
   form: UseFormReturn<IProfileFormFields, object>
@@ -28,7 +28,7 @@ export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
         Address: address.address1,
         Address2: address.address2,
         City: address.city,
-        Postal: address.postalCode,
+        Postal: address.postalCodePrefix,
       }
 
       setFormFields(fields)
@@ -49,12 +49,11 @@ export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
           placeholder="Address"
           maxLength={128}
           autoComplete="off"
-          styles={{ root: { width: "100%" } }}
         />
       </FormRow>
 
       <FormRow>
-        <FormTextField
+        <FormInputField
           control={control}
           name="Address2"
           label="Unit"
@@ -62,7 +61,7 @@ export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
           maxLength={32}
           autoComplete="address-line2"
         />
-        <FormTextField
+        <FormInputField
           control={control}
           name="City"
           label="City"
@@ -74,19 +73,15 @@ export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
       </FormRow>
 
       <FormRow>
-        <StatesDropdown
-          control={control}
-          name="State"
-          required
-          style={{ minWidth: 177 }}
-        />
-        <FormMaskedTextField
+        <StatesDropdown control={control} name="State" required />
+        <FormInputField
           control={control}
           id="postalCode"
           name="Postal"
           label="Postal code"
-          mask="99999-9999"
+          placeholder="Postal code"
           title="A 5 digit postal code"
+          maxLength={5}
           required
           autoComplete="postal-code"
         />

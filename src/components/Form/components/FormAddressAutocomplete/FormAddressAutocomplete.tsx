@@ -1,16 +1,25 @@
 import { usePlacesWidget } from "react-google-autocomplete"
 
-import { FormTextField, FormTextFieldProps } from "../v8/FormTextField"
+import { FormInputField, FormInputFieldProps } from "../v9/FormInputField"
 import { GoogleAddressResult } from "$types"
 import { RefObject } from "react"
 import { IProfileFormFields } from "$components/Forms/ProfileForm/ProfileForm.types"
+import styled from "@emotion/styled"
+
+const StyledFormInputField = styled(FormInputField)`
+  width: 100%;
+
+  & > span {
+    width: inherit;
+  }
+`
 
 export type FormAddressAutocompleteProps = {
   onPlaceSelected?: (
     address: GoogleAddressResult,
     input: RefObject<HTMLInputElement>
   ) => void
-} & Omit<FormTextFieldProps<IProfileFormFields>, "elementRef">
+} & FormInputFieldProps<IProfileFormFields>
 
 export const FormAddressAutocomplete: React.FunctionComponent<
   FormAddressAutocompleteProps
@@ -18,7 +27,7 @@ export const FormAddressAutocomplete: React.FunctionComponent<
   const { name, control, controllerProps, onPlaceSelected, ...inputProps } =
     props
 
-  const { ref: autocompleteRef } = usePlacesWidget({
+  const { ref } = usePlacesWidget({
     apiKey: import.meta.env.VITE_GOOGLE_PLACES_API_KEY,
     onPlaceSelected: (place, input) => {
       const address = new GoogleAddressResult(place)
@@ -36,15 +45,13 @@ export const FormAddressAutocomplete: React.FunctionComponent<
   })
 
   return (
-    <FormTextField
+    <StyledFormInputField
       name={name}
       control={control}
       controllerProps={controllerProps}
       {...inputProps}
-      elementRef={(c: any) => {
-        // @ts-ignore
-        autocompleteRef.current = c?.querySelector("input")
-      }}
+      // @ts-ignore
+      ref={ref}
     />
   )
 }

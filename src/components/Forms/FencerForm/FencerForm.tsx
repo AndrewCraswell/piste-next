@@ -6,7 +6,7 @@ import { FormDatePicker } from "$components/Form/components/v8/FormDatePicker"
 import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTextField"
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
-import { FormTextField } from "$components/Form/components/v8/FormTextField"
+import { FormInputField } from "$components/Form/components/v9/FormInputField"
 
 interface IFencerFormProps {
   form: UseFormReturn<IProfileFormFields, object>
@@ -20,7 +20,7 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
   return (
     <FormSection>
       <FormRow>
-        <FormTextField
+        <FormInputField
           control={control}
           name="FirstName"
           id="firstName"
@@ -30,7 +30,7 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
           maxLength={64}
           autoComplete="given-name"
         />
-        <FormTextField
+        <FormInputField
           control={control}
           id="lastName"
           name="LastName"
@@ -63,13 +63,12 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
           label="Phone number"
           mask="(999) 999-9999"
           title="A 10 digit phone number"
-          required
           type="tel"
           autoComplete="tel-national"
         />
       </FormRow>
       <FormRow>
-        <FormTextField
+        <FormInputField
           control={control}
           name="Email"
           label="Email"
