@@ -1,6 +1,6 @@
 import { usePlacesWidget } from "react-google-autocomplete"
 
-import { FormTextField, FormTextFieldProps } from "../FormTextField"
+import { FormTextField, FormTextFieldProps } from "../v8/FormTextField"
 import { GoogleAddressResult } from "$types"
 import { RefObject } from "react"
 import { IProfileFormFields } from "$components/Forms/ProfileForm/ProfileForm.types"

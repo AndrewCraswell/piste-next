@@ -7,10 +7,10 @@ import { useFormHelpers } from "$hooks"
 import { IProfileFormFields } from ".."
 import { StatesDropdown } from "$components/StatesDropdown"
 import { FormAddressAutocomplete } from "$components/Form/components/FormAddressAutocomplete"
-import { FormMaskedTextField } from "$components/Form/components/FormMaskedTextField"
+import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTextField"
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
-import { FormTextField } from "$components/Form/components/FormTextField"
+import { FormTextField } from "$components/Form/components/v8/FormTextField"
 
 interface IAddressFormProps {
   form: UseFormReturn<IProfileFormFields, object>

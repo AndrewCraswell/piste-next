@@ -1,7 +1,7 @@
 import {
   FormDropdown,
   FormDropdownProps,
-} from "$components/Form/components/FormDropdown"
+} from "$components/Form/components/v8/FormDropdown"
 
 import { states } from "./StatesDropdown.data"
 

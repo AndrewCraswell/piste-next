@@ -2,11 +2,11 @@ import { UseFormReturn } from "react-hook-form"
 import dayjs from "dayjs"
 
 import { IProfileFormFields } from "$components/Forms/ProfileForm"
-import { FormDatePicker } from "$components/Form/components/FormDatePicker"
-import { FormMaskedTextField } from "$components/Form/components/FormMaskedTextField"
+import { FormDatePicker } from "$components/Form/components/v8/FormDatePicker"
+import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTextField"
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
-import { FormTextField } from "$components/Form/components/FormTextField"
+import { FormTextField } from "$components/Form/components/v8/FormTextField"
 
 interface IFencerFormProps {
   form: UseFormReturn<IProfileFormFields, object>
