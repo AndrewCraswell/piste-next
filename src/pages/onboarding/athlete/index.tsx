@@ -2,14 +2,20 @@ import { Button, Text } from "@fluentui/react-components"
 import { AnimationStyles, MotionDurations, Stack } from "@fluentui/react"
 import styled from "@emotion/styled"
 
-import { useFormHelpers, useTitle } from "$hooks"
+import { useAccountProfile, useFormHelpers, useTitle } from "$hooks"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { useWizard, Wizard, WizardStep } from "$components/Wizard"
 import { IProfileFormFields, FencerForm, AddressForm } from "$components/Forms"
-import { useCallback } from "react"
+import { useCallback, useEffect } from "react"
 import { useForm, SubmitHandler } from "react-hook-form"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormRow } from "$components/Form/components/FormRow"
+import dayjs from "dayjs"
+import {
+  useAddAccountMutation,
+  useUpdateAccountByIdMutation,
+  useAddAddressAndFencerToAccountMutation,
+} from "$queries"
 
 const LeftSlideAnimation = styled.div`
   ${AnimationStyles.slideLeftIn400 as unknown as string}
@@ -36,12 +42,6 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
           </LeftSlideAnimation>
         </WizardStep>
 
-        <WizardStep id="profile" label="Fencer profile">
-          <LeftSlideAnimation>
-            <Text>Todo Fencer</Text>
-          </LeftSlideAnimation>
-        </WizardStep>
-
         <WizardStep id="membership" label="Club membership" optional>
           <LeftSlideAnimation>
             <Text>Todo Membership</Text>
@@ -54,10 +54,11 @@ export const AthleteOnboardingPage: React.FunctionComponent = () => {
 
 export default AthleteOnboardingPage
 
-// TODO: Restore form from profile data on backend
-//  TODO: Restore the step status after a page refresh
+// TODO: Handle errors
 
 // TODO: Fix State field not persisting
+// TODO: Store state property in storage too
+// TODO: Store copy of data in memory
 
 // TODO: Write GraphQL query for account registration
 // TODO: Add isOnboardingCompleted row on account
@@ -66,8 +67,22 @@ export default AthleteOnboardingPage
 const AccountProfileRegistration: React.FunctionComponent = () => {
   useTrackPisteMetric({ componentName: "AthleteOnboardingAccountPage" })
   const form = useForm<IProfileFormFields>()
-  const { handleSubmit } = form
-  const { sanitizePhone, sanitizePostal } = useFormHelpers(form)
+  const { handleSubmit, formState } = form
+  const { sanitizePhone, sanitizePostal, sanitizeDate, setFormFields } =
+    useFormHelpers(form)
+  const {
+    account,
+    account: { isRegistered, UserId, AddressId, PrimaryStudentId },
+    loading: isProfileLoading,
+  } = useAccountProfile()
+
+  const [addAccount, { error: addAccountError }] = useAddAccountMutation()
+
+  const [addAddressAndFencer, { error: addToAccountsError }] =
+    useAddAddressAndFencerToAccountMutation()
+
+  const [updateAccount, { error: updateAccountError }] =
+    useUpdateAccountByIdMutation()
 
   const {
     hasNext,
@@ -82,23 +97,123 @@ const AccountProfileRegistration: React.FunctionComponent = () => {
     storage: "localStorage",
   })
 
+  const hasStepCompleted = useCallback(() => {
+    return isRegistered && AddressId && PrimaryStudentId
+  }, [AddressId, PrimaryStudentId, isRegistered])
+
   const onSubmit: SubmitHandler<IProfileFormFields> = useCallback(
     (values, event) => {
       event?.preventDefault()
 
-      values.Phone = sanitizePhone(values.Phone)
-      values.Postal = sanitizePostal(values.Postal)
-
-      console.log(JSON.stringify(values))
-
-      // TODO: Actually execute the GraphQL query
-      if (currentStep) {
-        setStepStatus(currentStep.id, "completed")
+      // If the account is already create and no fields are changed, skip to next step
+      if (hasStepCompleted() && !formState.isDirty) {
         next()
+        return
       }
+
+      // TOOD: Migrate to Postgres so that this can all be done as a single query
+      addAccount({
+        variables: {
+          account: {
+            Oid: UserId,
+          },
+        },
+        onCompleted: () => {
+          // TODO: Add gender field
+          addAddressAndFencer({
+            variables: {
+              fencer: {
+                Oid: UserId,
+                FirstName: values.FirstName,
+                LastName: values.LastName,
+                Birthdate: sanitizeDate(values.Birthdate),
+                Phone: sanitizePhone(values.Phone),
+                Email: values.Email,
+              },
+              address: {
+                Address: values.Address,
+                Address2: values.Address2,
+                City: values.City,
+                // TODO: Fix the state field
+                //State: values.State,
+                State: "WA",
+                Postal: sanitizePostal(values.Postal),
+              },
+            },
+            onCompleted: ({ insert_Addresses_one, insert_Students_one }) => {
+              const { AddressId } = insert_Addresses_one ?? {}
+              const { StudentId } = insert_Students_one ?? {}
+
+              updateAccount({
+                variables: {
+                  id: UserId,
+                  changes: {
+                    AddressId,
+                    PrimaryStudentId: StudentId,
+                  },
+                },
+                onCompleted: () => {
+                  setStepStatus("account", "completed")
+                  next()
+                },
+              })
+            },
+          })
+        },
+      })
     },
-    [currentStep, next, sanitizePhone, sanitizePostal, setStepStatus]
+    [
+      UserId,
+      addAccount,
+      addAddressAndFencer,
+      formState.isDirty,
+      hasStepCompleted,
+      next,
+      sanitizeDate,
+      sanitizePhone,
+      sanitizePostal,
+      setStepStatus,
+      updateAccount,
+    ]
   )
+
+  // Load existing account values if they exist
+  useEffect(() => {
+    if (!isProfileLoading) {
+      console.log("ACCOUNT ", account)
+      if (account.isRegistered) {
+        if (account.PrimaryStudentId) {
+          // TODO: Shift this code into the FencerForm component
+          const fields: Partial<IProfileFormFields> = {
+            ...account.Student,
+            Birthdate: account.Student
+              ? dayjs(account.Student.Birthdate).toDate()
+              : undefined,
+          }
+
+          setFormFields(fields)
+        }
+
+        // TODO: Shift this code into the FencerForm component AddressForm component
+        if (account.AddressId) {
+          const fields: Partial<IProfileFormFields> = {
+            ...account.Address,
+          }
+
+          setFormFields(fields)
+        }
+      } else {
+        // Not registered
+      }
+    }
+  }, [setFormFields, account, isProfileLoading])
+
+  // Determine if the step is already completed
+  useEffect(() => {
+    if (hasStepCompleted()) {
+      setStepStatus("account", "completed")
+    }
+  }, [hasStepCompleted, setStepStatus])
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="on">
@@ -126,7 +241,11 @@ const AccountProfileRegistration: React.FunctionComponent = () => {
             </Button>
           )}
 
-          <Button type="submit" disabled={!hasNext()} appearance="primary">
+          <Button
+            type="submit"
+            appearance="primary"
+            disabled={!hasNext() || formState.isSubmitting}
+          >
             Save and continue
           </Button>
         </Stack>

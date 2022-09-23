@@ -1,4 +1,4 @@
-mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+mutation UpdateAccountById($id: String!, $changes: Accounts_set_input!) {
   update_Accounts_by_pk(pk_columns: { Oid: $id }, _set: $changes) {
     Oid
     PrimaryStudentId

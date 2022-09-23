@@ -1,0 +1,26 @@
+mutation AddAddressAndFencerToAccount(
+  $address: Addresses_insert_input!
+  $fencer: Students_insert_input!
+) {
+  insert_Addresses_one(object: $address) {
+    AddressId
+    Address
+    Address2
+    City
+    State
+    Postal
+  }
+  insert_Students_one(object: $fencer) {
+    Oid
+    StudentId
+    FirstName
+    LastName
+    Nickname
+    Gender
+    Birthdate
+    Email
+    Phone
+    AssociationMemberId
+    AvatarUrl
+  }
+}

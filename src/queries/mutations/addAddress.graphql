@@ -1,0 +1,10 @@
+mutation AddAddress($address: Addresses_insert_input!) {
+  insert_Addresses_one(object: $address) {
+    AddressId
+    Address
+    Address2
+    City
+    State
+    Postal
+  }
+}

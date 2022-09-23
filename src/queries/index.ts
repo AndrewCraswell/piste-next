@@ -2787,7 +2787,7 @@ export type Assessments_Assessment_Cohorts_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_cohorts */
+/** primary key columns input for table: assessments.assessment_cohorts */
 export type Assessments_Assessment_Cohorts_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3017,7 +3017,7 @@ export type Assessments_Assessment_Metrics_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_metrics */
+/** primary key columns input for table: assessments.assessment_metrics */
 export type Assessments_Assessment_Metrics_Pk_Columns_Input = {
   assessment_id: Scalars["uniqueidentifier"]
   metric_id: Scalars["uniqueidentifier"]
@@ -3324,7 +3324,7 @@ export type Assessments_Assessment_Result_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_result */
+/** primary key columns input for table: assessments.assessment_result */
 export type Assessments_Assessment_Result_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3468,7 +3468,7 @@ export type Assessments_Assessment_Result_Statuses_Order_By = {
   name?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_result_statuses */
+/** primary key columns input for table: assessments.assessment_result_statuses */
 export type Assessments_Assessment_Result_Statuses_Pk_Columns_Input = {
   id: Scalars["String"]
 }
@@ -3723,7 +3723,7 @@ export type Assessments_Assessments_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessments */
+/** primary key columns input for table: assessments.assessments */
 export type Assessments_Assessments_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3900,7 +3900,7 @@ export type Assessments_Cohort_Fencers_Order_By = {
   fencer_id?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_cohort_fencers */
+/** primary key columns input for table: assessments.cohort_fencers */
 export type Assessments_Cohort_Fencers_Pk_Columns_Input = {
   cohort_id: Scalars["uniqueidentifier"]
   fencer_id: Scalars["uniqueidentifier"]
@@ -4136,7 +4136,7 @@ export type Assessments_Metric_Questions_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_questions */
+/** primary key columns input for table: assessments.metric_questions */
 export type Assessments_Metric_Questions_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -4201,7 +4201,7 @@ export type Assessments_Metric_Result = {
   notes?: Maybe<Scalars["String"]>
   result_id: Scalars["uniqueidentifier"]
   updated_at: Scalars["datetime2"]
-  value: Scalars["String"]
+  value?: Maybe<Scalars["String"]>
 }
 
 /** aggregated selection of "assessments.metric_result" */
@@ -4338,7 +4338,7 @@ export type Assessments_Metric_Result_Order_By = {
   value?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_result */
+/** primary key columns input for table: assessments.metric_result */
 export type Assessments_Metric_Result_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -4507,7 +4507,7 @@ export type Assessments_Metric_Types_Order_By = {
   name?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_types */
+/** primary key columns input for table: assessments.metric_types */
 export type Assessments_Metric_Types_Pk_Columns_Input = {
   id: Scalars["String"]
 }
@@ -6963,6 +6963,69 @@ export type Uniqueidentifier_Mssql_Comparison_Exp = {
   _nin?: InputMaybe<Array<Scalars["uniqueidentifier"]>>
 }
 
+export type AddAccountMutationVariables = Exact<{
+  account: Accounts_Insert_Input
+}>
+
+export type AddAccountMutation = {
+  __typename?: "mutation_root"
+  insert_Accounts_one?: {
+    __typename?: "Accounts"
+    Oid: string
+    LanguageId: string
+    AddressId?: any | null
+  } | null
+}
+
+export type AddAddressMutationVariables = Exact<{
+  address: Addresses_Insert_Input
+}>
+
+export type AddAddressMutation = {
+  __typename?: "mutation_root"
+  insert_Addresses_one?: {
+    __typename?: "Addresses"
+    AddressId: any
+    Address: string
+    Address2?: string | null
+    City: string
+    State: string
+    Postal: string
+  } | null
+}
+
+export type AddAddressAndFencerToAccountMutationVariables = Exact<{
+  address: Addresses_Insert_Input
+  fencer: Students_Insert_Input
+}>
+
+export type AddAddressAndFencerToAccountMutation = {
+  __typename?: "mutation_root"
+  insert_Addresses_one?: {
+    __typename?: "Addresses"
+    AddressId: any
+    Address: string
+    Address2?: string | null
+    City: string
+    State: string
+    Postal: string
+  } | null
+  insert_Students_one?: {
+    __typename?: "Students"
+    Oid?: string | null
+    StudentId: any
+    FirstName: string
+    LastName: string
+    Nickname?: string | null
+    Gender?: string | null
+    Birthdate?: any | null
+    Email?: string | null
+    Phone?: string | null
+    AssociationMemberId?: string | null
+    AvatarUrl?: string | null
+  } | null
+}
+
 export type AddAssessmentEvaluationMutationVariables = Exact<{
   evaluation: Assessments_Assessment_Result_Insert_Input
 }>
@@ -7011,7 +7074,7 @@ export type AddMetricAnswersMutation = {
     returning: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       metric_question_id: any
       result_id: any
       notes?: string | null
@@ -7040,12 +7103,12 @@ export type DeleteFencerByIdMutation = {
   delete_Students_by_pk?: { __typename?: "Students"; StudentId: any } | null
 }
 
-export type UpdateStudentByIdMutationVariables = Exact<{
+export type UpdateAccountByIdMutationVariables = Exact<{
   id: Scalars["String"]
   changes: Accounts_Set_Input
 }>
 
-export type UpdateStudentByIdMutation = {
+export type UpdateAccountByIdMutation = {
   __typename?: "mutation_root"
   update_Accounts_by_pk?: {
     __typename?: "Accounts"
@@ -7108,7 +7171,7 @@ export type UpdateMetricAnswerMutation = {
     returning: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       notes?: string | null
     }>
   } | null
@@ -7124,9 +7187,9 @@ export type AccountProfileQuery = {
     __typename?: "Accounts"
     Oid: string
     PrimaryStudentId?: any | null
+    AddressId?: any | null
     Student?: {
       __typename?: "Students"
-      Oid?: string | null
       StudentId: any
       FirstName: string
       LastName: string
@@ -7263,7 +7326,7 @@ export type GetAssessmentEvaluationByIdQuery = {
     metric_results: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       notes?: string | null
       metric_question: {
         __typename?: "assessments_metric_questions"
@@ -7314,7 +7377,7 @@ export type GetAssessmentEvaluationsByIdQuery = {
       __typename?: "assessments_metric_result"
       id: any
       result_id: any
-      value: string
+      value?: string | null
       notes?: string | null
       created_at: any
       updated_at: any
@@ -7489,6 +7552,184 @@ export type SearchMembersQuery = {
   }>
 }
 
+export const AddAccountDocument = gql`
+  mutation AddAccount($account: Accounts_insert_input!) {
+    insert_Accounts_one(object: $account) {
+      Oid
+      LanguageId
+      AddressId
+    }
+  }
+`
+export type AddAccountMutationFn = Apollo.MutationFunction<
+  AddAccountMutation,
+  AddAccountMutationVariables
+>
+
+/**
+ * __useAddAccountMutation__
+ *
+ * To run a mutation, you first call `useAddAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddAccountMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addAccountMutation, { data, loading, error }] = useAddAccountMutation({
+ *   variables: {
+ *      account: // value for 'account'
+ *   },
+ * });
+ */
+export function useAddAccountMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    AddAccountMutation,
+    AddAccountMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    AddAccountMutation,
+    AddAccountMutationVariables
+  >(AddAccountDocument, options)
+}
+export type AddAccountMutationHookResult = ReturnType<
+  typeof useAddAccountMutation
+>
+export type AddAccountMutationResult = Apollo.MutationResult<AddAccountMutation>
+export type AddAccountMutationOptions = Apollo.BaseMutationOptions<
+  AddAccountMutation,
+  AddAccountMutationVariables
+>
+export const AddAddressDocument = gql`
+  mutation AddAddress($address: Addresses_insert_input!) {
+    insert_Addresses_one(object: $address) {
+      AddressId
+      Address
+      Address2
+      City
+      State
+      Postal
+    }
+  }
+`
+export type AddAddressMutationFn = Apollo.MutationFunction<
+  AddAddressMutation,
+  AddAddressMutationVariables
+>
+
+/**
+ * __useAddAddressMutation__
+ *
+ * To run a mutation, you first call `useAddAddressMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddAddressMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addAddressMutation, { data, loading, error }] = useAddAddressMutation({
+ *   variables: {
+ *      address: // value for 'address'
+ *   },
+ * });
+ */
+export function useAddAddressMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    AddAddressMutation,
+    AddAddressMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    AddAddressMutation,
+    AddAddressMutationVariables
+  >(AddAddressDocument, options)
+}
+export type AddAddressMutationHookResult = ReturnType<
+  typeof useAddAddressMutation
+>
+export type AddAddressMutationResult = Apollo.MutationResult<AddAddressMutation>
+export type AddAddressMutationOptions = Apollo.BaseMutationOptions<
+  AddAddressMutation,
+  AddAddressMutationVariables
+>
+export const AddAddressAndFencerToAccountDocument = gql`
+  mutation AddAddressAndFencerToAccount(
+    $address: Addresses_insert_input!
+    $fencer: Students_insert_input!
+  ) {
+    insert_Addresses_one(object: $address) {
+      AddressId
+      Address
+      Address2
+      City
+      State
+      Postal
+    }
+    insert_Students_one(object: $fencer) {
+      Oid
+      StudentId
+      FirstName
+      LastName
+      Nickname
+      Gender
+      Birthdate
+      Email
+      Phone
+      AssociationMemberId
+      AvatarUrl
+    }
+  }
+`
+export type AddAddressAndFencerToAccountMutationFn = Apollo.MutationFunction<
+  AddAddressAndFencerToAccountMutation,
+  AddAddressAndFencerToAccountMutationVariables
+>
+
+/**
+ * __useAddAddressAndFencerToAccountMutation__
+ *
+ * To run a mutation, you first call `useAddAddressAndFencerToAccountMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAddAddressAndFencerToAccountMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [addAddressAndFencerToAccountMutation, { data, loading, error }] = useAddAddressAndFencerToAccountMutation({
+ *   variables: {
+ *      address: // value for 'address'
+ *      fencer: // value for 'fencer'
+ *   },
+ * });
+ */
+export function useAddAddressAndFencerToAccountMutation(
+  baseOptions?: ApolloReactHooks.MutationHookOptions<
+    AddAddressAndFencerToAccountMutation,
+    AddAddressAndFencerToAccountMutationVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useMutation<
+    AddAddressAndFencerToAccountMutation,
+    AddAddressAndFencerToAccountMutationVariables
+  >(AddAddressAndFencerToAccountDocument, options)
+}
+export type AddAddressAndFencerToAccountMutationHookResult = ReturnType<
+  typeof useAddAddressAndFencerToAccountMutation
+>
+export type AddAddressAndFencerToAccountMutationResult =
+  Apollo.MutationResult<AddAddressAndFencerToAccountMutation>
+export type AddAddressAndFencerToAccountMutationOptions =
+  Apollo.BaseMutationOptions<
+    AddAddressAndFencerToAccountMutation,
+    AddAddressAndFencerToAccountMutationVariables
+  >
 export const AddAssessmentEvaluationDocument = gql`
   mutation AddAssessmentEvaluation(
     $evaluation: assessments_assessment_result_insert_input!
@@ -7761,8 +8002,8 @@ export type DeleteFencerByIdMutationOptions = Apollo.BaseMutationOptions<
   DeleteFencerByIdMutation,
   DeleteFencerByIdMutationVariables
 >
-export const UpdateStudentByIdDocument = gql`
-  mutation UpdateStudentById($id: String!, $changes: Accounts_set_input!) {
+export const UpdateAccountByIdDocument = gql`
+  mutation UpdateAccountById($id: String!, $changes: Accounts_set_input!) {
     update_Accounts_by_pk(pk_columns: { Oid: $id }, _set: $changes) {
       Oid
       PrimaryStudentId
@@ -7786,49 +8027,49 @@ export const UpdateStudentByIdDocument = gql`
     }
   }
 `
-export type UpdateStudentByIdMutationFn = Apollo.MutationFunction<
-  UpdateStudentByIdMutation,
-  UpdateStudentByIdMutationVariables
+export type UpdateAccountByIdMutationFn = Apollo.MutationFunction<
+  UpdateAccountByIdMutation,
+  UpdateAccountByIdMutationVariables
 >
 
 /**
- * __useUpdateStudentByIdMutation__
+ * __useUpdateAccountByIdMutation__
  *
- * To run a mutation, you first call `useUpdateStudentByIdMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateStudentByIdMutation` returns a tuple that includes:
+ * To run a mutation, you first call `useUpdateAccountByIdMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAccountByIdMutation` returns a tuple that includes:
  * - A mutate function that you can call at any time to execute the mutation
  * - An object with fields that represent the current status of the mutation's execution
  *
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [updateStudentByIdMutation, { data, loading, error }] = useUpdateStudentByIdMutation({
+ * const [updateAccountByIdMutation, { data, loading, error }] = useUpdateAccountByIdMutation({
  *   variables: {
  *      id: // value for 'id'
  *      changes: // value for 'changes'
  *   },
  * });
  */
-export function useUpdateStudentByIdMutation(
+export function useUpdateAccountByIdMutation(
   baseOptions?: ApolloReactHooks.MutationHookOptions<
-    UpdateStudentByIdMutation,
-    UpdateStudentByIdMutationVariables
+    UpdateAccountByIdMutation,
+    UpdateAccountByIdMutationVariables
   >
 ) {
   const options = { ...defaultOptions, ...baseOptions }
   return ApolloReactHooks.useMutation<
-    UpdateStudentByIdMutation,
-    UpdateStudentByIdMutationVariables
-  >(UpdateStudentByIdDocument, options)
+    UpdateAccountByIdMutation,
+    UpdateAccountByIdMutationVariables
+  >(UpdateAccountByIdDocument, options)
 }
-export type UpdateStudentByIdMutationHookResult = ReturnType<
-  typeof useUpdateStudentByIdMutation
+export type UpdateAccountByIdMutationHookResult = ReturnType<
+  typeof useUpdateAccountByIdMutation
 >
-export type UpdateStudentByIdMutationResult =
-  Apollo.MutationResult<UpdateStudentByIdMutation>
-export type UpdateStudentByIdMutationOptions = Apollo.BaseMutationOptions<
-  UpdateStudentByIdMutation,
-  UpdateStudentByIdMutationVariables
+export type UpdateAccountByIdMutationResult =
+  Apollo.MutationResult<UpdateAccountByIdMutation>
+export type UpdateAccountByIdMutationOptions = Apollo.BaseMutationOptions<
+  UpdateAccountByIdMutation,
+  UpdateAccountByIdMutationVariables
 >
 export const UpdateFencerByIdDocument = gql`
   mutation UpdateFencerById(
@@ -7969,7 +8210,6 @@ export const AccountProfileDocument = gql`
       Oid
       PrimaryStudentId
       Student {
-        Oid
         StudentId
         FirstName
         LastName
@@ -7997,6 +8237,7 @@ export const AccountProfileDocument = gql`
           Saber
         }
       }
+      AddressId
       Address {
         AddressId
         Address

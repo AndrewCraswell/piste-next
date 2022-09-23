@@ -1,0 +1,7 @@
+mutation AddAccount($account: Accounts_insert_input!) {
+  insert_Accounts_one(object: $account) {
+    Oid
+    LanguageId
+    AddressId
+  }
+}
