@@ -7,7 +7,6 @@ import { useFormHelpers } from "$hooks"
 import { IProfileFormFields } from ".."
 import { StatesDropdown } from "$components/Form/components/StatesDropdown"
 import { FormAddressAutocomplete } from "$components/Form/components/FormAddressAutocomplete"
-import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTextField"
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormInputField } from "$components/Form/components/v9/FormInputField"
@@ -29,6 +28,7 @@ export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
         Address2: address.address2,
         City: address.city,
         Postal: address.postalCodePrefix,
+        State: address.state,
       }
 
       setFormFields(fields)
