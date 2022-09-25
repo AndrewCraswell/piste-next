@@ -18,19 +18,17 @@ import {
 
 // TODO: Handle errors
 // TODO: Handle loading spinner
+// TODO: Determine whether to Create new records, or Update when "Save and continue" is clicked
 
 // TODO: Store copy of data in memory
 // TODO: Serializing of numbers/dates is not working correctly
 
-// TODO: Pressing "enter" on the address suggestions submits the form
-// TODO: Rearrange the Birthdate, Phone number, and Email fields to consume less space
-
 // TODO: Add isOnboardingCompleted row on account
-
 // TODO: Update the GraphQL "CreatedBy" fields for Accounts, Addresses, and Students tables in Hasura
 
 // TODO: Migrate database to Postgres to simplify the queries.
 //   Execute all mutations at the same time
+
 export const AccountProfileRegistration: React.FunctionComponent = () => {
   useTrackPisteMetric({ componentName: "AthleteOnboardingAccountPage" })
   const form = useForm<IProfileFormFields>()
@@ -79,7 +77,6 @@ export const AccountProfileRegistration: React.FunctionComponent = () => {
         return
       }
 
-      // TOOD: Migrate to Postgres so that this can all be done as a single query
       addAccount({
         variables: {
           account: {
@@ -87,7 +84,6 @@ export const AccountProfileRegistration: React.FunctionComponent = () => {
           },
         },
         onCompleted: () => {
-          // TODO: Add gender field
           addAddressAndFencer({
             variables: {
               fencer: {
@@ -95,6 +91,7 @@ export const AccountProfileRegistration: React.FunctionComponent = () => {
                 FirstName: values.FirstName,
                 LastName: values.LastName,
                 Birthdate: sanitizeDate(values.Birthdate),
+                Gender: values.Gender,
                 Phone: sanitizePhone(values.Phone),
                 Email: values.Email,
               },
