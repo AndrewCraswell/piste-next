@@ -24,10 +24,7 @@ export const StatesDropdown: React.FunctionComponent<StatesDropdownProps> = (
         State
       </Label>
 
-      <FormSelectField {...props} defaultValue="">
-        <option value="" disabled>
-          Select a state
-        </option>
+      <FormSelectField {...props} placeholder="Select a state">
         {states.map(({ key, text }) => (
           <option key={key} value={key}>
             {text}

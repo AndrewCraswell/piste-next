@@ -58,10 +58,11 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
           <FormLabel tooltipContent="The gender selection is used when determining events that are applicable to you. Choose the gender that best describes which event categories you are interested in.">
             Gender
           </FormLabel>
-          <FormSelectField control={control} name="Gender" defaultValue="">
-            <option value="" disabled>
-              Select a gender
-            </option>
+          <FormSelectField
+            control={control}
+            name="Gender"
+            placeholder="Select a gender"
+          >
             <option value="M">Male</option>
             <option value="F">Female</option>
             <option value="O">Other</option>
