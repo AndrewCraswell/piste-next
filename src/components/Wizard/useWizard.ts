@@ -2,6 +2,8 @@ import { useMount } from "@fluentui/react-hooks"
 import { useContext, useEffect } from "react"
 import { UseFormReturn } from "react-hook-form"
 
+import { IProfileFormFields } from "$components/Forms"
+import { StorageSerializer } from "$lib/StorageSerializer"
 import { WizardContext } from "./WizardContext"
 
 export type UseWizardOptions = {
@@ -22,12 +24,12 @@ export const useWizard = (options?: UseWizardOptions) => {
     const subscription = options.form.watch((value) => {
       if (currentStepId) {
         const cacheKey = name ?? currentStepId
-
-        const previousState = JSON.parse(localStorage.getItem(cacheKey) || "{}")
+        const cached = localStorage.getItem(cacheKey) ?? "{}"
+        const previousState = JSON.parse(cached)
 
         const state = {
           ...previousState,
-          [currentStepId]: value,
+          [currentStepId]: StorageSerializer.serialize(value),
         }
 
         localStorage.setItem(cacheKey, JSON.stringify(state))
@@ -45,24 +47,17 @@ export const useWizard = (options?: UseWizardOptions) => {
 
     if (currentStepId) {
       const cacheKey = name ?? currentStepId
-      const state = localStorage.getItem(cacheKey)
+      const cached = localStorage.getItem(cacheKey)
 
-      if (state) {
-        const parsed = JSON.parse(state)
-        const formState = parsed[currentStepId]
+      if (cached) {
+        const previousState = JSON.parse(cached)
+        const formState = previousState[currentStepId]
 
-        if (formState) {
-          // Check if the value is a date, and properly deserialize
-          Object.keys(formState).forEach((key) => {
-            const date = new Date(formState[key])
-            if (!isNaN(date.getDate())) {
-              formState[key] = date
-            }
-          })
+        // Set the form values from the restored form state
+        const deserializedForm =
+          StorageSerializer.deserialize<IProfileFormFields>(formState)
 
-          // Set the form values from the restored form state
-          options.form.reset(formState)
-        }
+        options.form.reset(deserializedForm)
       }
     }
   })
