@@ -69,8 +69,9 @@ export const OnboardingPage: React.FunctionComponent = () => {
             description={<Caption1>Personal account</Caption1>}
           />
           <CardContent>
-            Manage your personal account, find tournaments and get coaching. Get
-            notified of tournaments you qualify for, and never miss an event.
+            Manage your personal account, find tournaments and schedule
+            coaching. Get notified of tournaments you qualify for, and never
+            miss an event.
           </CardContent>
           <CardFooter>
             <SelectButton appearance="primary" href="/onboarding/athlete">
@@ -87,7 +88,7 @@ export const OnboardingPage: React.FunctionComponent = () => {
           />
           <CardContent>
             Manage one or more athlete accounts for your family. Find
-            tournaments and get coaching.
+            tournaments and schedule coaching.
           </CardContent>
           <CardFooter>
             <SelectButton appearance="primary" href="/onboarding/family">
