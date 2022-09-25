@@ -41,7 +41,7 @@ export const EditFencerDialog: React.FunctionComponent<
   )
 
   const form = useForm<IProfileFormFields>({ defaultValues: defaultFormValues })
-  const { handleSubmit, formState, reset, getValues } = form
+  const { handleSubmit, formState, reset } = form
   const { sanitizePhone, sanitizeDate } = useFormHelpers(form)
 
   const [addFencerToAccount] = useAddFencerToAccountMutation({
@@ -58,7 +58,7 @@ export const EditFencerDialog: React.FunctionComponent<
   const [editFencer] = useUpdateFencerByIdMutation({
     onCompleted: () => {
       onClose()
-      reset(getValues())
+      reset((values: IProfileFormFields) => ({ ...values }))
     },
   })
 
