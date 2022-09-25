@@ -7,6 +7,8 @@ import { FormMaskedTextField } from "$components/Form/components/v8/FormMaskedTe
 import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormInputField } from "$components/Form/components/v9/FormInputField"
+import { FormSelectField } from "$components/Form/components/v9/FormSelectField"
+import { FormLabel } from "$components/Form/components/FormLabel/FormLabel"
 
 interface IFencerFormProps {
   form: UseFormReturn<IProfileFormFields, object>
@@ -42,6 +44,40 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
         />
       </FormRow>
       <FormRow>
+        <FormInputField
+          control={control}
+          name="Email"
+          label="Email"
+          required
+          placeholder="Email"
+          type="email"
+          maxLength={64}
+          autoComplete="email"
+        />
+        <div>
+          <FormLabel tooltipContent="The gender selection is used when determining events that are applicable to you. Choose the gender that best describes which event categories you are interested in.">
+            Gender
+          </FormLabel>
+          <FormSelectField control={control} name="Gender" defaultValue="">
+            <option value="" disabled>
+              Select a gender
+            </option>
+            <option value="M">Male</option>
+            <option value="F">Female</option>
+            <option value="O">Other</option>
+          </FormSelectField>
+        </div>
+      </FormRow>
+      <FormRow>
+        <FormMaskedTextField
+          control={control}
+          name="Phone"
+          label="Phone number"
+          mask="(999) 999-9999"
+          title="A 10 digit phone number"
+          type="tel"
+          autoComplete="tel-national"
+        />
         <FormDatePicker
           control={control}
           name="Birthdate"
@@ -54,29 +90,6 @@ export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
           defaultValue={new Date() as unknown as string}
           maxDate={new Date()}
           formatDate={(date) => dayjs(date).format("M/DD/YYYY")}
-        />
-      </FormRow>
-      <FormRow>
-        <FormMaskedTextField
-          control={control}
-          name="Phone"
-          label="Phone number"
-          mask="(999) 999-9999"
-          title="A 10 digit phone number"
-          type="tel"
-          autoComplete="tel-national"
-        />
-      </FormRow>
-      <FormRow>
-        <FormInputField
-          control={control}
-          name="Email"
-          label="Email"
-          required
-          placeholder="Email"
-          type="email"
-          maxLength={64}
-          autoComplete="email"
         />
       </FormRow>
     </FormSection>

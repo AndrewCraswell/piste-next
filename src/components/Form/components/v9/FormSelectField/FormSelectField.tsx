@@ -3,10 +3,8 @@ import styled from "@emotion/styled"
 import { Select, SelectProps } from "@fluentui/react-components/unstable"
 import { Controller, FieldValues } from "react-hook-form"
 
-export type FormSelectProps<TForm extends FieldValues = any> = FormFieldProps<
-  SelectProps,
-  TForm
->
+export type FormSelectFieldProps<TForm extends FieldValues = any> =
+  FormFieldProps<SelectProps, TForm>
 
 // TODO: Migrate to the Fluent v9 DropdownField component
 // TODO: Fix the width issues
@@ -19,7 +17,9 @@ const StyledSelect = styled(Select)`
   }
 `
 
-export const FormSelect: React.FunctionComponent<FormSelectProps> = (props) => {
+export const FormSelectField: React.FunctionComponent<FormSelectFieldProps> = (
+  props
+) => {
   const { name, control, controllerProps, children, ...inputProps } = props
   return (
     <Controller

@@ -1,7 +1,7 @@
 import {
-  FormSelect,
-  FormSelectProps,
-} from "$components/Form/components/v9/FormSelect"
+  FormSelectField,
+  FormSelectFieldProps,
+} from "$components/Form/components/v9/FormSelectField"
 
 import { states } from "./StatesDropdown.data"
 import { Label } from "@fluentui/react-components"
@@ -9,7 +9,7 @@ import { Label } from "@fluentui/react-components"
 const labelStyles = { margin: "5px 0", display: "block" }
 
 export type StatesDropdownProps = Omit<
-  FormSelectProps,
+  FormSelectFieldProps,
   "children" | "placeholder"
 > & { required: boolean }
 
@@ -24,7 +24,7 @@ export const StatesDropdown: React.FunctionComponent<StatesDropdownProps> = (
         State
       </Label>
 
-      <FormSelect {...props} defaultValue="">
+      <FormSelectField {...props} defaultValue="">
         <option value="" disabled>
           Select a state
         </option>
@@ -33,7 +33,7 @@ export const StatesDropdown: React.FunctionComponent<StatesDropdownProps> = (
             {text}
           </option>
         ))}
-      </FormSelect>
+      </FormSelectField>
     </div>
   )
 }
