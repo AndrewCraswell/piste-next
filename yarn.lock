@@ -2339,7 +2339,7 @@
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
 
-"@fluentui/react@^8.96.0", "@fluentui/react@^8.96.1":
+"@fluentui/react@^8.96.1":
   version "8.96.1"
   resolved "https://registry.yarnpkg.com/@fluentui/react/-/react-8.96.1.tgz#edbd296d02832084cc4a36b1d0d8786ce48b2a54"
   integrity sha512-TzF4B3PTlPmpRirijwrGJTqOBmmlYnm42Y2XOZXKdIB48h1ZibqfXwSA8t/wpNYTNHBF5v4PtITTCIvnfhzMoA==
@@ -2387,12 +2387,12 @@
     "@microsoft/load-themed-styles" "^1.10.26"
     tslib "^2.1.0"
 
-"@fluentui/theme-samples@^8.7.2":
-  version "8.7.2"
-  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.7.2.tgz#3a5b72257c8baff6efbea6d10c36067c4647fb3e"
-  integrity sha512-mccZi0cuUpmujDzyNLi6hl2MqJYQTwWssiuOhX9nXpoGz0MwAEWQW1RkC7jSXsWjs4rzpDdAZ79bgBiGK0nSzQ==
+"@fluentui/theme-samples@^8.7.3":
+  version "8.7.3"
+  resolved "https://registry.yarnpkg.com/@fluentui/theme-samples/-/theme-samples-8.7.3.tgz#ef55b8682cf4909543ae1c627f717c7c83cf35a7"
+  integrity sha512-BsLUdhoZGzLW8q9te6Wq9yEnZeync57KnfAAScAZ+3kqeIKu15gMeAR+d+4LHzI/+WlW9Jl7PZ6ZP+v2fRQa2g==
   dependencies:
-    "@fluentui/react" "^8.96.0"
+    "@fluentui/react" "^8.96.1"
     "@fluentui/scheme-utilities" "^8.3.17"
     "@fluentui/set-version" "^8.2.2"
     tslib "^2.1.0"
