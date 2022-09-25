@@ -1,0 +1,14 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+// Remove the Google logo from the Places Suggestions component
+.pac-logo {
+  &::after {
+    content: none !important;
+  }
+
+  font-family: var(--fontFamilyBase);
+}
