@@ -8,7 +8,11 @@ import {
   PeopleTeam24Regular,
   Person24Regular,
 } from "@fluentui/react-icons"
-import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import {
+  Card,
+  CardFooter,
+  CardHeader,
+} from "@fluentui/react-components/unstable"
 import { LinkButton } from "$components/LinkButton"
 import { AnimationStyles } from "@fluentui/react"
 
@@ -35,6 +39,10 @@ const HeroSection = styled.div`
   & > span:first-of-type {
     margin-bottom: ${({ theme }) => theme.fluentV9.spacingVerticalS};
   }
+`
+
+const SelectButton = styled(LinkButton)`
+  width: 100%;
 `
 
 export const OnboardingPage: React.FunctionComponent = () => {
@@ -64,9 +72,11 @@ export const OnboardingPage: React.FunctionComponent = () => {
             Manage your personal account, find tournaments and get coaching. Get
             notified of tournaments you qualify for, and never miss an event.
           </CardContent>
-          <LinkButton appearance="primary" href="/onboarding/athlete">
-            Select
-          </LinkButton>
+          <CardFooter>
+            <SelectButton appearance="primary" href="/onboarding/athlete">
+              Select
+            </SelectButton>
+          </CardFooter>
         </AnimatedCard>
 
         <AnimatedCard>
@@ -79,9 +89,11 @@ export const OnboardingPage: React.FunctionComponent = () => {
             Manage one or more athlete accounts for your family. Find
             tournaments and get coaching.
           </CardContent>
-          <LinkButton appearance="primary" href="/onboarding/family">
-            Select
-          </LinkButton>
+          <CardFooter>
+            <SelectButton appearance="primary" href="/onboarding/family">
+              Select
+            </SelectButton>
+          </CardFooter>
         </AnimatedCard>
 
         <AnimatedCard>
@@ -95,9 +107,11 @@ export const OnboardingPage: React.FunctionComponent = () => {
             built-in payment processing. Reach a wider audience and drive
             engagement across your entire region.
           </CardContent>
-          <LinkButton appearance="primary" href="/onboarding/club">
-            Select
-          </LinkButton>
+          <CardFooter>
+            <SelectButton appearance="primary" href="/onboarding/club">
+              Select
+            </SelectButton>
+          </CardFooter>
         </AnimatedCard>
       </GridContainer>
     </>
