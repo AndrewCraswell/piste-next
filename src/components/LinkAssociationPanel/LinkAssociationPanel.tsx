@@ -2,7 +2,6 @@ import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 import { Alert } from "@fluentui/react-components/unstable"
-import { DismissCircleRegular } from "@fluentui/react-icons"
 
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
