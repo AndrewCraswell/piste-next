@@ -1,7 +1,8 @@
-import { MessageBar, MessageBarType } from "@fluentui/react"
 import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
+import { Alert } from "@fluentui/react-components/unstable"
+import { DismissCircleRegular } from "@fluentui/react-icons"
 
 import { useAccountProfile } from "$hooks"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
@@ -159,7 +160,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
               <>
                 <MemberDetailsCard details={memberDetails} />
                 {!!alreadyLinkedTo && (
-                  <MessageBar messageBarType={MessageBarType.blocked}>
+                  <Alert intent="error">
                     {alreadyLinkedTo === UserId ? (
                       <>
                         This membership is already linked to another fencer in
@@ -168,7 +169,7 @@ export const LinkAssociationPanel: React.FunctionComponent<
                     ) : (
                       <>This membership is already linked to another fencer.</>
                     )}
-                  </MessageBar>
+                  </Alert>
                 )}
               </>
             )}

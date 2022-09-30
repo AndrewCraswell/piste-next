@@ -21,7 +21,6 @@ import {
 // TODO: Determine whether to Create new records, or Update when "Save and continue" is clicked
 
 // TODO: Store copy of data in memory
-// TODO: Serializing of numbers/dates is not working correctly
 
 // TODO: Add isOnboardingCompleted row on account
 // TODO: Update the GraphQL "CreatedBy" fields for Accounts, Addresses, and Students tables in Hasura
