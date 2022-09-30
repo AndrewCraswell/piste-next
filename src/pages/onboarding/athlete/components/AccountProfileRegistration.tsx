@@ -28,6 +28,8 @@ import {
 // TODO: Migrate database to Postgres to simplify the queries.
 //   Execute all mutations at the same time
 
+const STEP_ID = "account"
+
 export const AccountProfileRegistration: React.FunctionComponent = () => {
   useTrackPisteMetric({ componentName: "AthleteOnboardingAccountPage" })
   const form = useForm<IProfileFormFields>()
@@ -59,6 +61,7 @@ export const AccountProfileRegistration: React.FunctionComponent = () => {
   } = useWizard({
     form,
     storage: "localStorage",
+    stepId: STEP_ID,
   })
 
   const hasStepCompleted = useCallback(() => {
@@ -172,7 +175,7 @@ export const AccountProfileRegistration: React.FunctionComponent = () => {
   // Determine if the step is already completed
   useEffect(() => {
     if (hasStepCompleted()) {
-      setStepStatus("account", "completed")
+      setStepStatus(STEP_ID, "completed")
     }
   }, [hasStepCompleted, setStepStatus])
 

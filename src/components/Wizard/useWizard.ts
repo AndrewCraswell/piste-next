@@ -6,9 +6,13 @@ import { IProfileFormFields } from "$components/Forms"
 import { StorageSerializer } from "$lib/StorageSerializer"
 import { WizardContext } from "./WizardContext"
 
+// TODO: Allow saving form values in SessionStorage, LocalStorage, or none
+// TODO: Save form values in memory
+
 export type UseWizardOptions = {
   form: UseFormReturn<any, object>
-  storage: "localStorage" | "sessionStorage"
+  storage?: "localStorage" | "sessionStorage"
+  stepId?: string
 }
 
 export const useWizard = (options?: UseWizardOptions) => {
@@ -22,14 +26,14 @@ export const useWizard = (options?: UseWizardOptions) => {
     }
 
     const subscription = options.form.watch((value) => {
-      if (currentStepId) {
-        const cacheKey = name ?? currentStepId
+      if (options.stepId) {
+        const cacheKey = name ?? options.stepId
         const cached = localStorage.getItem(cacheKey) ?? "{}"
         const previousState = JSON.parse(cached)
 
         const state = {
           ...previousState,
-          [currentStepId]: StorageSerializer.serialize(value),
+          [options.stepId]: StorageSerializer.serialize(value),
         }
 
         localStorage.setItem(cacheKey, JSON.stringify(state))
@@ -37,7 +41,7 @@ export const useWizard = (options?: UseWizardOptions) => {
     })
 
     return () => subscription.unsubscribe()
-  }, [currentStepId, name, options?.form])
+  }, [currentStepId, name, options?.form, options?.stepId])
 
   // Restore the form state from storage when mounted
   useMount(() => {
@@ -45,13 +49,13 @@ export const useWizard = (options?: UseWizardOptions) => {
       return
     }
 
-    if (currentStepId) {
-      const cacheKey = name ?? currentStepId
+    if (options.stepId) {
+      const cacheKey = name ?? options.stepId
       const cached = localStorage.getItem(cacheKey)
 
       if (cached) {
         const previousState = JSON.parse(cached)
-        const formState = previousState[currentStepId]
+        const formState = previousState[options.stepId]
 
         // Set the form values from the restored form state
         const deserializedForm =

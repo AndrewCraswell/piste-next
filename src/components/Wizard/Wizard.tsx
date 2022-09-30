@@ -149,15 +149,18 @@ export const Wizard: React.FunctionComponent<IWizardProps> = ({
       <WizardContent>
         {
           // Filter out any steps that aren't the current active step
-          React.Children.toArray(children).filter((node) => {
+          React.Children.map(children, (node) => {
             if (
               React.isValidElement(node) &&
               isNodeComponentType(node, WizardStep)
             ) {
               const { id } = node.props as ComponentProps<typeof WizardStep>
-              return id === currentStepId
+              if (id === currentStepId) {
+                return <div className="active">{node}</div>
+              }
             }
-            return true
+
+            return node
           })
         }
       </WizardContent>
