@@ -29,7 +29,7 @@ export const ThemeProvider: React.FunctionComponent = ({ children }) => {
   const [params] = useSearchParams()
   const themeName = params.get("theme")
 
-  let theme: IAppTheme = useMemo((): IAppTheme => {
+  const theme: IAppTheme = useMemo((): IAppTheme => {
     switch (themeName) {
       //@ts-ignore
       case "dark":
