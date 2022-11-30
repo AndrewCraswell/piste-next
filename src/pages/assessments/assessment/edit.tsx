@@ -2,7 +2,7 @@ import { Body1, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
-import { useDisclosure, useTitle } from "$hooks"
+import { useDisclosure } from "$hooks"
 import {
   useGetAssessmentEvaluationByIdQuery,
   useUpdateMetricAnswerMutation,
@@ -24,10 +24,10 @@ import { FormSection } from "$components/Form/components/FormSection"
 import { PageTitle } from "$components/PageTitle"
 import { PersonaAvatar } from "$components/PersonaAvatar"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 export const EditEvaluationPage: React.FunctionComponent = () => {
   const pageTitle = "Edit evaluation"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "EditEvaluationPage" })
 
   const params = useParams()
@@ -115,7 +115,7 @@ export const EditEvaluationPage: React.FunctionComponent = () => {
   }
 
   return (
-    <>
+    <DefaultPageLayout title={pageTitle} skipTitleHeading={true}>
       <BackLink onClick={cancelEvaluation}>Return to assessment</BackLink>
       <PageTitle>{evaluation?.assessment.title || pageTitle}</PageTitle>
       <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -194,7 +194,7 @@ export const EditEvaluationPage: React.FunctionComponent = () => {
       >
         Are you sure you want to leave without saving? Any changes will be lost.
       </ConfirmDialog>
-    </>
+    </DefaultPageLayout>
   )
 }
 

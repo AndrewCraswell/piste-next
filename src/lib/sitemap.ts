@@ -84,6 +84,14 @@ export const sitemap: IPageItem[] = [
         ],
       },
       {
+        name: "Users",
+        url: "users/",
+        tags: {
+          nav: { group: "Club", link: { icon: "People", disabled: false } },
+          breadcrumb: {},
+        },
+      },
+      {
         name: "Classes",
         url: "classes/",
         tags: {

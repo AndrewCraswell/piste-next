@@ -18,6 +18,7 @@ const SubmitEvaluationPage = loadable(
 const EditEvaluationPage = loadable(
   () => import("./pages/assessments/assessment/edit")
 )
+const UsersPage = loadable(() => import("./pages/users"))
 const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
 export const Routes: React.FunctionComponent = () => {
@@ -45,6 +46,8 @@ export const Routes: React.FunctionComponent = () => {
           path="assessments/:assessmentId/:evaluationId"
           element={<EditEvaluationPage />}
         />
+
+        <Route path="users" element={<UsersPage />} />
 
         <Route path="profile" element={<ProfilePage />} />
 

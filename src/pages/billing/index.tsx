@@ -1,17 +1,11 @@
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
-import { PageTitle } from "$components/PageTitle"
-import { useTitle } from "$hooks"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 const BillingPage: React.FunctionComponent = () => {
   const pageTitle = "Billing"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "BillingPage" })
 
-  return (
-    <>
-      <PageTitle>{pageTitle}</PageTitle>
-    </>
-  )
+  return <DefaultPageLayout title={pageTitle}></DefaultPageLayout>
 }
 
 export default BillingPage

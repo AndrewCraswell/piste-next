@@ -2,15 +2,14 @@ import { Body1, Text } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 import { useGetAssessmentsQuery } from "$queries"
-import { useTitle } from "$hooks"
 import { IAssessmentMetadata } from "$types"
 import { formatFullName } from "$lib/formatFullName"
 import {
   AssessmentCardSkeleton,
   AssessmentCard,
 } from "$components/AssessmentCard"
-import { PageTitle } from "$components/PageTitle"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 const AssessmentsGrid = styled.div`
   display: grid;
@@ -21,7 +20,6 @@ const AssessmentsGrid = styled.div`
 
 const AssessmentsPage: React.FunctionComponent = () => {
   const pageTitle = "Assessments"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "AssessmentsPage" })
 
   const { data, loading: isLoadingAssessments } = useGetAssessmentsQuery()
@@ -44,8 +42,7 @@ const AssessmentsPage: React.FunctionComponent = () => {
     })) || []
 
   return (
-    <>
-      <PageTitle>{pageTitle}</PageTitle>
+    <DefaultPageLayout title={pageTitle}>
       <Body1 block style={{ marginBottom: "1rem", maxWidth: 600 }}>
         Assessments allow coaches to evaluate students against a set of
         skill-based criteria. The results should help fencers understand their
@@ -69,7 +66,7 @@ const AssessmentsPage: React.FunctionComponent = () => {
           </>
         )}
       </AssessmentsGrid>
-    </>
+    </DefaultPageLayout>
   )
 }
 

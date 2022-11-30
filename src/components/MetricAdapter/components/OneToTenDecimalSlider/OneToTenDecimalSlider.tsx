@@ -1,6 +1,5 @@
 import { IMetricAdapterProps } from "$components/MetricAdapter/MetricAdapter.types"
-import { SpinButton } from "@fluentui/react-components/unstable"
-import { Label, Slider, useId } from "@fluentui/react-components"
+import { Label, Slider, useId, SpinButton } from "@fluentui/react-components"
 
 export const OneToTenDecimalSlider: React.FunctionComponent<
   Omit<IMetricAdapterProps, "type">
