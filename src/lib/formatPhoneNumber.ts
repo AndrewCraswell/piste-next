@@ -1,4 +1,8 @@
-export function formatPhoneNumber(phoneNumber: string) {
+export function formatPhoneNumber(phoneNumber?: string | null): string {
+  if (!phoneNumber) {
+    return ""
+  }
+
   var cleaned = phoneNumber.replace(/\D/g, "")
   var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/)
   if (match) {
