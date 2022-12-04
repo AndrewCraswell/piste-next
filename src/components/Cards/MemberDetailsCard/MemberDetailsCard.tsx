@@ -22,10 +22,9 @@ const MemberDetailsList = styled.ul`
   }
 `
 
-const MemberDetailItem: React.FunctionComponent<IMemberDetailItemProps> = ({
-  title,
-  value,
-}) => (
+export const MemberDetailItem: React.FunctionComponent<
+  IMemberDetailItemProps
+> = ({ title, value }) => (
   <li>
     <Text size={100} weight="semibold">
       {title}
@@ -45,7 +44,7 @@ const MemberPersona = styled(PersonaAvatar)`
 
 export interface IMemberDetailItemProps {
   title: string
-  value?: string
+  value?: string | number | null
 }
 
 export type MemberDetails = {
