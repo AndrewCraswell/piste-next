@@ -6,7 +6,7 @@ import { Text } from "@fluentui/react-components"
 import dayjs from "dayjs"
 import { PersonaAvatar } from "../../PersonaAvatar"
 
-const MemberDetailsList = styled.ul`
+export const MemberDetailsList = styled.ul`
   display: grid;
   grid-template-columns: auto auto auto;
   list-style: none;
