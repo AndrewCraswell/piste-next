@@ -5,6 +5,5 @@ export type TabPanelProps = {
 }
 
 export const TabPanel: React.FunctionComponent<TabPanelProps> = ({
-  name,
   children,
 }) => <>{children}</>
