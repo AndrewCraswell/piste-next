@@ -1,5 +1,5 @@
 export type AssessmentEvaluationAnswer = {
-  value: string
+  value?: string | null
   notes?: string
 }
 

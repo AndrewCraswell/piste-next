@@ -20,7 +20,7 @@ export function mapAssessmentEvaluationsToTable(
 
     const score =
       completedAnswers.reduce(
-        (total, answer) => total + parseFloat(answer.value),
+        (total, answer) => total + parseFloat(answer.value ?? "0"),
         0
       ) / 100
 
