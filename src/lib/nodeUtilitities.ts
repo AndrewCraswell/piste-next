@@ -11,8 +11,8 @@ export const isNodeComponentType = (
 export const filterChildrenByNodeType = <P>(
   children: React.ReactNode,
   component: React.FunctionComponent<P>
-): React.ReactNode => {
+): React.ReactElement<P>[] => {
   return React.Children.toArray(children).filter(
     (node) => React.isValidElement(node) && isNodeComponentType(node, component)
-  )
+  ) as React.ReactElement<P>[]
 }

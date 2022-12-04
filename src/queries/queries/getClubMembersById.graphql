@@ -1,0 +1,47 @@
+query GetClubMembersById($clubId: uniqueidentifier!) {
+  club_accounts(where: { club_id: { _eq: $clubId } }) {
+    Account {
+      Oid
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+        Email
+        Phone
+      }
+      AccountClubRoles {
+        ClubRoleId
+        ClubRole {
+          RoleId
+          Name
+        }
+      }
+      Students {
+        Oid
+        StudentId
+        AssociationMemberId
+        FirstName
+        LastName
+        Nickname
+        Email
+        Phone
+        Gender
+        Birthdate
+        AssociationMember {
+          AssociationMemberId
+          Birthdate
+          Competitive
+          Expiration
+          Epee
+          Foil
+          Saber
+          MemberType
+          SafeSportExpires
+          CheckEd
+          BackgroundCheckExpires
+        }
+      }
+    }
+  }
+}

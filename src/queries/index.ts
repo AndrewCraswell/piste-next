@@ -1554,7 +1554,7 @@ export type ClubLocations = {
   CreatedAt?: Maybe<Scalars["datetime2"]>
   CreatedBy?: Maybe<Scalars["String"]>
   Email: Scalars["String"]
-  LocationId: Scalars["String"]
+  LocationId: Scalars["uniqueidentifier"]
   Name: Scalars["String"]
   Phone: Scalars["String"]
   UpdatedAt?: Maybe<Scalars["datetime2"]>
@@ -1597,7 +1597,7 @@ export type ClubLocations_Bool_Exp = {
   CreatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>
   CreatedBy?: InputMaybe<String_Mssql_Comparison_Exp>
   Email?: InputMaybe<String_Mssql_Comparison_Exp>
-  LocationId?: InputMaybe<String_Mssql_Comparison_Exp>
+  LocationId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>
   Name?: InputMaybe<String_Mssql_Comparison_Exp>
   Phone?: InputMaybe<String_Mssql_Comparison_Exp>
   UpdatedAt?: InputMaybe<Datetime2_Mssql_Comparison_Exp>
@@ -1620,7 +1620,7 @@ export type ClubLocations_Insert_Input = {
   CreatedAt?: InputMaybe<Scalars["datetime2"]>
   CreatedBy?: InputMaybe<Scalars["String"]>
   Email?: InputMaybe<Scalars["String"]>
-  LocationId?: InputMaybe<Scalars["String"]>
+  LocationId?: InputMaybe<Scalars["uniqueidentifier"]>
   Name?: InputMaybe<Scalars["String"]>
   Phone?: InputMaybe<Scalars["String"]>
   UpdatedAt?: InputMaybe<Scalars["datetime2"]>
@@ -1654,7 +1654,6 @@ export type ClubLocations_Max_Fields = {
   CreatedAt?: Maybe<Scalars["datetime2"]>
   CreatedBy?: Maybe<Scalars["String"]>
   Email?: Maybe<Scalars["String"]>
-  LocationId?: Maybe<Scalars["String"]>
   Name?: Maybe<Scalars["String"]>
   Phone?: Maybe<Scalars["String"]>
   UpdatedAt?: Maybe<Scalars["datetime2"]>
@@ -1665,7 +1664,6 @@ export type ClubLocations_Max_Order_By = {
   CreatedAt?: InputMaybe<Order_By>
   CreatedBy?: InputMaybe<Order_By>
   Email?: InputMaybe<Order_By>
-  LocationId?: InputMaybe<Order_By>
   Name?: InputMaybe<Order_By>
   Phone?: InputMaybe<Order_By>
   UpdatedAt?: InputMaybe<Order_By>
@@ -1677,7 +1675,6 @@ export type ClubLocations_Min_Fields = {
   CreatedAt?: Maybe<Scalars["datetime2"]>
   CreatedBy?: Maybe<Scalars["String"]>
   Email?: Maybe<Scalars["String"]>
-  LocationId?: Maybe<Scalars["String"]>
   Name?: Maybe<Scalars["String"]>
   Phone?: Maybe<Scalars["String"]>
   UpdatedAt?: Maybe<Scalars["datetime2"]>
@@ -1688,7 +1685,6 @@ export type ClubLocations_Min_Order_By = {
   CreatedAt?: InputMaybe<Order_By>
   CreatedBy?: InputMaybe<Order_By>
   Email?: InputMaybe<Order_By>
-  LocationId?: InputMaybe<Order_By>
   Name?: InputMaybe<Order_By>
   Phone?: InputMaybe<Order_By>
   UpdatedAt?: InputMaybe<Order_By>
@@ -1720,7 +1716,7 @@ export type ClubLocations_Order_By = {
 
 /** primary key columns input for table: ClubLocations */
 export type ClubLocations_Pk_Columns_Input = {
-  LocationId: Scalars["String"]
+  LocationId: Scalars["uniqueidentifier"]
 }
 
 /** select columns of table "ClubLocations" */
@@ -1752,7 +1748,7 @@ export type ClubLocations_Set_Input = {
   CreatedAt?: InputMaybe<Scalars["datetime2"]>
   CreatedBy?: InputMaybe<Scalars["String"]>
   Email?: InputMaybe<Scalars["String"]>
-  LocationId?: InputMaybe<Scalars["String"]>
+  LocationId?: InputMaybe<Scalars["uniqueidentifier"]>
   Name?: InputMaybe<Scalars["String"]>
   Phone?: InputMaybe<Scalars["String"]>
   UpdatedAt?: InputMaybe<Scalars["datetime2"]>
@@ -2787,7 +2783,7 @@ export type Assessments_Assessment_Cohorts_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_cohorts */
+/** primary key columns input for table: assessments.assessment_cohorts */
 export type Assessments_Assessment_Cohorts_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3017,7 +3013,7 @@ export type Assessments_Assessment_Metrics_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_metrics */
+/** primary key columns input for table: assessments.assessment_metrics */
 export type Assessments_Assessment_Metrics_Pk_Columns_Input = {
   assessment_id: Scalars["uniqueidentifier"]
   metric_id: Scalars["uniqueidentifier"]
@@ -3324,7 +3320,7 @@ export type Assessments_Assessment_Result_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_result */
+/** primary key columns input for table: assessments.assessment_result */
 export type Assessments_Assessment_Result_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3468,7 +3464,7 @@ export type Assessments_Assessment_Result_Statuses_Order_By = {
   name?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessment_result_statuses */
+/** primary key columns input for table: assessments.assessment_result_statuses */
 export type Assessments_Assessment_Result_Statuses_Pk_Columns_Input = {
   id: Scalars["String"]
 }
@@ -3723,7 +3719,7 @@ export type Assessments_Assessments_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_assessments */
+/** primary key columns input for table: assessments.assessments */
 export type Assessments_Assessments_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -3900,7 +3896,7 @@ export type Assessments_Cohort_Fencers_Order_By = {
   fencer_id?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_cohort_fencers */
+/** primary key columns input for table: assessments.cohort_fencers */
 export type Assessments_Cohort_Fencers_Pk_Columns_Input = {
   cohort_id: Scalars["uniqueidentifier"]
   fencer_id: Scalars["uniqueidentifier"]
@@ -4136,7 +4132,7 @@ export type Assessments_Metric_Questions_Order_By = {
   updated_at?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_questions */
+/** primary key columns input for table: assessments.metric_questions */
 export type Assessments_Metric_Questions_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -4201,7 +4197,7 @@ export type Assessments_Metric_Result = {
   notes?: Maybe<Scalars["String"]>
   result_id: Scalars["uniqueidentifier"]
   updated_at: Scalars["datetime2"]
-  value: Scalars["String"]
+  value?: Maybe<Scalars["String"]>
 }
 
 /** aggregated selection of "assessments.metric_result" */
@@ -4338,7 +4334,7 @@ export type Assessments_Metric_Result_Order_By = {
   value?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_result */
+/** primary key columns input for table: assessments.metric_result */
 export type Assessments_Metric_Result_Pk_Columns_Input = {
   id: Scalars["uniqueidentifier"]
 }
@@ -4507,7 +4503,7 @@ export type Assessments_Metric_Types_Order_By = {
   name?: InputMaybe<Order_By>
 }
 
-/** primary key columns input for table: assessments_metric_types */
+/** primary key columns input for table: assessments.metric_types */
 export type Assessments_Metric_Types_Pk_Columns_Input = {
   id: Scalars["String"]
 }
@@ -5243,7 +5239,7 @@ export type Mutation_RootDelete_ClubLocationsArgs = {
 
 /** mutation root */
 export type Mutation_RootDelete_ClubLocations_By_PkArgs = {
-  LocationId: Scalars["String"]
+  LocationId: Scalars["uniqueidentifier"]
 }
 
 /** mutation root */
@@ -6174,7 +6170,7 @@ export type Query_RootClubLocations_AggregateArgs = {
 }
 
 export type Query_RootClubLocations_By_PkArgs = {
-  LocationId: Scalars["String"]
+  LocationId: Scalars["uniqueidentifier"]
 }
 
 export type Query_RootClubRolesArgs = {
@@ -6688,7 +6684,7 @@ export type Subscription_RootClubLocations_AggregateArgs = {
 }
 
 export type Subscription_RootClubLocations_By_PkArgs = {
-  LocationId: Scalars["String"]
+  LocationId: Scalars["uniqueidentifier"]
 }
 
 export type Subscription_RootClubRolesArgs = {
@@ -7011,7 +7007,7 @@ export type AddMetricAnswersMutation = {
     returning: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       metric_question_id: any
       result_id: any
       notes?: string | null
@@ -7108,7 +7104,7 @@ export type UpdateMetricAnswerMutation = {
     returning: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       notes?: string | null
     }>
   } | null
@@ -7126,7 +7122,6 @@ export type AccountProfileQuery = {
     PrimaryStudentId?: any | null
     Student?: {
       __typename?: "Students"
-      Oid?: string | null
       StudentId: any
       FirstName: string
       LastName: string
@@ -7263,7 +7258,7 @@ export type GetAssessmentEvaluationByIdQuery = {
     metric_results: Array<{
       __typename?: "assessments_metric_result"
       id: any
-      value: string
+      value?: string | null
       notes?: string | null
       metric_question: {
         __typename?: "assessments_metric_questions"
@@ -7314,7 +7309,7 @@ export type GetAssessmentEvaluationsByIdQuery = {
       __typename?: "assessments_metric_result"
       id: any
       result_id: any
-      value: string
+      value?: string | null
       notes?: string | null
       created_at: any
       updated_at: any
@@ -7369,6 +7364,62 @@ export type GetAssessmentsQuery = {
         }
       }
     }>
+  }>
+}
+
+export type GetClubMembersByIdQueryVariables = Exact<{
+  clubId: Scalars["uniqueidentifier"]
+}>
+
+export type GetClubMembersByIdQuery = {
+  __typename?: "query_root"
+  club_accounts: Array<{
+    __typename?: "club_accounts"
+    Account: {
+      __typename?: "Accounts"
+      Oid: string
+      Student?: {
+        __typename?: "Students"
+        StudentId: any
+        FirstName: string
+        LastName: string
+        Nickname?: string | null
+        Email?: string | null
+        Phone?: string | null
+      } | null
+      AccountClubRoles: Array<{
+        __typename?: "AccountClubRoles"
+        ClubRoleId: any
+        ClubRole: { __typename?: "ClubRoles"; RoleId: any; Name: string }
+      }>
+      Students: Array<{
+        __typename?: "Students"
+        Oid?: string | null
+        StudentId: any
+        AssociationMemberId?: string | null
+        FirstName: string
+        LastName: string
+        Nickname?: string | null
+        Email?: string | null
+        Phone?: string | null
+        Gender?: string | null
+        Birthdate?: any | null
+        AssociationMember?: {
+          __typename?: "AssociationMembers"
+          AssociationMemberId: string
+          Birthdate: number
+          Competitive: string
+          Expiration: any
+          Epee: string
+          Foil: string
+          Saber: string
+          MemberType: string
+          SafeSportExpires?: any | null
+          CheckEd: string
+          BackgroundCheckExpires?: any | null
+        } | null
+      }>
+    }
   }>
 }
 
@@ -7969,7 +8020,6 @@ export const AccountProfileDocument = gql`
       Oid
       PrimaryStudentId
       Student {
-        Oid
         StudentId
         FirstName
         LastName
@@ -8477,6 +8527,106 @@ export type GetAssessmentsLazyQueryHookResult = ReturnType<
 export type GetAssessmentsQueryResult = Apollo.QueryResult<
   GetAssessmentsQuery,
   GetAssessmentsQueryVariables
+>
+export const GetClubMembersByIdDocument = gql`
+  query GetClubMembersById($clubId: uniqueidentifier!) {
+    club_accounts(where: { club_id: { _eq: $clubId } }) {
+      Account {
+        Oid
+        Student {
+          StudentId
+          FirstName
+          LastName
+          Nickname
+          Email
+          Phone
+        }
+        AccountClubRoles {
+          ClubRoleId
+          ClubRole {
+            RoleId
+            Name
+          }
+        }
+        Students {
+          Oid
+          StudentId
+          AssociationMemberId
+          FirstName
+          LastName
+          Nickname
+          Email
+          Phone
+          Gender
+          Birthdate
+          AssociationMember {
+            AssociationMemberId
+            Birthdate
+            Competitive
+            Expiration
+            Epee
+            Foil
+            Saber
+            MemberType
+            SafeSportExpires
+            CheckEd
+            BackgroundCheckExpires
+          }
+        }
+      }
+    }
+  }
+`
+
+/**
+ * __useGetClubMembersByIdQuery__
+ *
+ * To run a query within a React component, call `useGetClubMembersByIdQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetClubMembersByIdQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetClubMembersByIdQuery({
+ *   variables: {
+ *      clubId: // value for 'clubId'
+ *   },
+ * });
+ */
+export function useGetClubMembersByIdQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<
+    GetClubMembersByIdQuery,
+    GetClubMembersByIdQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<
+    GetClubMembersByIdQuery,
+    GetClubMembersByIdQueryVariables
+  >(GetClubMembersByIdDocument, options)
+}
+export function useGetClubMembersByIdLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetClubMembersByIdQuery,
+    GetClubMembersByIdQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<
+    GetClubMembersByIdQuery,
+    GetClubMembersByIdQueryVariables
+  >(GetClubMembersByIdDocument, options)
+}
+export type GetClubMembersByIdQueryHookResult = ReturnType<
+  typeof useGetClubMembersByIdQuery
+>
+export type GetClubMembersByIdLazyQueryHookResult = ReturnType<
+  typeof useGetClubMembersByIdLazyQuery
+>
+export type GetClubMembersByIdQueryResult = Apollo.QueryResult<
+  GetClubMembersByIdQuery,
+  GetClubMembersByIdQueryVariables
 >
 export const GetFencersDocument = gql`
   query GetFencers {
