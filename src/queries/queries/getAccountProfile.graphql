@@ -1,5 +1,5 @@
-query AccountProfile($oid: String!) {
-  Accounts(where: { Oid: { _eq: $oid } }) {
+query GetAccountProfile($oid: String!) {
+  Accounts_by_pk(Oid: $oid) {
     Oid
     PrimaryStudentId
     Student {
@@ -44,6 +44,26 @@ query AccountProfile($oid: String!) {
       access_token
       provider
       created_at
+    }
+    AccountAppRoles {
+      AppRoleId
+      AppRole {
+        RoleId
+        Name
+      }
+    }
+    AccountClubRoles {
+      ClubId
+      ClubRoleId
+      Club {
+        ClubId
+        Code
+        Name
+      }
+      ClubRole {
+        RoleId
+        Name
+      }
     }
   }
 }

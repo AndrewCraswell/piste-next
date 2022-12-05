@@ -7110,13 +7110,35 @@ export type UpdateMetricAnswerMutation = {
   } | null
 }
 
-export type AccountProfileQueryVariables = Exact<{
+export type GetAccountFencersQueryVariables = Exact<{
   oid: Scalars["String"]
 }>
 
-export type AccountProfileQuery = {
+export type GetAccountFencersQuery = {
   __typename?: "query_root"
-  Accounts: Array<{
+  Students: Array<{
+    __typename?: "Students"
+    Oid?: string | null
+    StudentId: any
+    FirstName: string
+    LastName: string
+    Nickname?: string | null
+    Gender?: string | null
+    Birthdate?: any | null
+    Email?: string | null
+    Phone?: string | null
+    AssociationMemberId?: string | null
+    AvatarUrl?: string | null
+  }>
+}
+
+export type GetAccountProfileQueryVariables = Exact<{
+  oid: Scalars["String"]
+}>
+
+export type GetAccountProfileQuery = {
+  __typename?: "query_root"
+  Accounts_by_pk?: {
     __typename?: "Accounts"
     Oid: string
     PrimaryStudentId?: any | null
@@ -7166,29 +7188,24 @@ export type AccountProfileQuery = {
       provider: string
       created_at: any
     } | null
-  }>
-}
-
-export type GetAccountFencersQueryVariables = Exact<{
-  oid: Scalars["String"]
-}>
-
-export type GetAccountFencersQuery = {
-  __typename?: "query_root"
-  Students: Array<{
-    __typename?: "Students"
-    Oid?: string | null
-    StudentId: any
-    FirstName: string
-    LastName: string
-    Nickname?: string | null
-    Gender?: string | null
-    Birthdate?: any | null
-    Email?: string | null
-    Phone?: string | null
-    AssociationMemberId?: string | null
-    AvatarUrl?: string | null
-  }>
+    AccountAppRoles: Array<{
+      __typename?: "AccountAppRoles"
+      AppRoleId: any
+      AppRole: { __typename?: "AppRoles"; RoleId: any; Name: string }
+    }>
+    AccountClubRoles: Array<{
+      __typename?: "AccountClubRoles"
+      ClubId: any
+      ClubRoleId: any
+      Club: {
+        __typename?: "Clubs"
+        ClubId: any
+        Code?: string | null
+        Name: string
+      }
+      ClubRole: { __typename?: "ClubRoles"; RoleId: any; Name: string }
+    }>
+  } | null
 }
 
 export type GetAssessmentByIdQueryVariables = Exact<{
@@ -8014,108 +8031,6 @@ export type UpdateMetricAnswerMutationOptions = Apollo.BaseMutationOptions<
   UpdateMetricAnswerMutation,
   UpdateMetricAnswerMutationVariables
 >
-export const AccountProfileDocument = gql`
-  query AccountProfile($oid: String!) {
-    Accounts(where: { Oid: { _eq: $oid } }) {
-      Oid
-      PrimaryStudentId
-      Student {
-        StudentId
-        FirstName
-        LastName
-        Nickname
-        Email
-        Phone
-        Gender
-        Birthdate
-        AssociationMemberId
-        AssociationMember {
-          FullName
-          FirstName
-          LastName
-          FullName
-          Gender
-          Birthdate
-          Club1Name
-          Club2Name
-          Division
-          AssociationMemberId
-          MemberType
-          Expiration
-          Foil
-          Epee
-          Saber
-        }
-      }
-      Address {
-        AddressId
-        Address
-        Address2
-        City
-        Postal
-        State
-      }
-      calendar {
-        id
-        account_id
-        access_token
-        provider
-        created_at
-      }
-    }
-  }
-`
-
-/**
- * __useAccountProfileQuery__
- *
- * To run a query within a React component, call `useAccountProfileQuery` and pass it any options that fit your needs.
- * When your component renders, `useAccountProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAccountProfileQuery({
- *   variables: {
- *      oid: // value for 'oid'
- *   },
- * });
- */
-export function useAccountProfileQuery(
-  baseOptions: ApolloReactHooks.QueryHookOptions<
-    AccountProfileQuery,
-    AccountProfileQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useQuery<
-    AccountProfileQuery,
-    AccountProfileQueryVariables
-  >(AccountProfileDocument, options)
-}
-export function useAccountProfileLazyQuery(
-  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
-    AccountProfileQuery,
-    AccountProfileQueryVariables
-  >
-) {
-  const options = { ...defaultOptions, ...baseOptions }
-  return ApolloReactHooks.useLazyQuery<
-    AccountProfileQuery,
-    AccountProfileQueryVariables
-  >(AccountProfileDocument, options)
-}
-export type AccountProfileQueryHookResult = ReturnType<
-  typeof useAccountProfileQuery
->
-export type AccountProfileLazyQueryHookResult = ReturnType<
-  typeof useAccountProfileLazyQuery
->
-export type AccountProfileQueryResult = Apollo.QueryResult<
-  AccountProfileQuery,
-  AccountProfileQueryVariables
->
 export const GetAccountFencersDocument = gql`
   query GetAccountFencers($oid: String!) {
     Students(where: { Oid: { _eq: $oid } }, order_by: { FirstName: asc }) {
@@ -8183,6 +8098,128 @@ export type GetAccountFencersLazyQueryHookResult = ReturnType<
 export type GetAccountFencersQueryResult = Apollo.QueryResult<
   GetAccountFencersQuery,
   GetAccountFencersQueryVariables
+>
+export const GetAccountProfileDocument = gql`
+  query GetAccountProfile($oid: String!) {
+    Accounts_by_pk(Oid: $oid) {
+      Oid
+      PrimaryStudentId
+      Student {
+        StudentId
+        FirstName
+        LastName
+        Nickname
+        Email
+        Phone
+        Gender
+        Birthdate
+        AssociationMemberId
+        AssociationMember {
+          FullName
+          FirstName
+          LastName
+          FullName
+          Gender
+          Birthdate
+          Club1Name
+          Club2Name
+          Division
+          AssociationMemberId
+          MemberType
+          Expiration
+          Foil
+          Epee
+          Saber
+        }
+      }
+      Address {
+        AddressId
+        Address
+        Address2
+        City
+        Postal
+        State
+      }
+      calendar {
+        id
+        account_id
+        access_token
+        provider
+        created_at
+      }
+      AccountAppRoles {
+        AppRoleId
+        AppRole {
+          RoleId
+          Name
+        }
+      }
+      AccountClubRoles {
+        ClubId
+        ClubRoleId
+        Club {
+          ClubId
+          Code
+          Name
+        }
+        ClubRole {
+          RoleId
+          Name
+        }
+      }
+    }
+  }
+`
+
+/**
+ * __useGetAccountProfileQuery__
+ *
+ * To run a query within a React component, call `useGetAccountProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAccountProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAccountProfileQuery({
+ *   variables: {
+ *      oid: // value for 'oid'
+ *   },
+ * });
+ */
+export function useGetAccountProfileQuery(
+  baseOptions: ApolloReactHooks.QueryHookOptions<
+    GetAccountProfileQuery,
+    GetAccountProfileQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useQuery<
+    GetAccountProfileQuery,
+    GetAccountProfileQueryVariables
+  >(GetAccountProfileDocument, options)
+}
+export function useGetAccountProfileLazyQuery(
+  baseOptions?: ApolloReactHooks.LazyQueryHookOptions<
+    GetAccountProfileQuery,
+    GetAccountProfileQueryVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions }
+  return ApolloReactHooks.useLazyQuery<
+    GetAccountProfileQuery,
+    GetAccountProfileQueryVariables
+  >(GetAccountProfileDocument, options)
+}
+export type GetAccountProfileQueryHookResult = ReturnType<
+  typeof useGetAccountProfileQuery
+>
+export type GetAccountProfileLazyQueryHookResult = ReturnType<
+  typeof useGetAccountProfileLazyQuery
+>
+export type GetAccountProfileQueryResult = Apollo.QueryResult<
+  GetAccountProfileQuery,
+  GetAccountProfileQueryVariables
 >
 export const GetAssessmentByIdDocument = gql`
   query GetAssessmentById($id: uniqueidentifier!) {
