@@ -86,6 +86,8 @@ function useSitemapData() {
     label: import.meta.env.MODE,
   })
 
+  console.info("Environment", import.meta.env.MODE)
+
   return useMemo(() => {
     const sitemap: IPageItem[] = [
       {
