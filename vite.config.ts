@@ -40,6 +40,7 @@ export default defineConfig({
       $hooks: path.resolve(__dirname, "./src/hooks"),
       $types: path.resolve(__dirname, "./src/types"),
       $store: path.resolve(__dirname, "./src/store"),
+      $assets: path.resolve(__dirname, "./src/assets"),
     },
   },
 })
