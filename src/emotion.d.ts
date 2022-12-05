@@ -1,4 +1,4 @@
-import { IAppTheme } from "$components/ThemeProvider"
+import { IAppTheme } from "$components/AppThemeProvider"
 import "@emotion/react"
 
 declare module "@emotion/react" {

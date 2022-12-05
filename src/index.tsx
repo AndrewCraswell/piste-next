@@ -10,7 +10,7 @@ import { BrowserRouter } from "react-router-dom"
 import { App } from "./App"
 import { AuthenticatedApp } from "$components/AuthenticatedApp"
 import { AuthorizedApolloProvider } from "$components/AuthorizedApolloProvider"
-import { ThemeProvider } from "$components/ThemeProvider"
+import { AppThemeProvider } from "$components/AppThemeProvider"
 import { ApplicationInsightsProvider } from "$components/ApplicationInsightsProvider"
 
 import "./styles/globals.scss"
@@ -30,13 +30,13 @@ render(
       >
         <BrowserRouter>
           <AuthorizedApolloProvider>
-            <ThemeProvider>
+            <AppThemeProvider>
               <Provider store={store}>
                 <AuthenticatedApp>
                   <App />
                 </AuthenticatedApp>
               </Provider>
-            </ThemeProvider>
+            </AppThemeProvider>
           </AuthorizedApolloProvider>
         </BrowserRouter>
       </Auth0Provider>
