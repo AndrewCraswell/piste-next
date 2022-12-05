@@ -13,7 +13,7 @@ import { AuthorizedApolloProvider } from "$components/AuthorizedApolloProvider"
 import { ThemeProvider } from "$components/ThemeProvider"
 import { ApplicationInsightsProvider } from "$components/ApplicationInsightsProvider"
 
-import "./styles/globals.css"
+import "./styles/globals.scss"
 import "modern-normalize"
 
 initializeIcons()
