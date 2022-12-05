@@ -71,7 +71,6 @@ import { formatFullName } from "$lib/formatFullName"
 import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
-import { useAppConfiguration, useFeatureFlag } from "$hooks/useAppConfiguration"
 
 // TODO: Make Users page visible only to Club Admins
 
@@ -97,11 +96,6 @@ const UsersPage: React.FunctionComponent = () => {
   const pageTitle = "Users"
   useTrackPisteMetric({ componentName: "UsersPage" })
   const { onTabSelected, selectedTab } = useTabs("membersTab")
-
-  const isPageEnabled = useFeatureFlag("members-page", import.meta.env.MODE)
-
-  console.log("isPageEnabled", isPageEnabled)
-  console.log("Mode", import.meta.env.MODE)
 
   // TODO: Parameterize the clubId
   const { data, loading, error } = useGetClubMembersByIdQuery({

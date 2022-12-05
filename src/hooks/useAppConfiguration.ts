@@ -2,6 +2,7 @@ import {
   AppConfigurationClient,
   ConfigurationSetting,
   featureFlagPrefix,
+  FeatureFlagValue,
   isFeatureFlag,
   ListConfigurationSettingsOptions,
   parseFeatureFlag,
@@ -12,97 +13,162 @@ const client = new AppConfigurationClient(
   import.meta.env.VITE_APP_CONFIGURATION_KEY
 )
 
-let _settingsCache: ConfigurationSetting<string>[] = []
-let _hasCached = false
+const _settingsCache = new Map<string, ConfigurationSetting<string>>()
+const _featuresCache = new Map<string, ConfigurationSetting<FeatureFlagValue>>()
+let _hasSettingsCached = false
+
+export type AppConfiguration = {
+  configurations: ConfigurationSetting<string>[]
+  features: ConfigurationSetting<FeatureFlagValue>[]
+}
+
+const _emptyAppConfig: AppConfiguration = {
+  configurations: [],
+  features: [],
+}
+
+export type AppConfigurationHookOptions = {
+  options?: ListConfigurationSettingsOptions
+  bypassCache?: boolean
+}
 
 export const useAppConfiguration = (
-  options?: ListConfigurationSettingsOptions
-) => {
-  const [configuration, setConfiguration] = useState<
-    ConfigurationSetting<string>[]
-  >([])
+  configOptions: AppConfigurationHookOptions = {}
+): AppConfiguration => {
+  const { bypassCache, options } = configOptions
+
+  const [configuration, setConfiguration] =
+    useState<AppConfiguration>(_emptyAppConfig)
 
   useEffect(() => {
     const fetchConfigurations = async () => {
       const settingsIterator = client.listConfigurationSettings(options)
 
-      const settings: ConfigurationSetting<string>[] = []
       for await (const setting of settingsIterator) {
-        settings.push(setting)
+        if (isFeatureFlag(setting)) {
+          _featuresCache.set(
+            setting.key + setting.label,
+            setting as unknown as ConfigurationSetting<FeatureFlagValue>
+          )
+        } else {
+          _settingsCache.set(setting.key, setting)
+        }
       }
 
-      setConfiguration(settings)
-      _settingsCache = settings
-      _hasCached = true
+      _hasSettingsCached = true
+
+      setConfiguration({
+        configurations: Array.from(_settingsCache.values()),
+        features: Array.from(_featuresCache.values()),
+      })
     }
 
     // Only fetch the settings if it isn't already cached
-    if (_hasCached === false) {
-      fetchConfigurations()
+    // TODO: Enable bypass of cache
+    if (_hasSettingsCached && !bypassCache) {
+      setConfiguration({
+        configurations: Array.from(_settingsCache.values()),
+        features: Array.from(_featuresCache.values()),
+      })
     } else {
-      setConfiguration(_settingsCache)
+      fetchConfigurations()
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return configuration
 }
 
-/**
- * Retrieves the specified feature flag from Azure App Configuration.
- * @param {string} flagKey App Config Feature Flag key
- * @returns the feature flag for the specified key
- */
-export const useFeatureFlag = (
-  flagKey: string,
+export type ConfigSettingHookOptions = {
+  key: string
   label?: string
-): boolean | undefined => {
-  const [enabled, setEnabled] = useState<boolean | undefined>(undefined)
-
-  useMemo(async () => {
-    try {
-      const result = await client.getConfigurationSetting({
-        key: featureFlagPrefix + flagKey,
-        label,
-      })
-
-      if (isFeatureFlag(result)) {
-        const flag = parseFeatureFlag(result)
-        setEnabled(!!flag.value)
-      }
-    } catch (error) {
-      console.error(error)
-    }
-  }, [flagKey, label])
-
-  return enabled
+  bypassCache?: boolean
 }
 
-/**
- * Retrieves the specified configuration from Azure App Configuration.
- * @param {string} configKey App Config Key
- * @returns the configuration for the specified key
- */
-export const useConfigurationSetting = (
-  configKey: string,
-  label?: string
-): string | undefined => {
-  const [config, setConfig] = useState<string | undefined>(undefined)
+export const useFeatureFlag = (options: ConfigSettingHookOptions) => {
+  const { key, label, bypassCache } = options
+  const featureKey = featureFlagPrefix + key
+  const cacheKey = featureKey + label
 
-  useMemo(async () => {
-    try {
-      const result = await client.getConfigurationSetting({
-        key: configKey.toString().trim(),
-        label,
-      })
+  const [feature, setFeature] = useState<
+    ConfigurationSetting<FeatureFlagValue> | undefined
+  >(_featuresCache.get(cacheKey))
 
-      if (result) {
-        setConfig(result.value)
+  useEffect(() => {
+    const fetchFlag = async () => {
+      try {
+        const result = await client.getConfigurationSetting({
+          key: featureKey,
+          label,
+        })
+
+        if (isFeatureFlag(result)) {
+          const flag = parseFeatureFlag(result)
+
+          _featuresCache.set(cacheKey, flag)
+          setFeature(flag)
+        }
+      } catch (error) {
+        console.error(error)
       }
-    } catch (error) {
-      console.error(error)
     }
-  }, [configKey, label])
 
-  return config
+    if (_featuresCache.has(cacheKey) && !bypassCache) {
+      const cachedFeature = _featuresCache.get(cacheKey)
+      setFeature(cachedFeature)
+    } else {
+      fetchFlag()
+    }
+  }, [bypassCache, cacheKey, featureKey, key, label])
+
+  return useMemo(
+    () => ({
+      feature,
+      isEnabled: feature?.value.enabled,
+    }),
+    [feature]
+  )
+}
+
+// TODO: Refactor this to use the settings cache
+export const useConfigurationSetting = (options: ConfigSettingHookOptions) => {
+  const { key, label, bypassCache } = options
+
+  const [setting, setSetting] = useState<
+    ConfigurationSetting<string> | undefined
+  >(_settingsCache.get(key))
+
+  useEffect(() => {
+    const fetchSetting = async () => {
+      try {
+        const value = await client.getConfigurationSetting({
+          key,
+          label,
+        })
+
+        if (!isFeatureFlag(value)) {
+          _settingsCache.set(key, value)
+          setSetting(value)
+        }
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    if (_settingsCache.has(key) && !bypassCache) {
+      const cachedSetting = _settingsCache.get(key)
+      setSetting(cachedSetting)
+    } else {
+      fetchSetting()
+    }
+  }, [bypassCache, key, label])
+
+  return useMemo(
+    () => ({
+      setting,
+      value: setting?.value,
+    }),
+    [setting]
+  )
 }
