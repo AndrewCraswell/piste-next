@@ -1,7 +1,9 @@
+import { useFeatureFlag } from "$hooks/configuration"
 import { INavLink } from "@fluentui/react"
+import { useMemo } from "react"
 
 import { useLinkShims } from "../useLinkShims"
-import { IPageItem, sitemap } from "./sitemap"
+import { IPageItem } from "./useSitemap.types"
 
 function flattenNavLinks(links: Array<INavLink[]>) {
   const flattenedLinks: INavLink[] = []
@@ -57,6 +59,7 @@ export interface IUseSitemapOptions {
 
 export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
   const { onClick, onMouseOver } = useLinkShims()
+  const sitemap = useSitemapData()
 
   const links = sitemap
     .map((item) => traverseSitemap(item, options))
@@ -75,4 +78,181 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
 
     return item
   })
+}
+
+function useSitemapData() {
+  const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
+    key: "members-page",
+    label: import.meta.env.MODE,
+  })
+
+  return useMemo(() => {
+    const sitemap: IPageItem[] = [
+      {
+        name: "Overview",
+        url: "/",
+        tags: {
+          nav: {
+            link: {
+              icon: "ViewDashboard",
+            },
+          },
+          breadcrumb: { link: { name: "Home" } },
+        },
+        children: [
+          {
+            name: "Calendar",
+            url: "calendar/",
+            tags: {
+              nav: { link: { icon: "Calendar", disabled: true } },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Clubs",
+            url: "clubs/",
+            tags: {
+              nav: { link: { icon: "Teamwork", disabled: true } },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Billing",
+            url: "billing/",
+            tags: {
+              nav: { link: { icon: "PaymentCard", disabled: true } },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Assessments",
+            url: "assessments/",
+            tags: {
+              nav: {
+                group: "Club",
+                link: { icon: "TestPlan", disabled: false },
+              },
+              breadcrumb: {},
+            },
+            children: [
+              {
+                name: "View assessment",
+                url: "[assessmentId]/",
+                tags: {
+                  breadcrumb: {},
+                },
+                children: [
+                  {
+                    name: "Submit evaluation",
+                    url: "submit/",
+                    tags: {
+                      breadcrumb: {},
+                    },
+                  },
+                  {
+                    name: "Edit evaluation",
+                    url: "[evaluationId]/",
+                    tags: {
+                      breadcrumb: {},
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+          isUsersPageEnabled && {
+            name: "Users",
+            url: "users/",
+            tags: {
+              nav: { group: "Club", link: { icon: "People", disabled: false } },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Classes",
+            url: "classes/",
+            tags: {
+              nav: {
+                group: "Club",
+                link: { icon: "Education", disabled: true },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Coaching",
+            url: "coaching/",
+            tags: {
+              nav: {
+                group: "Club",
+                link: { icon: "UserEvent", disabled: true },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Challenge",
+            url: "challenge/",
+            tags: {
+              nav: { group: "Club", link: { icon: "Diamond", disabled: true } },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Armory",
+            url: "armory/",
+            tags: {
+              nav: {
+                group: "Club",
+                link: { icon: "DeveloperTools", disabled: true },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Store",
+            url: "store/",
+            tags: {
+              nav: {
+                group: "Club",
+                link: { icon: "OfficeStoreLogo", disabled: true },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Clinics",
+            url: "clinics/",
+            tags: {
+              nav: {
+                group: "Events",
+                link: { icon: "Certificate", disabled: true },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Tournaments",
+            url: "tournaments/",
+            tags: {
+              nav: {
+                group: "Events",
+                link: { icon: "Trophy2", disabled: false },
+              },
+              breadcrumb: {},
+            },
+          },
+          {
+            name: "Profile",
+            url: "profile/",
+            tags: {
+              breadcrumb: {},
+            },
+          },
+        ].filter(Boolean) as IPageItem[],
+      },
+    ]
+
+    return sitemap
+  }, [isUsersPageEnabled])
 }
