@@ -15,6 +15,7 @@ interface ImportMetaEnv {
   readonly VITE_BACKEND_API_URL: string
   readonly VITE_APP_CONFIGURATION_KEY: string
   readonly VITE_APP_SUPPORT_EMAIL: string
+  readonly VITE_APP_CONFIGURATION_DOMAIN: string
 }
 
 interface ImportMeta {
