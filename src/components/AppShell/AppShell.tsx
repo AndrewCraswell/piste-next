@@ -1,9 +1,10 @@
-import { useSitemapGroups } from "$hooks"
-import { useBreadcrumbs } from "$hooks/useBreadcrumbs"
 import styled from "@emotion/styled"
 import { Outlet } from "react-router-dom"
+
+import { useBreadcrumbs } from "$hooks/useBreadcrumbs"
 import { AppHeader, AppNav, AppPage } from "./components"
 import { AppBreadcrumbs } from "./components/AppBreadcrumbs"
+import { useSitemapGroups } from "$hooks/sitemap"
 
 const AppRoot = styled.div`
   display: grid;

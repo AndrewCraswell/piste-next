@@ -5,7 +5,7 @@ import {
 } from "@fluentui/react-components"
 import { useState, useCallback, useMemo } from "react"
 
-export function useTabs(defaultTabName?: string) {
+export function useTabs(defaultTabName?: TabValue) {
   const [selectedTab, setTab] = useState<TabValue>(defaultTabName)
 
   const onTabSelected = useCallback(

@@ -1,6 +1,5 @@
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
-import { PageTitle } from "$components/PageTitle"
-import { useTitle } from "$hooks"
+import { DefaultPageLayout } from "$components/AppShell/components"
 import { useCreateComponentQuery } from "$store"
 import { DOMAttributes, useEffect } from "react"
 
@@ -172,7 +171,6 @@ const NylasAvailability: React.FunctionComponent = () => {
 
 const CalendarPage: React.FunctionComponent = () => {
   const pageTitle = "Calendar"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "CalendarPage" })
 
   // useEffect(() => {
@@ -254,12 +252,11 @@ const CalendarPage: React.FunctionComponent = () => {
   //const { data } = useCreateComponentQuery("aa0s62mpdqybj4566yy1bl7zr")
 
   return (
-    <>
-      <PageTitle>{pageTitle}</PageTitle>
+    <DefaultPageLayout title={pageTitle}>
       <div style={{ width: "100%", height: "80vh" }}>
         {/* <NylasAvailability /> */}
       </div>
-    </>
+    </DefaultPageLayout>
   )
 }
 

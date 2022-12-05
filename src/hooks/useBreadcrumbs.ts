@@ -1,7 +1,7 @@
 import { IBreadcrumbItem, INavLink } from "@fluentui/react"
 import { useMemo } from "react"
 import { useSearchParams, useLocation } from "react-router-dom"
-import { useSitemap } from "./useSitemap"
+import { useSitemap } from "./sitemap/useSitemap"
 
 export function useBreadcrumbs(): IBreadcrumbItem[] {
   const [queryParams] = useSearchParams()

@@ -2,7 +2,7 @@ import { Body1, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
-import { useAccountProfile, useDisclosure, useTitle } from "$hooks"
+import { useAccountProfile, useDisclosure } from "$hooks"
 import {
   AddMetricAnswersMutationVariables,
   useAddAssessmentEvaluationMutation,
@@ -26,12 +26,12 @@ import { PersonaAvatar } from "$components/PersonaAvatar"
 import { FormFencerLookupField } from "$components/Form/components/FormFencerLookupField"
 import { FormSection } from "$components/Form/components/FormSection"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 // TODO: Add Notes field
 
 export const SubmitEvaluationPage: React.FunctionComponent = () => {
   const pageTitle = "Submit evaluation"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "SubmitEvaluationPage" })
 
   const params = useParams()
@@ -169,7 +169,7 @@ export const SubmitEvaluationPage: React.FunctionComponent = () => {
   }
 
   return (
-    <>
+    <DefaultPageLayout title={pageTitle} skipTitleHeading={true}>
       <BackLink onClick={cancelEvaluation}>Return to assessment</BackLink>
       <PageTitle>
         {assessmentData?.assessments_assessments_by_pk?.title || pageTitle}
@@ -244,7 +244,7 @@ export const SubmitEvaluationPage: React.FunctionComponent = () => {
       >
         Are you sure you want to leave without saving? Any changes will be lost.
       </ConfirmDialog>
-    </>
+    </DefaultPageLayout>
   )
 }
 

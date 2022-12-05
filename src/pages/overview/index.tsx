@@ -3,11 +3,10 @@ import { SearchBox, Spinner, SpinnerSize } from "@fluentui/react"
 import React, { useCallback, useEffect, useState } from "react"
 import { Button, Text } from "@fluentui/react-components"
 
-import { useTitle } from "$hooks"
 import { useSearchMembersLazyQuery } from "$queries"
 import { MemberDetailsCard } from "$components/Cards/MemberDetailsCard"
-import { PageTitle } from "$components/PageTitle"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 const pageSize = 12
 
@@ -20,7 +19,6 @@ const GridContainer = styled.div`
 
 const OverviewPage: React.FunctionComponent = () => {
   const pageTitle = "Overview"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "OverviewPage" })
 
   const [fetch, { data: members, fetchMore, loading }] =
@@ -84,8 +82,7 @@ const OverviewPage: React.FunctionComponent = () => {
   }, [fetch])
 
   return (
-    <>
-      <PageTitle>{pageTitle}</PageTitle>
+    <DefaultPageLayout title={pageTitle}>
       <Text style={{ marginBottom: "2rem" }} block>
         Search by name or club to find any association members.
       </Text>
@@ -124,7 +121,7 @@ const OverviewPage: React.FunctionComponent = () => {
           Load more
         </Button>
       )}
-    </>
+    </DefaultPageLayout>
   )
 }
 

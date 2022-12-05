@@ -1,7 +1,7 @@
 export interface MetricFieldItem {
   metric_id: any
   order_number: number
-  value?: string
+  value?: string | null
   notes?: string | null
   metric_question: {
     id: any

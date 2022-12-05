@@ -13,6 +13,7 @@ interface ImportMetaEnv {
   readonly VITE_NYLAS_CLIENT_ID: string
   readonly VITE_NYLAS_API_URL: string
   readonly VITE_BACKEND_API_URL: string
+  readonly VITE_APP_CONFIGURATION_KEY: string
 }
 
 interface ImportMeta {

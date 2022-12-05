@@ -21,7 +21,7 @@ interface IMetricFormProps {
   control: Control<FieldValues, any>
   disabled?: boolean
   required?: boolean
-  value?: string
+  value?: string | null
   form: UseFormReturn<FieldValues, any>
 }
 

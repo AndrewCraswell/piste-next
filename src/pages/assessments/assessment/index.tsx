@@ -1,13 +1,12 @@
 import { Body1, Text } from "@fluentui/react-components"
 
-import { useTitle } from "$hooks"
 import { useGetAssessmentByIdQuery } from "$queries"
 import styled from "@emotion/styled"
 import { useParams } from "react-router-dom"
 import { AssessmentResponseList } from "$components/AssessmentResponseList"
 import { LinkButton } from "$components/LinkButton"
-import { PageTitle } from "$components/PageTitle"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
+import { DefaultPageLayout } from "$components/AppShell/components"
 
 const PageSection = styled.div`
   margin-top: 3em;
@@ -15,7 +14,6 @@ const PageSection = styled.div`
 
 const ViewAssessmentPage: React.FunctionComponent = () => {
   const pageTitle = "View assessment"
-  useTitle(pageTitle)
   useTrackPisteMetric({ componentName: "ViewAssessmentPage" })
   const params = useParams()
 
@@ -40,8 +38,7 @@ const ViewAssessmentPage: React.FunctionComponent = () => {
   }
 
   return (
-    <>
-      <PageTitle>{assessment?.title || "View assessment"}</PageTitle>
+    <DefaultPageLayout title={pageTitle}>
       <Body1 block>{assessment?.description}</Body1>
 
       <PageSection>
@@ -73,7 +70,7 @@ const ViewAssessmentPage: React.FunctionComponent = () => {
         </Text>
         <AssessmentResponseList assessmentId={assessmentId} />
       </PageSection>
-    </>
+    </DefaultPageLayout>
   )
 }
 
