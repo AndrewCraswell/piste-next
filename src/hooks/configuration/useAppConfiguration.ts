@@ -3,6 +3,7 @@ import {
   FeatureFlagValue,
   isFeatureFlag,
   ListConfigurationSettingsOptions,
+  parseFeatureFlag,
 } from "@azure/app-configuration"
 import { useState, useEffect } from "react"
 import {
@@ -45,7 +46,7 @@ export const useAppConfiguration = (
         if (isFeatureFlag(setting)) {
           _featuresCache.set(
             setting.key + setting.label,
-            setting as unknown as ConfigurationSetting<FeatureFlagValue>
+            parseFeatureFlag(setting)
           )
         } else {
           _settingsCache.set(setting.key, setting)
