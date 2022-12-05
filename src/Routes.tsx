@@ -1,7 +1,8 @@
 import { Route, Routes as Router } from "react-router-dom"
 import loadable from "@loadable/component"
 import { AppShell } from "$components/AppShell"
-import { Body1 } from "@fluentui/react-components"
+import { Route404 } from "$components/ErrorPages/Route404"
+import { ProtectedRbacRoute } from "$components/ProtectedRbacRoute"
 
 const OverviewPage = loadable(() => import("./pages/overview"))
 const BillingPage = loadable(() => import("./pages/billing"))
@@ -47,14 +48,24 @@ export const Routes: React.FunctionComponent = () => {
           element={<EditEvaluationPage />}
         />
 
-        <Route path="users" element={<UsersPage />} />
+        <Route
+          path="users"
+          element={
+            <ProtectedRbacRoute clubRoles={["Admin"]}>
+              <UsersPage />
+            </ProtectedRbacRoute>
+          }
+        />
 
         <Route path="profile" element={<ProfilePage />} />
 
         <Route path="tournaments" element={<TournamentsPage />} />
 
-        <Route path="*" element={<Body1>Page not found.</Body1>} />
+        <Route path="*" element={<Route404 />} />
       </Route>
     </Router>
   )
 }
+
+// TODO: Fetch app roles with profile
+// TODO: Add hook to get club and club roles
