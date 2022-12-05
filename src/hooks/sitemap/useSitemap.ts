@@ -1,13 +1,7 @@
-import { IPageItem, sitemap } from "$lib/sitemap"
-import { INavLink, INavLinkGroup } from "@fluentui/react"
-import { useLinkShims } from "./useLinkShims"
+import { INavLink } from "@fluentui/react"
 
-export interface IUseSitemapOptions {
-  tagName?: string
-  flatten?: boolean
-  basePath?: string
-  injectLinkShims?: boolean
-}
+import { useLinkShims } from "../useLinkShims"
+import { IPageItem, sitemap } from "./sitemap"
 
 function flattenNavLinks(links: Array<INavLink[]>) {
   const flattenedLinks: INavLink[] = []
@@ -54,21 +48,11 @@ function traverseSitemap(
   return [link]
 }
 
-function groupLinks(links: INavLink[]): INavLinkGroup[] {
-  const groupedLinks = links.reduce((dictionary, link) => {
-    const key = (link.group as string) || ""
-    if (!dictionary[key]) {
-      dictionary[key] = {
-        name: key,
-        links: [],
-      } as INavLinkGroup
-    }
-    dictionary[key].links.push(link)
-
-    return dictionary
-  }, {} as Record<string, INavLinkGroup>)
-
-  return Object.values(groupedLinks)
+export interface IUseSitemapOptions {
+  tagName?: string
+  flatten?: boolean
+  basePath?: string
+  injectLinkShims?: boolean
 }
 
 export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
@@ -91,12 +75,4 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
 
     return item
   })
-}
-
-export function useSitemapGroups(
-  options: IUseSitemapOptions = {}
-): INavLinkGroup[] {
-  const links = useSitemap(options)
-
-  return groupLinks(links)
 }
