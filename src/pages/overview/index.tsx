@@ -39,7 +39,7 @@ const OverviewPage: React.FunctionComponent = () => {
       updateQuery: (existing, incoming) => ({
         AssociationMembers: [
           ...existing.AssociationMembers,
-          ...incoming.fetchMoreResult?.AssociationMembers!,
+          ...(incoming.fetchMoreResult?.AssociationMembers || {}),
         ],
       }),
     })
