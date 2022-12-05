@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { DefaultPageLayout } from "$components/AppShell/components"
 import { useCreateComponentQuery } from "$store"
