@@ -10,8 +10,8 @@ import { HeaderButton, UserMenu } from "./components"
 export const headerHeight = 48
 
 const Header = styled.header`
-  background-color: ${({ theme }) => theme.palette.themePrimary};
-  color: #fff;
+  background-color: ${({ theme }) => theme.fluentV9.colorBrandBackground};
+  color: ${({ theme }) => theme.fluentV9.colorNeutralForegroundOnBrand};
 `
 Header.defaultProps = {
   role: "banner",

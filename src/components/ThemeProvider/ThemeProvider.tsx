@@ -8,7 +8,9 @@ import {
   webDarkTheme,
   FluentProvider as FluentNextProvider,
 } from "@fluentui/react-components"
+
 import { IEmotionalSupportProps, IAppTheme } from "./ThemeProvider.types"
+import { useSearchParams } from "react-router-dom"
 
 const BodyGrow = styled.div`
   height: 100vh;
@@ -24,9 +26,10 @@ const EmotionalSupport: React.FunctionComponent<IEmotionalSupportProps> = ({
 )
 
 export const ThemeProvider: React.FunctionComponent = ({ children }) => {
-  const themeName = "light"
+  const [params] = useSearchParams()
+  const themeName = params.get("theme")
 
-  let theme: IAppTheme = useMemo((): IAppTheme => {
+  const theme: IAppTheme = useMemo((): IAppTheme => {
     switch (themeName) {
       //@ts-ignore
       case "dark":
@@ -37,7 +40,7 @@ export const ThemeProvider: React.FunctionComponent = ({ children }) => {
       default:
         return { ...DefaultTheme, fluentV9: webLightTheme }
     }
-  }, [])
+  }, [themeName])
 
   return (
     <FluentProvider theme={theme}>
