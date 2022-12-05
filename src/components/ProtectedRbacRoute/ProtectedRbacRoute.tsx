@@ -1,6 +1,7 @@
+import { Outlet } from "react-router-dom"
+
 import { UnauthorizedAppRole } from "$components/ErrorPages/UnauthorizedAppRole"
 import { UnauthorizedClubRole } from "$components/ErrorPages/UnauthorizedClubRole"
-import { Outlet } from "react-router-dom"
 
 export type ProtectedRbacRouteProps = {
   clubRoles?: string[]

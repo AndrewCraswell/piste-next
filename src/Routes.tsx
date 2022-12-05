@@ -3,6 +3,7 @@ import loadable from "@loadable/component"
 import { AppShell } from "$components/AppShell"
 import { Route404 } from "$components/ErrorPages/Route404"
 import { ProtectedRbacRoute } from "$components/ProtectedRbacRoute"
+import { useFeatureFlag } from "$hooks/configuration"
 
 const OverviewPage = loadable(() => import("./pages/overview"))
 const BillingPage = loadable(() => import("./pages/billing"))
@@ -23,6 +24,11 @@ const UsersPage = loadable(() => import("./pages/users"))
 const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
 export const Routes: React.FunctionComponent = () => {
+  const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
+    key: "members-page",
+    label: import.meta.env.MODE,
+  })
+
   return (
     <Router>
       {/* Root route */}
@@ -48,14 +54,16 @@ export const Routes: React.FunctionComponent = () => {
           element={<EditEvaluationPage />}
         />
 
-        <Route
-          path="users"
-          element={
-            <ProtectedRbacRoute clubRoles={["Admin"]}>
-              <UsersPage />
-            </ProtectedRbacRoute>
-          }
-        />
+        {isUsersPageEnabled && (
+          <Route
+            path="users"
+            element={
+              <ProtectedRbacRoute clubRoles={["Admin"]}>
+                <UsersPage />
+              </ProtectedRbacRoute>
+            }
+          />
+        )}
 
         <Route path="profile" element={<ProfilePage />} />
 
