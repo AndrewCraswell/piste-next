@@ -1,17 +1,19 @@
-import { appInsights } from "$components/ApplicationInsightsProvider"
-import { PistePanel } from "$components/PistePanel"
-import { useAccountProfile, useDisclosure } from "$hooks"
-import { IStyleableProps } from "$types"
 import { LogoutOptions, useAuth0 } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
+
+import { appInsights } from "$components/ApplicationInsightsProvider"
+import { PistePanel } from "$components/PistePanel"
+import { useAccountProfile } from "$hooks/useAccountProfile"
+import { useDisclosure } from "$hooks/useDisclosure"
+import { IStyleableProps } from "$types"
 import { HeaderButton, UserMenu } from "./components"
 
 export const headerHeight = 48
 
 const Header = styled.header`
-  background-color: ${({ theme }) => theme.palette.themePrimary};
-  color: #fff;
+  background-color: ${({ theme }) => theme.fluentV9.colorBrandBackground};
+  color: ${({ theme }) => theme.fluentV9.colorNeutralForegroundOnBrand};
 `
 Header.defaultProps = {
   role: "banner",

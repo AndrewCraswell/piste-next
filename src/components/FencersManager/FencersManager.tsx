@@ -4,7 +4,7 @@ import {
   AddFencerCard,
   FencerProfileCard,
 } from "$components/Cards/FencerProfileCard"
-import { useAccountProfile } from "$hooks"
+import { useAccountProfile } from "$hooks/useAccountProfile"
 import { useGetAccountFencersLazyQuery } from "$queries"
 import { useEffect } from "react"
 

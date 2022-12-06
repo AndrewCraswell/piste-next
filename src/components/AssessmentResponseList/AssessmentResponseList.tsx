@@ -31,7 +31,7 @@ import {
 } from "./AssessmentResponseList.utils"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { ConfirmDialog } from "$components/ConfirmDialog"
-import { useDisclosure } from "$hooks"
+import { useDisclosure } from "$hooks/useDisclosure"
 import { AssessmentEvaluation } from "./AssessmentResponseList.types"
 import { useNavigate } from "react-router-dom"
 import { cacheEvicter } from "$lib/apolloClient"

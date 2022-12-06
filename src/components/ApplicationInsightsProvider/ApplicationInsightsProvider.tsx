@@ -17,7 +17,10 @@ export const appInsights = new ApplicationInsights({
     enableAutoRouteTracking: true,
     disableFetchTracking: false,
     maxBatchInterval: 250,
-    correlationHeaderExcludedDomains: [import.meta.env.VITE_AUTH0_DOMAIN],
+    correlationHeaderExcludedDomains: [
+      import.meta.env.VITE_AUTH0_DOMAIN,
+      import.meta.env.VITE_APP_CONFIGURATION_DOMAIN,
+    ],
     extensions: [reactPlugin],
     enableAjaxPerfTracking: true,
     enableDebug: import.meta.env.DEV,

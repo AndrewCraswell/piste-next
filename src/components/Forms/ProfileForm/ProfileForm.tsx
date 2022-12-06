@@ -8,14 +8,15 @@ import {
   Button,
   Text,
 } from "@fluentui/react-components"
+import styled from "@emotion/styled"
 import dayjs from "dayjs"
 
 import { IProfileFormFields } from "./ProfileForm.types"
-import { useAccountProfile, useFormHelpers } from "$hooks"
 import { AddressForm } from "../AddressForm"
 import { FencerForm } from "../FencerForm"
 import { PanelFooter } from "$components/PanelFooter"
-import styled from "@emotion/styled"
+import { useAccountProfile } from "$hooks/useAccountProfile"
+import { useFormHelpers } from "$hooks/useFormHelpers"
 
 export const IndentedAccordionPanel = styled(AccordionPanel)`
   margin-left: 40px;

@@ -28,7 +28,9 @@
       "$types": ["types"],
       "$types/*": ["types/*"],
       "$store": ["store"],
-      "$store/*": ["store/*"]
+      "$store/*": ["store/*"],
+      "$assets": ["assets"],
+      "$assets/*": ["assets/*"]
     }
   },
   "include": ["src"],

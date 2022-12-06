@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { Button, ButtonProps } from "@fluentui/react-components"
-import { useLinkShims } from "$hooks"
+import { useLinkShims } from "$hooks/useLinkShims"
 
 const UnstyledButton = styled(Button)`
   text-decoration: none;

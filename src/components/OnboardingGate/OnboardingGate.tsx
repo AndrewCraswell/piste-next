@@ -1,6 +1,7 @@
-import { useAccountProfile } from "$hooks"
 import styled from "@emotion/styled"
 import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
+
+import { useAccountProfile } from "$hooks/useAccountProfile"
 
 const AnimatedStack = styled(Stack)`
   ${AnimationStyles.slideUpIn20 as unknown as string}

@@ -1,4 +1,4 @@
-import { useDisclosure } from "$hooks"
+import { useDisclosure } from "$hooks/useDisclosure"
 import { IStyleableProps } from "$types"
 import styled from "@emotion/styled"
 import {
