@@ -6,8 +6,7 @@ import { Auth0Provider } from "@auth0/auth0-react"
 import { getBaseUrl } from "$lib/getBaseUrl"
 import { Provider } from "react-redux"
 import { store } from "$store"
-import { BrowserRouter } from "react-router-dom"
-import { App } from "./App"
+import { BrowserRouter, Routes } from "react-router-dom"
 import { AuthenticatedApp } from "$components/AuthenticatedApp"
 import { AuthorizedApolloProvider } from "$components/AuthorizedApolloProvider"
 import { AppThemeProvider } from "$components/AppThemeProvider"
@@ -33,7 +32,7 @@ render(
             <AppThemeProvider>
               <Provider store={store}>
                 <AuthenticatedApp>
-                  <App />
+                  <Routes />
                 </AuthenticatedApp>
               </Provider>
             </AppThemeProvider>
