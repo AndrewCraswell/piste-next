@@ -58,7 +58,7 @@ export const Routes: React.FunctionComponent = () => {
           <Route
             path="users"
             element={
-              <ProtectedRbacRoute clubRoles={["Admin"]}>
+              <ProtectedRbacRoute clubRoles={["Coach"]}>
                 <UsersPage />
               </ProtectedRbacRoute>
             }
@@ -74,6 +74,3 @@ export const Routes: React.FunctionComponent = () => {
     </Router>
   )
 }
-
-// TODO: Fetch app roles with profile
-// TODO: Add hook to get club and club roles
