@@ -3,7 +3,7 @@ import { Button, FluentProvider, Text } from "@fluentui/react-components"
 import { useCallback, useEffect, useMemo, useState } from "react"
 import { FieldValues, useForm } from "react-hook-form"
 
-import { useAccountProfile } from "$hooks"
+import { useAccountProfile } from "$hooks/useAccountProfile"
 import { useGetMembersByIdQuery, useUpdateFencerByIdMutation } from "$queries"
 import { associationMemberToPersona } from "$lib/associationMemberToPersona"
 import { getMemberDetailsFromAssociation } from "$lib/getMemberDetailsFromAssociation"

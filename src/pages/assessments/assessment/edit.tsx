@@ -2,7 +2,7 @@ import { Body1, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
-import { useDisclosure } from "$hooks"
+import { useDisclosure } from "$hooks/useDisclosure"
 import {
   useGetAssessmentEvaluationByIdQuery,
   useUpdateMetricAnswerMutation,

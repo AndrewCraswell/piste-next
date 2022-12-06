@@ -1,5 +1,3 @@
-import { PersonaAvatar } from "../../../../../PersonaAvatar"
-import { useDisclosure, useLinkShims } from "$hooks"
 import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { ActionButton } from "@fluentui/react"
@@ -10,6 +8,11 @@ import {
   Text,
 } from "@fluentui/react-components"
 import { useCallback, useRef } from "react"
+
+import { PersonaAvatar } from "$components/PersonaAvatar"
+import { useDisclosure } from "$hooks/useDisclosure"
+import { useLinkShims } from "$hooks/useLinkShims"
+
 import { HeaderButton } from "../HeaderButton"
 
 const AvatarContainer = styled.div`

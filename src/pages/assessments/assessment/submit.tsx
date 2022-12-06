@@ -2,7 +2,6 @@ import { Body1, Text } from "@fluentui/react-components"
 import { Card, CardHeader } from "@fluentui/react-components/unstable"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
-import { useAccountProfile, useDisclosure } from "$hooks"
 import {
   AddMetricAnswersMutationVariables,
   useAddAssessmentEvaluationMutation,
@@ -27,6 +26,8 @@ import { FormFencerLookupField } from "$components/Form/components/FormFencerLoo
 import { FormSection } from "$components/Form/components/FormSection"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { DefaultPageLayout } from "$components/AppShell/components"
+import { useAccountProfile } from "$hooks/useAccountProfile"
+import { useDisclosure } from "$hooks/useDisclosure"
 
 // TODO: Add Notes field
 

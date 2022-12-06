@@ -5,7 +5,7 @@ import { useCallback, useMemo } from "react"
 
 import { useDeleteFencerByIdMutation } from "$queries"
 import { DetailsItem } from "./components"
-import { useDisclosure } from "$hooks"
+import { useDisclosure } from "$hooks/useDisclosure"
 import {
   CardHeader,
   BadgeContainer,

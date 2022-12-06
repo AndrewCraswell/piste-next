@@ -1,6 +1,6 @@
 import { EditFencerDialog } from "$components/EditFencerDialog"
 import { VerticalCard } from "$components/Cards/VerticalCard"
-import { useDisclosure } from "$hooks"
+import { useDisclosure } from "$hooks/useDisclosure"
 import styled from "@emotion/styled"
 import { Stack } from "@fluentui/react"
 import { Button } from "@fluentui/react-components"
