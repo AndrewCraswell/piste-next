@@ -40,25 +40,64 @@ export const Routes: React.FunctionComponent = () => {
         <Route path="billing" element={<BillingPage />} />
 
         {/* Assessments routes */}
-        <Route path="assessments" element={<AssessmentsPage />} />
+        <Route
+          path="assessments"
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["Owner", "Admin", "Coach"],
+              }}
+            >
+              <AssessmentsPage />
+            </ProtectedRbacRoute>
+          }
+        />
         <Route
           path="assessments/:assessmentId"
-          element={<ViewAssessmentPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["Owner", "Admin", "Coach"],
+              }}
+            >
+              <ViewAssessmentPage />
+            </ProtectedRbacRoute>
+          }
         />
         <Route
           path="assessments/:assessmentId/submit"
-          element={<SubmitEvaluationPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["Owner", "Admin", "Coach"],
+              }}
+            >
+              <SubmitEvaluationPage />
+            </ProtectedRbacRoute>
+          }
         />
         <Route
           path="assessments/:assessmentId/:evaluationId"
-          element={<EditEvaluationPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["Owner", "Admin", "Coach"],
+              }}
+            >
+              <EditEvaluationPage />
+            </ProtectedRbacRoute>
+          }
         />
 
         {isUsersPageEnabled && (
           <Route
             path="users"
             element={
-              <ProtectedRbacRoute clubRoles={["Coach"]}>
+              <ProtectedRbacRoute
+                clubRules={{
+                  anyOf: ["Owner"],
+                }}
+              >
                 <UsersPage />
               </ProtectedRbacRoute>
             }

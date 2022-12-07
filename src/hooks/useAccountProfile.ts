@@ -1,5 +1,6 @@
 import { formatFullName } from "$lib/formatFullName"
 import { useGetAccountProfileQuery } from "$queries"
+import { AppRole, ClubRole } from "$types/Rbac"
 import { useAuth0 } from "@auth0/auth0-react"
 import { useMemo } from "react"
 
@@ -42,10 +43,10 @@ export const useAccountProfile = () => {
     const userId = Oid || user?.sub!
 
     // Determine the user's roles
-    const appRoles = AccountAppRoles?.map((r) => r.AppRole.Name)
+    const appRoles = AccountAppRoles?.map((r) => r.AppRole.Name) as AppRole[]
     const clubRoles = AccountClubRoles?.map((r) => ({
       clubId: r.ClubId,
-      name: r.ClubRole.Name,
+      name: r.ClubRole.Name as unknown as ClubRole[],
     }))
 
     return {
