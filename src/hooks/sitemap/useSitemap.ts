@@ -65,6 +65,9 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
     .map((item) => traverseSitemap(item, options))
     .filter(Boolean) as Array<INavLink[]>
 
+  // TODO: Update the sitemap hook to add data for required app roles and club roles
+  //    -> Filter links out if roles don't match
+
   return flattenNavLinks(links).map((item) => {
     if (options.injectLinkShims && !item.disabled) {
       item.onMouseOver = onMouseOver
@@ -80,12 +83,9 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
   })
 }
 
-// TODO: Update the sitemap hook to add data for required app roles and club roles
-//    -> Filter links out if roles don't match
-
 function useSitemapData() {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
-    key: "members-page",
+    key: "users-page",
     label: import.meta.env.MODE,
   })
 

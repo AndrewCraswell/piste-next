@@ -25,7 +25,7 @@ const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
 export const Routes: React.FunctionComponent = () => {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
-    key: "members-page",
+    key: "users-page",
     label: import.meta.env.MODE,
   })
 
