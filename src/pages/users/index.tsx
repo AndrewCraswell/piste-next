@@ -71,8 +71,7 @@ import { formatFullName } from "$lib/formatFullName"
 import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
-
-// TODO: Make Users page visible only to Club Admins
+import { ClubRole } from "$types/Rbac"
 
 // TODO: Enable assigning/removing user role
 
@@ -124,8 +123,8 @@ const UsersPage: React.FunctionComponent = () => {
 
           <MenuPopover>
             <MenuList>
-              <MenuItem>Member</MenuItem>
               <MenuItem>Account</MenuItem>
+              <MenuItem>Athlete</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -155,14 +154,14 @@ const UsersPage: React.FunctionComponent = () => {
         <Button icon={<FilterRegular />}>Filter</Button>
         <Input
           contentBefore={<SearchRegular />}
-          placeholder="Search members"
+          placeholder="Search users"
           onChange={() => {}}
         />
       </PageToolbar>
 
       <DefaultPageLayout title={pageTitle}>
         <TabList onTabSelect={onTabSelected} selectedValue={selectedTab}>
-          <Tab value="membersTab">Members</Tab>
+          <Tab value="membersTab">Athletes</Tab>
           <Tab value="accountsTab">Accounts</Tab>
           <Tab value="staffTab">Staff</Tab>
         </TabList>
@@ -325,7 +324,7 @@ const UsersPage: React.FunctionComponent = () => {
                     <Call16Regular /> Phone
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <PeopleTeam16Regular /> Members
+                    <PeopleTeam16Regular /> Family
                   </TableHeaderCell>
                   <TableHeaderCell>
                     <Guest16Regular /> Roles
@@ -418,7 +417,7 @@ const UsersPage: React.FunctionComponent = () => {
                             {AccountClubRoles.map((r) => (
                               <RoleBadge
                                 key={r.ClubRoleId}
-                                name={r.ClubRole.Name}
+                                role={r.ClubRole.Name as ClubRole}
                               />
                             ))}
                           </RoleBadgeList>

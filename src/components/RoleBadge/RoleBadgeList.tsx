@@ -22,14 +22,14 @@ export const RoleBadgeList: React.FunctionComponent<RoleBadgeListProps> = ({
   const visibleRoles = roles.slice(0, maxRolesToShow)
   const truncatedRoles = roles
     .slice(maxRolesToShow)
-    .map((r) => r.props.name)
+    .map((r) => r.props.role)
     .join(", ")
 
   return (
     <Stack horizontal tokens={listTokens}>
       {visibleRoles.map((element, i) => {
-        const roleName = element.props.name
-        return <RoleBadge name={roleName} />
+        const roleName = element.props.role
+        return <RoleBadge key={i} role={roleName} />
       })}
 
       {truncatedRoles.length > 0 && (

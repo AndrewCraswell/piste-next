@@ -1,4 +1,5 @@
 import { useFeatureFlag } from "$hooks/configuration"
+import { AppRole, AtLeastOne, ClubRole, RbacRulesEvaluator } from "$types/Rbac"
 import { INavLink } from "@fluentui/react"
 import { useMemo } from "react"
 
@@ -14,22 +15,65 @@ function traverseSitemap(
   item: IPageItem,
   options: IUseSitemapOptions = {}
 ): INavLink[] | undefined {
-  const { tagName, flatten, basePath } = options
+  const { tagName, flatten, basePath, rbacRoles } = options
   let link: INavLink = {
     name: item.name,
     url: `${basePath ? basePath : ""}${item.url}`,
   }
 
   if (tagName) {
-    //@ts-ignore
     const tag = item?.tags?.[tagName]
-    if (tag) {
-      link = { ...link, ...tag.link }
-      if (tag.group) {
-        link.group = tag.group
-      }
+    if (tag === true) {
+      // Just return the link
+      // link = { ...link }
     } else {
-      return
+      if (tag && tag.hidden !== true) {
+        // If an RBAC policy was defined, evaluate if the current user can see the link
+        if (tag.rbacPolicy) {
+          const { appRules, clubRules } = tag.rbacPolicy
+
+          // Make sure the user roles were passed to the hook so they can be evaluated against the policies
+          if (rbacRoles) {
+            const { appRoles, clubRoles } = rbacRoles
+
+            if (appRules) {
+              if (appRoles) {
+                if (!RbacRulesEvaluator.isAuthorized(appRules, appRoles)) {
+                  return
+                }
+              } else {
+                console.error(
+                  `[useSitemap] A link (${link.name}) has App Role RBAC policies defined, but no user app roles were passed to the hook. Skipping the evaluation of the policies.`
+                )
+              }
+            }
+
+            if (clubRules) {
+              if (clubRoles) {
+                if (!RbacRulesEvaluator.isAuthorized(clubRules, clubRoles)) {
+                  return
+                }
+              } else {
+                console.error(
+                  `[useSitemap] A link (${link.name}) has Club Role RBAC policies defined, but no user club roles were passed to the hook. Skipping the evaluation of the policies.`
+                )
+              }
+            }
+          } else {
+            console.error(
+              `[useSitemap] A link (${link.name}) has RBAC policies defined, but no roles were passed to the hook. Skipping the evaluation of the policies.`
+            )
+          }
+        }
+
+        link = { ...link, ...tag.link }
+        if (tag.group) {
+          link.group = tag.group
+        }
+      } else {
+        // The tag was either false or doesn't exist, don't add it to the nav
+        return
+      }
     }
   }
 
@@ -54,7 +98,17 @@ export interface IUseSitemapOptions {
   tagName?: string
   flatten?: boolean
   basePath?: string
+
+  // Link shims add onClick and other handlers to
+  //  force links to behave like react-router links
   injectLinkShims?: boolean
+
+  // Provide the roles to be used for evaluating
+  //  Role Based Access Control policies on each link
+  rbacRoles?: AtLeastOne<{
+    clubRoles?: ClubRole[]
+    appRoles?: AppRole[]
+  }>
 }
 
 export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
@@ -82,7 +136,7 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
 
 function useSitemapData() {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
-    key: "members-page",
+    key: "users-page",
     label: import.meta.env.MODE,
   })
 
@@ -105,7 +159,7 @@ function useSitemapData() {
             url: "calendar/",
             tags: {
               nav: { link: { icon: "Calendar", disabled: true } },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -113,7 +167,7 @@ function useSitemapData() {
             url: "clubs/",
             tags: {
               nav: { link: { icon: "Teamwork", disabled: true } },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -121,7 +175,7 @@ function useSitemapData() {
             url: "billing/",
             tags: {
               nav: { link: { icon: "PaymentCard", disabled: true } },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -131,41 +185,51 @@ function useSitemapData() {
               nav: {
                 group: "Club",
                 link: { icon: "TestPlan", disabled: false },
+                rbacPolicy: {
+                  clubRules: { anyOf: ["owner", "admin", "coach"] },
+                },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
             children: [
               {
                 name: "View assessment",
                 url: "[assessmentId]/",
                 tags: {
-                  breadcrumb: {},
+                  breadcrumb: true,
                 },
                 children: [
                   {
                     name: "Submit evaluation",
                     url: "submit/",
                     tags: {
-                      breadcrumb: {},
+                      breadcrumb: true,
                     },
                   },
                   {
                     name: "Edit evaluation",
                     url: "[evaluationId]/",
                     tags: {
-                      breadcrumb: {},
+                      breadcrumb: true,
                     },
                   },
                 ],
               },
             ],
           },
-          isUsersPageEnabled && {
+          {
             name: "Users",
             url: "users/",
             tags: {
-              nav: { group: "Club", link: { icon: "People", disabled: false } },
-              breadcrumb: {},
+              nav: {
+                group: "Club",
+                link: { icon: "People", disabled: false },
+                hidden: !isUsersPageEnabled,
+                rbacPolicy: {
+                  clubRules: { anyOf: ["owner", "admin", "coach"] },
+                },
+              },
+              breadcrumb: true,
             },
           },
           {
@@ -176,7 +240,7 @@ function useSitemapData() {
                 group: "Club",
                 link: { icon: "Education", disabled: true },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -187,7 +251,7 @@ function useSitemapData() {
                 group: "Club",
                 link: { icon: "UserEvent", disabled: true },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -195,7 +259,7 @@ function useSitemapData() {
             url: "challenge/",
             tags: {
               nav: { group: "Club", link: { icon: "Diamond", disabled: true } },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -206,7 +270,7 @@ function useSitemapData() {
                 group: "Club",
                 link: { icon: "DeveloperTools", disabled: true },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -217,7 +281,7 @@ function useSitemapData() {
                 group: "Club",
                 link: { icon: "OfficeStoreLogo", disabled: true },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -228,7 +292,7 @@ function useSitemapData() {
                 group: "Events",
                 link: { icon: "Certificate", disabled: true },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
@@ -239,14 +303,14 @@ function useSitemapData() {
                 group: "Events",
                 link: { icon: "Trophy2", disabled: false },
               },
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
           {
             name: "Profile",
             url: "profile/",
             tags: {
-              breadcrumb: {},
+              breadcrumb: true,
             },
           },
         ].filter(Boolean) as IPageItem[],
