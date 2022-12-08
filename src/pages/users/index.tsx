@@ -71,7 +71,6 @@ import { formatFullName } from "$lib/formatFullName"
 import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
-import { useRoleNameMappers } from "$hooks/authorization/useRoleNameMappers"
 import { ClubRole } from "$types/Rbac"
 
 // TODO: Enable assigning/removing user role
