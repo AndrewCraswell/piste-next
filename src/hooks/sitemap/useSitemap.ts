@@ -23,7 +23,7 @@ function traverseSitemap(
   if (tagName) {
     //@ts-ignore
     const tag = item?.tags?.[tagName]
-    if (tag) {
+    if (tag && tag.hidden !== true) {
       link = { ...link, ...tag.link }
       if (tag.group) {
         link.group = tag.group
@@ -79,6 +79,9 @@ export function useSitemap(options: IUseSitemapOptions = {}): INavLink[] {
     return item
   })
 }
+
+// TODO: Update the sitemap hook to add data for required app roles and club roles
+//    -> Filter links out if roles don't match
 
 function useSitemapData() {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
@@ -160,11 +163,15 @@ function useSitemapData() {
               },
             ],
           },
-          isUsersPageEnabled && {
+          {
             name: "Users",
             url: "users/",
             tags: {
-              nav: { group: "Club", link: { icon: "People", disabled: false } },
+              nav: {
+                group: "Club",
+                link: { icon: "People", disabled: false },
+                hidden: !isUsersPageEnabled,
+              },
               breadcrumb: {},
             },
           },
@@ -249,7 +256,7 @@ function useSitemapData() {
               breadcrumb: {},
             },
           },
-        ].filter(Boolean) as IPageItem[],
+        ].filter(Boolean),
       },
     ]
 
