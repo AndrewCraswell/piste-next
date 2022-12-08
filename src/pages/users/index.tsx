@@ -124,8 +124,8 @@ const UsersPage: React.FunctionComponent = () => {
 
           <MenuPopover>
             <MenuList>
-              <MenuItem>Member</MenuItem>
               <MenuItem>Account</MenuItem>
+              <MenuItem>Athlete</MenuItem>
             </MenuList>
           </MenuPopover>
         </Menu>
@@ -155,14 +155,14 @@ const UsersPage: React.FunctionComponent = () => {
         <Button icon={<FilterRegular />}>Filter</Button>
         <Input
           contentBefore={<SearchRegular />}
-          placeholder="Search members"
+          placeholder="Search users"
           onChange={() => {}}
         />
       </PageToolbar>
 
       <DefaultPageLayout title={pageTitle}>
         <TabList onTabSelect={onTabSelected} selectedValue={selectedTab}>
-          <Tab value="membersTab">Members</Tab>
+          <Tab value="membersTab">Athletes</Tab>
           <Tab value="accountsTab">Accounts</Tab>
           <Tab value="staffTab">Staff</Tab>
         </TabList>
