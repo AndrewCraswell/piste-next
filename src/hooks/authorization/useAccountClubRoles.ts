@@ -1,5 +1,5 @@
 import { ClubRole } from "$types/Rbac"
-import { useAccountProfile } from "./useAccountProfile"
+import { useAccountProfile } from "../useAccountProfile"
 
 export function useAccountClubRoles(): ClubRole[] {
   const { account } = useAccountProfile()

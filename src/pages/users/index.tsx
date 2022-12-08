@@ -71,8 +71,8 @@ import { formatFullName } from "$lib/formatFullName"
 import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
-
-// TODO: Make Users page visible only to Club Admins
+import { useRoleNameMappers } from "$hooks/authorization/useRoleNameMappers"
+import { ClubRole } from "$types/Rbac"
 
 // TODO: Enable assigning/removing user role
 
@@ -325,7 +325,7 @@ const UsersPage: React.FunctionComponent = () => {
                     <Call16Regular /> Phone
                   </TableHeaderCell>
                   <TableHeaderCell>
-                    <PeopleTeam16Regular /> Members
+                    <PeopleTeam16Regular /> Family
                   </TableHeaderCell>
                   <TableHeaderCell>
                     <Guest16Regular /> Roles
@@ -418,7 +418,7 @@ const UsersPage: React.FunctionComponent = () => {
                             {AccountClubRoles.map((r) => (
                               <RoleBadge
                                 key={r.ClubRoleId}
-                                name={r.ClubRole.Name}
+                                role={r.ClubRole.Name as ClubRole}
                               />
                             ))}
                           </RoleBadgeList>

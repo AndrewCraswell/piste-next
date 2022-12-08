@@ -10,8 +10,8 @@ import {
   RbacRulesEvaluator,
   RbacPolicy,
 } from "$types/Rbac"
-import { useAccountClubRoles } from "$hooks/useAccountClubRoles"
-import { useAccountAppRoles } from "$hooks/useAccountAppRoles"
+import { useAccountClubRoles } from "$hooks/authorization/useAccountClubRoles"
+import { useAccountAppRoles } from "$hooks/authorization/useAccountAppRoles"
 
 const _emptyAppRules: RbacRules<AppRole> = {
   allOf: [],
