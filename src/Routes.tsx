@@ -45,7 +45,7 @@ export const Routes: React.FunctionComponent = () => {
           element={
             <ProtectedRbacRoute
               clubRules={{
-                anyOf: ["Owner", "Admin", "Coach"],
+                anyOf: ["owner", "admin", "coach"],
               }}
             >
               <AssessmentsPage />
@@ -57,7 +57,7 @@ export const Routes: React.FunctionComponent = () => {
           element={
             <ProtectedRbacRoute
               clubRules={{
-                anyOf: ["Owner", "Admin", "Coach"],
+                anyOf: ["owner", "admin", "coach"],
               }}
             >
               <ViewAssessmentPage />
@@ -69,7 +69,7 @@ export const Routes: React.FunctionComponent = () => {
           element={
             <ProtectedRbacRoute
               clubRules={{
-                anyOf: ["Owner", "Admin", "Coach"],
+                anyOf: ["owner", "admin", "coach"],
               }}
             >
               <SubmitEvaluationPage />
@@ -81,7 +81,7 @@ export const Routes: React.FunctionComponent = () => {
           element={
             <ProtectedRbacRoute
               clubRules={{
-                anyOf: ["Owner", "Admin", "Coach"],
+                anyOf: ["owner", "admin", "coach"],
               }}
             >
               <EditEvaluationPage />
@@ -95,7 +95,7 @@ export const Routes: React.FunctionComponent = () => {
             element={
               <ProtectedRbacRoute
                 clubRules={{
-                  anyOf: ["Owner"],
+                  anyOf: ["owner"],
                 }}
               >
                 <UsersPage />

@@ -1,14 +1,22 @@
-export type ClubRole = "Armorer" | "Coach" | "Owner" | "Member" | "Admin"
-export type AppRole = "Admin" | "Support"
+export type ClubRole = "armorer" | "coach" | "owner" | "member" | "admin"
+export type AppRole = "admin" | "support"
 
-export type RbacRules<T = ClubRole | AppRole> = {
+export type AtLeastOne<T> = Partial<T> &
+  { [K in keyof T]: { [_ in K]-?: T[K] } }[keyof T]
+
+export type RbacRules<T = ClubRole | AppRole> = AtLeastOne<{
   anyOf?: T[]
   allOf?: T[]
-} & ({ anyOf: T[] } | { allOf: T[] })
+}>
 
 export type RbacRuleRoles<T = ClubRole | AppRole> = {
   required?: T[]
   roles: T[]
+}
+
+export type RbacPolicy = {
+  clubRules?: RbacRules<ClubRole>
+  appRules?: RbacRules<AppRole>
 }
 
 export class RbacRulesEvaluator<T = ClubRole | AppRole> {
@@ -26,7 +34,7 @@ export class RbacRulesEvaluator<T = ClubRole | AppRole> {
     this._rules = rules
   }
 
-  public isAuthorized(roles: T[]) {
+  public isAuthorized(roles: T[]): boolean {
     return this.anyOf(roles) && this.allOf(roles)
   }
 
@@ -44,19 +52,36 @@ export class RbacRulesEvaluator<T = ClubRole | AppRole> {
     })
   }
 
-  static anyOf<T>(options: RbacRuleRoles<T>): boolean {
-    if (!options.required || !options.required.length) {
-      return true
+  static isAuthorized<T>(policy: RbacRules<T>, roles: T[]): boolean {
+    const anyOfRuleRoles: RbacRuleRoles<T> = {
+      required: policy.anyOf,
+      roles,
     }
 
-    return !!options.roles.find((r) => options.required?.includes(r))
+    const allOfRuleRoles: RbacRuleRoles<T> = {
+      required: policy.allOf,
+      roles,
+    }
+
+    return (
+      RbacRulesEvaluator.anyOf(anyOfRuleRoles) &&
+      RbacRulesEvaluator.allOf(allOfRuleRoles)
+    )
   }
 
-  static allOf<T>(options: RbacRuleRoles<T>): boolean {
-    if (!options.required || !options.required.length) {
+  static anyOf<T>(policy: RbacRuleRoles<T>): boolean {
+    if (!policy.required || !policy.required.length) {
       return true
     }
 
-    return options.required.every((r) => options.roles.includes(r))
+    return !!policy.roles.find((r) => policy.required?.includes(r))
+  }
+
+  static allOf<T>(policy: RbacRuleRoles<T>): boolean {
+    if (!policy.required || !policy.required.length) {
+      return true
+    }
+
+    return policy.required.every((r) => policy.roles.includes(r))
   }
 }

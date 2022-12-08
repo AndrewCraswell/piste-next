@@ -3,7 +3,13 @@ import { useMemo } from "react"
 
 import { UnauthorizedAppRole } from "$components/ErrorPages/UnauthorizedAppRole"
 import { UnauthorizedClubRole } from "$components/ErrorPages/UnauthorizedClubRole"
-import { ClubRole, AppRole, RbacRules, RbacRulesEvaluator } from "$types/Rbac"
+import {
+  ClubRole,
+  AppRole,
+  RbacRules,
+  RbacRulesEvaluator,
+  RbacPolicy,
+} from "$types/Rbac"
 import { useAccountClubRoles } from "$hooks/useAccountClubRoles"
 import { useAccountAppRoles } from "$hooks/useAccountAppRoles"
 
@@ -17,10 +23,7 @@ const _emptyClubRules: RbacRules<ClubRole> = {
   anyOf: [],
 }
 
-export type ProtectedRbacRouteProps = {
-  clubRules?: RbacRules<ClubRole>
-  appRules?: RbacRules<AppRole>
-} & ({ clubRules: RbacRules<ClubRole> } | { appRules: RbacRules<AppRole> })
+export type ProtectedRbacRouteProps = RbacPolicy
 
 export const ProtectedRbacRoute: React.FunctionComponent<
   ProtectedRbacRouteProps
