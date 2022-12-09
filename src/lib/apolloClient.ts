@@ -7,12 +7,14 @@ import {
 } from "@apollo/client"
 import { RetryLink } from "@apollo/client/link/retry"
 import { BatchHttpLink } from "@apollo/client/link/batch-http"
-import { Auth0ContextInterface, useAuth0 } from "@auth0/auth0-react"
 import { setContext } from "@apollo/client/link/context"
+import { useMsal } from "@azure/msal-react"
+import { IPublicClientApplication } from "@azure/msal-browser"
+import { msalSilentRequest } from "./msalClient"
 
-export function createApolloClient(
-  tokenHandler?: Auth0ContextInterface["getAccessTokenSilently"]
-) {
+type MsalAcquireTokenSilent = IPublicClientApplication["acquireTokenSilent"]
+
+export function createApolloClient(tokenHandler?: MsalAcquireTokenSilent) {
   return new ApolloClient({
     link: ApolloLink.from([
       authMiddlewareFactory(tokenHandler),
@@ -66,7 +68,7 @@ let apolloClient: ApolloClient<any>
 
 export function initializeApollo(
   initialState = {},
-  tokenHandler?: Auth0ContextInterface["getAccessTokenSilently"]
+  tokenHandler?: MsalAcquireTokenSilent
 ) {
   const _apolloClient = apolloClient ?? createApolloClient(tokenHandler)
 
@@ -80,17 +82,23 @@ export function initializeApollo(
 }
 
 export const authMiddlewareFactory = (
-  tokenHandler?: Auth0ContextInterface["getAccessTokenSilently"]
+  tokenHandler?: MsalAcquireTokenSilent
 ) => {
   return setContext(async (_, { headers, ...context }) => {
-    const token = tokenHandler ? await tokenHandler() : undefined
-
     const allHeaders = {
       ...headers,
     }
 
-    if (token) {
-      allHeaders.Authorization = `Bearer ${token}`
+    try {
+      const token = tokenHandler
+        ? await tokenHandler(msalSilentRequest)
+        : undefined
+
+      if (token?.accessToken) {
+        allHeaders.Authorization = `Bearer ${token.accessToken}`
+      }
+    } catch (e) {
+      console.error(e)
     }
 
     return {
@@ -101,11 +109,11 @@ export const authMiddlewareFactory = (
 }
 
 export function useApollo() {
-  const { getAccessTokenSilently } = useAuth0()
+  const { instance: msal } = useMsal()
 
   const store = useMemo(
-    () => initializeApollo({}, getAccessTokenSilently),
-    [getAccessTokenSilently]
+    () => initializeApollo({}, msal.acquireTokenSilent),
+    [msal.acquireTokenSilent]
   )
 
   return store

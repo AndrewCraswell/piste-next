@@ -1,40 +1,38 @@
 import { appInsights } from "$components/ApplicationInsightsProvider"
-import { useAuth0 } from "@auth0/auth0-react"
+import { msalLoginRequest } from "$lib/msalClient"
+import { InteractionType } from "@azure/msal-browser"
+import { MsalAuthenticationTemplate, useMsal } from "@azure/msal-react"
 import React from "react"
 
 export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
-  const { loginWithRedirect, isLoading, user, error } = useAuth0()
+  const { accounts, instance: msal } = useMsal()
+  // TODO: Write a useMsalAccount() hook
 
-  if (error) {
-    return (
-      <span>
-        An error was encountered while logging in. Please try again later.
-      </span>
+  const account = accounts.length ? accounts[0] : null
+  if (account && account.idTokenClaims?.sub) {
+    appInsights.setAuthenticatedUserContext(
+      account.idTokenClaims.sub!,
+      undefined,
+      true
     )
+
+    msal.setActiveAccount(account)
   }
 
-  if (isLoading) {
-    return null
-  }
-
-  if (user) {
-    if (user.sub) {
-      appInsights.setAuthenticatedUserContext(
-        user.sub.replace("|", ""),
-        undefined,
-        true
-      )
-    }
-
-    return <>{children}</>
-  } else {
-    loginWithRedirect({
-      prompt: "select_account",
-      scope: "profile email openid",
-    })
-
-    return null
-  }
+  return (
+    <MsalAuthenticationTemplate
+      interactionType={InteractionType.Redirect}
+      authenticationRequest={msalLoginRequest}
+      errorComponent={() => (
+        <span>
+          An error was encountered while logging in. Please try again later.
+        </span>
+      )}
+      loadingComponent={() => <span>Logging in...</span>}
+    >
+      {children}
+    </MsalAuthenticationTemplate>
+  )
 }
 
 export default React.memo(AuthenticatedApp)

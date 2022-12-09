@@ -1,14 +1,17 @@
 import { formatFullName } from "$lib/formatFullName"
 import { useGetAccountProfileQuery } from "$queries"
 import { AppRole, ClubRole } from "$types/Rbac"
-import { useAuth0 } from "@auth0/auth0-react"
+import { useMsal } from "@azure/msal-react"
 import { useMemo } from "react"
 
 export const useAccountProfile = () => {
-  const { user, isLoading: isAuthLoading } = useAuth0()
+  const { accounts, inProgress: isAuthLoading } = useMsal()
+  const user = accounts.length ? accounts[0] : null
+  console.log("user", user)
+
   const { data, ...query } = useGetAccountProfileQuery({
     variables: {
-      oid: user?.sub!,
+      oid: user?.idTokenClaims?.sub!,
     },
   })
 
@@ -30,17 +33,11 @@ export const useAccountProfile = () => {
       nickname: Student?.Nickname,
     })
 
-    const userFullName =
-      user?.name ||
-      formatFullName({
-        firstName: user?.given_name,
-        lastName: user?.family_name,
-        nickname: user?.nickname,
-      })
+    const userFullName = user?.name
 
     // Use fallbacks to determine the best email
-    const email = Student?.Email || user?.email
-    const userId = Oid || user?.sub!
+    const email = Student?.Email || user?.idTokenClaims?.email
+    const userId = Oid || user?.idTokenClaims?.sub!
 
     // Determine the user's roles
     const appRoles = AccountAppRoles?.map((r) => r.AppRole.Name) as AppRole[]
@@ -57,7 +54,6 @@ export const useAccountProfile = () => {
       FullName: accountFullName || userFullName,
       Student,
       ...Address,
-      Picture: user?.picture,
       Email: email,
       appRoles,
       clubRoles,
