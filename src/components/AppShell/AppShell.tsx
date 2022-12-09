@@ -46,9 +46,6 @@ export const AppShell: React.FunctionComponent = ({ children }) => {
   const appRoles = useAccountAppRoles()
   const clubRoles = useAccountClubRoles()
 
-  console.log("AppRoles", appRoles)
-  console.log("ClubRoles", clubRoles)
-
   // TODO: Lift the nav links outside of the AppShell
   const crumbs = useBreadcrumbs()
   const sitemap = useSitemapGroups({

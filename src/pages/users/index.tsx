@@ -84,11 +84,11 @@ import { ClubRole } from "$types/Rbac"
 // TODO: Make data exportable to CSV, JSON, and Excel
 
 type ClubStudent = NonNullable<
-  GetClubMembersByIdQuery["club_accounts"][0]["Account"]["Students"][0]
+  GetClubMembersByIdQuery["AccountClubRoles"][0]["Account"]["Students"][0]
 >
 
 type ClubAccount = NonNullable<
-  GetClubMembersByIdQuery["club_accounts"][0]["Account"]
+  GetClubMembersByIdQuery["AccountClubRoles"][0]["Account"]
 >
 
 const UsersPage: React.FunctionComponent = () => {
@@ -103,7 +103,7 @@ const UsersPage: React.FunctionComponent = () => {
     },
   })
 
-  const accounts = data?.club_accounts.reduce((members, account) => {
+  const accounts = data?.AccountClubRoles.reduce((members, account) => {
     return [...members, account.Account]
   }, [] as ClubAccount[])
 
