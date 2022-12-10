@@ -4677,10 +4677,12 @@ export enum Calendars_Update_Column {
 /** columns and relationships of "club_accounts" */
 export type Club_Accounts = {
   __typename?: "club_accounts"
-  account_id: Scalars["String"]
-  club_id: Scalars["uniqueidentifier"]
-  created_by?: Maybe<Scalars["String"]>
-  created_on: Scalars["datetime2"]
+  /** An object relationship */
+  Account?: Maybe<Accounts>
+  /** An object relationship */
+  Club?: Maybe<Clubs>
+  ClubId: Scalars["uniqueidentifier"]
+  Oid: Scalars["String"]
 }
 
 /** aggregated selection of "club_accounts" */
@@ -4706,13 +4708,13 @@ export type Club_Accounts_Aggregate_FieldsCountArgs = {
 
 /** Boolean expression to filter rows from the table "club_accounts". All fields are combined with a logical 'AND'. */
 export type Club_Accounts_Bool_Exp = {
+  Account?: InputMaybe<Accounts_Bool_Exp>
+  Club?: InputMaybe<Clubs_Bool_Exp>
+  ClubId?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>
+  Oid?: InputMaybe<String_Mssql_Comparison_Exp>
   _and?: InputMaybe<Array<Club_Accounts_Bool_Exp>>
   _not?: InputMaybe<Club_Accounts_Bool_Exp>
   _or?: InputMaybe<Array<Club_Accounts_Bool_Exp>>
-  account_id?: InputMaybe<String_Mssql_Comparison_Exp>
-  club_id?: InputMaybe<Uniqueidentifier_Mssql_Comparison_Exp>
-  created_by?: InputMaybe<String_Mssql_Comparison_Exp>
-  created_on?: InputMaybe<Datetime2_Mssql_Comparison_Exp>
 }
 
 /** upsert condition type for table "club_accounts" */
@@ -4724,38 +4726,28 @@ export type Club_Accounts_If_Matched = {
 
 /** input type for inserting data into table "club_accounts" */
 export type Club_Accounts_Insert_Input = {
-  account_id?: InputMaybe<Scalars["String"]>
-  club_id?: InputMaybe<Scalars["uniqueidentifier"]>
-  created_by?: InputMaybe<Scalars["String"]>
-  created_on?: InputMaybe<Scalars["datetime2"]>
+  ClubId?: InputMaybe<Scalars["uniqueidentifier"]>
+  Oid?: InputMaybe<Scalars["String"]>
 }
 
 /** select match_columns of table "club_accounts" */
 export enum Club_Accounts_Insert_Match_Column {
   /** column name */
-  AccountId = "account_id",
+  ClubId = "ClubId",
   /** column name */
-  ClubId = "club_id",
-  /** column name */
-  CreatedBy = "created_by",
-  /** column name */
-  CreatedOn = "created_on",
+  Oid = "Oid",
 }
 
 /** aggregate max on columns */
 export type Club_Accounts_Max_Fields = {
   __typename?: "club_accounts_max_fields"
-  account_id?: Maybe<Scalars["String"]>
-  created_by?: Maybe<Scalars["String"]>
-  created_on?: Maybe<Scalars["datetime2"]>
+  Oid?: Maybe<Scalars["String"]>
 }
 
 /** aggregate min on columns */
 export type Club_Accounts_Min_Fields = {
   __typename?: "club_accounts_min_fields"
-  account_id?: Maybe<Scalars["String"]>
-  created_by?: Maybe<Scalars["String"]>
-  created_on?: Maybe<Scalars["datetime2"]>
+  Oid?: Maybe<Scalars["String"]>
 }
 
 /** response of any mutation on the table "club_accounts" */
@@ -4769,48 +4761,32 @@ export type Club_Accounts_Mutation_Response = {
 
 /** Ordering options when selecting data from "club_accounts". */
 export type Club_Accounts_Order_By = {
-  account_id?: InputMaybe<Order_By>
-  club_id?: InputMaybe<Order_By>
-  created_by?: InputMaybe<Order_By>
-  created_on?: InputMaybe<Order_By>
-}
-
-/** primary key columns input for table: club_accounts */
-export type Club_Accounts_Pk_Columns_Input = {
-  account_id: Scalars["String"]
-  club_id: Scalars["uniqueidentifier"]
+  Account?: InputMaybe<Accounts_Order_By>
+  Club?: InputMaybe<Clubs_Order_By>
+  ClubId?: InputMaybe<Order_By>
+  Oid?: InputMaybe<Order_By>
 }
 
 /** select columns of table "club_accounts" */
 export enum Club_Accounts_Select_Column {
   /** column name */
-  AccountId = "account_id",
+  ClubId = "ClubId",
   /** column name */
-  ClubId = "club_id",
-  /** column name */
-  CreatedBy = "created_by",
-  /** column name */
-  CreatedOn = "created_on",
+  Oid = "Oid",
 }
 
 /** input type for updating data in table "club_accounts" */
 export type Club_Accounts_Set_Input = {
-  account_id?: InputMaybe<Scalars["String"]>
-  club_id?: InputMaybe<Scalars["uniqueidentifier"]>
-  created_by?: InputMaybe<Scalars["String"]>
-  created_on?: InputMaybe<Scalars["datetime2"]>
+  ClubId?: InputMaybe<Scalars["uniqueidentifier"]>
+  Oid?: InputMaybe<Scalars["String"]>
 }
 
 /** update columns of table "club_accounts" */
 export enum Club_Accounts_Update_Column {
   /** column name */
-  AccountId = "account_id",
+  ClubId = "ClubId",
   /** column name */
-  ClubId = "club_id",
-  /** column name */
-  CreatedBy = "created_by",
-  /** column name */
-  CreatedOn = "created_on",
+  Oid = "Oid",
 }
 
 /** Boolean expression to compare columns of type "date". All fields are combined with logical 'AND'. */
@@ -4924,8 +4900,6 @@ export type Mutation_Root = {
   delete_calendars_by_pk?: Maybe<Calendars>
   /** delete data from the table: "club_accounts" */
   delete_club_accounts?: Maybe<Club_Accounts_Mutation_Response>
-  /** delete single row from the table: "club_accounts" */
-  delete_club_accounts_by_pk?: Maybe<Club_Accounts>
   /** insert data into the table: "AccountAppRoles" */
   insert_AccountAppRoles?: Maybe<AccountAppRoles_Mutation_Response>
   /** insert a single row into the table: "AccountAppRoles" */
@@ -5092,8 +5066,6 @@ export type Mutation_Root = {
   update_calendars_by_pk?: Maybe<Calendars>
   /** update data of the table: "club_accounts" */
   update_club_accounts?: Maybe<Club_Accounts_Mutation_Response>
-  /** update single row of the table: "club_accounts" */
-  update_club_accounts_by_pk?: Maybe<Club_Accounts>
 }
 
 /** mutation root */
@@ -5305,12 +5277,6 @@ export type Mutation_RootDelete_Calendars_By_PkArgs = {
 /** mutation root */
 export type Mutation_RootDelete_Club_AccountsArgs = {
   where: Club_Accounts_Bool_Exp
-}
-
-/** mutation root */
-export type Mutation_RootDelete_Club_Accounts_By_PkArgs = {
-  account_id: Scalars["String"]
-  club_id: Scalars["uniqueidentifier"]
 }
 
 /** mutation root */
@@ -5819,12 +5785,6 @@ export type Mutation_RootUpdate_Club_AccountsArgs = {
   where: Club_Accounts_Bool_Exp
 }
 
-/** mutation root */
-export type Mutation_RootUpdate_Club_Accounts_By_PkArgs = {
-  _set?: InputMaybe<Club_Accounts_Set_Input>
-  pk_columns: Club_Accounts_Pk_Columns_Input
-}
-
 /** column ordering options */
 export enum Order_By {
   /** in ascending order, nulls first */
@@ -5967,8 +5927,6 @@ export type Query_Root = {
   club_accounts: Array<Club_Accounts>
   /** fetch aggregated fields from the table: "club_accounts" */
   club_accounts_aggregate: Club_Accounts_Aggregate
-  /** fetch data from the table: "club_accounts" using primary key columns */
-  club_accounts_by_pk?: Maybe<Club_Accounts>
 }
 
 export type Query_RootAccountAppRolesArgs = {
@@ -6350,11 +6308,6 @@ export type Query_RootClub_Accounts_AggregateArgs = {
   where?: InputMaybe<Club_Accounts_Bool_Exp>
 }
 
-export type Query_RootClub_Accounts_By_PkArgs = {
-  account_id: Scalars["String"]
-  club_id: Scalars["uniqueidentifier"]
-}
-
 export type Subscription_Root = {
   __typename?: "subscription_root"
   /** An array relationship */
@@ -6481,8 +6434,6 @@ export type Subscription_Root = {
   club_accounts: Array<Club_Accounts>
   /** fetch aggregated fields from the table: "club_accounts" */
   club_accounts_aggregate: Club_Accounts_Aggregate
-  /** fetch data from the table: "club_accounts" using primary key columns */
-  club_accounts_by_pk?: Maybe<Club_Accounts>
 }
 
 export type Subscription_RootAccountAppRolesArgs = {
@@ -6866,11 +6817,6 @@ export type Subscription_RootClub_Accounts_AggregateArgs = {
   offset?: InputMaybe<Scalars["Int"]>
   order_by?: InputMaybe<Array<Club_Accounts_Order_By>>
   where?: InputMaybe<Club_Accounts_Bool_Exp>
-}
-
-export type Subscription_RootClub_Accounts_By_PkArgs = {
-  account_id: Scalars["String"]
-  club_id: Scalars["uniqueidentifier"]
 }
 
 /** Boolean expression to compare columns of type "uniqueidentifier". All fields are combined with logical 'AND'. */
@@ -7317,10 +7263,9 @@ export type GetClubMembersByIdQueryVariables = Exact<{
 
 export type GetClubMembersByIdQuery = {
   __typename?: "query_root"
-  AccountClubRoles: Array<{
-    __typename?: "AccountClubRoles"
-    ClubRoleId: any
-    Account: {
+  club_accounts: Array<{
+    __typename?: "club_accounts"
+    Account?: {
       __typename?: "Accounts"
       Oid: string
       Student?: {
@@ -7364,7 +7309,7 @@ export type GetClubMembersByIdQuery = {
           BackgroundCheckExpires?: any | null
         } | null
       }>
-    }
+    } | null
   }>
 }
 
@@ -8495,8 +8440,7 @@ export type GetAssessmentsQueryResult = Apollo.QueryResult<
 >
 export const GetClubMembersByIdDocument = gql`
   query GetClubMembersById($clubId: uniqueidentifier!) {
-    AccountClubRoles(where: { ClubId: { _eq: $clubId } }) {
-      ClubRoleId
+    club_accounts(where: { ClubId: { _eq: $clubId } }) {
       Account {
         Oid
         Student {
