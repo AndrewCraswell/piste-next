@@ -5,6 +5,8 @@ import { useBreadcrumbs } from "$hooks/useBreadcrumbs"
 import { AppHeader, AppNav, AppPage } from "./components"
 import { AppBreadcrumbs } from "./components/AppBreadcrumbs"
 import { useSitemapGroups } from "$hooks/sitemap"
+import { useAccountAppRoles } from "$hooks/authorization/useAccountAppRoles"
+import { useAccountClubRoles } from "$hooks/authorization/useAccountClubRoles"
 
 const AppRoot = styled.div`
   display: grid;
@@ -41,12 +43,19 @@ const Page = styled(AppPage)`
 `
 
 export const AppShell: React.FunctionComponent = ({ children }) => {
+  const appRoles = useAccountAppRoles()
+  const clubRoles = useAccountClubRoles()
+
   // TODO: Lift the nav links outside of the AppShell
   const crumbs = useBreadcrumbs()
   const sitemap = useSitemapGroups({
     flatten: true,
     tagName: "nav",
     injectLinkShims: true,
+    rbacRoles: {
+      appRoles,
+      clubRoles,
+    },
   })
 
   return (

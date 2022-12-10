@@ -25,7 +25,7 @@ const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
 export const Routes: React.FunctionComponent = () => {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
-    key: "members-page",
+    key: "users-page",
     label: import.meta.env.MODE,
   })
 
@@ -40,25 +40,64 @@ export const Routes: React.FunctionComponent = () => {
         <Route path="billing" element={<BillingPage />} />
 
         {/* Assessments routes */}
-        <Route path="assessments" element={<AssessmentsPage />} />
+        <Route
+          path="assessments"
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["owner", "admin", "coach"],
+              }}
+            >
+              <AssessmentsPage />
+            </ProtectedRbacRoute>
+          }
+        />
         <Route
           path="assessments/:assessmentId"
-          element={<ViewAssessmentPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["owner", "admin", "coach"],
+              }}
+            >
+              <ViewAssessmentPage />
+            </ProtectedRbacRoute>
+          }
         />
         <Route
           path="assessments/:assessmentId/submit"
-          element={<SubmitEvaluationPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["owner", "admin", "coach"],
+              }}
+            >
+              <SubmitEvaluationPage />
+            </ProtectedRbacRoute>
+          }
         />
         <Route
           path="assessments/:assessmentId/:evaluationId"
-          element={<EditEvaluationPage />}
+          element={
+            <ProtectedRbacRoute
+              clubRules={{
+                anyOf: ["owner", "admin", "coach"],
+              }}
+            >
+              <EditEvaluationPage />
+            </ProtectedRbacRoute>
+          }
         />
 
         {isUsersPageEnabled && (
           <Route
             path="users"
             element={
-              <ProtectedRbacRoute clubRoles={["Coach"]}>
+              <ProtectedRbacRoute
+                clubRules={{
+                  anyOf: ["owner"],
+                }}
+              >
                 <UsersPage />
               </ProtectedRbacRoute>
             }

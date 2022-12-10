@@ -1,31 +1,51 @@
 import { Outlet } from "react-router-dom"
+import { useMemo } from "react"
 
 import { UnauthorizedAppRole } from "$components/ErrorPages/UnauthorizedAppRole"
 import { UnauthorizedClubRole } from "$components/ErrorPages/UnauthorizedClubRole"
-import { useAccountProfile } from "$hooks/useAccountProfile"
+import {
+  ClubRole,
+  AppRole,
+  RbacRules,
+  RbacRulesEvaluator,
+  RbacPolicy,
+} from "$types/Rbac"
+import { useAccountClubRoles } from "$hooks/authorization/useAccountClubRoles"
+import { useAccountAppRoles } from "$hooks/authorization/useAccountAppRoles"
 
-export type ProtectedRbacRouteProps = {
-  clubRoles?: string[]
-  appRoles?: string[]
+const _emptyAppRules: RbacRules<AppRole> = {
+  allOf: [],
+  anyOf: [],
 }
+
+const _emptyClubRules: RbacRules<ClubRole> = {
+  allOf: [],
+  anyOf: [],
+}
+
+export type ProtectedRbacRouteProps = RbacPolicy
 
 export const ProtectedRbacRoute: React.FunctionComponent<
   ProtectedRbacRouteProps
 > = (props) => {
-  const { appRoles = [], clubRoles = [], children } = props
+  const {
+    appRules = _emptyAppRules,
+    clubRules = _emptyClubRules,
+    children,
+  } = props
 
   const accountClubRoles = useAccountClubRoles()
   const accountAppRoles = useAccountAppRoles()
 
-  console.log("ClubRoles", accountClubRoles)
-  console.log("AppRoles", accountAppRoles)
+  const isAppRoleAuthorized = useMemo(() => {
+    const rbacEvaluator = new RbacRulesEvaluator(appRules)
+    return rbacEvaluator.isAuthorized(accountAppRoles)
+  }, [accountAppRoles, appRules])
 
-  const isAppRoleAuthorized = appRoles.every((r) =>
-    accountAppRoles?.includes(r)
-  )
-  const isClubRoleAuthorized = clubRoles.every((r) =>
-    accountClubRoles?.includes(r)
-  )
+  const isClubRoleAuthorized = useMemo(() => {
+    const rbacEvaluator = new RbacRulesEvaluator(clubRules)
+    return rbacEvaluator.isAuthorized(accountClubRoles)
+  }, [accountClubRoles, clubRules])
 
   const isAuthorized = isAppRoleAuthorized && isClubRoleAuthorized
 
@@ -43,21 +63,3 @@ export const ProtectedRbacRoute: React.FunctionComponent<
 
   return null
 }
-
-export function useAccountClubRoles() {
-  const { account } = useAccountProfile()
-
-  // TODO: Get the current selected clubId
-  return (
-    account.clubRoles
-      ?.filter((c) => c.clubId === "61B591E9-5093-4A05-A3C2-6E7154660BA2")
-      .map((r) => r.name) ?? []
-  )
-}
-
-export function useAccountAppRoles() {
-  const { account } = useAccountProfile()
-  return account.appRoles ?? []
-}
-
-// TODO: Add hook to get club and club roles

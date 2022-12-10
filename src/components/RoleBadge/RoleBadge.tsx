@@ -1,17 +1,21 @@
 import { Badge } from "@fluentui/react-components"
 
+import { ClubRole } from "$types/Rbac"
+import { useRoleNameMappers } from "$hooks/authorization/useRoleNameMappers"
+
 export type RoleBadgeProps = {
-  name: string
+  role: ClubRole
 }
 
 export const RoleBadge: React.FunctionComponent<RoleBadgeProps> = ({
-  name,
+  role,
 }) => {
-  const isStaff = name !== "Member"
+  const { getClubRoleName } = useRoleNameMappers()
+  const isStaff = role !== "member"
 
   return (
     <Badge color={isStaff ? "brand" : "informative"} shape="rounded">
-      {name}
+      {getClubRoleName(role)}
     </Badge>
   )
 }
