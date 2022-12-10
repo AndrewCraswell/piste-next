@@ -1,5 +1,5 @@
 {
-  "resource_version": 538,
+  "resource_version": 551,
   "metadata": {
     "version": 3,
     "sources": [
@@ -9,8 +9,8 @@
         "tables": [
           {
             "table": {
-              "schema": "dbo",
-              "name": "AccountAppRoles"
+              "name": "AccountAppRoles",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -31,11 +31,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "Oid",
-                    "AppRoleId"
-                  ],
-                  "backend_only": false
+                  "columns": ["Oid", "AppRoleId"]
                 }
               }
             ],
@@ -43,10 +39,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "Oid",
-                    "AppRoleId"
-                  ],
+                  "columns": ["Oid", "AppRoleId"],
                   "filter": {}
                 }
               }
@@ -55,10 +48,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "Oid",
-                    "AppRoleId"
-                  ],
+                  "columns": ["Oid", "AppRoleId"],
                   "filter": {},
                   "check": null
                 }
@@ -75,8 +65,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "AccountClubRoles"
+              "name": "AccountClubRoles",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -103,12 +93,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "ClubId",
-                    "Oid",
-                    "ClubRoleId"
-                  ],
-                  "backend_only": false
+                  "columns": ["ClubId", "Oid", "ClubRoleId"]
                 }
               }
             ],
@@ -116,11 +101,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "ClubId",
-                    "Oid",
-                    "ClubRoleId"
-                  ],
+                  "columns": ["ClubId", "Oid", "ClubRoleId"],
                   "filter": {}
                 }
               }
@@ -129,11 +110,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "ClubId",
-                    "Oid",
-                    "ClubRoleId"
-                  ],
+                  "columns": ["ClubId", "Oid", "ClubRoleId"],
                   "filter": {},
                   "check": null
                 }
@@ -150,8 +127,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "Accounts"
+              "name": "Accounts",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -172,8 +149,8 @@
                   "foreign_key_constraint_on": {
                     "column": "account_id",
                     "table": {
-                      "schema": "dbo",
-                      "name": "calendars"
+                      "name": "calendars",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -186,8 +163,8 @@
                   "foreign_key_constraint_on": {
                     "column": "Oid",
                     "table": {
-                      "schema": "dbo",
-                      "name": "AccountAppRoles"
+                      "name": "AccountAppRoles",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -198,8 +175,8 @@
                   "foreign_key_constraint_on": {
                     "column": "Oid",
                     "table": {
-                      "schema": "dbo",
-                      "name": "AccountClubRoles"
+                      "name": "AccountClubRoles",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -210,8 +187,8 @@
                   "foreign_key_constraint_on": {
                     "column": "Oid",
                     "table": {
-                      "schema": "dbo",
-                      "name": "Students"
+                      "name": "Students",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -220,25 +197,13 @@
                 "name": "assessments",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "assessments",
-                      "name": "assessments"
-                    },
-                    "insertion_order": null,
                     "column_mapping": {
                       "Oid": "created_by"
-                    }
-                  }
-                }
-              },
-              {
-                "name": "club_accounts",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "account_id",
-                    "table": {
-                      "schema": "dbo",
-                      "name": "club_accounts"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "assessments",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -257,8 +222,7 @@
                     "CreatedBy",
                     "Oid",
                     "AddressId"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -267,13 +231,13 @@
                 "role": "user",
                 "permission": {
                   "columns": [
-                    "LanguageId",
-                    "CreatedAt",
-                    "UpdatedAt",
-                    "PrimaryStudentId",
-                    "CreatedBy",
                     "Oid",
-                    "AddressId"
+                    "LanguageId",
+                    "PrimaryStudentId",
+                    "AddressId",
+                    "CreatedBy",
+                    "CreatedAt",
+                    "UpdatedAt"
                   ],
                   "filter": {}
                 }
@@ -308,8 +272,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "Addresses"
+              "name": "Addresses",
+              "schema": "dbo"
             },
             "array_relationships": [
               {
@@ -318,8 +282,8 @@
                   "foreign_key_constraint_on": {
                     "column": "AddressId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "Accounts"
+                      "name": "Accounts",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -330,8 +294,8 @@
                   "foreign_key_constraint_on": {
                     "column": "AddressId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "ClubLocations"
+                      "name": "ClubLocations",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -352,8 +316,7 @@
                     "Postal",
                     "State",
                     "Address"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -407,8 +370,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "AppRoles"
+              "name": "AppRoles",
+              "schema": "dbo"
             },
             "array_relationships": [
               {
@@ -417,8 +380,8 @@
                   "foreign_key_constraint_on": {
                     "column": "AppRoleId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "AccountAppRoles"
+                      "name": "AccountAppRoles",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -429,11 +392,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
-                  "backend_only": false
+                  "columns": ["RoleId", "Name"]
                 }
               }
             ],
@@ -441,10 +400,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
+                  "columns": ["RoleId", "Name"],
                   "filter": {}
                 }
               }
@@ -453,10 +409,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
+                  "columns": ["RoleId", "Name"],
                   "filter": {},
                   "check": null
                 }
@@ -473,8 +426,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "AssociationMembers"
+              "name": "AssociationMembers",
+              "schema": "dbo"
             },
             "array_relationships": [
               {
@@ -483,8 +436,8 @@
                   "foreign_key_constraint_on": {
                     "column": "AssociationMemberId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "Students"
+                      "name": "Students",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -563,8 +516,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "ClubLocations"
+              "name": "ClubLocations",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -595,8 +548,7 @@
                     "Email",
                     "Phone",
                     "ClubId"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -650,8 +602,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "ClubRoles"
+              "name": "ClubRoles",
+              "schema": "dbo"
             },
             "array_relationships": [
               {
@@ -660,8 +612,8 @@
                   "foreign_key_constraint_on": {
                     "column": "ClubRoleId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "AccountClubRoles"
+                      "name": "AccountClubRoles",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -672,11 +624,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
-                  "backend_only": false
+                  "columns": ["RoleId", "Name"]
                 }
               }
             ],
@@ -684,10 +632,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
+                  "columns": ["RoleId", "Name"],
                   "filter": {}
                 }
               }
@@ -696,10 +641,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "RoleId",
-                    "Name"
-                  ],
+                  "columns": ["RoleId", "Name"],
                   "filter": {},
                   "check": {}
                 }
@@ -716,8 +658,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "Clubs"
+              "name": "Clubs",
+              "schema": "dbo"
             },
             "array_relationships": [
               {
@@ -726,8 +668,8 @@
                   "foreign_key_constraint_on": {
                     "column": "ClubId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "AccountClubRoles"
+                      "name": "AccountClubRoles",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -738,20 +680,8 @@
                   "foreign_key_constraint_on": {
                     "column": "ClubId",
                     "table": {
-                      "schema": "dbo",
-                      "name": "ClubLocations"
-                    }
-                  }
-                }
-              },
-              {
-                "name": "club_accounts",
-                "using": {
-                  "foreign_key_constraint_on": {
-                    "column": "club_id",
-                    "table": {
-                      "schema": "dbo",
-                      "name": "club_accounts"
+                      "name": "ClubLocations",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -774,8 +704,7 @@
                     "Division",
                     "Name",
                     "CreatedBy"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -852,8 +781,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "Students"
+              "name": "Students",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -885,8 +814,7 @@
                     "Nickname",
                     "Oid",
                     "Phone"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -946,8 +874,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "assessment_cohorts"
+              "name": "assessment_cohorts",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
@@ -964,8 +892,8 @@
                   "foreign_key_constraint_on": {
                     "column": "cohort_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "cohort_fencers"
+                      "name": "cohort_fencers",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -976,12 +904,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "description",
-                    "id",
-                    "title"
-                  ],
-                  "backend_only": false
+                  "columns": ["description", "id", "title"]
                 }
               }
             ],
@@ -1006,11 +929,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "description",
-                    "id",
-                    "title"
-                  ],
+                  "columns": ["description", "id", "title"],
                   "filter": {},
                   "check": null
                 }
@@ -1027,8 +946,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "assessment_metrics"
+              "name": "assessment_metrics",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
@@ -1049,12 +968,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "assessment_id",
-                    "metric_id",
-                    "order_number"
-                  ],
-                  "backend_only": false
+                  "columns": ["assessment_id", "metric_id", "order_number"]
                 }
               }
             ],
@@ -1078,9 +992,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "order_number"
-                  ],
+                  "columns": ["order_number"],
                   "filter": {},
                   "check": null
                 }
@@ -1097,8 +1009,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "assessment_result"
+              "name": "assessment_result",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
@@ -1117,13 +1029,13 @@
                 "name": "fencer",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "dbo",
-                      "name": "Students"
-                    },
-                    "insertion_order": null,
                     "column_mapping": {
                       "fencer_id": "StudentId"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Students",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -1132,13 +1044,13 @@
                 "name": "proctor",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "dbo",
-                      "name": "Accounts"
-                    },
-                    "insertion_order": null,
                     "column_mapping": {
                       "created_by": "Oid"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Accounts",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -1151,8 +1063,8 @@
                   "foreign_key_constraint_on": {
                     "column": "result_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "metric_result"
+                      "name": "metric_result",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1171,8 +1083,7 @@
                     "created_by",
                     "fencer_id",
                     "status_id"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -1197,9 +1108,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "status_id"
-                  ],
+                  "columns": ["status_id"],
                   "filter": {},
                   "check": null
                 }
@@ -1216,8 +1125,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "assessment_result_statuses"
+              "name": "assessment_result_statuses",
+              "schema": "assessments"
             },
             "array_relationships": [
               {
@@ -1226,8 +1135,8 @@
                   "foreign_key_constraint_on": {
                     "column": "status_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "assessment_result"
+                      "name": "assessment_result",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1237,10 +1146,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "id",
-                    "name"
-                  ],
+                  "columns": ["id", "name"],
                   "filter": {}
                 }
               }
@@ -1248,21 +1154,21 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "assessments"
+              "name": "assessments",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
                 "name": "account",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "dbo",
-                      "name": "Accounts"
-                    },
-                    "insertion_order": null,
                     "column_mapping": {
                       "created_by": "Oid"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Accounts",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -1275,8 +1181,8 @@
                   "foreign_key_constraint_on": {
                     "column": "assessment_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "assessment_cohorts"
+                      "name": "assessment_cohorts",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1287,8 +1193,8 @@
                   "foreign_key_constraint_on": {
                     "column": "assessment_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "assessment_metrics"
+                      "name": "assessment_metrics",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1299,8 +1205,8 @@
                   "foreign_key_constraint_on": {
                     "column": "assessment_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "assessment_result"
+                      "name": "assessment_result",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1311,11 +1217,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "description",
-                    "title"
-                  ],
-                  "backend_only": false
+                  "columns": ["description", "title"]
                 }
               }
             ],
@@ -1339,10 +1241,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "description",
-                    "title"
-                  ],
+                  "columns": ["description", "title"],
                   "filter": {},
                   "check": null
                 }
@@ -1359,8 +1258,8 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "calendars"
+              "name": "calendars",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
@@ -1375,13 +1274,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "access_token",
-                    "account_id",
-                    "id",
-                    "provider"
-                  ],
-                  "backend_only": false
+                  "columns": ["access_token", "account_id", "id", "provider"]
                 }
               }
             ],
@@ -1406,9 +1299,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "access_token"
-                  ],
+                  "columns": ["access_token"],
                   "filter": {},
                   "check": null
                 }
@@ -1425,35 +1316,38 @@
           },
           {
             "table": {
-              "schema": "dbo",
-              "name": "club_accounts"
+              "name": "club_accounts",
+              "schema": "dbo"
             },
             "object_relationships": [
               {
                 "name": "Account",
                 "using": {
-                  "foreign_key_constraint_on": "account_id"
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "Oid": "Oid"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Accounts",
+                      "schema": "dbo"
+                    }
+                  }
                 }
               },
               {
                 "name": "Club",
                 "using": {
-                  "foreign_key_constraint_on": "club_id"
-                }
-              }
-            ],
-            "insert_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "check": {},
-                  "columns": [
-                    "created_on",
-                    "account_id",
-                    "created_by",
-                    "club_id"
-                  ],
-                  "backend_only": false
+                  "manual_configuration": {
+                    "column_mapping": {
+                      "ClubId": "ClubId"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Clubs",
+                      "schema": "dbo"
+                    }
+                  }
                 }
               }
             ],
@@ -1461,28 +1355,8 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "created_on",
-                    "account_id",
-                    "created_by",
-                    "club_id"
-                  ],
+                  "columns": ["Oid", "ClubId"],
                   "filter": {}
-                }
-              }
-            ],
-            "update_permissions": [
-              {
-                "role": "user",
-                "permission": {
-                  "columns": [
-                    "created_on",
-                    "account_id",
-                    "created_by",
-                    "club_id"
-                  ],
-                  "filter": {},
-                  "check": null
                 }
               }
             ],
@@ -1497,20 +1371,20 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "cohort_fencers"
+              "name": "cohort_fencers",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
                 "name": "Student",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "dbo",
-                      "name": "Students"
-                    },
+                    "column_mapping": {},
                     "insertion_order": null,
-                    "column_mapping": {}
+                    "remote_table": {
+                      "name": "Students",
+                      "schema": "dbo"
+                    }
                   }
                 }
               },
@@ -1524,13 +1398,13 @@
                 "name": "fencer",
                 "using": {
                   "manual_configuration": {
-                    "remote_table": {
-                      "schema": "dbo",
-                      "name": "Students"
-                    },
-                    "insertion_order": null,
                     "column_mapping": {
                       "fencer_id": "StudentId"
+                    },
+                    "insertion_order": null,
+                    "remote_table": {
+                      "name": "Students",
+                      "schema": "dbo"
                     }
                   }
                 }
@@ -1541,11 +1415,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "cohort_id",
-                    "fencer_id"
-                  ],
-                  "backend_only": false
+                  "columns": ["cohort_id", "fencer_id"]
                 }
               }
             ],
@@ -1574,8 +1444,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "metric_questions"
+              "name": "metric_questions",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
@@ -1592,8 +1462,8 @@
                   "foreign_key_constraint_on": {
                     "column": "metric_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "assessment_metrics"
+                      "name": "assessment_metrics",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1604,8 +1474,8 @@
                   "foreign_key_constraint_on": {
                     "column": "metric_question_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "metric_result"
+                      "name": "metric_result",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1616,12 +1486,7 @@
                 "role": "user",
                 "permission": {
                   "check": {},
-                  "columns": [
-                    "description",
-                    "metric_type_id",
-                    "title"
-                  ],
-                  "backend_only": false
+                  "columns": ["description", "metric_type_id", "title"]
                 }
               }
             ],
@@ -1646,11 +1511,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "description",
-                    "metric_type_id",
-                    "title"
-                  ],
+                  "columns": ["description", "metric_type_id", "title"],
                   "filter": {},
                   "check": null
                 }
@@ -1667,8 +1528,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "metric_result"
+              "name": "metric_result",
+              "schema": "assessments"
             },
             "object_relationships": [
               {
@@ -1694,8 +1555,7 @@
                     "notes",
                     "result_id",
                     "value"
-                  ],
-                  "backend_only": false
+                  ]
                 }
               }
             ],
@@ -1720,10 +1580,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "notes",
-                    "value"
-                  ],
+                  "columns": ["notes", "value"],
                   "filter": {},
                   "check": null
                 }
@@ -1740,8 +1597,8 @@
           },
           {
             "table": {
-              "schema": "assessments",
-              "name": "metric_types"
+              "name": "metric_types",
+              "schema": "assessments"
             },
             "array_relationships": [
               {
@@ -1750,8 +1607,8 @@
                   "foreign_key_constraint_on": {
                     "column": "metric_type_id",
                     "table": {
-                      "schema": "assessments",
-                      "name": "metric_questions"
+                      "name": "metric_questions",
+                      "schema": "assessments"
                     }
                   }
                 }
@@ -1761,11 +1618,7 @@
               {
                 "role": "user",
                 "permission": {
-                  "columns": [
-                    "id",
-                    "description",
-                    "name"
-                  ],
+                  "columns": ["id", "description", "name"],
                   "filter": {}
                 }
               }
@@ -1779,7 +1632,8 @@
             },
             "pool_settings": {
               "idle_timeout": 5,
-              "max_connections": 50
+              "max_connections": 50,
+              "total_max_connections": null
             }
           }
         }
@@ -1787,20 +1641,30 @@
     ],
     "api_limits": {
       "depth_limit": {
-        "per_role": {},
-        "global": 10
+        "global": 10,
+        "per_role": {}
       },
       "disabled": true,
-      "rate_limit": {
-        "per_role": {},
-        "global": {
-          "unique_params": "IP",
-          "max_reqs_per_min": 1000
-        }
-      },
       "node_limit": {
-        "per_role": {},
-        "global": 1000
+        "global": 1000,
+        "per_role": {}
+      },
+      "rate_limit": {
+        "global": {
+          "max_reqs_per_min": 1000,
+          "unique_params": "IP"
+        },
+        "per_role": {}
+      }
+    },
+    "backend_configs": {
+      "dataconnector": {
+        "athena": {
+          "uri": "http://localhost:8081/api/v1/athena"
+        },
+        "snowflake": {
+          "uri": "http://localhost:8081/api/v1/snowflake"
+        }
       }
     }
   }
