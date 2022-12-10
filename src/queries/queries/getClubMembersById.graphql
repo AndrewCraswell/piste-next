@@ -1,5 +1,5 @@
 query GetClubMembersById($clubId: uniqueidentifier!) {
-  club_accounts(where: { club_id: { _eq: $clubId } }) {
+  club_accounts(where: { ClubId: { _eq: $clubId } }) {
     Account {
       Oid
       Student {
