@@ -1,4 +1,3 @@
-import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { ActionButton } from "@fluentui/react"
 import {
@@ -79,7 +78,7 @@ export interface IUserMenuProps {
   avatarUrl?: string
   fullName?: string
   email?: string
-  logout?: (options?: LogoutOptions | undefined) => void
+  logout?: () => void
 }
 
 export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
@@ -102,7 +101,7 @@ export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
 
   const loginRedirect = useCallback(() => {
     if (logout) {
-      logout({ returnTo: window.location.origin })
+      logout()
     }
   }, [logout])
 

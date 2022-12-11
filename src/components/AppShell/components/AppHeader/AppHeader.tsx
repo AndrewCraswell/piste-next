@@ -1,4 +1,3 @@
-import { LogoutOptions, useAuth0 } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
 import { useCallback } from "react"
 
@@ -8,6 +7,7 @@ import { useAccountProfile } from "$hooks/useAccountProfile"
 import { useDisclosure } from "$hooks/useDisclosure"
 import { IStyleableProps } from "$types"
 import { HeaderButton, UserMenu } from "./components"
+import { useMsal } from "@azure/msal-react"
 
 export const headerHeight = 48
 
@@ -53,15 +53,12 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
 }) => {
   const { isOpen, onClose, onToggle } = useDisclosure()
   const { account } = useAccountProfile()
-  const { logout } = useAuth0()
+  const { instance: msal } = useMsal()
 
-  const handleLogout = useCallback(
-    (options?: LogoutOptions) => {
-      appInsights.clearAuthenticatedUserContext()
-      return logout(options)
-    },
-    [logout]
-  )
+  const handleLogout = useCallback(() => {
+    appInsights.clearAuthenticatedUserContext()
+    return msal.logout()
+  }, [msal])
 
   return (
     <>
