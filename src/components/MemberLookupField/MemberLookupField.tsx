@@ -22,9 +22,8 @@ export interface IMemberLookupFieldProps
   size?: PersonaSize
 }
 
-export const MemberLookupField: React.FunctionComponent<
-  IMemberLookupFieldProps
-> = ({ size, defaultFilter = "%", ...pickerProps }) => {
+export function MemberLookupField(props: IMemberLookupFieldProps) {
+  const { size, defaultFilter = "%", ...pickerProps } = props
   const client = useApolloClient()
 
   // TODO: Enable "show more" suggestions

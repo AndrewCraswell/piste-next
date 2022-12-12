@@ -8,13 +8,11 @@ import { FormRow } from "$components/Form/components/FormRow"
 import { FormSection } from "$components/Form/components/FormSection"
 import { FormTextField } from "$components/Form/components/FormTextField"
 
-interface IFencerFormProps {
+type FencerFormProps = {
   form: UseFormReturn<IProfileFormFields, object>
 }
 
-export const FencerForm: React.FunctionComponent<IFencerFormProps> = ({
-  form,
-}) => {
+export function FencerForm({ form }: FencerFormProps) {
   const { control } = form
 
   return (

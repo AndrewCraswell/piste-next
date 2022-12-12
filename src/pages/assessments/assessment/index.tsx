@@ -12,7 +12,7 @@ const PageSection = styled.div`
   margin-top: 3em;
 `
 
-const ViewAssessmentPage: React.FunctionComponent = () => {
+function ViewAssessmentPage() {
   const pageTitle = "View assessment"
   useTrackPisteMetric({ componentName: "ViewAssessmentPage" })
   const params = useParams()

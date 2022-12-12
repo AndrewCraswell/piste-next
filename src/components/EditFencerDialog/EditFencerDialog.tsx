@@ -18,16 +18,15 @@ import {
 import { useAccountProfile } from "$hooks/useAccountProfile"
 import { useFormHelpers } from "$hooks/useFormHelpers"
 
-export interface IEditFencerDialogProps {
+export interface EditFencerDialogProps {
   fencer?: AccountFencer
   isOpen?: boolean
   onSaved?: (fencer: IFencerFormFields) => void
   onClose: () => void
 }
 
-export const EditFencerDialog: React.FunctionComponent<
-  IEditFencerDialogProps
-> = ({ isOpen, onClose, onSaved, fencer }) => {
+export function EditFencerDialog(props: EditFencerDialogProps) {
+  const { isOpen, onClose, onSaved, fencer } = props
   const {
     account: { UserId },
   } = useAccountProfile()

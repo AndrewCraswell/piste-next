@@ -23,7 +23,7 @@ const EditEvaluationPage = loadable(
 const UsersPage = loadable(() => import("./pages/users"))
 const TournamentsPage = loadable(() => import("./pages/tournaments"))
 
-export const Routes: React.FunctionComponent = () => {
+export function Routes() {
   const { isEnabled: isUsersPageEnabled } = useFeatureFlag({
     key: "users-page",
     label: import.meta.env.MODE,

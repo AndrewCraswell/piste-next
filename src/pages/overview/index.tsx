@@ -17,7 +17,7 @@ const GridContainer = styled.div`
   margin-top: 2em;
 `
 
-const OverviewPage: React.FunctionComponent = () => {
+function OverviewPage() {
   const pageTitle = "Overview"
   useTrackPisteMetric({ componentName: "OverviewPage" })
 

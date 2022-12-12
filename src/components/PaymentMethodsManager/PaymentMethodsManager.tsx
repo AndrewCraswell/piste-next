@@ -10,7 +10,7 @@ const PaymentMethodsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, 292px);
 `
 
-export const PaymentMethodsManager: React.FunctionComponent = () => {
+export function PaymentMethodsManager() {
   const { data: paymentMethods } =
     useGetPaymentMethodsQuery("cus_Kvm41gHVgqbeeS")
 

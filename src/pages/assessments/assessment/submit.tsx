@@ -31,7 +31,7 @@ import { useDisclosure } from "$hooks/useDisclosure"
 
 // TODO: Add Notes field
 
-export const SubmitEvaluationPage: React.FunctionComponent = () => {
+function SubmitEvaluationPage() {
   const pageTitle = "Submit evaluation"
   useTrackPisteMetric({ componentName: "SubmitEvaluationPage" })
 

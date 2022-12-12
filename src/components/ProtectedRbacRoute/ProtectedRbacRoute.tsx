@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom"
-import { useMemo } from "react"
+import { PropsWithChildren, useMemo } from "react"
 
 import { UnauthorizedAppRole } from "$components/ErrorPages/UnauthorizedAppRole"
 import { UnauthorizedClubRole } from "$components/ErrorPages/UnauthorizedClubRole"
@@ -23,11 +23,9 @@ const _emptyClubRules: RbacRules<ClubRole> = {
   anyOf: [],
 }
 
-export type ProtectedRbacRouteProps = RbacPolicy
+export type ProtectedRbacRouteProps = PropsWithChildren<RbacPolicy>
 
-export const ProtectedRbacRoute: React.FunctionComponent<
-  ProtectedRbacRouteProps
-> = (props) => {
+export function ProtectedRbacRoute(props: ProtectedRbacRouteProps) {
   const {
     appRules = _emptyAppRules,
     clubRules = _emptyClubRules,

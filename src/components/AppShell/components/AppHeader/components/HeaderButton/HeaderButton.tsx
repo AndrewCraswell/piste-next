@@ -11,7 +11,7 @@ export interface IHeaderButtonProps
   icon?: string
 }
 
-const Button: React.FunctionComponent<IHeaderButtonProps> = (props) => {
+function Button(props: IHeaderButtonProps) {
   const { icon, variant, children, ...buttonProps } = props
 
   return (

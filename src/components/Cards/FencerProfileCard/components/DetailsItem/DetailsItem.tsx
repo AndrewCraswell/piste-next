@@ -5,6 +5,7 @@ import {
   PresenceBadgeProps,
   Text,
 } from "@fluentui/react-components"
+import { PropsWithChildren } from "react"
 
 const TextTruncated = styled(Text)`
   overflow: hidden;
@@ -22,25 +23,23 @@ const DetailsBadge = styled(PresenceBadge)`
   margin-left: 0.5rem;
 `
 
-export interface IDetailsItemProps {
+export type DetailsItemProps = PropsWithChildren<{
   iconName: string
   iconLabel: string
   title: string
   badgeProps?: PresenceBadgeProps
-}
+}>
 
-export const DetailsItem: React.FunctionComponent<IDetailsItemProps> = ({
-  iconName,
-  iconLabel,
-  badgeProps,
-  title,
-  children,
-}) => (
-  <Stack horizontal verticalAlign="center">
-    <DetailsIcon iconName={iconName} title={iconLabel} />
-    <TextTruncated title={title}>
-      <>{children}</>
-      <>{badgeProps ? <DetailsBadge {...badgeProps} /> : null}</>
-    </TextTruncated>
-  </Stack>
-)
+export function DetailsItem(props: DetailsItemProps) {
+  const { iconName, iconLabel, badgeProps, title, children } = props
+
+  return (
+    <Stack horizontal verticalAlign="center">
+      <DetailsIcon iconName={iconName} title={iconLabel} />
+      <TextTruncated title={title}>
+        <>{children}</>
+        <>{badgeProps ? <DetailsBadge {...badgeProps} /> : null}</>
+      </TextTruncated>
+    </Stack>
+  )
+}

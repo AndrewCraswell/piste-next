@@ -1,9 +1,9 @@
-import { IMetricAdapterProps } from "$components/MetricAdapter/MetricAdapter.types"
+import { MetricAdapterProps } from "$components/MetricAdapter/MetricAdapter.types"
 import { Label, Slider, useId, SpinButton } from "@fluentui/react-components"
 
-export const OneToTenDecimalSlider: React.FunctionComponent<
-  Omit<IMetricAdapterProps, "type">
-> = (props) => {
+type OneToTenDecimalSliderProps = Omit<MetricAdapterProps, "type">
+
+export function OneToTenDecimalSlider(props: OneToTenDecimalSliderProps) {
   const { field, disabled, required } = props
   const id = useId("metric")
 

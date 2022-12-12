@@ -1,7 +1,7 @@
 import { IButtonProps, Icon, Stack } from "@fluentui/react"
 import { Avatar, Badge } from "@fluentui/react-components"
 import dayjs from "dayjs"
-import { useCallback, useMemo } from "react"
+import { PropsWithChildren, useCallback, useMemo } from "react"
 
 import { useDeleteFencerByIdMutation } from "$queries"
 import { DetailsItem } from "./components"
@@ -22,15 +22,15 @@ import { cacheEvicter } from "$lib/apolloClient"
 import { formatFullName } from "$lib/formatFullName"
 import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 
-export interface IFencerCardProps {
+export type FencerCardProps = PropsWithChildren<{
   fencer: AccountFencer
   primaryFencerId?: string
-}
+}>
 
-export const FencerProfileCard: React.FunctionComponent<IFencerCardProps> = ({
+export function FencerProfileCard({
   fencer,
   primaryFencerId,
-}) => {
+}: FencerCardProps) {
   const {
     AssociationMemberId,
     Email,

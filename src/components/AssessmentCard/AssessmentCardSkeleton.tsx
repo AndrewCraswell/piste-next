@@ -73,7 +73,7 @@ const attributionShimmer = [
   },
 ]
 
-export const AssessmentCardSkeleton: React.FunctionComponent = () => {
+export function AssessmentCardSkeleton() {
   return (
     <Card>
       <CardHeader

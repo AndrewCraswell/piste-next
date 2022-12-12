@@ -26,7 +26,7 @@ import { PersonaAvatar } from "$components/PersonaAvatar"
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { DefaultPageLayout } from "$components/AppShell/components"
 
-export const EditEvaluationPage: React.FunctionComponent = () => {
+function EditEvaluationPage() {
   const pageTitle = "Edit evaluation"
   useTrackPisteMetric({ componentName: "EditEvaluationPage" })
 

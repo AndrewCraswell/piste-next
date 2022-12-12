@@ -11,13 +11,12 @@ const HamburgerContainer = styled.div`
   border-bottom: 1px solid ${({ theme }) => theme.palette.neutralLight};
 `
 
-export const Hamburger: React.FunctionComponent<IButtonProps> = ({
-  children,
-  className,
-  theme,
-  ...props
-}) => (
-  <HamburgerContainer className={className}>
-    <HamburgerButton {...props} />
-  </HamburgerContainer>
-)
+export function Hamburger(props: IButtonProps) {
+  const { children, className, theme, ...buttonProps } = props
+
+  return (
+    <HamburgerContainer className={className}>
+      <HamburgerButton {...buttonProps} />
+    </HamburgerContainer>
+  )
+}

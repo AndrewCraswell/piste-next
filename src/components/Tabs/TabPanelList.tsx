@@ -1,17 +1,14 @@
 import { isNodeComponentType } from "$lib/nodeUtilitities"
 import { TabValue } from "@fluentui/react-components"
-import React from "react"
+import React, { PropsWithChildren } from "react"
 
 import { TabPanel, TabPanelProps } from "./TabPanel"
 
-export type TabPanelListProps = {
+export type TabPanelListProps = PropsWithChildren<{
   selectedPanel: TabValue
-}
+}>
 
-export const TabPanelList: React.FunctionComponent<TabPanelListProps> = ({
-  selectedPanel,
-  children,
-}) => {
+export function TabPanelList({ selectedPanel, children }: TabPanelListProps) {
   return (
     <>
       {React.Children.map(children, (element) => {

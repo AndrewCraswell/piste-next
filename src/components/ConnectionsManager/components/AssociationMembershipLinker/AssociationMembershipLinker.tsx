@@ -15,7 +15,7 @@ const MembershipCard = styled(MemberDetailsCard)`
   margin-bottom: 0.5rem;
 `
 
-export const AssociationMembershipLinker: React.FunctionComponent = () => {
+export function AssociationMembershipLinker() {
   const { account, refetch: refetchProfile } = useAccountProfile()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 

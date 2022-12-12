@@ -1,4 +1,4 @@
-import { IPaymentMethodProps, PaymentMethod } from "$components/PaymentMethod"
+import { PaymentMethodProps, PaymentMethod } from "$components/PaymentMethod"
 import styled from "@emotion/styled"
 import { IButtonProps } from "@fluentui/react"
 import { PaymentMethod as PM } from "@stripe/stripe-js"
@@ -22,14 +22,12 @@ const PaymentContainer = styled(HorizontalCard)`
   }
 `
 
-export interface IPaymentMethodCardProps extends IPaymentMethodProps {
+export interface IPaymentMethodCardProps extends PaymentMethodProps {
   onEditClick?: (event: any, card: PM.Card) => void
   onDeleteClick?: (event: any, card: PM.Card) => void
 }
 
-export const PaymentMethodCard: React.FunctionComponent<
-  IPaymentMethodCardProps
-> = (props) => {
+export function PaymentMethodCard(props: IPaymentMethodCardProps) {
   const { card, onEditClick, onDeleteClick } = props
 
   const paymentActions: IButtonProps[] = useMemo(

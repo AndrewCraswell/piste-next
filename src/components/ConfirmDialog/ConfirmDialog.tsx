@@ -1,26 +1,29 @@
 import { Dialog, DialogFooter, DialogType } from "@fluentui/react"
 import { Button, FluentProvider } from "@fluentui/react-components"
+import { PropsWithChildren } from "react"
 
 import { DialogSpinner } from "./ConfirmDialog.styles"
 
-export interface IConfirmDialogProps {
+export type ConfirmDialogProps = PropsWithChildren<{
   hidden: boolean
   isProcessing?: boolean
   onConfirmed: () => void
   onClose: () => void
   confirmLabel: string
   title: string
-}
+}>
 
-export const ConfirmDialog: React.FunctionComponent<IConfirmDialogProps> = ({
-  hidden,
-  isProcessing,
-  children,
-  onConfirmed,
-  onClose,
-  confirmLabel,
-  title,
-}) => {
+export function ConfirmDialog(props: ConfirmDialogProps) {
+  const {
+    hidden,
+    isProcessing,
+    children,
+    onConfirmed,
+    onClose,
+    confirmLabel,
+    title,
+  } = props
+
   return (
     <Dialog
       hidden={hidden}

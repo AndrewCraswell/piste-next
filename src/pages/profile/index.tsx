@@ -13,7 +13,7 @@ const ProfileTabs = styled(TabList)`
   margin-bottom: 1rem;
 `
 
-export const ProfilePage: React.FunctionComponent = () => {
+function ProfilePage() {
   const pageTitle = "Profile"
   useTrackPisteMetric({ componentName: "ProfilePage" })
 

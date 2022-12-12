@@ -16,7 +16,7 @@ const VerticallyCentered = styled(Stack)`
   height: 100%;
 `
 
-export const AddFencerCard: React.FunctionComponent = () => {
+export function AddFencerCard() {
   const {
     isOpen: isEditFencerDialogOpen,
     onClose: onCloseEditFencerDialog,

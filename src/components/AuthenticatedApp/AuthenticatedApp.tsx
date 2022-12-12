@@ -1,8 +1,8 @@
 import { appInsights } from "$components/ApplicationInsightsProvider"
 import { useAuth0 } from "@auth0/auth0-react"
-import React from "react"
+import React, { PropsWithChildren } from "react"
 
-export const AuthenticatedApp: React.FunctionComponent = ({ children }) => {
+export function AuthenticatedApp({ children }: PropsWithChildren<{}>) {
   const { loginWithRedirect, isLoading, user, error } = useAuth0()
 
   if (error) {

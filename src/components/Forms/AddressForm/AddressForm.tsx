@@ -16,9 +16,7 @@ interface IAddressFormProps {
   form: UseFormReturn<IProfileFormFields, object>
 }
 
-export const AddressForm: React.FunctionComponent<IAddressFormProps> = ({
-  form,
-}) => {
+export function AddressForm({ form }: IAddressFormProps) {
   const { setFormFields } = useFormHelpers(form)
   const { control } = form
 

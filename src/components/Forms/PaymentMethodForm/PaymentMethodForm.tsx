@@ -5,26 +5,22 @@ import {
   useElements,
   useStripe,
 } from "@stripe/react-stripe-js"
-import { FormEvent } from "react"
+import { FormEvent, PropsWithChildren } from "react"
 import { Button } from "@fluentui/react-components"
 
 // Sample code:
 // https://github.com/stripe-samples/saving-card-without-payment/blob/14749ed3cf830ba307924092b9ca3e0d4ae726ef/client/script.js
-
-export interface IPaymentMethodFormProps {}
 
 const stripePromise = loadStripe(
   //"pk_test_51Jyr98IdrFHHtGoGwIGJkd5OLVshsJT0sgV3BREw0aMyPthBV1TiLCWOTKr666HeSs1Y8yBgvVphoweVp9XxnVzN00bY4jDgw6"
   "pk_live_51Jyr98IdrFHHtGoGIVzQUqX04KyrZIB8dacM56ARIMtRqAMqUIKvL3ZHF7P9ujeNnPYaCSpNSByliUei4EtBE9gQ00ubuKijiH"
 )
 
-export const ElementsProvider: React.FunctionComponent = ({ children }) => {
+export function ElementsProvider({ children }: PropsWithChildren<{}>) {
   return <Elements stripe={stripePromise}>{children}</Elements>
 }
 
-export const PaymentMethodForm: React.FunctionComponent<
-  IPaymentMethodFormProps
-> = (props) => {
+export function PaymentMethodForm() {
   const stripe = useStripe()
   const elements = useElements()
 

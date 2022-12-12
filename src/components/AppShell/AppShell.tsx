@@ -7,6 +7,7 @@ import { AppBreadcrumbs } from "./components/AppBreadcrumbs"
 import { useSitemapGroups } from "$hooks/sitemap"
 import { useAccountAppRoles } from "$hooks/authorization/useAccountAppRoles"
 import { useAccountClubRoles } from "$hooks/authorization/useAccountClubRoles"
+import { PropsWithChildren } from "react"
 
 const AppRoot = styled.div`
   display: grid;
@@ -42,7 +43,7 @@ const Page = styled(AppPage)`
   grid-area: body;
 `
 
-export const AppShell: React.FunctionComponent = ({ children }) => {
+export function AppShell({ children }: PropsWithChildren<{}>) {
   const appRoles = useAccountAppRoles()
   const clubRoles = useAccountClubRoles()
 

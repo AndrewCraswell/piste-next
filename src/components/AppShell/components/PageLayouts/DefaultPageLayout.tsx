@@ -5,6 +5,6 @@ const PageLayout = styled(BasePageLayout)`
   margin: ${({ theme }) => theme.spacing.l2};
 `
 
-export const DefaultPageLayout: React.FunctionComponent<
-  BasePageLayoutProps
-> = ({ children, ...props }) => <PageLayout {...props}>{children}</PageLayout>
+export function DefaultPageLayout({ children, ...props }: BasePageLayoutProps) {
+  return <PageLayout {...props}>{children}</PageLayout>
+}

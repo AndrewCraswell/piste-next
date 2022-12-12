@@ -8,9 +8,7 @@ import {
 
 export type FormFencerLookupFieldProps = FormFieldProps<IFencerLookupFieldProps>
 
-export const FormFencerLookupField: React.FunctionComponent<
-  FormFencerLookupFieldProps
-> = (props) => {
+export function FormFencerLookupField(props: FormFencerLookupFieldProps) {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
 

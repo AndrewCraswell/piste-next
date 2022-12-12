@@ -1,9 +1,10 @@
 import { TabValue } from "@fluentui/react-components"
+import { PropsWithChildren } from "react"
 
-export type TabPanelProps = {
+export type TabPanelProps = PropsWithChildren<{
   name: TabValue
-}
+}>
 
-export const TabPanel: React.FunctionComponent<TabPanelProps> = ({
-  children,
-}) => <>{children}</>
+export function TabPanel({ children }: TabPanelProps) {
+  return <>{children}</>
+}

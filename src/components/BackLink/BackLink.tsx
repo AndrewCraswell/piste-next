@@ -1,14 +1,12 @@
 import { ChevronLeftRegular } from "@fluentui/react-icons"
+import { PropsWithChildren } from "react"
 import { IconLink } from "./BackLink.styles"
 
-interface IBackLink {
+type IBackLink = PropsWithChildren<{
   onClick: () => void
-}
+}>
 
-export const BackLink: React.FunctionComponent<IBackLink> = ({
-  onClick,
-  children,
-}) => {
+export function BackLink({ onClick, children }: IBackLink) {
   return (
     <IconLink onClick={onClick} as="button">
       <ChevronLeftRegular />

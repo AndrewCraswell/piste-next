@@ -5,6 +5,7 @@ import { IButtonProps } from "@fluentui/react"
 import { Text } from "@fluentui/react-components"
 import dayjs from "dayjs"
 import { PersonaAvatar } from "../../PersonaAvatar"
+import { PropsWithChildren } from "react"
 
 export const MemberDetailsList = styled.ul`
   display: grid;
@@ -22,16 +23,16 @@ export const MemberDetailsList = styled.ul`
   }
 `
 
-export const MemberDetailItem: React.FunctionComponent<
-  IMemberDetailItemProps
-> = ({ title, value }) => (
-  <li>
-    <Text size={100} weight="semibold">
-      {title}
-    </Text>
-    <Text size={200}>{value ?? "N/A"}</Text>
-  </li>
-)
+export function MemberDetailItem({ title, value }: MemberDetailItemProps) {
+  return (
+    <li>
+      <Text size={100} weight="semibold">
+        {title}
+      </Text>
+      <Text size={200}>{value ?? "N/A"}</Text>
+    </li>
+  )
+}
 
 const ThinCard = styled(HorizontalCard)`
   padding: ${({ theme }) => theme.spacing.s1};
@@ -42,10 +43,10 @@ const MemberPersona = styled(PersonaAvatar)`
   max-width: 245px;
 `
 
-export interface IMemberDetailItemProps {
+export type MemberDetailItemProps = PropsWithChildren<{
   title: string
   value?: string | number | null
-}
+}>
 
 export type MemberDetails = {
   fullName?: string
@@ -62,9 +63,9 @@ export interface IMemberDetailsCardProps extends IStyleableProps {
   details: MemberDetails
   actions?: IButtonProps[]
 }
-export const MemberDetailsCard: React.FunctionComponent<
-  IMemberDetailsCardProps
-> = ({ className, details, actions }) => {
+export function MemberDetailsCard(props: IMemberDetailsCardProps) {
+  const { className, details, actions } = props
+
   const {
     fullName,
     secondaryText,

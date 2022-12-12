@@ -13,7 +13,7 @@ import { useDisclosure } from "$hooks/useDisclosure"
 
 dayjs.extend(utc)
 
-export const CalendarLinker: React.FunctionComponent = () => {
+export function CalendarLinker() {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   const {

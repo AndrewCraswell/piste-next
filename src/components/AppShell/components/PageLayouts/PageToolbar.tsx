@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { IStackTokens, Stack } from "@fluentui/react"
+import { PropsWithChildren } from "react"
 
 const ToolbarContainer = styled.div`
   padding: ${({ theme }) => theme.fluentV9.spacingVerticalS}
@@ -9,7 +10,7 @@ const ToolbarContainer = styled.div`
 
 const toolbarTokens: IStackTokens = { childrenGap: 8 }
 
-export const PageToolbar: React.FunctionComponent = ({ children }) => {
+export function PageToolbar({ children }: PropsWithChildren<{}>) {
   return (
     <ToolbarContainer role="complementary">
       <Stack horizontal={true} horizontalAlign="start" tokens={toolbarTokens}>
@@ -19,8 +20,10 @@ export const PageToolbar: React.FunctionComponent = ({ children }) => {
   )
 }
 
-export const PageToolbarGrow: React.FunctionComponent = () => (
-  <Stack.Item grow>
-    <></>
-  </Stack.Item>
-)
+export function PageToolbarGrow() {
+  return (
+    <Stack.Item grow>
+      <></>
+    </Stack.Item>
+  )
+}

@@ -1,5 +1,6 @@
 import styled from "@emotion/styled"
 import { AnimationStyles, Spinner, SpinnerSize, Stack } from "@fluentui/react"
+import { PropsWithChildren } from "react"
 
 import { useAccountProfile } from "$hooks/useAccountProfile"
 
@@ -9,7 +10,7 @@ const AnimatedStack = styled(Stack)`
   width: 100vw;
 `
 
-export const OnboardingGate: React.FunctionComponent = ({ children }) => {
+export function OnboardingGate({ children }: PropsWithChildren<{}>) {
   const { loading, account } = useAccountProfile()
 
   if (loading) {

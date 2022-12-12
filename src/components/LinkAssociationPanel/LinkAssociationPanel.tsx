@@ -18,7 +18,7 @@ interface IAssociationMembershipForm extends FieldValues {
   personas: IAssociationMemberPersona[]
 }
 
-interface ILinkAssociationPanelProps {
+type LinkAssociationPanelProps = {
   fencerId: string
   defaultFilter?: string
   associationId?: string | null
@@ -27,9 +27,9 @@ interface ILinkAssociationPanelProps {
   onClose: () => void
 }
 
-export const LinkAssociationPanel: React.FunctionComponent<
-  ILinkAssociationPanelProps
-> = ({ associationId, fencerId, defaultFilter, onClose, onSaved, isOpen }) => {
+export function LinkAssociationPanel(props: LinkAssociationPanelProps) {
+  const { associationId, fencerId, defaultFilter, onClose, onSaved, isOpen } =
+    props
   const {
     account: { UserId },
   } = useAccountProfile()

@@ -18,7 +18,7 @@ const AssessmentsGrid = styled.div`
   grid-template-columns: repeat(auto-fill, 280px);
 `
 
-const AssessmentsPage: React.FunctionComponent = () => {
+function AssessmentsPage() {
   const pageTitle = "Assessments"
   useTrackPisteMetric({ componentName: "AssessmentsPage" })
 

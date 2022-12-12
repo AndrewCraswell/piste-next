@@ -7,9 +7,7 @@ export type ThemedImageProps = {
   darkSrc: string
 } & Omit<ImageProps, "src" | "srcSet">
 
-export const ThemedImage: React.FunctionComponent<ThemedImageProps> = (
-  props
-) => {
+export function ThemedImage(props: ThemedImageProps) {
   const { lightSrc, darkSrc, ...imageProps } = props
   const { themeName } = useAppTheme()
 

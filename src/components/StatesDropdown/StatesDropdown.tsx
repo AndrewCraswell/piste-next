@@ -10,9 +10,7 @@ export type StatesDropdownProps = Omit<
   "options" | "label" | "placeholder"
 >
 
-export const StatesDropdown: React.FunctionComponent<StatesDropdownProps> = (
-  props
-) => {
+export function StatesDropdown(props: StatesDropdownProps) {
   return (
     <FormDropdown
       label="State"

@@ -12,9 +12,7 @@ export type FormAddressAutocompleteProps = {
   ) => void
 } & Omit<FormTextFieldProps<IProfileFormFields>, "elementRef">
 
-export const FormAddressAutocomplete: React.FunctionComponent<
-  FormAddressAutocompleteProps
-> = (props) => {
+export function FormAddressAutocomplete(props: FormAddressAutocompleteProps) {
   const { name, control, controllerProps, onPlaceSelected, ...inputProps } =
     props
 

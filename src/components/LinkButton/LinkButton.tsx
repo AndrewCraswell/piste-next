@@ -12,7 +12,7 @@ UnstyledButton.defaultProps = {
 
 type LinkButtonProps = ButtonProps & { href: string }
 
-export const LinkButton: React.FunctionComponent<LinkButtonProps> = (props) => {
+export function LinkButton(props: LinkButtonProps) {
   const { children, ...buttonProps } = props
   const { onClick, onMouseOver } = useLinkShims()
 

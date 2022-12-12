@@ -1,6 +1,6 @@
 import { ControllerRenderProps, FieldValues } from "react-hook-form"
 
-export interface IMetricAdapterProps {
+export type MetricAdapterProps = {
   type: string
   required?: boolean
   disabled?: boolean

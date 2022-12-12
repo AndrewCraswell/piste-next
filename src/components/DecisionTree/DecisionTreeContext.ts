@@ -1,9 +1,9 @@
 import { createContext } from "react"
 
-import { IDecisionTemplateProps } from "./DecisionTemplate"
+import { DecisionTemplateProps } from "./DecisionTemplate"
 
 export interface IDecisionTreeContext {
-  decision: IDecisionTemplateProps | null
+  decision: DecisionTemplateProps | null
   hasNext: boolean
   hasPrevious: boolean
   next: () => void

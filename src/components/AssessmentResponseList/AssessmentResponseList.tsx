@@ -42,9 +42,9 @@ export interface IAssessmentResponseListProps {
   assessmentId: string
 }
 
-export const AssessmentResponseList: React.FunctionComponent<
-  IAssessmentResponseListProps
-> = ({ assessmentId }) => {
+export function AssessmentResponseList({
+  assessmentId,
+}: IAssessmentResponseListProps) {
   const [selectedEvaluation, setSelectedEvaluation] = useState<
     AssessmentEvaluation | undefined
   >(undefined)

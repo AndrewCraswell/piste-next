@@ -6,15 +6,13 @@ import { ThemedImage } from "$components/ThemedImage"
 // TODO: Parameterize these as props
 import errorLightSvg from "$assets/errorLight.svg"
 import errorDarkSvg from "$assets/errorDark.svg"
+import { PropsWithChildren } from "react"
 
-export type BigMessageProps = {
+export type BigMessageProps = PropsWithChildren<{
   heading: string
-}
+}>
 
-export const BigMessage: React.FunctionComponent<BigMessageProps> = ({
-  heading,
-  children,
-}) => {
+export function BigMessage({ heading, children }: BigMessageProps) {
   return (
     <Stack horizontalAlign="center" style={{ marginTop: "10vh" }}>
       <ThemedImage

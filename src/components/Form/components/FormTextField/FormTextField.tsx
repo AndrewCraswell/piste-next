@@ -5,9 +5,7 @@ import { Controller, FieldValues } from "react-hook-form"
 export type FormTextFieldProps<TForm extends FieldValues = any> =
   FormFieldProps<ITextFieldProps, TForm>
 
-export const FormTextField: React.FunctionComponent<FormTextFieldProps> = (
-  props
-) => {
+export function FormTextField(props: FormTextFieldProps) {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
 
