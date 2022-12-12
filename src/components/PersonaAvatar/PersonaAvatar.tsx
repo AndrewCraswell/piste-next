@@ -7,14 +7,12 @@ export type PersonaAvatarProps = Omit<IPersonaProps, "size"> &
     className?: string
   }
 
-const PersonaAdapter: React.FunctionComponent<PersonaAvatarProps> = ({
-  size = 48,
-  className,
-  ...props
-}) => {
+function PersonaAdapter(props: PersonaAvatarProps) {
+  const { size = 48, className, ...personaProps } = props
+
   return (
     <Persona
-      {...props}
+      {...personaProps}
       className={className}
       size={PersonaSize.size48}
       onRenderPersonaCoin={(item) => (

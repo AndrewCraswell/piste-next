@@ -26,7 +26,7 @@ export const TabText = styled(Text)`
   margin: 0 0 1rem 1rem;
 `
 
-export const ProfileForm: React.FunctionComponent = () => {
+export function ProfileForm() {
   const form = useForm<IProfileFormFields>()
   const { setFormFields, sanitizePhone, sanitizePostal } = useFormHelpers(form)
   const { account, loading } = useAccountProfile()

@@ -48,9 +48,7 @@ const CenterRegion = styled.div`
 
 export interface IAppHeaderProps extends IStyleableProps {}
 
-export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
-  className,
-}) => {
+export function AppHeader({ className }: IAppHeaderProps) {
   const { isOpen, onClose, onToggle } = useDisclosure()
   const { account } = useAccountProfile()
   const { logout } = useAuth0()
@@ -82,7 +80,6 @@ export const AppHeader: React.FunctionComponent<IAppHeaderProps> = ({
 
           {/* TODO: Pass all user menu props up to the AppShell level */}
           <UserMenu
-            avatarUrl={account.Picture}
             fullName={account.FullName}
             email={account.Email}
             logout={handleLogout}

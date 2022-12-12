@@ -2,6 +2,7 @@ import styled from "@emotion/styled"
 import { Badge, Text } from "@fluentui/react-components"
 import { PaymentMethod as StripePayment } from "@stripe/stripe-js"
 import { lighten } from "polished"
+import { PropsWithChildren } from "react"
 
 const PaymentCard = styled.button<{ primaryColor: string }>`
   // Remove user agent button styles
@@ -107,19 +108,15 @@ const DefaultBadge = styled(Badge)`
   border: none;
 `
 
-export interface IPaymentMethodProps {
+export type PaymentMethodProps = PropsWithChildren<{
   card: StripePayment.Card
   themeIndex?: number
   name?: string | null
   isDefault?: boolean
-}
+}>
 
-export const PaymentMethod: React.FunctionComponent<IPaymentMethodProps> = ({
-  card,
-  themeIndex,
-  name,
-  isDefault,
-}) => {
+export function PaymentMethod(props: PaymentMethodProps) {
+  const { card, themeIndex, name, isDefault } = props
   const { brand, exp_month, exp_year, last4 } = card
 
   const color = getCardColor({ index: themeIndex, last4 })

@@ -1,5 +1,5 @@
 import { ThemeProvider as FluentProvider } from "@fluentui/react"
-import React, { useMemo, useState } from "react"
+import React, { PropsWithChildren, useMemo, useState } from "react"
 import { DefaultTheme, DarkTheme } from "@fluentui/theme-samples"
 import {
   webLightTheme,
@@ -25,7 +25,7 @@ export const AppThemeContext = createContext<IAppThemeContextValue | undefined>(
   undefined
 )
 
-export const AppThemeProvider: React.FunctionComponent = ({ children }) => {
+export function AppThemeProvider({ children }: PropsWithChildren<{}>) {
   const [params] = useSearchParams()
   const defaultTheme = (params.get("theme") as AppTheme) ?? "light"
 

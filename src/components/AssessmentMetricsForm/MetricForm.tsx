@@ -25,9 +25,7 @@ interface IMetricFormProps {
   form: UseFormReturn<FieldValues, any>
 }
 
-export const MetricForm: React.FunctionComponent<IMetricFormProps> = (
-  props
-) => {
+export function MetricForm(props: IMetricFormProps) {
   const {
     id,
     title,

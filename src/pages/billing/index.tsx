@@ -1,7 +1,7 @@
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { DefaultPageLayout } from "$components/AppShell/components"
 
-const BillingPage: React.FunctionComponent = () => {
+function BillingPage() {
   const pageTitle = "Billing"
   useTrackPisteMetric({ componentName: "BillingPage" })
 

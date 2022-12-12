@@ -24,9 +24,7 @@ export interface IAppBreadcrumbsProps {
   crumbs: IBreadcrumbItem[]
 }
 
-export const AppBreadcrumbs: React.FunctionComponent<IAppBreadcrumbsProps> = ({
-  crumbs,
-}) => {
+export function AppBreadcrumbs({ crumbs }: IAppBreadcrumbsProps) {
   return (
     <BreadcrumbBar
       items={crumbs}

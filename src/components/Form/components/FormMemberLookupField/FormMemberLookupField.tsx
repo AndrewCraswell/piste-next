@@ -8,9 +8,7 @@ import { FormFieldProps } from "$components/Form/Form.types"
 
 export type FormMemberLookupFieldProps = FormFieldProps<IMemberLookupFieldProps>
 
-export const FormMemberLookupField: React.FunctionComponent<
-  FormMemberLookupFieldProps
-> = (props) => {
+export function FormMemberLookupField(props: FormMemberLookupFieldProps) {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
 

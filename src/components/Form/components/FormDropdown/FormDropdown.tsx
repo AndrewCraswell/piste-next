@@ -7,9 +7,7 @@ export type FormDropdownProps<TForm extends FieldValues = any> = FormFieldProps<
   TForm
 >
 
-export const FormDropdown: React.FunctionComponent<FormDropdownProps> = (
-  props
-) => {
+export function FormDropdown(props: FormDropdownProps) {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
 

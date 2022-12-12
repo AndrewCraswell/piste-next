@@ -2,20 +2,17 @@ import { filterChildrenByNodeType } from "$lib/nodeUtilitities"
 import { Stack } from "@fluentui/react"
 import { Badge, Tooltip } from "@fluentui/react-components"
 import { MoreHorizontal16Regular } from "@fluentui/react-icons"
-import React from "react"
+import { PropsWithChildren } from "react"
 
 import { RoleBadge } from "./RoleBadge"
 
 const listTokens = { childrenGap: 4 }
 
-export type RoleBadgeListProps = {
+export type RoleBadgeListProps = PropsWithChildren<{
   maxItems?: number
-}
+}>
 
-export const RoleBadgeList: React.FunctionComponent<RoleBadgeListProps> = ({
-  children,
-  maxItems,
-}) => {
+export function RoleBadgeList({ children, maxItems }: RoleBadgeListProps) {
   const roles = filterChildrenByNodeType(children, RoleBadge)
   const maxRolesToShow = maxItems ?? roles.length
 

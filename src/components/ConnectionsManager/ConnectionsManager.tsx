@@ -8,9 +8,7 @@ import { TabText, IndentedAccordionPanel } from "$components/Forms"
 import { CalendarLinker } from "./components"
 import { AssociationMembershipLinker } from "./components"
 
-export const ConnectionsManager: React.FunctionComponent = () => {
-  // TODO: Add check for user role
-
+export function ConnectionsManager() {
   return (
     <div style={{ maxWidth: 600 }}>
       <TabText block>Manage external connections to your account.</TabText>

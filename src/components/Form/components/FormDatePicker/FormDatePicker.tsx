@@ -4,9 +4,7 @@ import { Controller } from "react-hook-form"
 
 export type FormDatePickerProps = FormFieldProps<IDatePickerProps>
 
-export const FormDatePicker: React.FunctionComponent<FormDatePickerProps> = (
-  props
-) => {
+export function FormDatePicker(props: FormDatePickerProps) {
   const { name, control, controllerProps, onChange, onBlur, ...inputProps } =
     props
 

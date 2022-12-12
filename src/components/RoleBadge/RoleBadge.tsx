@@ -7,9 +7,7 @@ export type RoleBadgeProps = {
   role: ClubRole
 }
 
-export const RoleBadge: React.FunctionComponent<RoleBadgeProps> = ({
-  role,
-}) => {
+export function RoleBadge({ role }: RoleBadgeProps) {
   const { getClubRoleName } = useRoleNameMappers()
   const isStaff = role !== "member"
 

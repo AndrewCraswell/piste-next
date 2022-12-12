@@ -14,7 +14,7 @@ const FencersGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(220px, 280px));
 `
 
-export const FencersManager: React.FunctionComponent = () => {
+export function FencersManager() {
   const { account } = useAccountProfile()
 
   const [getAccountFencers, { data: accountFencers }] =

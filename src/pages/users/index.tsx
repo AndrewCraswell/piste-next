@@ -91,7 +91,7 @@ type ClubAccount = NonNullable<
   GetClubMembersByIdQuery["club_accounts"][0]["Account"]
 >
 
-const UsersPage: React.FunctionComponent = () => {
+function UsersPage() {
   const pageTitle = "Users"
   useTrackPisteMetric({ componentName: "UsersPage" })
   const { onTabSelected, selectedTab } = useTabs("membersTab")
@@ -435,9 +435,9 @@ const UsersPage: React.FunctionComponent = () => {
 
 export default UsersPage
 
-const MemberAvatarStack: React.FunctionComponent<{ names: string[] }> = ({
-  names,
-}) => {
+type MemberAvatarStackProps = { names: string[] }
+
+function MemberAvatarStack({ names }: MemberAvatarStackProps) {
   const { inlineItems, overflowItems } = partitionAvatarGroupItems({
     items: names,
     layout: "stack",

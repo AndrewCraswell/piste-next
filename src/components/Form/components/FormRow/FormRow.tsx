@@ -1,8 +1,9 @@
 import { Stack } from "@fluentui/react"
+import { PropsWithChildren } from "react"
 
 const rowTokens = { childrenGap: 50 }
 
-export const FormRow: React.FunctionComponent = ({ children }) => {
+export function FormRow({ children }: PropsWithChildren<{}>) {
   return (
     <Stack horizontal tokens={rowTokens}>
       {children}

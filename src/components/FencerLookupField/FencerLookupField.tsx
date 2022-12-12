@@ -25,9 +25,8 @@ export interface IFencerLookupFieldProps
   size?: PersonaSize
 }
 
-export const FencerLookupField: React.FunctionComponent<
-  IFencerLookupFieldProps
-> = ({ size, ...pickerProps }) => {
+export function FencerLookupField(props: IFencerLookupFieldProps) {
+  const { size, ...pickerProps } = props
   const client = useApolloClient()
 
   const resolveSuggestions = useCallback(

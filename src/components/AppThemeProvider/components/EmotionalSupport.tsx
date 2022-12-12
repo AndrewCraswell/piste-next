@@ -1,6 +1,6 @@
 import { ThemeProvider } from "@emotion/react"
 import styled from "@emotion/styled"
-import React from "react"
+import React, { PropsWithChildren } from "react"
 
 import { IAppTheme } from "../AppThemeProvider.types"
 
@@ -8,14 +8,14 @@ const BodyGrow = styled.div`
   height: 100vh;
 `
 
-export interface IEmotionalSupportProps {
+export type EmotionalSupportProps = PropsWithChildren<{
   theme: IAppTheme
-}
+}>
 
-export const EmotionalSupport: React.FunctionComponent<
-  IEmotionalSupportProps
-> = ({ children, theme }) => (
-  <ThemeProvider theme={theme}>
-    <BodyGrow>{children}</BodyGrow>
-  </ThemeProvider>
-)
+export function EmotionalSupport({ children, theme }: EmotionalSupportProps) {
+  return (
+    <ThemeProvider theme={theme}>
+      <BodyGrow>{children}</BodyGrow>
+    </ThemeProvider>
+  )
+}

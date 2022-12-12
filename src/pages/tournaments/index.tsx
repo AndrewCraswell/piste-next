@@ -1,7 +1,7 @@
 import { useTrackPisteMetric } from "$components/ApplicationInsightsProvider"
 import { DefaultPageLayout } from "$components/AppShell/components"
 
-export const TournamentsPage: React.FunctionComponent = () => {
+function TournamentsPage() {
   const pageTitle = "Tournaments"
   useTrackPisteMetric({ componentName: "TournamentsPage" })
 

@@ -76,18 +76,12 @@ const OutlinedAvatar = styled(PersonaAvatar)`
 `
 
 export interface IUserMenuProps {
-  avatarUrl?: string
   fullName?: string
   email?: string
   logout?: (options?: LogoutOptions | undefined) => void
 }
 
-export const UserMenu: React.FunctionComponent<IUserMenuProps> = ({
-  avatarUrl,
-  fullName,
-  email,
-  logout,
-}) => {
+export function UserMenu({ fullName, email, logout }: IUserMenuProps) {
   const avatarRef = useRef(null)
   const linkShims = useLinkShims()
   const { isOpen, onToggle, onClose, setIsOpen } = useDisclosure(false)

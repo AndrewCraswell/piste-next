@@ -11,9 +11,7 @@ interface IAssessmentCardProps {
   assessment: IAssessmentMetadata
 }
 
-export const AssessmentCard: React.FunctionComponent<IAssessmentCardProps> = ({
-  assessment,
-}) => {
+export function AssessmentCard({ assessment }: IAssessmentCardProps) {
   const {
     id,
     title,

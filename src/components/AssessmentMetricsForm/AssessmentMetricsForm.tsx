@@ -19,9 +19,8 @@ interface IAssessmentMetricsFormProps {
   isLoading?: boolean
 }
 
-export const AssessmentMetricsForm: React.FunctionComponent<
-  IAssessmentMetricsFormProps
-> = ({ metrics, form, disabled, required, onCancel, isLoading }) => {
+export function AssessmentMetricsForm(props: IAssessmentMetricsFormProps) {
+  const { metrics, form, disabled, required, onCancel, isLoading } = props
   const { control } = form
 
   // Sort the metrics by the proper order number

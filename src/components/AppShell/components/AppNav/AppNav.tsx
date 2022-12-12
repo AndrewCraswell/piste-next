@@ -65,10 +65,7 @@ export interface IAppNavProps extends IStyleableProps {
   links: INavLinkGroup[]
 }
 
-export const AppNav: React.FunctionComponent<IAppNavProps> = ({
-  links,
-  className,
-}) => {
+export function AppNav({ links, className }: IAppNavProps) {
   const { isOpen, onToggle } = useDisclosure(true)
 
   const onRenderGroupHeader = useCallback(

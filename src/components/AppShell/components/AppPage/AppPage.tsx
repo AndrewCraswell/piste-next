@@ -16,11 +16,7 @@ export interface IAppPageProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
     IStyleableProps {}
 
-export const AppPage: React.FunctionComponent<IAppPageProps> = ({
-  children,
-  className,
-  ...props
-}) => {
+export function AppPage({ children, className, ...props }: IAppPageProps) {
   return (
     <PageContainer className={className} {...props}>
       <PageContent>{children}</PageContent>

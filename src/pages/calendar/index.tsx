@@ -155,7 +155,7 @@ interface OpenHours {
   object_type: "open_hours"
 }
 
-const NylasAvailability: React.FunctionComponent = () => {
+function NylasAvailability() {
   // @ts-ignore
   useEffect(() => import("@nylas/components-availability"), [])
 
@@ -170,7 +170,7 @@ const NylasAvailability: React.FunctionComponent = () => {
   )
 }
 
-const CalendarPage: React.FunctionComponent = () => {
+function CalendarPage() {
   const pageTitle = "Calendar"
   useTrackPisteMetric({ componentName: "CalendarPage" })
 

@@ -1,9 +1,9 @@
-import { IMetricAdapterProps } from "$components/MetricAdapter/MetricAdapter.types"
+import { MetricAdapterProps } from "$components/MetricAdapter/MetricAdapter.types"
 import { Label, Radio, RadioGroup, useId } from "@fluentui/react-components"
 
-export const OneToTenRadios: React.FunctionComponent<
-  Omit<IMetricAdapterProps, "type">
-> = (props) => {
+type OneToTenRadiosProps = Omit<MetricAdapterProps, "type">
+
+export function OneToTenRadios(props: OneToTenRadiosProps) {
   const { field, disabled, required } = props
   const id = useId("metric")
 

@@ -4,6 +4,7 @@ import {
   AppInsightsErrorBoundary,
 } from "@microsoft/applicationinsights-react-js"
 import { ApplicationInsights } from "@microsoft/applicationinsights-web"
+import { PropsWithChildren } from "react"
 
 export const reactPlugin = new ReactPlugin()
 export const appInsights = new ApplicationInsights({
@@ -29,9 +30,9 @@ export const appInsights = new ApplicationInsights({
 
 appInsights.loadAppInsights()
 
-export const ApplicationInsightsProvider: React.FunctionComponent = ({
+export function ApplicationInsightsProvider({
   children,
-}) => {
+}: PropsWithChildren<{}>) {
   return (
     <AppInsightsContext.Provider value={reactPlugin}>
       {/* @ts-ignore  */}

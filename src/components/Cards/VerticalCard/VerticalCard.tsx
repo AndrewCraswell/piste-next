@@ -16,26 +16,27 @@ const verticalTokens = { childrenGap: "0.5rem" }
 
 export interface IVerticalCardProps extends IStyleableProps {
   actions?: IButtonProps[]
+  children?: React.ReactNode
 }
 
-export const VerticalCard: React.FunctionComponent<IVerticalCardProps> = ({
-  children,
-  className,
-  actions,
-}) => (
-  <CardThinnedBottom className={className}>
-    <Stack tokens={verticalTokens} verticalFill grow>
-      <Stack tokens={verticalTokens} verticalFill grow>
-        {children}
-      </Stack>
+export function VerticalCard(props: IVerticalCardProps) {
+  const { children, className, actions } = props
 
-      {actions?.length ? (
-        <CardControls horizontal horizontalAlign="end">
-          {actions.map((props, index) => (
-            <IconButton key={index} {...props} />
-          ))}
-        </CardControls>
-      ) : undefined}
-    </Stack>
-  </CardThinnedBottom>
-)
+  return (
+    <CardThinnedBottom className={className}>
+      <Stack tokens={verticalTokens} verticalFill grow>
+        <Stack tokens={verticalTokens} verticalFill grow>
+          {children}
+        </Stack>
+
+        {actions?.length ? (
+          <CardControls horizontal horizontalAlign="end">
+            {actions.map((props, index) => (
+              <IconButton key={index} {...props} />
+            ))}
+          </CardControls>
+        ) : undefined}
+      </Stack>
+    </CardThinnedBottom>
+  )
+}
