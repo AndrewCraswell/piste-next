@@ -5,6 +5,7 @@ import {
   AvatarGroupItem,
   AvatarGroupPopover,
   Button,
+  CounterBadge,
   Input,
   Menu,
   MenuButton,
@@ -72,6 +73,8 @@ import { formatPhoneNumber } from "$lib/formatPhoneNumber"
 import { formatLocalLocalizedTime } from "$lib/formatLocalTime"
 import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
 import { ClubRole } from "$types/Rbac"
+import { IStackTokens, Stack } from "@fluentui/react"
+import { useRbacRoleHelpers } from "$hooks/authorization/useRbacRoleHelpers"
 
 // TODO: Enable assigning/removing user role
 
@@ -91,10 +94,13 @@ type ClubAccount = NonNullable<
   GetClubMembersByIdQuery["club_accounts"][0]["Account"]
 >
 
+const tabBadgeTokens: IStackTokens = { childrenGap: 4 }
+
 function UsersPage() {
   const pageTitle = "Users"
   useTrackPisteMetric({ componentName: "UsersPage" })
   const { onTabSelected, selectedTab } = useTabs("membersTab")
+  const { isStaffRole } = useRbacRoleHelpers()
 
   // TODO: Parameterize the clubId
   const { data, loading, error } = useGetClubMembersByIdQuery({
@@ -107,6 +113,9 @@ function UsersPage() {
     []) as ClubAccount[]
   const members = (accounts?.map((a) => a?.Students).flat() ??
     []) as ClubStudent[]
+  const staff = accounts.filter((a) =>
+    a.AccountClubRoles.find((r) => isStaffRole(r.ClubRole.Name))
+  )
 
   return (
     <>
@@ -158,9 +167,39 @@ function UsersPage() {
 
       <DefaultPageLayout title={pageTitle}>
         <TabList onTabSelect={onTabSelected} selectedValue={selectedTab}>
-          <Tab value="membersTab">Athletes</Tab>
-          <Tab value="accountsTab">Accounts</Tab>
-          <Tab value="staffTab">Staff</Tab>
+          <Tab value="membersTab">
+            <Stack horizontal tokens={tabBadgeTokens}>
+              <span>Athletes</span>
+              <CounterBadge
+                appearance="filled"
+                color="brand"
+                count={members.length}
+                size="small"
+              />
+            </Stack>
+          </Tab>
+          <Tab value="accountsTab">
+            <Stack horizontal tokens={tabBadgeTokens}>
+              <span>Accounts</span>
+              <CounterBadge
+                appearance="filled"
+                color="brand"
+                count={accounts.length}
+                size="small"
+              />
+            </Stack>
+          </Tab>
+          <Tab value="staffTab">
+            <Stack horizontal tokens={tabBadgeTokens}>
+              <span>Staff</span>
+              <CounterBadge
+                appearance="filled"
+                color="brand"
+                count={staff.length}
+                size="small"
+              />
+            </Stack>
+          </Tab>
         </TabList>
 
         <TabPanelList selectedPanel={selectedTab}>
