@@ -27,7 +27,7 @@
     "@emotion/react": "^11.10.4",
     "@emotion/styled": "^11.10.4",
     "@fluentui/react": "^8.96.1",
-    "@fluentui/react-components": "^9.7.1",
+    "@fluentui/react-components": "^9.8.0",
     "@fluentui/react-icons": "^2.0.190",
     "@fluentui/theme-samples": "^8.7.3",
     "@loadable/component": "^5.15.2",
