@@ -105,10 +105,14 @@
   dependencies:
     tslib "^2.2.0"
 
-"@azure/functions@^3.0.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@azure/functions/-/functions-3.2.0.tgz#c73003db8bd93be186824db29e98e00879bf0f91"
-  integrity sha512-HbE7iORnYcjLzKNf5mIQRJQDTsVxhoXHRWEZ6KWdGh4e7+F9xTloiBicavbSoVmlAYivenIVpryHanVwsQaHUw==
+"@azure/functions@^3.5.0":
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/@azure/functions/-/functions-3.5.0.tgz#64df210c676637ea720e9896d135046491f20d9b"
+  integrity sha512-RBYGdZIPYT17UPGBcXI9DPlpaEOO5D8r7pDpJsm/2N5eVrpqIRO8VZuoIiZiEQWV0LO3BZNzlvdS87pzBUBJzQ==
+  dependencies:
+    iconv-lite "^0.6.3"
+    long "^4.0.0"
+    uuid "^8.3.0"
 
 "@azure/identity@^2.0.4":
   version "2.1.0"
@@ -908,6 +912,11 @@ lodash@^4.17.21, lodash@^4.17.3:
   version "4.17.21"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
   integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+
+long@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/long/-/long-4.0.0.tgz#9a7b71cfb7d361a194ea555241c92f7468d5bf28"
+  integrity sha512-XsP+KhQif4bjX1kbuSiySJFNAehNxgLb6hPRGJ9QsUr8ajHkuXGdrHmFUTUUXhDwVX2R5bY4JNZEwbUiMhV+MA==
 
 mime-db@1.52.0:
   version "1.52.0"
