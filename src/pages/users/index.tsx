@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useMemo } from "react"
 import {
   Avatar,
   AvatarGroup,
@@ -33,6 +33,9 @@ import {
   TableCell,
   TableCellLayout,
   TableCellActions,
+  ColumnDefinition,
+  createColumn,
+  RowState,
 } from "@fluentui/react-components/unstable"
 import {
   // Sized
@@ -75,6 +78,14 @@ import { RoleBadge, RoleBadgeList } from "$components/RoleBadge"
 import { ClubRole } from "$types/Rbac"
 import { IStackTokens, Stack } from "@fluentui/react"
 import { useRbacRoleHelpers } from "$hooks/authorization/useRbacRoleHelpers"
+import {
+  DataGrid,
+  DataGridHeader,
+  DataGridRow,
+  DataGridHeaderCell,
+  DataGridBody,
+  DataGridCell,
+} from "@fluentui/react-table"
 
 // TODO: Enable assigning/removing user role
 
@@ -85,6 +96,13 @@ import { useRbacRoleHelpers } from "$hooks/authorization/useRbacRoleHelpers"
 // TODO: Show only staff
 
 // TODO: Make data exportable to CSV, JSON, and Excel
+
+type UserRow = {
+  file: {
+    label: string
+    icon: JSX.Element
+  }
+}
 
 type ClubStudent = NonNullable<
   GetClubMembersByIdQuery["club_accounts"][0]["Account"]
@@ -99,7 +117,7 @@ const tabBadgeTokens: IStackTokens = { childrenGap: 4 }
 function UsersPage() {
   const pageTitle = "Users"
   useTrackPisteMetric({ componentName: "UsersPage" })
-  const { onTabSelected, selectedTab } = useTabs("membersTab")
+  const { onTabSelected, selectedTab } = useTabs("athletesTab")
   const { isStaffRole } = useRbacRoleHelpers()
 
   // TODO: Parameterize the clubId
@@ -116,6 +134,46 @@ function UsersPage() {
   const staff = accounts.filter((a) =>
     a.AccountClubRoles.find((r) => isStaffRole(r.ClubRole.Name))
   )
+
+  const usersColumns: ColumnDefinition<UserRow>[] = useMemo(
+    () => [
+      createColumn<UserRow>({
+        columnId: "file",
+        compare: (a, b) => {
+          return a.file.label.localeCompare(b.file.label)
+        },
+        renderHeaderCell: () => {
+          return "File"
+        },
+        renderCell: (item) => {
+          return (
+            <TableCellLayout media={item.file.icon}>
+              {item.file.label}
+            </TableCellLayout>
+          )
+        },
+      }),
+    ],
+    []
+  )
+
+  const athleteRows: UserRow[] = [
+    {
+      file: {
+        label: "Meeting notes",
+        icon: <FilterRegular />,
+      },
+    },
+  ]
+
+  // const [sortState, setSortState] = React.useState<SortState>({
+  //   sortColumn: "file",
+  //   sortDirection: "ascending",
+  // })
+
+  // const onSortChange: DataGridProps["onSortChange"] = (e, nextSortState) => {
+  //   setSortState(nextSortState)
+  // }
 
   return (
     <>
@@ -167,7 +225,7 @@ function UsersPage() {
 
       <DefaultPageLayout title={pageTitle}>
         <TabList onTabSelect={onTabSelected} selectedValue={selectedTab}>
-          <Tab value="membersTab">
+          <Tab value="athletesTab">
             <Stack horizontal tokens={tabBadgeTokens}>
               <span>Athletes</span>
               <CounterBadge
@@ -203,7 +261,37 @@ function UsersPage() {
         </TabList>
 
         <TabPanelList selectedPanel={selectedTab}>
-          <TabPanel name="membersTab">
+          <TabPanel name="athletesTab">
+            <DataGrid
+              items={athleteRows}
+              columns={usersColumns}
+              focusMode="cell"
+              sortable
+              // sortState={sortState}
+              // onSortChange={onSortChange}
+              selectionMode="multiselect"
+              subtleSelection
+            >
+              <DataGridHeader>
+                <DataGridRow>
+                  {({ renderHeaderCell }: ColumnDefinition<UserRow>) => (
+                    <DataGridHeaderCell>
+                      {renderHeaderCell()}
+                    </DataGridHeaderCell>
+                  )}
+                </DataGridRow>
+              </DataGridHeader>
+              <DataGridBody>
+                {({ item, rowId }: RowState<UserRow>) => (
+                  <DataGridRow key={rowId}>
+                    {({ renderCell }: ColumnDefinition<UserRow>) => (
+                      <DataGridCell>{renderCell(item)}</DataGridCell>
+                    )}
+                  </DataGridRow>
+                )}
+              </DataGridBody>
+            </DataGrid>
+
             <Table size="medium">
               <TableHeader>
                 <TableRow>
