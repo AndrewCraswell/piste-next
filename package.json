@@ -59,7 +59,7 @@
     "@graphql-codegen/typescript-operations": "^4.0.1",
     "@graphql-codegen/typescript-react-apollo": "^4.1.0",
     "@types/loadable__component": "^5.13.8",
-    "@types/node": "20.10.5",
+    "@types/node": "20.11.1",
     "@types/react": "^18.2.46",
     "@types/react-dom": "^17.0.16",
     "@vitejs/plugin-react-swc": "^3.5.0",
