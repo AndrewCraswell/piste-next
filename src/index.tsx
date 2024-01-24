@@ -1,5 +1,5 @@
 import React from "react"
-import { render } from "react-dom"
+import { createRoot } from "react-dom/client"
 import { initializeIcons } from "@fluentui/react"
 
 import { Auth0Provider } from "@auth0/auth0-react"
@@ -18,7 +18,10 @@ import "modern-normalize"
 
 initializeIcons()
 
-render(
+const container = document.getElementById("root")!
+const root = createRoot(container)
+
+root.render(
   <React.StrictMode>
     <ApplicationInsightsProvider>
       <Auth0Provider
@@ -41,6 +44,5 @@ render(
         </BrowserRouter>
       </Auth0Provider>
     </ApplicationInsightsProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+  </React.StrictMode>
 )
