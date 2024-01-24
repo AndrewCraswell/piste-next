@@ -29,8 +29,10 @@ export function AuthenticatedApp({ children }: PropsWithChildren<{}>) {
     return <>{children}</>
   } else {
     loginWithRedirect({
-      prompt: "select_account",
-      scope: "profile email openid",
+      authorizationParams: {
+        prompt: "select_account",
+        scope: "profile email openid",
+      },
     })
 
     return null

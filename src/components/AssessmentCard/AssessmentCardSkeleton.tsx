@@ -1,10 +1,11 @@
 import { Shimmer, ShimmerElementType } from "@fluentui/react"
-import { Body1, Text } from "@fluentui/react-components"
 import {
+  Body1,
+  Text,
   Card,
   CardHeader,
   CardFooter,
-} from "@fluentui/react-components/unstable"
+} from "@fluentui/react-components"
 
 const iconShimmer = [
   {

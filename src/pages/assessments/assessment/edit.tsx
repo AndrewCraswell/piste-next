@@ -1,7 +1,5 @@
-import { Body1, Text } from "@fluentui/react-components"
-import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import { Body1, Text, Card, CardHeader } from "@fluentui/react-components"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
-
 import { useDisclosure } from "$hooks/useDisclosure"
 import {
   useGetAssessmentEvaluationByIdQuery,
@@ -59,7 +57,7 @@ function EditEvaluationPage() {
   }, [assessmentId, navigate])
 
   const onSubmit = useCallback(
-    (values: Dictionary<string>, event) => {
+    (values: Dictionary<string>, event: any) => {
       if (event.nativeEvent.submitter.id !== SUBMIT_BUTTON_ID) {
         return
       }

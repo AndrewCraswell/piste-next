@@ -1,5 +1,4 @@
-import { Text } from "@fluentui/react-components"
-import { Card } from "@fluentui/react-components/unstable"
+import { Text, Card } from "@fluentui/react-components"
 import styled from "@emotion/styled"
 
 export const AuthorAttribution = styled(Text)`

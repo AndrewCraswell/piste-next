@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { CommandBar } from "@fluentui/react"
-import { CardHeader } from "@fluentui/react-components/unstable"
+import { CardHeader } from "@fluentui/react-components"
 
 export const AssessmentResponseActions = styled(CommandBar)`
   .ms-CommandBar {

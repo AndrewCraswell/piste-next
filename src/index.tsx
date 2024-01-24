@@ -27,9 +27,11 @@ root.render(
       <Auth0Provider
         domain={import.meta.env.VITE_AUTH0_DOMAIN}
         clientId={import.meta.env.VITE_AUTH0_CLIENT_ID}
-        redirectUri={getBaseUrl()}
+        authorizationParams={{
+          redirect_uri: getBaseUrl(),
+          audience: import.meta.env.VITE_AUTH0_HASURA_AUDIENCE,
+        }}
         cacheLocation="localstorage"
-        audience={import.meta.env.VITE_AUTH0_HASURA_AUDIENCE}
       >
         <BrowserRouter>
           <AuthorizedApolloProvider>

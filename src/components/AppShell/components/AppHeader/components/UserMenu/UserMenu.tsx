@@ -1,13 +1,13 @@
 import { LogoutOptions } from "@auth0/auth0-react"
 import styled from "@emotion/styled"
-import { ActionButton } from "@fluentui/react"
+import { ActionButton, BaseButton, Button } from "@fluentui/react"
 import {
   Popover,
   PopoverSurface,
   PopoverTrigger,
   Text,
 } from "@fluentui/react-components"
-import { useCallback, useRef } from "react"
+import { MouseEventHandler, useCallback, useRef } from "react"
 
 import { PersonaAvatar } from "$components/PersonaAvatar"
 import { useDisclosure } from "$hooks/useDisclosure"
@@ -87,7 +87,7 @@ export function UserMenu({ fullName, email, logout }: IUserMenuProps) {
   const { isOpen, onToggle, onClose, setIsOpen } = useDisclosure(false)
 
   const onLinkClicked = useCallback(
-    (event) => {
+    (event: any) => {
       linkShims.onClick(event)
       onClose()
     },
@@ -96,7 +96,7 @@ export function UserMenu({ fullName, email, logout }: IUserMenuProps) {
 
   const loginRedirect = useCallback(() => {
     if (logout) {
-      logout({ returnTo: window.location.origin })
+      logout({ logoutParams: { returnTo: window.location.origin } })
     }
   }, [logout])
 

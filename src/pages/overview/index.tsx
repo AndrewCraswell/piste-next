@@ -46,7 +46,7 @@ function OverviewPage() {
   }, [fetchMore, pageNum, searchTerm])
 
   const onSearch = useCallback(
-    (value) => {
+    (value: string) => {
       if (searchTerm === value) {
         return
       }

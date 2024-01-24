@@ -1,5 +1,11 @@
-import { Body1, Caption1, Button, Text } from "@fluentui/react-components"
-import { CardHeader, CardFooter } from "@fluentui/react-components/unstable"
+import {
+  Body1,
+  Caption1,
+  Button,
+  Text,
+  CardHeader,
+  CardFooter,
+} from "@fluentui/react-components"
 import { ClipboardDataBar32Regular } from "@fluentui/react-icons"
 
 import { LinkButton } from "$components/LinkButton"

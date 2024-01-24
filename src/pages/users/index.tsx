@@ -1,4 +1,3 @@
-import React from "react"
 import {
   Avatar,
   AvatarGroup,
@@ -22,8 +21,6 @@ import {
   Tab,
   TabList,
   Tooltip,
-} from "@fluentui/react-components"
-import {
   Table,
   TableHeader,
   TableRow,
@@ -32,7 +29,7 @@ import {
   TableCell,
   TableCellLayout,
   TableCellActions,
-} from "@fluentui/react-components/unstable"
+} from "@fluentui/react-components"
 import {
   // Sized
   Accessibility16Regular,

@@ -12,12 +12,12 @@ import {
 } from "./AssessmentResponseList.styles"
 import { ChangeEvent, useCallback, useMemo, useState } from "react"
 import { evaluationColumns } from "./AssessmentResponseList.data"
-import { Card } from "@fluentui/react-components/unstable"
 import {
   FluentProvider,
   Text,
   Input,
   InputOnChangeData,
+  Card,
 } from "@fluentui/react-components"
 import { SearchRegular } from "@fluentui/react-icons"
 import {

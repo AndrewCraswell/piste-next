@@ -4,9 +4,7 @@ import {
   FieldValues,
   UseFormReturn,
 } from "react-hook-form"
-import { Body1, Text } from "@fluentui/react-components"
-import { Card, CardHeader } from "@fluentui/react-components/unstable"
-
+import { Body1, Text, Card, CardHeader } from "@fluentui/react-components"
 import ReactMarkdown from "react-markdown"
 import { ClipboardTaskRegular, ClipboardRegular } from "@fluentui/react-icons"
 import { MetricAdapter } from "$components/MetricAdapter"

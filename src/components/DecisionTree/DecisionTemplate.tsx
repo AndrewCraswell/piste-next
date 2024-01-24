@@ -1,12 +1,13 @@
-import React, { PropsWithChildren } from "react"
+import React from "react"
 
 import { IDecisionTreeContext } from "./DecisionTreeContext"
 import { useDecisionTree } from "./useDecisionTree"
 
-export type DecisionTemplateProps = PropsWithChildren<{
+export type DecisionTemplateProps = {
   id: string
   nextId?: string
-}>
+  children?: React.ReactNode | Function
+}
 
 export type DecisionTemplateFunction = IDecisionTreeContext
 

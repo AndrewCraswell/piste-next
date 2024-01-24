@@ -1,5 +1,4 @@
-import { Body1, Text } from "@fluentui/react-components"
-import { Card, CardHeader } from "@fluentui/react-components/unstable"
+import { Body1, Text, Card, CardHeader } from "@fluentui/react-components"
 import { GuestRegular, ContactCardRegular } from "@fluentui/react-icons"
 
 import {
@@ -74,7 +73,7 @@ function SubmitEvaluationPage() {
   }, [assessmentId, navigate])
 
   const onSubmit = useCallback(
-    (values: Dictionary<any>, event) => {
+    (values: Dictionary<any>, event: any) => {
       if (event.nativeEvent.submitter.id !== SUBMIT_BUTTON_ID) {
         return
       }
