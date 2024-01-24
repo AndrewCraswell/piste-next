@@ -15,7 +15,7 @@ jobs:
   staging_deployment:
     environment:
       name: Staging
-      url: https://staging.fencing.club
+      url: https://staging.app.fencing.club
     runs-on: ubuntu-latest
     name: Deploy to Staging
     steps:
@@ -58,7 +58,7 @@ jobs:
   production_deployment:
     environment:
       name: Production
-      url: https://fencing.club
+      url: https://app.fencing.club
     needs: staging_deployment
     runs-on: ubuntu-latest
     name: Deploy to Production
